@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Tutorial;
 use App\Models\Course_type;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class Esocial_controller extends Controller
@@ -35,7 +36,7 @@ class Esocial_controller extends Controller
     public function course_type()
     {
         $course_type = Course_type::get();
-        return view('course_type',[
+        return view('course_type', [
             'course_type' => $course_type,
         ]);
     }
@@ -49,5 +50,23 @@ class Esocial_controller extends Controller
         $new->save();
 
         return redirect('course_type')->with('success', 'Successfully added new course');
+    }
+
+    public function approved_instructor()
+    {
+        $instructor = User::where('user_type', 'Instructor')->get();
+        return view('approved_instructor', [
+            'instructor' => $instructor
+        ]);
+    }
+
+    public function approved_instructor_process($id)
+    {
+        User::where('id', $id)
+            ->update([
+                'status' => 'Approved',
+            ]);
+
+        return redirect('approved_instructor')->with('success', 'Successfully approved selected instructor');
     }
 }

@@ -21,11 +21,5 @@ class Instructor_controller extends Controller
         }
     }
 
-    public function approved_instructor()
-    {
-        $instructor = User::where('user_type','Instructor')->get();
-        return view('approved_instructor',[
-            'instructor' => $instructor
-        ]);
-    }
+    
 }
