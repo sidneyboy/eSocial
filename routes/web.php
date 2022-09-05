@@ -35,6 +35,9 @@ Route::get('/student_landing', 'Student_controller@student_landing')->name('stud
 Route::get('/student_course', 'Student_controller@student_course')->name('student_course');
 Route::get('/student_profile', 'Student_controller@student_profile')->name('student_profile');
 
+Route::post('/student_profile_add_image', 'Esocial_controller@student_profile_add_image')->name('student_profile_add_image');
+
+
 
 
 
@@ -45,10 +48,16 @@ Route::get('/instructor_add_course', 'Instructor_controller@instructor_add_cours
 Route::post('/instructor_add_course_process', 'Instructor_controller@instructor_add_course_process')->name('instructor_add_course_process');
 
 
+
+
 Route::get('/instructor_add_course_phase_2/{course_id}', 'Instructor_controller@instructor_add_course_phase_2')->name('instructor_add_course_phase_2');
 Route::post('/instructor_add_course_phase_2_process', 'Instructor_controller@instructor_add_course_phase_2_process')->name('instructor_add_course_phase_2_process');
 
 Route::get('/instructor_courses', 'Instructor_controller@instructor_courses')->name('instructor_courses');
+
+Route::post('/instructor_add_subject_file', 'Instructor_controller@instructor_add_subject_file')->name('instructor_add_subject_file');
+Route::post('/instructor_profile_add_image', 'Instructor_controller@instructor_profile_add_image')->name('instructor_profile_add_image');
+
 
 
 // Route::get('/instructor_add_course_file_process/{course_id}', 'Instructor_controller@instructor_add_course_file_process')->name('instructor_add_course_file_process');

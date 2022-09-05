@@ -113,6 +113,11 @@
             z-index: 9999;
             background-color: #4e73df;
         }
+
+        video {
+            width: 100%;
+            height: auto;
+        }
     </style>
 </head>
 
@@ -245,8 +250,9 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                @if ($user_data->user_image != '')
-                                    <img src="{{ asset('/storage/'. $user_data->user_image) }}" class="img-profile rounded-circle" alt="">
+                                @if ($user_data->user_image != null)
+                                    <img src="{{ asset('/storage/' . $user_data->user_image) }}"
+                                        class="img-profile rounded-circle" alt="">
                                 @else
                                     <span
                                         class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->name }}</span>

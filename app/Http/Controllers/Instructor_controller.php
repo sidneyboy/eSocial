@@ -10,6 +10,7 @@ use App\Models\Course_details;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+
 class Instructor_controller extends Controller
 {
 
@@ -21,12 +22,14 @@ class Instructor_controller extends Controller
     public function instructor_landing()
     {
         $user = User::find(auth()->user()->id);
+        $user_data = User::find(auth()->user()->id);
         if ($user->status == '') {
             Auth::logout();
             return redirect('/')->with('error', 'Please wait for admin approval');
         } else {
             return view('instructor_landing', [
                 'user' => $user,
+                'user_data' => $user_data,
             ]);
         }
     }
@@ -52,6 +55,9 @@ class Instructor_controller extends Controller
     public function instructor_add_course_process(Request $request)
     {
         //return $request->input();
+
+
+
         $new = new Course([
             'course_type_id' => $request->input('course_type'),
             'course_title' => $request->input('course_title'),
@@ -99,11 +105,44 @@ class Instructor_controller extends Controller
 
     public function instructor_courses()
     {
-        $course = Course::where('user_id',auth()->user()->id)->get();
+        $course = Course::where('user_id', auth()->user()->id)->orderBy('id','Desc')->get();
         $user_data = User::find(auth()->user()->id);
-        return view('instructor_courses',[
+        return view('instructor_courses', [
             'course' => $course,
             'user_data' => $user_data,
         ]);
+    }
+
+    public function instructor_add_subject_file(Request $request)
+    {
+        $subject_file = $request->file('subject_file');
+        //$subject_file_name = 'subject_file-' . time() . '.' . $subject_file->getClientOriginalExtension();
+        $subject_file_name = $subject_file->getClientOriginalName();
+        $subject_file_type = $subject_file->getClientMimeType();
+        $path_subject_file = $subject_file->storeAs('public', $subject_file_name);
+
+        $new_course_details = new Course_details([
+            'file' => $subject_file_name,
+            'course_id' => $request->input('course_id'),
+            'file_type' => $subject_file_type,
+        ]);
+
+        $new_course_details->save();
+
+        return redirect()->route('instructor_courses')->with('success', 'Successfully added new course_file');
+    }
+
+    public function instructor_profile_add_image(Request $request)
+    {
+        $user_image = $request->file('user_image');
+        $user_image_name = 'user_image-' . time() . '.' . $user_image->getClientOriginalExtension();
+        $path_user_image = $user_image->storeAs('public', $user_image_name);
+
+        User::where('id', $request->input('user_id'))
+            ->update([
+                'user_image' => $user_image_name,
+            ]);
+
+        return redirect('instructor_profile')->with('success', 'Successfully approved selected instructor');
     }
 }

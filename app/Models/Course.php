@@ -19,6 +19,11 @@ class Course extends Model
         'status',
     ];
 
+    public function course_type()
+    {
+        return $this->belongsTo('App\Models\Course_type', 'course_type_id');
+    }
+
     public function course_details()
     {
         return $this->hasMany('App\Models\Course_details', 'course_id');

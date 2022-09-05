@@ -18,7 +18,7 @@
                     <div class="card-body">
                         <div class="form-group">
                             <label>File</label>
-                            <input type="file" class="form-control" required name="course_file">
+                            <input type="file" class="form-control" accept="image/*,video/*,application/pdf" required name="course_file">
 
                             <input type="hidden" value="{{ $course_id }}" name="course_id">
                         </div>

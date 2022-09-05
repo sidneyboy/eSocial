@@ -53,7 +53,7 @@
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
-                                <form action="{{ route('profile_add_image') }}" method="post"
+                                <form action="{{ route('instructor_profile_add_image') }}" method="post"
                                     enctype="multipart/form-data">
                                     @csrf
                                     <div class="modal-body">

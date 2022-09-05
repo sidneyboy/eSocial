@@ -244,7 +244,7 @@
                                 <figure class="img-profile rounded-circle avatar font-weight-bold"
                                     data-initial="{{ Auth::user()->name[0] }}"></figure> --}}
 
-                                @if ($user_data->user_image != '')
+                                @if ($user_data->user_image != NULL)
                                     <img src="{{ asset('/storage/' . $user_data->user_image) }}"
                                         class="img-profile rounded-circle" alt="">
                                 @else

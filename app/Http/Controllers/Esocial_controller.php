@@ -89,6 +89,6 @@ class Esocial_controller extends Controller
                 'user_image' => $user_image_name,
             ]);
 
-        return redirect('profile')->with('success', 'Successfully approved selected instructor');
+        return redirect('profile')->with('success', 'Successfully approved selected admin');
     }
 }
