@@ -40,7 +40,8 @@
                                                     </button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <iframe src="https://docs.google.com/gview?url={{ asset('/storage/'. $details->file) }}"></iframe>
+                                                    {{-- <iframe src="https://docs.google.com/gview?url={{ asset('/storage/'. $details->file) }}"></iframe> --}}
+                                                    <iframe src="{{ asset('/storage/'. $details->file) }}" frameborder="0"></iframe>
                                                 </div>
                                                 <div class="modal-footer">
                                                     {{-- <button type="button" class="btn btn-secondary"
