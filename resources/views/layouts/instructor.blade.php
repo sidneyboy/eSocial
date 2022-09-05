@@ -55,7 +55,7 @@
         .loader:before {
             width: 5.2em;
             height: 10.2em;
-            background: #0ce9e5;
+            background: #4e73df;
             border-radius: 10.2em 0 0 10.2em;
             top: -0.1em;
             left: -0.1em;
@@ -68,7 +68,7 @@
         .loader:after {
             width: 5.2em;
             height: 10.2em;
-            background: #0ce9e5;
+            background: #4e73df;
             border-radius: 0 10.2em 10.2em 0;
             top: -0.1em;
             left: 4.9em;
@@ -178,7 +178,7 @@
             </li> --}}
 
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="{{ route('instructor_add_course') }}">
                     <i class="fas fa-fw fa-hands-helping"></i>
                     <span>{{ __('Add Course') }}</span>
                 </a>
@@ -192,7 +192,7 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="{{ url('instructor_courses') }}">
                     <i class="fas fa-fw fa-hands-helping"></i>
                     <span>{{ __('My Courses') }}</span>
                 </a>

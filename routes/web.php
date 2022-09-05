@@ -41,6 +41,19 @@ Route::get('/student_profile', 'Student_controller@student_profile')->name('stud
 
 Route::get('/instructor_landing', 'Instructor_controller@instructor_landing')->name('instructor_landing');
 Route::get('/instructor_profile', 'Instructor_controller@instructor_profile')->name('instructor_profile');
+Route::get('/instructor_add_course', 'Instructor_controller@instructor_add_course')->name('instructor_add_course');
+Route::post('/instructor_add_course_process', 'Instructor_controller@instructor_add_course_process')->name('instructor_add_course_process');
+
+
+Route::get('/instructor_add_course_phase_2/{course_id}', 'Instructor_controller@instructor_add_course_phase_2')->name('instructor_add_course_phase_2');
+Route::post('/instructor_add_course_phase_2_process', 'Instructor_controller@instructor_add_course_phase_2_process')->name('instructor_add_course_phase_2_process');
+
+Route::get('/instructor_courses', 'Instructor_controller@instructor_courses')->name('instructor_courses');
+
+
+// Route::get('/instructor_add_course_file_process/{course_id}', 'Instructor_controller@instructor_add_course_file_process')->name('instructor_add_course_file_process');
+
+
 
 
 
