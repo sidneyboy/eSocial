@@ -35,7 +35,6 @@ class HomeController extends Controller
 
             return view('home', compact('widget'));
         } elseif($user_type->user_type == 'Student') {
-            // return 'asdasd';
             return redirect('student_landing');
         }else{
             return redirect('instructor_landing');
