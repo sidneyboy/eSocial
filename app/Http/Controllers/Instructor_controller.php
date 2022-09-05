@@ -8,6 +8,12 @@ use Illuminate\Support\Facades\Auth;
 
 class Instructor_controller extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function instructor_landing()
     {
         $user = User::find(auth()->user()->id);
@@ -19,6 +25,14 @@ class Instructor_controller extends Controller
                 'user' => $user,
             ]);
         }
+    }
+
+    public function instructor_profile()
+    {
+        $user_data = User::find(auth()->user()->id);
+        return view('instructor_profile',[
+            'user_data' => $user_data,
+        ]);
     }
 
     

@@ -27,15 +27,20 @@ Route::get('/course_type', 'Esocial_controller@course_type')->name('course_type'
 Route::post('/course_process', 'Esocial_controller@course_process')->name('course_process');
 Route::get('/approved_instructor', 'Esocial_controller@approved_instructor')->name('approved_instructor');
 Route::get('/approved_instructor_process/{id}', 'Esocial_controller@approved_instructor_process')->name('approved_instructor_process');
-
+Route::post('/profile_add_image', 'Esocial_controller@profile_add_image')->name('profile_add_image');
 
 
 
 Route::get('/student_landing', 'Student_controller@student_landing')->name('student_landing');
 Route::get('/student_course', 'Student_controller@student_course')->name('student_course');
+Route::get('/student_profile', 'Student_controller@student_profile')->name('student_profile');
+
+
+
 
 
 Route::get('/instructor_landing', 'Instructor_controller@instructor_landing')->name('instructor_landing');
+Route::get('/instructor_profile', 'Instructor_controller@instructor_profile')->name('instructor_profile');
 
 
 

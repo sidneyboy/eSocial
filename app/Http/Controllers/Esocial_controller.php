@@ -69,4 +69,19 @@ class Esocial_controller extends Controller
 
         return redirect('approved_instructor')->with('success', 'Successfully approved selected instructor');
     }
+
+    public function profile_add_image(Request $request)
+    {
+
+        $user_image = $request->file('user_image');
+        $user_image_name = 'user_image-' . time() . '.' . $user_image->getClientOriginalExtension();
+        $path_user_image = $user_image->storeAs('public', $user_image_name);
+
+        User::where('id', $request->input('user_id'))
+            ->update([
+                'user_image' => $user_image_name,
+            ]);
+
+        return redirect('profile')->with('success', 'Successfully approved selected instructor');
+    }
 }
