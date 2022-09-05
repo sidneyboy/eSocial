@@ -16,6 +16,7 @@ class Student_controller extends Controller
     {
         // $user = User::find(auth()->user()->id);
         $tutorial = Tutorial::simplePaginate(1);
+        
         return view('student_landing', [
             'tutorial' => $tutorial,
         ]);

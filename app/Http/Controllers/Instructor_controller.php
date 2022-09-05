@@ -42,8 +42,10 @@ class Instructor_controller extends Controller
     public function instructor_add_course()
     {
         $course_type = Course_type::get();
+        $user_data = User::find(auth()->user()->id);
         return view('instructor_add_course', [
             'course_type' => $course_type,
+            'user_data' => $user_data,
         ]);
     }
 
@@ -68,8 +70,10 @@ class Instructor_controller extends Controller
     public function instructor_add_course_phase_2($course_id)
     {
         // $course = Course::find($course_id);
+        $user_data = User::find(auth()->user()->id);
         return view('instructor_add_course_phase_2', [
             'course_id' => $course_id,
+            'user_data' => $user_data,
         ]);
     }
 
@@ -96,8 +100,10 @@ class Instructor_controller extends Controller
     public function instructor_courses()
     {
         $course = Course::where('user_id',auth()->user()->id)->get();
+        $user_data = User::find(auth()->user()->id);
         return view('instructor_courses',[
             'course' => $course,
+            'user_data' => $user_data,
         ]);
     }
 }

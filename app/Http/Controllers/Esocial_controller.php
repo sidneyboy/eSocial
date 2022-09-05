@@ -12,8 +12,10 @@ class Esocial_controller extends Controller
     public function tutorial()
     {
         $tutorial = Tutorial::get();
+        $user_data = User::find(auth()->user()->id);
         return view('tutorial', [
-            'tutorial' => $tutorial
+            'tutorial' => $tutorial,
+            'user_data' => $user_data
         ]);
     }
 
@@ -36,9 +38,12 @@ class Esocial_controller extends Controller
     public function course_type()
     {
         $course_type = Course_type::get();
+        $user_data = User::find(auth()->user()->id);
         return view('course_type', [
             'course_type' => $course_type,
+            'user_data' => $user_data,
         ]);
+
     }
 
     public function course_process(Request $request)
@@ -55,8 +60,10 @@ class Esocial_controller extends Controller
     public function approved_instructor()
     {
         $instructor = User::where('user_type', 'Instructor')->get();
+        $user_data = User::find(auth()->user()->id);
         return view('approved_instructor', [
-            'instructor' => $instructor
+            'instructor' => $instructor,
+            'user_data' => $user_data,
         ]);
     }
 
