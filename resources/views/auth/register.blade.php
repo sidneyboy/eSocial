@@ -8,7 +8,7 @@
                 <div class="card-body p-0">
                     <div class="row">
                         {{-- <div class="col-lg-6 d-none d-lg-block bg-login-image"></div> --}}
-                        <div class="col-lg-6">
+                        <div class="col-lg-12">
                             <div class="p-5">
                                 <div class="text-center">
                                     <img src="{{ asset('/admin_images/received_790004915490478.jpeg') }}" style="border:0px;" class="img img-thumbnail" alt="">

@@ -14,12 +14,31 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth/login');
 });
+
+Route::get('/home', 'HomeController@index')->name('home');
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/tutorial', 'Esocial_controller@tutorial')->name('tutorial');
+Route::post('/tutorial_process', 'Esocial_controller@tutorial_process')->name('tutorial_process');
+Route::get('/course_type', 'Esocial_controller@course_type')->name('course_type');
+Route::post('/course_process', 'Esocial_controller@course_process')->name('course_process');
+
+Route::get('/student_landing', 'Student_controller@student_landing')->name('student_landing');
+Route::get('/student_course', 'Student_controller@student_course')->name('student_course');
+
+
+Route::get('/instructor_landing', 'Instructor_controller@instructor_landing')->name('instructor_landing');
+
+
+
+
+
+
+
+
 
 Route::get('/profile', 'ProfileController@index')->name('profile');
 Route::put('/profile', 'ProfileController@update')->name('profile.update');

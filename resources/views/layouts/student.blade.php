@@ -74,17 +74,17 @@
                 <span>{{ __('About') }}</span>
             </a>
         </li> --}}
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a class="nav-link" href="{{ url('tutorial') }}">
                     <i class="fas fa-fw fa-hands-helping"></i>
                     <span>{{ __('Tutorial') }}</span>
                 </a>
-            </li>
+            </li> --}}
 
             <li class="nav-item">
-                <a class="nav-link" href="{{ url('course_type') }}">
+                <a class="nav-link" href="#">
                     <i class="fas fa-fw fa-hands-helping"></i>
-                    <span>{{ __('Course Type') }}</span>
+                    <span>{{ __('Course') }}</span>
                 </a>
             </li>
 

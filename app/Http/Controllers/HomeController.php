@@ -25,12 +25,20 @@ class HomeController extends Controller
     public function index()
     {
         $users = User::count();
+        $user_type = User::find(auth()->user()->id);
 
-        $widget = [
-            'users' => $users,
-            //...
-        ];
+        if ($user_type->user_type == 'Admin') {
+            $widget = [
+                'users' => $users,
+                //...
+            ];
 
-        return view('home', compact('widget'));
+            return view('home', compact('widget'));
+        } elseif($user_type->user_type == 'Student') {
+            // return 'asdasd';
+            return redirect('student_landing');
+        }else{
+            return redirect('instructor_landing');
+        }
     }
 }
