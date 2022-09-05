@@ -57,6 +57,8 @@ Route::get('/instructor_courses', 'Instructor_controller@instructor_courses')->n
 
 Route::post('/instructor_add_subject_file', 'Instructor_controller@instructor_add_subject_file')->name('instructor_add_subject_file');
 Route::post('/instructor_profile_add_image', 'Instructor_controller@instructor_profile_add_image')->name('instructor_profile_add_image');
+Route::post('/instructor_update_course', 'Instructor_controller@instructor_update_course')->name('instructor_update_course');
+
 
 
 

@@ -190,19 +190,21 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="#">
-                    <i class="fas fa-fw fa-hands-helping"></i>
-                    <span>{{ __('My Students') }}</span>
-                </a>
-            </li>
-
-            <li class="nav-item">
                 <a class="nav-link" href="{{ url('instructor_courses') }}">
                     <i class="fas fa-fw fa-hands-helping"></i>
                     <span>{{ __('My Courses') }}</span>
                 </a>
             </li>
 
+
+            <li class="nav-item">
+                <a class="nav-link" href="#">
+                    <i class="fas fa-fw fa-hands-helping"></i>
+                    <span>{{ __('My Students') }}</span>
+                </a>
+            </li>
+
+           
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
 
@@ -342,7 +344,26 @@
             </div>
         </div>
     </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script>
+        $("#course_monitization").change(function() {
+            if ($(this).val() == 'Monitize') {
+                $('#course_amount').show();
+            }
+        });
 
+        $('body').append('<div style="" id="loadingDiv"><div class="loader">Loading...</div></div>');
+        $(window).on('load', function() {
+            setTimeout(removeLoader, 500); //wait for page load PLUS two seconds.
+        });
+
+        function removeLoader() {
+            $("#loadingDiv").fadeOut(500, function() {
+                // fadeOut complete. Remove the loading div
+                $("#loadingDiv").remove(); //makes page more lightweight 
+            });
+        }
+    </script>
     <!-- Scripts -->
     <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
     <script src="{{ asset('vendor/bootstrap/js/bootstrap.min.js') }}"></script>

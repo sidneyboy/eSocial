@@ -105,7 +105,7 @@ class Instructor_controller extends Controller
 
     public function instructor_courses()
     {
-        $course = Course::where('user_id', auth()->user()->id)->orderBy('id','Desc')->get();
+        $course = Course::where('user_id', auth()->user()->id)->orderBy('id', 'Desc')->get();
         $user_data = User::find(auth()->user()->id);
         return view('instructor_courses', [
             'course' => $course,
@@ -115,6 +115,7 @@ class Instructor_controller extends Controller
 
     public function instructor_add_subject_file(Request $request)
     {
+
         $subject_file = $request->file('subject_file');
         //$subject_file_name = 'subject_file-' . time() . '.' . $subject_file->getClientOriginalExtension();
         $subject_file_name = $subject_file->getClientOriginalName();
@@ -144,5 +145,16 @@ class Instructor_controller extends Controller
             ]);
 
         return redirect('instructor_profile')->with('success', 'Successfully approved selected instructor');
+    }
+
+    public function instructor_update_course(Request $request)
+    {
+        Course::where('id', $request->input('course_id'))
+            ->update([
+                'course_title' => $request->input('update_course_title'),
+                'course_description' => $request->input('update_course_description'),
+            ]);
+
+        return redirect('instructor_courses')->with('success', 'Successfully approved selected course');
     }
 }
