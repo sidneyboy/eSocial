@@ -38,6 +38,9 @@
                                 <option value="Monitize">Monitize</option>
                             </select>
 
+                            <label>Course Image Template</label>
+                            <input type="file" class="form-control" accept="image/*" required name="course_image_template">
+
 
                             <span id="course_amount" style="display: none">
                                 <label>Amount:</label>

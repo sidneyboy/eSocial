@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Course;
 use App\Models\Tutorial;
 use Illuminate\Http\Request;
 
@@ -25,7 +26,12 @@ class Student_controller extends Controller
 
     public function student_course()
     {
-        return view('student_course');
+        $course = Course::orderBy('id', 'Desc')->get();
+        $user_data = User::find(auth()->user()->id);
+        return view('student_course',[
+            'user_data' => $user_data,
+            'course' => $course,
+        ]);
     }
 
     public function student_profile()
@@ -48,5 +54,17 @@ class Student_controller extends Controller
             ]);
 
         return redirect('student_profile')->with('success', 'Successfully approved selected student');
+    }
+
+    public function student_search_course(Request $request)
+    {
+        $search = $request->input('search_box');
+        $course_search = Course::where('course_title', 'like', '%' . $search . '%')->orderBy('created_at', 'DESC')->get();
+
+        $user_data = User::find(auth()->user()->id);
+        return view('student_search_course',[
+            'course_search' => $course_search,
+            'user_data' => $user_data,
+        ]);
     }
 }

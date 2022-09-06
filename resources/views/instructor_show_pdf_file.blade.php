@@ -1,0 +1,1 @@
+<iframe src="{{ asset('/storage/' . $course_details->file) }}" frameborder="0" height="1000" width="100%"></iframe>

@@ -17,11 +17,17 @@ class Course extends Model
         'course_amount',
         'user_id',
         'status',
+        'image_template',
     ];
 
     public function course_type()
     {
         return $this->belongsTo('App\Models\Course_type', 'course_type_id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo('App\Models\User', 'user_id');
     }
 
     public function course_details()

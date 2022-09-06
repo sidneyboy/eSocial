@@ -55,7 +55,10 @@ class Instructor_controller extends Controller
     public function instructor_add_course_process(Request $request)
     {
         //return $request->input();
-
+        $course_image_template = $request->file('course_image_template');
+        $course_image_template_name = 'course_image_template-' . time() . '.' . $course_image_template->getClientOriginalExtension();
+        $course_image_template_type = $course_image_template->getClientMimeType();
+        $path_course_image_template = $course_image_template->storeAs('public', $course_image_template_name);
 
 
         $new = new Course([
@@ -66,6 +69,7 @@ class Instructor_controller extends Controller
             'course_amount' => $request->input('course_amount'),
             'status' => 'Pending Approval',
             'user_id' => auth()->user()->id,
+            'image_template' => $course_image_template_name,
         ]);
 
         $new->save();
@@ -88,7 +92,7 @@ class Instructor_controller extends Controller
         //dd($request->all());
 
         $course_file = $request->file('course_file');
-        $course_file_name = 'course_file-' . time() . '.' . $course_file->getClientOriginalExtension();
+        $course_file_name = $course_file->getClientOriginalName();
         $course_file_type = $course_file->getClientMimeType();
         $path_course_file = $course_file->storeAs('public', $course_file_name);
 
@@ -156,5 +160,29 @@ class Instructor_controller extends Controller
             ]);
 
         return redirect('instructor_courses')->with('success', 'Successfully approved selected course');
+    }
+
+    public function instructor_show_pdf_file($details_id)
+    {
+        $course_details = Course_details::find($details_id);
+        return view('instructor_show_pdf_file',[
+            'course_details' => $course_details,
+        ]);
+    }
+
+    public function instructor_show_video($details_id)
+    {
+        $course_details = Course_details::find($details_id);
+        return view('instructor_show_video',[
+            'course_details' => $course_details,
+        ]);
+    }
+
+    public function instructor_show_image($details_id)
+    {
+        $course_details = Course_details::find($details_id);
+        return view('instructor_show_image',[
+            'course_details' => $course_details,
+        ]);
     }
 }
