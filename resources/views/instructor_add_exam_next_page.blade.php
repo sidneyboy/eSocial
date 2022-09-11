@@ -11,35 +11,67 @@
         integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
 
     <title>Instructor</title>
-    <style>
-        video {
-            width: 100%;
-            height: auto;
-        }
-    </style>
 </head>
 
 <body>
     <br />
     <div class="container">
-        @foreach ($course_data as $data)
-            <div class="card" style="width: 100%;">
-                <div class="card-header">
-                    <a href="{{ url('instructor_courses') }}">Back</a>
-                </div>
+
+        <div class="card" style="width: 100%;">
+            <div class="card-header">
+                <a href="{{ url('instructor_courses') }}">Back</a>
+            </div>
+            <form enctype="multipart/form-data" action="{{ route('instructor_add_exam_next_page_process') }}" method="post">
+                @csrf
                 <div class="card-body">
-                    <video controls>
-                        <source src="{{ asset('/storage/' . $data->file) }}"
-                            type="{{ $data->file_type }}">
-                    </video>
+                    <div class="form-group">
+                        <label>Question</label>
+                        <textarea name="question" class="form-control" required></textarea>
+
+                        <label>Question Image</label>
+                        <input type="file" class="form-control" accept="image/*" name="exam_file">
+
+                        <label>Answer</label>
+                        <select name="answer" class="form-control" required>
+                            <option value="" default>Set Answer</option>
+                            <option value="choice_a">Choice A</option>
+                            <option value="choice_b">Choice B</option>
+                            <option value="choice_c">Choice C</option>
+                            <option value="choice_d">Choice D</option>
+                        </select>
+                        <hr>
+                        <label>Choice A</label>
+                        <input required type="text" name="choice_a" class="form-control">
+
+                        <label>Choice B</label>
+                        <input required type="text" name="choice_b" class="form-control">
+
+                        <label>Choice C</label>
+                        <input required type="text" name="choice_c" class="form-control">
+
+                        <label>Choice D</label>
+                        <input required type="text" name="choice_d" class="form-control">
+
+                        <input type="text" name="exam_id" value="{{ $exam_id }}">
+                        <input type="text" value="{{ $number_of_exams - 1 }}" name="number_of_exams">
+                    </div>
                 </div>
                 <div class="card-footer">
                     <div class="float-right">
-                        {{ $course_data->links() }}
-                    </div>
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination">
+                                <li class="page-item">
+                                    <button type="submit" class="page-link" href="#" aria-label="Next">
+                                        Next
+                                    </button>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div
                 </div>
-            </div>
-        @endforeach
+            </form>
+        </div>
+
     </div>
     <br />
     <!-- Optional JavaScript; choose one of the two! -->

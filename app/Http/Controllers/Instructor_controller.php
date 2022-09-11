@@ -6,6 +6,10 @@ use App\Models\User;
 use App\Models\Course_type;
 use App\Models\Course;
 use App\Models\Course_details;
+use App\Models\Comments;
+use App\Models\Exam;
+use App\Models\Exam_details;
+
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -111,6 +115,7 @@ class Instructor_controller extends Controller
     {
         $course = Course::where('user_id', auth()->user()->id)->orderBy('id', 'Desc')->get();
         $user_data = User::find(auth()->user()->id);
+
         return view('instructor_courses', [
             'course' => $course,
             'user_data' => $user_data,
@@ -162,27 +167,172 @@ class Instructor_controller extends Controller
         return redirect('instructor_courses')->with('success', 'Successfully approved selected course');
     }
 
-    public function instructor_show_pdf_file($details_id)
+    public function instructor_show_pdf_file($course_id)
     {
-        $course_details = Course_details::find($details_id);
-        return view('instructor_show_pdf_file',[
-            'course_details' => $course_details,
+        $search = 'application';
+        $course_data = Course_details::where('course_id', $course_id)->where('file_type', 'like', '%' . $search . '%')->get();
+
+        return view('instructor_show_pdf_file', [
+            'course_data' => $course_data,
         ]);
     }
 
-    public function instructor_show_video($details_id)
+    public function instructor_show_video($course_id)
     {
-        $course_details = Course_details::find($details_id);
-        return view('instructor_show_video',[
-            'course_details' => $course_details,
+        $search = 'video';
+        $course_data = Course_details::where('course_id', $course_id)->where('file_type', 'like', '%' . $search . '%')->paginate(1);
+
+        return view('instructor_show_video', [
+            'course_data' => $course_data,
         ]);
     }
 
-    public function instructor_show_image($details_id)
+    public function instructor_show_image_file($course_id)
     {
-        $course_details = Course_details::find($details_id);
-        return view('instructor_show_image',[
-            'course_details' => $course_details,
+        $search = 'image';
+        $course_data = Course_details::where('course_id', $course_id)->where('file_type', 'like', '%' . $search . '%')->paginate(1);
+
+        return view('instructor_show_image_file', [
+            'course_data' => $course_data
         ]);
+    }
+
+    public function instructor_comment_process(Request $request)
+    {
+
+        foreach ($request->input('comment_details') as $key => $id) {
+            Comments::where('id', $id)
+                ->update(['status' => 'replied']);
+        }
+
+        $new_comment = new Comments([
+            'course_id' => $request->input('course_id'),
+            'comment' => $request->input('comment'),
+            'user_id' => auth()->user()->id,
+            'status' => 'replied',
+        ]);
+
+        $new_comment->save();
+
+        return redirect('instructor_courses')->with('success', 'Successfully add new comment');
+    }
+
+    public function instructor_add_exam(Request $request)
+    {
+
+        return view('instructor_add_exam')
+            ->with('course_id', $request->input('course_id'))
+            ->with('number_of_exams', $request->input('number_of_exams'));
+    }
+
+    public function instructor_add_exam_next_page(Request $request)
+    {
+        //return $request->input();
+
+        //dd($request->all());
+
+        if ($request->file('exam_file')) {
+            $exam_file = $request->file('exam_file');
+            $exam_file_name = $exam_file->getClientOriginalName();
+            $exam_file_type = $exam_file->getClientMimeType();
+            $path_exam_file = $exam_file->storeAs('public', $exam_file_name);
+
+            $new_exam = new Exam([
+                'course_id' => $request->input('course_id'),
+                'title' => $request->input('title'),
+                'number_of_exams' => $request->input('number_of_exams') + 1,
+            ]);
+
+            $new_exam->save();
+
+            $new_exam_details = new Exam_details([
+                'exam_id' => $new_exam->id,
+                'question' => $request->input('question'),
+                'choice_a' => $request->input('choice_a'),
+                'choice_b' => $request->input('choice_b'),
+                'choice_c' => $request->input('choice_c'),
+                'choice_d' => $request->input('choice_d'),
+                'file' => $exam_file_name,
+                'file_type' => $exam_file_type,
+                'answer' => $request->input('answer'),
+            ]);
+
+            $new_exam_details->save();
+        } else {
+            $new_exam = new Exam([
+                'course_id' => $request->input('course_id'),
+                'title' => $request->input('title'),
+                'number_of_exams' => $request->input('number_of_exams') + 1,
+            ]);
+
+            $new_exam->save();
+
+            $new_exam_details = new Exam_details([
+                'exam_id' => $new_exam->id,
+                'question' => $request->input('question'),
+                'choice_a' => $request->input('choice_a'),
+                'choice_b' => $request->input('choice_b'),
+                'choice_c' => $request->input('choice_c'),
+                'choice_d' => $request->input('choice_d'),
+                'answer' => $request->input('answer'),
+            ]);
+
+            $new_exam_details->save();
+        }
+
+
+        if ($request->input('number_of_exams') == 0) {
+            return redirect('instructor_courses');
+        } else {
+            return view('instructor_add_exam_next_page')
+                ->with('number_of_exams', $request->input('number_of_exams'))
+                ->with('exam_id', $new_exam->id);
+        }
+    }
+
+    public function instructor_add_exam_next_page_process(Request $request)
+    {
+        // dd($request->all());
+        if ($request->file('exam_file')) {
+            $exam_file = $request->file('exam_file');
+            $exam_file_name = $exam_file->getClientOriginalName();
+            $exam_file_type = $exam_file->getClientMimeType();
+            $path_exam_file = $exam_file->storeAs('public', $exam_file_name);
+
+
+            $new_exam_details = new Exam_details([
+                'exam_id' => $request->input('exam_id'),
+                'question' => $request->input('question'),
+                'choice_a' => $request->input('choice_a'),
+                'choice_b' => $request->input('choice_b'),
+                'choice_c' => $request->input('choice_c'),
+                'choice_d' => $request->input('choice_d'),
+                'file' => $exam_file_name,
+                'file_type' => $exam_file_type,
+                'answer' => $request->input('answer'),
+            ]);
+
+            $new_exam_details->save();
+        } else {
+            $new_exam_details = new Exam_details([
+                'exam_id' => $request->input('exam_id'),
+                'question' => $request->input('question'),
+                'choice_a' => $request->input('choice_a'),
+                'choice_b' => $request->input('choice_b'),
+                'choice_c' => $request->input('choice_c'),
+                'choice_d' => $request->input('choice_d'),
+                'answer' => $request->input('answer'),
+            ]);
+
+            $new_exam_details->save();
+        }
+
+        if ($request->input('number_of_exams') == 0) {
+            return redirect('instructor_courses');
+        } else {
+            return view('instructor_add_exam_next_page')
+                ->with('number_of_exams', $request->input('number_of_exams'))
+                ->with('exam_id', $request->input('exam_id'));
+        }
     }
 }

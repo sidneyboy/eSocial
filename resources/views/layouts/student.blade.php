@@ -115,6 +115,36 @@
             z-index: 9999;
             background-color: #4e73df;
         }
+
+
+        #table-wrapper {
+            position: relative;
+        }
+
+        #table-scroll {
+            height: 300px;
+            overflow: auto;
+            margin-top: 20px;
+        }
+
+        #table-wrapper table {
+            width: 100%;
+
+        }
+
+        #table-wrapper table * {
+            /* background: yellow; */
+            color: black;
+        }
+
+        #table-wrapper table thead th .text {
+            position: absolute;
+            top: -20px;
+            z-index: 2;
+            height: 20px;
+            width: 35%;
+            border: 1px solid red;
+        }
     </style>
 </head>
 
@@ -172,6 +202,13 @@
                     <span>{{ __('Tutorial') }}</span>
                 </a>
             </li> --}}
+
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url('student_direct_message') }}">
+                    <i class="fas fa-fw fa-hands-helping"></i>
+                    <span>{{ __('Direct Message') }}</span>
+                </a>
+            </li>
 
             <li class="nav-item">
                 <a class="nav-link" href="{{ url('student_course') }}">
@@ -338,7 +375,7 @@
             </div>
         </div>
     </div>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script>
         $('body').append('<div style="" id="loadingDiv"><div class="loader">Loading...</div></div>');
         $(window).on('load', function() {
@@ -351,7 +388,7 @@
                 $("#loadingDiv").remove(); //makes page more lightweight 
             });
         }
-    </script>
+    </script> --}}
 
     <!-- Scripts -->
     <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>

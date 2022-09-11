@@ -118,6 +118,35 @@
             width: 100%;
             height: auto;
         }
+
+        #table-wrapper {
+            position: relative;
+        }
+
+        #table-scroll {
+            height: 300px;
+            overflow: auto;
+            margin-top: 20px;
+        }
+
+        #table-wrapper table {
+            width: 100%;
+
+        }
+
+        #table-wrapper table * {
+            /* background: yellow; */
+            color: black;
+        }
+
+        #table-wrapper table thead th .text {
+            position: absolute;
+            top: -20px;
+            z-index: 2;
+            height: 20px;
+            width: 35%;
+            border: 1px solid red;
+        }
     </style>
 </head>
 
@@ -204,7 +233,7 @@
                 </a>
             </li>
 
-           
+
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
 

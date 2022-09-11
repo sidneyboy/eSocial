@@ -10,36 +10,26 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
         integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
 
-    <title>Instructor</title>
-    <style>
-        video {
-            width: 100%;
-            height: auto;
-        }
-    </style>
+    <title>Student</title>
 </head>
 
 <body>
     <br />
     <div class="container">
-        @foreach ($course_data as $data)
-            <div class="card" style="width: 100%;">
-                <div class="card-header">
-                    <a href="{{ url('instructor_courses') }}">Back</a>
-                </div>
-                <div class="card-body">
-                    <video controls>
-                        <source src="{{ asset('/storage/' . $data->file) }}"
-                            type="{{ $data->file_type }}">
-                    </video>
-                </div>
-                <div class="card-footer">
-                    <div class="float-right">
-                        {{ $course_data->links() }}
-                    </div>
-                </div>
+        <div class="card" style="width: 100%;">
+            <div class="card-header">
+                <a href="{{ url('student_course') }}">Back</a>
             </div>
-        @endforeach
+            <div class="card-body">
+                <ul class="list-group">
+                    @foreach ($course_data as $data)
+                        <li class="list-group-item">
+                            <a href="{{ asset('/storage/'. $data->file) }}" download>{{ $data->file }}</a>
+                        </li>
+                    @endforeach
+                </ul>
+            </div>
+        </div>
     </div>
     <br />
     <!-- Optional JavaScript; choose one of the two! -->

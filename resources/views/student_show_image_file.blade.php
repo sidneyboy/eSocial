@@ -10,13 +10,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
         integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
 
-    <title>Instructor</title>
-    <style>
-        video {
-            width: 100%;
-            height: auto;
-        }
-    </style>
+    <title>Student</title>
 </head>
 
 <body>
@@ -25,13 +19,11 @@
         @foreach ($course_data as $data)
             <div class="card" style="width: 100%;">
                 <div class="card-header">
-                    <a href="{{ url('instructor_courses') }}">Back</a>
+                    <a href="{{ url('student_course') }}">Back</a>
                 </div>
                 <div class="card-body">
-                    <video controls>
-                        <source src="{{ asset('/storage/' . $data->file) }}"
-                            type="{{ $data->file_type }}">
-                    </video>
+                    <img class="img img-thumbnail" style="border: 0px;" src="{{ asset('/storage/' . $data->file) }}"
+                            alt="Card image cap">
                 </div>
                 <div class="card-footer">
                     <div class="float-right">

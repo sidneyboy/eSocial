@@ -41,11 +41,12 @@ Route::get('/student_landing', 'Student_controller@student_landing')->name('stud
 Route::get('/student_course', 'Student_controller@student_course')->name('student_course');
 Route::get('/student_profile', 'Student_controller@student_profile')->name('student_profile');
 Route::get('/student_search_course', 'Student_controller@student_search_course')->name('student_search_course');
-
-
-
-
-
+Route::post('/student_comment_process', 'Student_controller@student_comment_process')->name('student_comment_process');
+Route::get('/student_show_image_file/{course_id}', 'Student_controller@student_show_image_file')->name('student_show_image_file');
+Route::get('/student_show_pdf_file/{course_id}', 'Student_controller@student_show_pdf_file')->name('student_show_pdf_file');
+Route::get('/student_show_video/{course_id}', 'Student_controller@student_show_video')->name('student_show_video');
+Route::post('/student_message_process', 'Student_controller@student_message_process')->name('student_message_process');
+Route::get('/student_direct_message', 'Student_controller@student_direct_message')->name('student_direct_message');
 
 
 
@@ -59,9 +60,14 @@ Route::get('/instructor_courses', 'Instructor_controller@instructor_courses')->n
 Route::post('/instructor_add_subject_file', 'Instructor_controller@instructor_add_subject_file')->name('instructor_add_subject_file');
 Route::post('/instructor_profile_add_image', 'Instructor_controller@instructor_profile_add_image')->name('instructor_profile_add_image');
 Route::post('/instructor_update_course', 'Instructor_controller@instructor_update_course')->name('instructor_update_course');
-Route::get('/instructor_show_pdf_file/{details_id}', 'Instructor_controller@instructor_show_pdf_file')->name('instructor_show_pdf_file');
-Route::get('/instructor_show_video/{details_id}', 'Instructor_controller@instructor_show_video')->name('instructor_show_video');
-Route::get('/instructor_show_image/{details_id}', 'Instructor_controller@instructor_show_image')->name('instructor_show_image');
+Route::get('/instructor_show_pdf_file/{course_id}', 'Instructor_controller@instructor_show_pdf_file')->name('instructor_show_pdf_file');
+Route::get('/instructor_show_video/{course_id}', 'Instructor_controller@instructor_show_video')->name('instructor_show_video');
+Route::get('/instructor_show_image/{course_id}', 'Instructor_controller@instructor_show_image')->name('instructor_show_image');
+Route::post('/instructor_comment_process/', 'Instructor_controller@instructor_comment_process')->name('instructor_comment_process');
+Route::post('/instructor_add_exam/', 'Instructor_controller@instructor_add_exam')->name('instructor_add_exam');
+Route::post('/instructor_add_exam_next_page/', 'Instructor_controller@instructor_add_exam_next_page')->name('instructor_add_exam_next_page');
+Route::post('/instructor_add_exam_next_page_process/', 'Instructor_controller@instructor_add_exam_next_page_process')->name('instructor_add_exam_next_page_process');
+
 
 
 

@@ -62,4 +62,14 @@ class User extends Authenticatable
     {
         $this->attributes['password'] = bcrypt($value);
     }
+
+    public function student()
+    {
+        return $this->hasMany('App\Models\Direct_message', 'user_id','id');
+    }
+
+    public function instructor()
+    {
+        return $this->hasMany('App\Models\Direct_message', 'instructor_id','id');
+    }
 }
