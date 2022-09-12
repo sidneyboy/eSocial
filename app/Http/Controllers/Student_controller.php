@@ -8,7 +8,8 @@ use App\Models\Course_details;
 use App\Models\Tutorial;
 use App\Models\Comments;
 use App\Models\direct_message;
-use Illuminate\Http\Request;
+use App\Models\exam;
+use App\Models\exam_details;
 
 class Student_controller extends Controller
 {
@@ -159,10 +160,23 @@ class Student_controller extends Controller
 
 
 
-        return view('student_direct_message',[
+        return view('student_direct_message', [
             'user_data' => $user_data,
             'instructors' => $instructors,
             'message' => $message,
         ]);
+    }
+
+    public function student_show_exam($course_id)
+    {
+        $exam_data = Exam::where('course_id', $course_id)->get();
+        return view('student_show_exam', [
+            'exam_data' => $exam_data,
+        ]);
+    }
+
+    public function student_exam_process(Request $request)
+    {
+        return $request->input();
     }
 }

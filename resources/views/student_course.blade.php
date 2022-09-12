@@ -141,6 +141,10 @@
                                             </div>
                                         </li>
                                         <li class="list-group-item">
+                                            <a href="{{ url('student_show_exam', ['course_id' => $data->id]) }}"
+                                                class="btn btn-sm btn-primary btn-block">Open Exam</a>
+                                        </li>
+                                        <li class="list-group-item">
                                             <a href="{{ url('student_show_pdf_file', ['course_id' => $data->id]) }}"
                                                 class="btn btn-sm btn-primary btn-block">Open Files</a>
                                         </li>

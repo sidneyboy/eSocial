@@ -47,6 +47,9 @@ Route::get('/student_show_pdf_file/{course_id}', 'Student_controller@student_sho
 Route::get('/student_show_video/{course_id}', 'Student_controller@student_show_video')->name('student_show_video');
 Route::post('/student_message_process', 'Student_controller@student_message_process')->name('student_message_process');
 Route::get('/student_direct_message', 'Student_controller@student_direct_message')->name('student_direct_message');
+Route::get('/student_show_exam/{course_id}', 'Student_controller@student_show_exam')->name('student_show_exam');
+Route::post('/student_exam_process', 'Student_controller@student_exam_process')->name('student_exam_process');
+
 
 
 
