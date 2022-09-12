@@ -169,6 +169,9 @@
                                         </div>
                                     </li>
                                     <li class="list-group-item">
+                                        <a href="{{ url('instructor_view_exam',['course_id'=>$data->id]) }}" class="btn btn-sm btn-block btn-primary">View Exam</a>
+                                    </li>
+                                    <li class="list-group-item">
                                         <!-- Button trigger modal -->
                                         <button type="button" class="btn btn-primary btn-block btn-sm"
                                             style="text-decoration: none;" data-toggle="modal"

@@ -335,4 +335,12 @@ class Instructor_controller extends Controller
                 ->with('exam_id', $request->input('exam_id'));
         }
     }
+
+    public function instructor_view_exam($course_id)
+    {
+        $exam_data = Exam::where('course_id',$course_id)->get();
+        return view('instructor_view_exam',[
+            'exam_data' => $exam_data,
+        ]);
+    }
 }

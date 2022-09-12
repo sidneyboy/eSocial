@@ -52,8 +52,8 @@
                         <label>Choice D</label>
                         <input required type="text" name="choice_d" class="form-control">
 
-                        <input type="text" name="exam_id" value="{{ $exam_id }}">
-                        <input type="text" value="{{ $number_of_exams - 1 }}" name="number_of_exams">
+                        <input type="hidden" name="exam_id" value="{{ $exam_id }}">
+                        <input type="hidden" value="{{ $number_of_exams - 1 }}" name="number_of_exams">
                     </div>
                 </div>
                 <div class="card-footer">

@@ -18813,3 +18813,519 @@
 #11 C:\\Users\\Administrator\\Documents\\GitHub\\eSocial\\artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
 #12 {main}
 "} 
+[2022-09-12 02:15:34] local.ERROR: The "--columns" option does not exist. {"exception":"[object] (Symfony\\Component\\Console\\Exception\\RuntimeException(code: 0): The \"--columns\" option does not exist. at C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\symfony\\console\\Input\\ArgvInput.php:220)
+[stacktrace]
+#0 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\symfony\\console\\Input\\ArgvInput.php(147): Symfony\\Component\\Console\\Input\\ArgvInput->addLongOption('columns', 'uri,name,action...')
+#1 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\symfony\\console\\Input\\ArgvInput.php(82): Symfony\\Component\\Console\\Input\\ArgvInput->parseLongOption('--columns=uri,n...')
+#2 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\symfony\\console\\Input\\ArgvInput.php(71): Symfony\\Component\\Console\\Input\\ArgvInput->parseToken('--columns=uri,n...', true)
+#3 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\symfony\\console\\Input\\Input.php(55): Symfony\\Component\\Console\\Input\\ArgvInput->parse()
+#4 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\symfony\\console\\Command\\Command.php(267): Symfony\\Component\\Console\\Input\\Input->bind(Object(Symfony\\Component\\Console\\Input\\InputDefinition))
+#5 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php(124): Symfony\\Component\\Console\\Command\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))
+#6 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\symfony\\console\\Application.php(1002): Illuminate\\Console\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#7 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\symfony\\console\\Application.php(299): Symfony\\Component\\Console\\Application->doRunCommand(Object(Illuminate\\Foundation\\Console\\RouteListCommand), Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#8 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\symfony\\console\\Application.php(171): Symfony\\Component\\Console\\Application->doRun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#9 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Application.php(102): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#10 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(129): Illuminate\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#11 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#12 {main}
+"} 
+[2022-09-12 02:15:36] local.ERROR: The "--columns" option does not exist. {"exception":"[object] (Symfony\\Component\\Console\\Exception\\RuntimeException(code: 0): The \"--columns\" option does not exist. at C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\symfony\\console\\Input\\ArgvInput.php:220)
+[stacktrace]
+#0 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\symfony\\console\\Input\\ArgvInput.php(147): Symfony\\Component\\Console\\Input\\ArgvInput->addLongOption('columns', 'uri,name,action...')
+#1 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\symfony\\console\\Input\\ArgvInput.php(82): Symfony\\Component\\Console\\Input\\ArgvInput->parseLongOption('--columns=uri,n...')
+#2 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\symfony\\console\\Input\\ArgvInput.php(71): Symfony\\Component\\Console\\Input\\ArgvInput->parseToken('--columns=uri,n...', true)
+#3 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\symfony\\console\\Input\\Input.php(55): Symfony\\Component\\Console\\Input\\ArgvInput->parse()
+#4 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\symfony\\console\\Command\\Command.php(267): Symfony\\Component\\Console\\Input\\Input->bind(Object(Symfony\\Component\\Console\\Input\\InputDefinition))
+#5 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php(124): Symfony\\Component\\Console\\Command\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))
+#6 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\symfony\\console\\Application.php(1002): Illuminate\\Console\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#7 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\symfony\\console\\Application.php(299): Symfony\\Component\\Console\\Application->doRunCommand(Object(Illuminate\\Foundation\\Console\\RouteListCommand), Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#8 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\symfony\\console\\Application.php(171): Symfony\\Component\\Console\\Application->doRun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#9 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Application.php(102): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#10 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(129): Illuminate\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#11 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#12 {main}
+"} 
+[2022-09-12 02:15:39] local.ERROR: The "--columns" option does not exist. {"exception":"[object] (Symfony\\Component\\Console\\Exception\\RuntimeException(code: 0): The \"--columns\" option does not exist. at C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\symfony\\console\\Input\\ArgvInput.php:220)
+[stacktrace]
+#0 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\symfony\\console\\Input\\ArgvInput.php(147): Symfony\\Component\\Console\\Input\\ArgvInput->addLongOption('columns', 'uri,name,action...')
+#1 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\symfony\\console\\Input\\ArgvInput.php(82): Symfony\\Component\\Console\\Input\\ArgvInput->parseLongOption('--columns=uri,n...')
+#2 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\symfony\\console\\Input\\ArgvInput.php(71): Symfony\\Component\\Console\\Input\\ArgvInput->parseToken('--columns=uri,n...', true)
+#3 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\symfony\\console\\Input\\Input.php(55): Symfony\\Component\\Console\\Input\\ArgvInput->parse()
+#4 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\symfony\\console\\Command\\Command.php(267): Symfony\\Component\\Console\\Input\\Input->bind(Object(Symfony\\Component\\Console\\Input\\InputDefinition))
+#5 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php(124): Symfony\\Component\\Console\\Command\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))
+#6 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\symfony\\console\\Application.php(1002): Illuminate\\Console\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#7 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\symfony\\console\\Application.php(299): Symfony\\Component\\Console\\Application->doRunCommand(Object(Illuminate\\Foundation\\Console\\RouteListCommand), Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#8 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\symfony\\console\\Application.php(171): Symfony\\Component\\Console\\Application->doRun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#9 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Application.php(102): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#10 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(129): Illuminate\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#11 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#12 {main}
+"} 
+[2022-09-12 02:15:48] local.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'esocial.comments' doesn't exist (SQL: select * from `comments` where `comments`.`course_id` = 9 and `comments`.`course_id` is not null and `status` != replied) {"view":{"view":"C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\resources\\views\\instructor_courses.blade.php","data":{"errors":"<pre class=sf-dump id=sf-dump-1361535038 data-indent-pad=\"  \"><span class=sf-dump-note>Illuminate\\Support\\ViewErrorBag</span> {<a class=sf-dump-ref>#339</a><samp data-depth=1 class=sf-dump-expanded>
+  #<span class=sf-dump-protected title=\"Protected property\">bags</span>: []
+</samp>}
+</pre><script>Sfdump(\"sf-dump-1361535038\", {\"maxDepth\":3,\"maxStringLength\":160})</script>
+","course":"<pre class=sf-dump id=sf-dump-1606899245 data-indent-pad=\"  \"><span class=sf-dump-note>Illuminate\\Database\\Eloquent\\Collection</span> {<a class=sf-dump-ref>#1293</a><samp data-depth=1 class=sf-dump-expanded>
+  #<span class=sf-dump-protected title=\"Protected property\">items</span>: <span class=sf-dump-note>array:5</span> [<samp data-depth=2 class=sf-dump-compact>
+    <span class=sf-dump-index>0</span> => <span class=sf-dump-note title=\"App\\Models\\Course
+\"><span class=\"sf-dump-ellipsis sf-dump-ellipsis-note\">App\\Models</span><span class=\"sf-dump-ellipsis sf-dump-ellipsis-note\">\\</span>Course</span> {<a class=sf-dump-ref>#1295</a><samp data-depth=3 class=sf-dump-compact>
+      #<span class=sf-dump-protected title=\"Protected property\">connection</span>: \"<span class=sf-dump-str title=\"5 characters\">mysql</span>\"
+      #<span class=sf-dump-protected title=\"Protected property\">table</span>: \"<span class=sf-dump-str title=\"7 characters\">courses</span>\"
+      #<span class=sf-dump-protected title=\"Protected property\">primaryKey</span>: \"<span class=sf-dump-str title=\"2 characters\">id</span>\"
+      #<span class=sf-dump-protected title=\"Protected property\">keyType</span>: \"<span class=sf-dump-str title=\"3 characters\">int</span>\"
+      +<span class=sf-dump-public title=\"Public property\">incrementing</span>: <span class=sf-dump-const>true</span>
+      #<span class=sf-dump-protected title=\"Protected property\">with</span>: []
+      #<span class=sf-dump-protected title=\"Protected property\">withCount</span>: []
+      +<span class=sf-dump-public title=\"Public property\">preventsLazyLoading</span>: <span class=sf-dump-const>false</span>
+      #<span class=sf-dump-protected title=\"Protected property\">perPage</span>: <span class=sf-dump-num>15</span>
+      +<span class=sf-dump-public title=\"Public property\">exists</span>: <span class=sf-dump-const>true</span>
+      +<span class=sf-dump-public title=\"Public property\">wasRecentlyCreated</span>: <span class=sf-dump-const>false</span>
+      #<span class=sf-dump-protected title=\"Protected property\">escapeWhenCastingToString</span>: <span class=sf-dump-const>false</span>
+      #<span class=sf-dump-protected title=\"Protected property\">attributes</span>: <span class=sf-dump-note>array:11</span> [ &#8230;11]
+      #<span class=sf-dump-protected title=\"Protected property\">original</span>: <span class=sf-dump-note>array:11</span> [ &#8230;11]
+      #<span class=sf-dump-protected title=\"Protected property\">changes</span>: []
+      #<span class=sf-dump-protected title=\"Protected property\">casts</span>: []
+      #<span class=sf-dump-protected title=\"Protected property\">classCastCache</span>: []
+      #<span class=sf-dump-protected title=\"Protected property\">attributeCastCache</span>: []
+      #<span class=sf-dump-protected title=\"Protected property\">dates</span>: []
+      #<span class=sf-dump-protected title=\"Protected property\">dateFormat</span>: <span class=sf-dump-const>null</span>
+      #<span class=sf-dump-protected title=\"Protected property\">appends</span>: []
+      #<span class=sf-dump-protected title=\"Protected property\">dispatchesEvents</span>: []
+      #<span class=sf-dump-protected title=\"Protected property\">observables</span>: []
+      #<span class=sf-dump-protected title=\"Protected property\">relations</span>: <span class=sf-dump-note>array:1</span> [ &#8230;1]
+      #<span class=sf-dump-protected title=\"Protected property\">touches</span>: []
+      +<span class=sf-dump-public title=\"Public property\">timestamps</span>: <span class=sf-dump-const>true</span>
+      #<span class=sf-dump-protected title=\"Protected property\">hidden</span>: []
+      #<span class=sf-dump-protected title=\"Protected property\">visible</span>: []
+      #<span class=sf-dump-protected title=\"Protected property\">fillable</span>: <span class=sf-dump-note>array:8</span> [ &#8230;8]
+      #<span class=sf-dump-protected title=\"Protected property\">guarded</span>: <span class=sf-dump-note>array:1</span> [ &#8230;1]
+    </samp>}
+    <span class=sf-dump-index>1</span> => <span class=sf-dump-note title=\"App\\Models\\Course
+\"><span class=\"sf-dump-ellipsis sf-dump-ellipsis-note\">App\\Models</span><span class=\"sf-dump-ellipsis sf-dump-ellipsis-note\">\\</span>Course</span> {<a class=sf-dump-ref>#1296</a><samp data-depth=3 class=sf-dump-compact>
+      #<span class=sf-dump-protected title=\"Protected property\">connection</span>: \"<span class=sf-dump-str title=\"5 characters\">mysql</span>\"
+      #<span class=sf-dump-protected title=\"Protected property\">table</span>: \"<span class=sf-dump-str title=\"7 characters\">courses</span>\"
+      #<span class=sf-dump-protected title=\"Protected property\">primaryKey</span>: \"<span class=sf-dump-str title=\"2 characters\">id</span>\"
+      #<span class=sf-dump-protected title=\"Protected property\">keyType</span>: \"<span class=sf-dump-str title=\"3 characters\">int</span>\"
+      +<span class=sf-dump-public title=\"Public property\">incrementing</span>: <span class=sf-dump-const>true</span>
+      #<span class=sf-dump-protected title=\"Protected property\">with</span>: []
+      #<span class=sf-dump-protected title=\"Protected property\">withCount</span>: []
+      +<span class=sf-dump-public title=\"Public property\">preventsLazyLoading</span>: <span class=sf-dump-const>false</span>
+      #<span class=sf-dump-protected title=\"Protected property\">perPage</span>: <span class=sf-dump-num>15</span>
+      +<span class=sf-dump-public title=\"Public property\">exists</span>: <span class=sf-dump-const>true</span>
+      +<span class=sf-dump-public title=\"Public property\">wasRecentlyCreated</span>: <span class=sf-dump-const>false</span>
+      #<span class=sf-dump-protected title=\"Protected property\">escapeWhenCastingToString</span>: <span class=sf-dump-const>false</span>
+      #<span class=sf-dump-protected title=\"Protected property\">attributes</span>: <span class=sf-dump-note>array:11</span> [ &#8230;11]
+      #<span class=sf-dump-protected title=\"Protected property\">original</span>: <span class=sf-dump-note>array:11</span> [ &#8230;11]
+      #<span class=sf-dump-protected title=\"Protected property\">changes</span>: []
+      #<span class=sf-dump-protected title=\"Protected property\">casts</span>: []
+      #<span class=sf-dump-protected title=\"Protected property\">classCastCache</span>: []
+      #<span class=sf-dump-protected title=\"Protected property\">attributeCastCache</span>: []
+      #<span class=sf-dump-protected title=\"Protected property\">dates</span>: []
+      #<span class=sf-dump-protected title=\"Protected property\">dateFormat</span>: <span class=sf-dump-const>null</span>
+      #<span class=sf-dump-protected title=\"Protected property\">appends</span>: []
+      #<span class=sf-dump-protected title=\"Protected property\">dispatchesEvents</span>: []
+      #<span class=sf-dump-protected title=\"Protected property\">observables</span>: []
+      #<span class=sf-dump-protected title=\"Protected property\">relations</span>: []
+      #<span class=sf-dump-protected title=\"Protected property\">touches</span>: []
+      +<span class=sf-dump-public title=\"Public property\">timestamps</span>: <span class=sf-dump-const>true</span>
+      #<span class=sf-dump-protected title=\"Protected property\">hidden</span>: []
+      #<span class=sf-dump-protected title=\"Protected property\">visible</span>: []
+      #<span class=sf-dump-protected title=\"Protected property\">fillable</span>: <span class=sf-dump-note>array:8</span> [ &#8230;8]
+      #<span class=sf-dump-protected title=\"Protected property\">guarded</span>: <span class=sf-dump-note>array:1</span> [ &#8230;1]
+    </samp>}
+    <span class=sf-dump-index>2</span> => <span class=sf-dump-note title=\"App\\Models\\Course
+\"><span class=\"sf-dump-ellipsis sf-dump-ellipsis-note\">App\\Models</span><span class=\"sf-dump-ellipsis sf-dump-ellipsis-note\">\\</span>Course</span> {<a class=sf-dump-ref>#1297</a><samp data-depth=3 class=sf-dump-compact>
+      #<span class=sf-dump-protected title=\"Protected property\">connection</span>: \"<span class=sf-dump-str title=\"5 characters\">mysql</span>\"
+      #<span class=sf-dump-protected title=\"Protected property\">table</span>: \"<span class=sf-dump-str title=\"7 characters\">courses</span>\"
+      #<span class=sf-dump-protected title=\"Protected property\">primaryKey</span>: \"<span class=sf-dump-str title=\"2 characters\">id</span>\"
+      #<span class=sf-dump-protected title=\"Protected property\">keyType</span>: \"<span class=sf-dump-str title=\"3 characters\">int</span>\"
+      +<span class=sf-dump-public title=\"Public property\">incrementing</span>: <span class=sf-dump-const>true</span>
+      #<span class=sf-dump-protected title=\"Protected property\">with</span>: []
+      #<span class=sf-dump-protected title=\"Protected property\">withCount</span>: []
+      +<span class=sf-dump-public title=\"Public property\">preventsLazyLoading</span>: <span class=sf-dump-const>false</span>
+      #<span class=sf-dump-protected title=\"Protected property\">perPage</span>: <span class=sf-dump-num>15</span>
+      +<span class=sf-dump-public title=\"Public property\">exists</span>: <span class=sf-dump-const>true</span>
+      +<span class=sf-dump-public title=\"Public property\">wasRecentlyCreated</span>: <span class=sf-dump-const>false</span>
+      #<span class=sf-dump-protected title=\"Protected property\">escapeWhenCastingToString</span>: <span class=sf-dump-const>false</span>
+      #<span class=sf-dump-protected title=\"Protected property\">attributes</span>: <span class=sf-dump-note>array:11</span> [ &#8230;11]
+      #<span class=sf-dump-protected title=\"Protected property\">original</span>: <span class=sf-dump-note>array:11</span> [ &#8230;11]
+      #<span class=sf-dump-protected title=\"Protected property\">changes</span>: []
+      #<span class=sf-dump-protected title=\"Protected property\">casts</span>: []
+      #<span class=sf-dump-protected title=\"Protected property\">classCastCache</span>: []
+      #<span class=sf-dump-protected title=\"Protected property\">attributeCastCache</span>: []
+      #<span class=sf-dump-protected title=\"Protected property\">dates</span>: []
+      #<span class=sf-dump-protected title=\"Protected property\">dateFormat</span>: <span class=sf-dump-const>null</span>
+      #<span class=sf-dump-protected title=\"Protected property\">appends</span>: []
+      #<span class=sf-dump-protected title=\"Protected property\">dispatchesEvents</span>: []
+      #<span class=sf-dump-protected title=\"Protected property\">observables</span>: []
+      #<span class=sf-dump-protected title=\"Protected property\">relations</span>: []
+      #<span class=sf-dump-protected title=\"Protected property\">touches</span>: []
+      +<span class=sf-dump-public title=\"Public property\">timestamps</span>: <span class=sf-dump-const>true</span>
+      #<span class=sf-dump-protected title=\"Protected property\">hidden</span>: []
+      #<span class=sf-dump-protected title=\"Protected property\">visible</span>: []
+      #<span class=sf-dump-protected title=\"Protected property\">fillable</span>: <span class=sf-dump-note>array:8</span> [ &#8230;8]
+      #<span class=sf-dump-protected title=\"Protected property\">guarded</span>: <span class=sf-dump-note>array:1</span> [ &#8230;1]
+    </samp>}
+    <span class=sf-dump-index>3</span> => <span class=sf-dump-note title=\"App\\Models\\Course
+\"><span class=\"sf-dump-ellipsis sf-dump-ellipsis-note\">App\\Models</span><span class=\"sf-dump-ellipsis sf-dump-ellipsis-note\">\\</span>Course</span> {<a class=sf-dump-ref>#1298</a><samp data-depth=3 class=sf-dump-compact>
+      #<span class=sf-dump-protected title=\"Protected property\">connection</span>: \"<span class=sf-dump-str title=\"5 characters\">mysql</span>\"
+      #<span class=sf-dump-protected title=\"Protected property\">table</span>: \"<span class=sf-dump-str title=\"7 characters\">courses</span>\"
+      #<span class=sf-dump-protected title=\"Protected property\">primaryKey</span>: \"<span class=sf-dump-str title=\"2 characters\">id</span>\"
+      #<span class=sf-dump-protected title=\"Protected property\">keyType</span>: \"<span class=sf-dump-str title=\"3 characters\">int</span>\"
+      +<span class=sf-dump-public title=\"Public property\">incrementing</span>: <span class=sf-dump-const>true</span>
+      #<span class=sf-dump-protected title=\"Protected property\">with</span>: []
+      #<span class=sf-dump-protected title=\"Protected property\">withCount</span>: []
+      +<span class=sf-dump-public title=\"Public property\">preventsLazyLoading</span>: <span class=sf-dump-const>false</span>
+      #<span class=sf-dump-protected title=\"Protected property\">perPage</span>: <span class=sf-dump-num>15</span>
+      +<span class=sf-dump-public title=\"Public property\">exists</span>: <span class=sf-dump-const>true</span>
+      +<span class=sf-dump-public title=\"Public property\">wasRecentlyCreated</span>: <span class=sf-dump-const>false</span>
+      #<span class=sf-dump-protected title=\"Protected property\">escapeWhenCastingToString</span>: <span class=sf-dump-const>false</span>
+      #<span class=sf-dump-protected title=\"Protected property\">attributes</span>: <span class=sf-dump-note>array:11</span> [ &#8230;11]
+      #<span class=sf-dump-protected title=\"Protected property\">original</span>: <span class=sf-dump-note>array:11</span> [ &#8230;11]
+      #<span class=sf-dump-protected title=\"Protected property\">changes</span>: []
+      #<span class=sf-dump-protected title=\"Protected property\">casts</span>: []
+      #<span class=sf-dump-protected title=\"Protected property\">classCastCache</span>: []
+      #<span class=sf-dump-protected title=\"Protected property\">attributeCastCache</span>: []
+      #<span class=sf-dump-protected title=\"Protected property\">dates</span>: []
+      #<span class=sf-dump-protected title=\"Protected property\">dateFormat</span>: <span class=sf-dump-const>null</span>
+      #<span class=sf-dump-protected title=\"Protected property\">appends</span>: []
+      #<span class=sf-dump-protected title=\"Protected property\">dispatchesEvents</span>: []
+      #<span class=sf-dump-protected title=\"Protected property\">observables</span>: []
+      #<span class=sf-dump-protected title=\"Protected property\">relations</span>: []
+      #<span class=sf-dump-protected title=\"Protected property\">touches</span>: []
+      +<span class=sf-dump-public title=\"Public property\">timestamps</span>: <span class=sf-dump-const>true</span>
+      #<span class=sf-dump-protected title=\"Protected property\">hidden</span>: []
+      #<span class=sf-dump-protected title=\"Protected property\">visible</span>: []
+      #<span class=sf-dump-protected title=\"Protected property\">fillable</span>: <span class=sf-dump-note>array:8</span> [ &#8230;8]
+      #<span class=sf-dump-protected title=\"Protected property\">guarded</span>: <span class=sf-dump-note>array:1</span> [ &#8230;1]
+    </samp>}
+    <span class=sf-dump-index>4</span> => <span class=sf-dump-note title=\"App\\Models\\Course
+\"><span class=\"sf-dump-ellipsis sf-dump-ellipsis-note\">App\\Models</span><span class=\"sf-dump-ellipsis sf-dump-ellipsis-note\">\\</span>Course</span> {<a class=sf-dump-ref>#1299</a><samp data-depth=3 class=sf-dump-compact>
+      #<span class=sf-dump-protected title=\"Protected property\">connection</span>: \"<span class=sf-dump-str title=\"5 characters\">mysql</span>\"
+      #<span class=sf-dump-protected title=\"Protected property\">table</span>: \"<span class=sf-dump-str title=\"7 characters\">courses</span>\"
+      #<span class=sf-dump-protected title=\"Protected property\">primaryKey</span>: \"<span class=sf-dump-str title=\"2 characters\">id</span>\"
+      #<span class=sf-dump-protected title=\"Protected property\">keyType</span>: \"<span class=sf-dump-str title=\"3 characters\">int</span>\"
+      +<span class=sf-dump-public title=\"Public property\">incrementing</span>: <span class=sf-dump-const>true</span>
+      #<span class=sf-dump-protected title=\"Protected property\">with</span>: []
+      #<span class=sf-dump-protected title=\"Protected property\">withCount</span>: []
+      +<span class=sf-dump-public title=\"Public property\">preventsLazyLoading</span>: <span class=sf-dump-const>false</span>
+      #<span class=sf-dump-protected title=\"Protected property\">perPage</span>: <span class=sf-dump-num>15</span>
+      +<span class=sf-dump-public title=\"Public property\">exists</span>: <span class=sf-dump-const>true</span>
+      +<span class=sf-dump-public title=\"Public property\">wasRecentlyCreated</span>: <span class=sf-dump-const>false</span>
+      #<span class=sf-dump-protected title=\"Protected property\">escapeWhenCastingToString</span>: <span class=sf-dump-const>false</span>
+      #<span class=sf-dump-protected title=\"Protected property\">attributes</span>: <span class=sf-dump-note>array:11</span> [ &#8230;11]
+      #<span class=sf-dump-protected title=\"Protected property\">original</span>: <span class=sf-dump-note>array:11</span> [ &#8230;11]
+      #<span class=sf-dump-protected title=\"Protected property\">changes</span>: []
+      #<span class=sf-dump-protected title=\"Protected property\">casts</span>: []
+      #<span class=sf-dump-protected title=\"Protected property\">classCastCache</span>: []
+      #<span class=sf-dump-protected title=\"Protected property\">attributeCastCache</span>: []
+      #<span class=sf-dump-protected title=\"Protected property\">dates</span>: []
+      #<span class=sf-dump-protected title=\"Protected property\">dateFormat</span>: <span class=sf-dump-const>null</span>
+      #<span class=sf-dump-protected title=\"Protected property\">appends</span>: []
+      #<span class=sf-dump-protected title=\"Protected property\">dispatchesEvents</span>: []
+      #<span class=sf-dump-protected title=\"Protected property\">observables</span>: []
+      #<span class=sf-dump-protected title=\"Protected property\">relations</span>: []
+      #<span class=sf-dump-protected title=\"Protected property\">touches</span>: []
+      +<span class=sf-dump-public title=\"Public property\">timestamps</span>: <span class=sf-dump-const>true</span>
+      #<span class=sf-dump-protected title=\"Protected property\">hidden</span>: []
+      #<span class=sf-dump-protected title=\"Protected property\">visible</span>: []
+      #<span class=sf-dump-protected title=\"Protected property\">fillable</span>: <span class=sf-dump-note>array:8</span> [ &#8230;8]
+      #<span class=sf-dump-protected title=\"Protected property\">guarded</span>: <span class=sf-dump-note>array:1</span> [ &#8230;1]
+    </samp>}
+  </samp>]
+  #<span class=sf-dump-protected title=\"Protected property\">escapeWhenCastingToString</span>: <span class=sf-dump-const>false</span>
+</samp>}
+</pre><script>Sfdump(\"sf-dump-1606899245\", {\"maxDepth\":3,\"maxStringLength\":160})</script>
+","user_data":"<pre class=sf-dump id=sf-dump-1204788209 data-indent-pad=\"  \"><span class=sf-dump-note>App\\Models\\User</span> {<a class=sf-dump-ref>#1146</a><samp data-depth=1 class=sf-dump-expanded>
+  #<span class=sf-dump-protected title=\"Protected property\">connection</span>: \"<span class=sf-dump-str title=\"5 characters\">mysql</span>\"
+  #<span class=sf-dump-protected title=\"Protected property\">table</span>: \"<span class=sf-dump-str title=\"5 characters\">users</span>\"
+  #<span class=sf-dump-protected title=\"Protected property\">primaryKey</span>: \"<span class=sf-dump-str title=\"2 characters\">id</span>\"
+  #<span class=sf-dump-protected title=\"Protected property\">keyType</span>: \"<span class=sf-dump-str title=\"3 characters\">int</span>\"
+  +<span class=sf-dump-public title=\"Public property\">incrementing</span>: <span class=sf-dump-const>true</span>
+  #<span class=sf-dump-protected title=\"Protected property\">with</span>: []
+  #<span class=sf-dump-protected title=\"Protected property\">withCount</span>: []
+  +<span class=sf-dump-public title=\"Public property\">preventsLazyLoading</span>: <span class=sf-dump-const>false</span>
+  #<span class=sf-dump-protected title=\"Protected property\">perPage</span>: <span class=sf-dump-num>15</span>
+  +<span class=sf-dump-public title=\"Public property\">exists</span>: <span class=sf-dump-const>true</span>
+  +<span class=sf-dump-public title=\"Public property\">wasRecentlyCreated</span>: <span class=sf-dump-const>false</span>
+  #<span class=sf-dump-protected title=\"Protected property\">escapeWhenCastingToString</span>: <span class=sf-dump-const>false</span>
+  #<span class=sf-dump-protected title=\"Protected property\">attributes</span>: <span class=sf-dump-note>array:12</span> [<samp data-depth=2 class=sf-dump-compact>
+    \"<span class=sf-dump-key>id</span>\" => <span class=sf-dump-num>2</span>
+    \"<span class=sf-dump-key>name</span>\" => \"<span class=sf-dump-str title=\"6 characters\">Sidney</span>\"
+    \"<span class=sf-dump-key>last_name</span>\" => \"<span class=sf-dump-str title=\"7 characters\">Salazar</span>\"
+    \"<span class=sf-dump-key>email</span>\" => \"<span class=sf-dump-str title=\"27 characters\">salazarjohnsidney@gmail.com</span>\"
+    \"<span class=sf-dump-key>user_type</span>\" => \"<span class=sf-dump-str title=\"10 characters\">Instructor</span>\"
+    \"<span class=sf-dump-key>email_verified_at</span>\" => <span class=sf-dump-const>null</span>
+    \"<span class=sf-dump-key>password</span>\" => \"<span class=sf-dump-str title=\"60 characters\">$2y$10$Wqil.dPzVH2jhDdvvDiESOnYZ2DS5lc9gQsUzhkXVFDPR66ZF35RO</span>\"
+    \"<span class=sf-dump-key>remember_token</span>\" => <span class=sf-dump-const>null</span>
+    \"<span class=sf-dump-key>created_at</span>\" => \"<span class=sf-dump-str title=\"19 characters\">2022-09-05 01:18:36</span>\"
+    \"<span class=sf-dump-key>updated_at</span>\" => \"<span class=sf-dump-str title=\"19 characters\">2022-09-05 05:23:21</span>\"
+    \"<span class=sf-dump-key>status</span>\" => \"<span class=sf-dump-str title=\"8 characters\">Approved</span>\"
+    \"<span class=sf-dump-key>user_image</span>\" => \"<span class=sf-dump-str title=\"25 characters\">user_image-1662355401.jpg</span>\"
+  </samp>]
+  #<span class=sf-dump-protected title=\"Protected property\">original</span>: <span class=sf-dump-note>array:12</span> [<samp data-depth=2 class=sf-dump-compact>
+    \"<span class=sf-dump-key>id</span>\" => <span class=sf-dump-num>2</span>
+    \"<span class=sf-dump-key>name</span>\" => \"<span class=sf-dump-str title=\"6 characters\">Sidney</span>\"
+    \"<span class=sf-dump-key>last_name</span>\" => \"<span class=sf-dump-str title=\"7 characters\">Salazar</span>\"
+    \"<span class=sf-dump-key>email</span>\" => \"<span class=sf-dump-str title=\"27 characters\">salazarjohnsidney@gmail.com</span>\"
+    \"<span class=sf-dump-key>user_type</span>\" => \"<span class=sf-dump-str title=\"10 characters\">Instructor</span>\"
+    \"<span class=sf-dump-key>email_verified_at</span>\" => <span class=sf-dump-const>null</span>
+    \"<span class=sf-dump-key>password</span>\" => \"<span class=sf-dump-str title=\"60 characters\">$2y$10$Wqil.dPzVH2jhDdvvDiESOnYZ2DS5lc9gQsUzhkXVFDPR66ZF35RO</span>\"
+    \"<span class=sf-dump-key>remember_token</span>\" => <span class=sf-dump-const>null</span>
+    \"<span class=sf-dump-key>created_at</span>\" => \"<span class=sf-dump-str title=\"19 characters\">2022-09-05 01:18:36</span>\"
+    \"<span class=sf-dump-key>updated_at</span>\" => \"<span class=sf-dump-str title=\"19 characters\">2022-09-05 05:23:21</span>\"
+    \"<span class=sf-dump-key>status</span>\" => \"<span class=sf-dump-str title=\"8 characters\">Approved</span>\"
+    \"<span class=sf-dump-key>user_image</span>\" => \"<span class=sf-dump-str title=\"25 characters\">user_image-1662355401.jpg</span>\"
+  </samp>]
+  #<span class=sf-dump-protected title=\"Protected property\">changes</span>: []
+  #<span class=sf-dump-protected title=\"Protected property\">casts</span>: <span class=sf-dump-note>array:1</span> [<samp data-depth=2 class=sf-dump-compact>
+    \"<span class=sf-dump-key>email_verified_at</span>\" => \"<span class=sf-dump-str title=\"8 characters\">datetime</span>\"
+  </samp>]
+  #<span class=sf-dump-protected title=\"Protected property\">classCastCache</span>: []
+  #<span class=sf-dump-protected title=\"Protected property\">attributeCastCache</span>: []
+  #<span class=sf-dump-protected title=\"Protected property\">dates</span>: []
+  #<span class=sf-dump-protected title=\"Protected property\">dateFormat</span>: <span class=sf-dump-const>null</span>
+  #<span class=sf-dump-protected title=\"Protected property\">appends</span>: []
+  #<span class=sf-dump-protected title=\"Protected property\">dispatchesEvents</span>: []
+  #<span class=sf-dump-protected title=\"Protected property\">observables</span>: []
+  #<span class=sf-dump-protected title=\"Protected property\">relations</span>: []
+  #<span class=sf-dump-protected title=\"Protected property\">touches</span>: []
+  +<span class=sf-dump-public title=\"Public property\">timestamps</span>: <span class=sf-dump-const>true</span>
+  #<span class=sf-dump-protected title=\"Protected property\">hidden</span>: <span class=sf-dump-note>array:2</span> [<samp data-depth=2 class=sf-dump-compact>
+    <span class=sf-dump-index>0</span> => \"<span class=sf-dump-str title=\"8 characters\">password</span>\"
+    <span class=sf-dump-index>1</span> => \"<span class=sf-dump-str title=\"14 characters\">remember_token</span>\"
+  </samp>]
+  #<span class=sf-dump-protected title=\"Protected property\">visible</span>: []
+  #<span class=sf-dump-protected title=\"Protected property\">fillable</span>: <span class=sf-dump-note>array:7</span> [<samp data-depth=2 class=sf-dump-compact>
+    <span class=sf-dump-index>0</span> => \"<span class=sf-dump-str title=\"4 characters\">name</span>\"
+    <span class=sf-dump-index>1</span> => \"<span class=sf-dump-str title=\"9 characters\">last_name</span>\"
+    <span class=sf-dump-index>2</span> => \"<span class=sf-dump-str title=\"5 characters\">email</span>\"
+    <span class=sf-dump-index>3</span> => \"<span class=sf-dump-str title=\"8 characters\">password</span>\"
+    <span class=sf-dump-index>4</span> => \"<span class=sf-dump-str title=\"9 characters\">user_type</span>\"
+    <span class=sf-dump-index>5</span> => \"<span class=sf-dump-str title=\"6 characters\">status</span>\"
+    <span class=sf-dump-index>6</span> => \"<span class=sf-dump-str title=\"10 characters\">user_image</span>\"
+  </samp>]
+  #<span class=sf-dump-protected title=\"Protected property\">guarded</span>: <span class=sf-dump-note>array:1</span> [<samp data-depth=2 class=sf-dump-compact>
+    <span class=sf-dump-index>0</span> => \"<span class=sf-dump-str>*</span>\"
+  </samp>]
+  #<span class=sf-dump-protected title=\"Protected property\">rememberTokenName</span>: \"<span class=sf-dump-str title=\"14 characters\">remember_token</span>\"
+</samp>}
+</pre><script>Sfdump(\"sf-dump-1204788209\", {\"maxDepth\":3,\"maxStringLength\":160})</script>
+"}},"userId":2,"exception":"[object] (Spatie\\LaravelIgnition\\Exceptions\\ViewException(code: 0): SQLSTATE[42S02]: Base table or view not found: 1146 Table 'esocial.comments' doesn't exist (SQL: select * from `comments` where `comments`.`course_id` = 9 and `comments`.`course_id` is not null and `status` != replied) at C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php:759)
+[stacktrace]
+#0 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(719): Illuminate\\Database\\Connection->runQueryCallback('select * from `...', Array, Object(Closure))
+#1 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(421): Illuminate\\Database\\Connection->run('select * from `...', Array, Object(Closure))
+#2 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Query\\Builder.php(2630): Illuminate\\Database\\Connection->select('select * from `...', Array, true)
+#3 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Query\\Builder.php(2618): Illuminate\\Database\\Query\\Builder->runSelect()
+#4 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Query\\Builder.php(3154): Illuminate\\Database\\Query\\Builder->Illuminate\\Database\\Query\\{closure}()
+#5 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Query\\Builder.php(2619): Illuminate\\Database\\Query\\Builder->onceWithColumns(Array, Object(Closure))
+#6 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Builder.php(699): Illuminate\\Database\\Query\\Builder->get(Array)
+#7 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Builder.php(683): Illuminate\\Database\\Eloquent\\Builder->getModels(Array)
+#8 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Relations\\HasMany.php(17): Illuminate\\Database\\Eloquent\\Builder->get()
+#9 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Concerns\\HasAttributes.php(564): Illuminate\\Database\\Eloquent\\Relations\\HasMany->getResults()
+#10 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Concerns\\HasAttributes.php(502): Illuminate\\Database\\Eloquent\\Model->getRelationshipFromMethod('comments_count')
+#11 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Concerns\\HasAttributes.php(451): Illuminate\\Database\\Eloquent\\Model->getRelationValue('comments_count')
+#12 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Model.php(2092): Illuminate\\Database\\Eloquent\\Model->getAttribute('comments_count')
+#13 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\storage\\framework\\views\\3ca3aec0903d7fc816fd756afe44cf083a9f7f14.php(26): Illuminate\\Database\\Eloquent\\Model->__get('comments_count')
+#14 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Filesystem\\Filesystem.php(109): require('C:\\\\Users\\\\SALAZA...')
+#15 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Filesystem\\Filesystem.php(110): Illuminate\\Filesystem\\Filesystem::Illuminate\\Filesystem\\{closure}()
+#16 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\View\\Engines\\PhpEngine.php(58): Illuminate\\Filesystem\\Filesystem->getRequire('C:\\\\Users\\\\SALAZA...', Array)
+#17 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\View\\Engines\\CompilerEngine.php(61): Illuminate\\View\\Engines\\PhpEngine->evaluatePath('C:\\\\Users\\\\SALAZA...', Array)
+#18 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\View\\View.php(139): Illuminate\\View\\Engines\\CompilerEngine->get('C:\\\\Users\\\\SALAZA...', Array)
+#19 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\View\\View.php(122): Illuminate\\View\\View->getContents()
+#20 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\View\\View.php(91): Illuminate\\View\\View->renderContents()
+#21 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Response.php(69): Illuminate\\View\\View->render()
+#22 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Response.php(35): Illuminate\\Http\\Response->setContent(Object(Illuminate\\View\\View))
+#23 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(833): Illuminate\\Http\\Response->__construct(Object(Illuminate\\View\\View), 200, Array)
+#24 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(802): Illuminate\\Routing\\Router::toResponse(Object(Illuminate\\Http\\Request), Object(Illuminate\\View\\View))
+#25 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(725): Illuminate\\Routing\\Router->prepareResponse(Object(Illuminate\\Http\\Request), Object(Illuminate\\View\\View))
+#26 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(141): Illuminate\\Routing\\Router->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#27 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Middleware\\SubstituteBindings.php(50): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#28 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(180): Illuminate\\Routing\\Middleware\\SubstituteBindings->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#29 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Auth\\Middleware\\Authenticate.php(44): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#30 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(180): Illuminate\\Auth\\Middleware\\Authenticate->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#31 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken.php(78): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#32 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(180): Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#33 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\View\\Middleware\\ShareErrorsFromSession.php(49): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#34 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(180): Illuminate\\View\\Middleware\\ShareErrorsFromSession->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#35 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Session\\Middleware\\StartSession.php(121): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#36 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Session\\Middleware\\StartSession.php(64): Illuminate\\Session\\Middleware\\StartSession->handleStatefulRequest(Object(Illuminate\\Http\\Request), Object(Illuminate\\Session\\Store), Object(Closure))
+#37 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(180): Illuminate\\Session\\Middleware\\StartSession->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#38 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse.php(37): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#39 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(180): Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#40 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Cookie\\Middleware\\EncryptCookies.php(67): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#41 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(180): Illuminate\\Cookie\\Middleware\\EncryptCookies->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#42 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(116): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#43 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(726): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#44 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(703): Illuminate\\Routing\\Router->runRouteWithinStack(Object(Illuminate\\Routing\\Route), Object(Illuminate\\Http\\Request))
+#45 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(667): Illuminate\\Routing\\Router->runRoute(Object(Illuminate\\Http\\Request), Object(Illuminate\\Routing\\Route))
+#46 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(656): Illuminate\\Routing\\Router->dispatchToRoute(Object(Illuminate\\Http\\Request))
+#47 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(167): Illuminate\\Routing\\Router->dispatch(Object(Illuminate\\Http\\Request))
+#48 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(141): Illuminate\\Foundation\\Http\\Kernel->Illuminate\\Foundation\\Http\\{closure}(Object(Illuminate\\Http\\Request))
+#49 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest.php(21): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#50 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\ConvertEmptyStringsToNull.php(31): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#51 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(180): Illuminate\\Foundation\\Http\\Middleware\\ConvertEmptyStringsToNull->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#52 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest.php(21): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#53 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TrimStrings.php(40): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#54 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(180): Illuminate\\Foundation\\Http\\Middleware\\TrimStrings->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#55 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\ValidatePostSize.php(27): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#56 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(180): Illuminate\\Foundation\\Http\\Middleware\\ValidatePostSize->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#57 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\PreventRequestsDuringMaintenance.php(86): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#58 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(180): Illuminate\\Foundation\\Http\\Middleware\\PreventRequestsDuringMaintenance->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#59 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\fruitcake\\laravel-cors\\src\\HandleCors.php(38): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#60 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(180): Fruitcake\\Cors\\HandleCors->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#61 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Middleware\\TrustProxies.php(39): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#62 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(180): Illuminate\\Http\\Middleware\\TrustProxies->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#63 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(116): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#64 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(142): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#65 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(111): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
+#66 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\public\\index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
+#67 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\server.php(21): require_once('C:\\\\Users\\\\SALAZA...')
+#68 {main}
+
+[previous exception] [object] (Illuminate\\Database\\QueryException(code: 42S02): SQLSTATE[42S02]: Base table or view not found: 1146 Table 'esocial.comments' doesn't exist (SQL: select * from `comments` where `comments`.`course_id` = 9 and `comments`.`course_id` is not null and `status` != replied) at C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php:759)
+[stacktrace]
+#0 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(719): Illuminate\\Database\\Connection->runQueryCallback('select * from `...', Array, Object(Closure))
+#1 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(421): Illuminate\\Database\\Connection->run('select * from `...', Array, Object(Closure))
+#2 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Query\\Builder.php(2630): Illuminate\\Database\\Connection->select('select * from `...', Array, true)
+#3 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Query\\Builder.php(2618): Illuminate\\Database\\Query\\Builder->runSelect()
+#4 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Query\\Builder.php(3154): Illuminate\\Database\\Query\\Builder->Illuminate\\Database\\Query\\{closure}()
+#5 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Query\\Builder.php(2619): Illuminate\\Database\\Query\\Builder->onceWithColumns(Array, Object(Closure))
+#6 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Builder.php(699): Illuminate\\Database\\Query\\Builder->get(Array)
+#7 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Builder.php(683): Illuminate\\Database\\Eloquent\\Builder->getModels(Array)
+#8 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Relations\\HasMany.php(17): Illuminate\\Database\\Eloquent\\Builder->get()
+#9 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Concerns\\HasAttributes.php(564): Illuminate\\Database\\Eloquent\\Relations\\HasMany->getResults()
+#10 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Concerns\\HasAttributes.php(502): Illuminate\\Database\\Eloquent\\Model->getRelationshipFromMethod('comments_count')
+#11 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Concerns\\HasAttributes.php(451): Illuminate\\Database\\Eloquent\\Model->getRelationValue('comments_count')
+#12 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Model.php(2092): Illuminate\\Database\\Eloquent\\Model->getAttribute('comments_count')
+#13 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\storage\\framework\\views\\3ca3aec0903d7fc816fd756afe44cf083a9f7f14.php(26): Illuminate\\Database\\Eloquent\\Model->__get('comments_count')
+#14 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Filesystem\\Filesystem.php(109): require('C:\\\\Users\\\\SALAZA...')
+#15 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Filesystem\\Filesystem.php(110): Illuminate\\Filesystem\\Filesystem::Illuminate\\Filesystem\\{closure}()
+#16 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\View\\Engines\\PhpEngine.php(58): Illuminate\\Filesystem\\Filesystem->getRequire('C:\\\\Users\\\\SALAZA...', Array)
+#17 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\View\\Engines\\CompilerEngine.php(61): Illuminate\\View\\Engines\\PhpEngine->evaluatePath('C:\\\\Users\\\\SALAZA...', Array)
+#18 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\View\\View.php(139): Illuminate\\View\\Engines\\CompilerEngine->get('C:\\\\Users\\\\SALAZA...', Array)
+#19 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\View\\View.php(122): Illuminate\\View\\View->getContents()
+#20 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\View\\View.php(91): Illuminate\\View\\View->renderContents()
+#21 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Response.php(69): Illuminate\\View\\View->render()
+#22 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Response.php(35): Illuminate\\Http\\Response->setContent(Object(Illuminate\\View\\View))
+#23 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(833): Illuminate\\Http\\Response->__construct(Object(Illuminate\\View\\View), 200, Array)
+#24 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(802): Illuminate\\Routing\\Router::toResponse(Object(Illuminate\\Http\\Request), Object(Illuminate\\View\\View))
+#25 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(725): Illuminate\\Routing\\Router->prepareResponse(Object(Illuminate\\Http\\Request), Object(Illuminate\\View\\View))
+#26 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(141): Illuminate\\Routing\\Router->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#27 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Middleware\\SubstituteBindings.php(50): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#28 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(180): Illuminate\\Routing\\Middleware\\SubstituteBindings->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#29 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Auth\\Middleware\\Authenticate.php(44): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#30 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(180): Illuminate\\Auth\\Middleware\\Authenticate->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#31 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken.php(78): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#32 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(180): Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#33 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\View\\Middleware\\ShareErrorsFromSession.php(49): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#34 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(180): Illuminate\\View\\Middleware\\ShareErrorsFromSession->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#35 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Session\\Middleware\\StartSession.php(121): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#36 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Session\\Middleware\\StartSession.php(64): Illuminate\\Session\\Middleware\\StartSession->handleStatefulRequest(Object(Illuminate\\Http\\Request), Object(Illuminate\\Session\\Store), Object(Closure))
+#37 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(180): Illuminate\\Session\\Middleware\\StartSession->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#38 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse.php(37): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#39 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(180): Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#40 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Cookie\\Middleware\\EncryptCookies.php(67): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#41 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(180): Illuminate\\Cookie\\Middleware\\EncryptCookies->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#42 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(116): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#43 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(726): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#44 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(703): Illuminate\\Routing\\Router->runRouteWithinStack(Object(Illuminate\\Routing\\Route), Object(Illuminate\\Http\\Request))
+#45 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(667): Illuminate\\Routing\\Router->runRoute(Object(Illuminate\\Http\\Request), Object(Illuminate\\Routing\\Route))
+#46 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(656): Illuminate\\Routing\\Router->dispatchToRoute(Object(Illuminate\\Http\\Request))
+#47 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(167): Illuminate\\Routing\\Router->dispatch(Object(Illuminate\\Http\\Request))
+#48 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(141): Illuminate\\Foundation\\Http\\Kernel->Illuminate\\Foundation\\Http\\{closure}(Object(Illuminate\\Http\\Request))
+#49 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest.php(21): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#50 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\ConvertEmptyStringsToNull.php(31): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#51 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(180): Illuminate\\Foundation\\Http\\Middleware\\ConvertEmptyStringsToNull->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#52 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest.php(21): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#53 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TrimStrings.php(40): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#54 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(180): Illuminate\\Foundation\\Http\\Middleware\\TrimStrings->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#55 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\ValidatePostSize.php(27): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#56 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(180): Illuminate\\Foundation\\Http\\Middleware\\ValidatePostSize->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#57 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\PreventRequestsDuringMaintenance.php(86): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#58 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(180): Illuminate\\Foundation\\Http\\Middleware\\PreventRequestsDuringMaintenance->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#59 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\fruitcake\\laravel-cors\\src\\HandleCors.php(38): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#60 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(180): Fruitcake\\Cors\\HandleCors->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#61 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Middleware\\TrustProxies.php(39): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#62 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(180): Illuminate\\Http\\Middleware\\TrustProxies->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#63 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(116): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#64 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(142): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#65 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(111): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
+#66 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\public\\index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
+#67 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\server.php(21): require_once('C:\\\\Users\\\\SALAZA...')
+#68 {main}
+
+[previous exception] [object] (PDOException(code: 42S02): SQLSTATE[42S02]: Base table or view not found: 1146 Table 'esocial.comments' doesn't exist at C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php:413)
+[stacktrace]
+#0 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(413): PDO->prepare('select * from `...')
+#1 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(752): Illuminate\\Database\\Connection->Illuminate\\Database\\{closure}('select * from `...', Array)
+#2 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(719): Illuminate\\Database\\Connection->runQueryCallback('select * from `...', Array, Object(Closure))
+#3 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(421): Illuminate\\Database\\Connection->run('select * from `...', Array, Object(Closure))
+#4 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Query\\Builder.php(2630): Illuminate\\Database\\Connection->select('select * from `...', Array, true)
+#5 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Query\\Builder.php(2618): Illuminate\\Database\\Query\\Builder->runSelect()
+#6 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Query\\Builder.php(3154): Illuminate\\Database\\Query\\Builder->Illuminate\\Database\\Query\\{closure}()
+#7 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Query\\Builder.php(2619): Illuminate\\Database\\Query\\Builder->onceWithColumns(Array, Object(Closure))
+#8 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Builder.php(699): Illuminate\\Database\\Query\\Builder->get(Array)
+#9 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Builder.php(683): Illuminate\\Database\\Eloquent\\Builder->getModels(Array)
+#10 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Relations\\HasMany.php(17): Illuminate\\Database\\Eloquent\\Builder->get()
+#11 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Concerns\\HasAttributes.php(564): Illuminate\\Database\\Eloquent\\Relations\\HasMany->getResults()
+#12 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Concerns\\HasAttributes.php(502): Illuminate\\Database\\Eloquent\\Model->getRelationshipFromMethod('comments_count')
+#13 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Concerns\\HasAttributes.php(451): Illuminate\\Database\\Eloquent\\Model->getRelationValue('comments_count')
+#14 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Model.php(2092): Illuminate\\Database\\Eloquent\\Model->getAttribute('comments_count')
+#15 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\storage\\framework\\views\\3ca3aec0903d7fc816fd756afe44cf083a9f7f14.php(26): Illuminate\\Database\\Eloquent\\Model->__get('comments_count')
+#16 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Filesystem\\Filesystem.php(109): require('C:\\\\Users\\\\SALAZA...')
+#17 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Filesystem\\Filesystem.php(110): Illuminate\\Filesystem\\Filesystem::Illuminate\\Filesystem\\{closure}()
+#18 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\View\\Engines\\PhpEngine.php(58): Illuminate\\Filesystem\\Filesystem->getRequire('C:\\\\Users\\\\SALAZA...', Array)
+#19 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\View\\Engines\\CompilerEngine.php(61): Illuminate\\View\\Engines\\PhpEngine->evaluatePath('C:\\\\Users\\\\SALAZA...', Array)
+#20 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\View\\View.php(139): Illuminate\\View\\Engines\\CompilerEngine->get('C:\\\\Users\\\\SALAZA...', Array)
+#21 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\View\\View.php(122): Illuminate\\View\\View->getContents()
+#22 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\View\\View.php(91): Illuminate\\View\\View->renderContents()
+#23 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Response.php(69): Illuminate\\View\\View->render()
+#24 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Response.php(35): Illuminate\\Http\\Response->setContent(Object(Illuminate\\View\\View))
+#25 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(833): Illuminate\\Http\\Response->__construct(Object(Illuminate\\View\\View), 200, Array)
+#26 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(802): Illuminate\\Routing\\Router::toResponse(Object(Illuminate\\Http\\Request), Object(Illuminate\\View\\View))
+#27 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(725): Illuminate\\Routing\\Router->prepareResponse(Object(Illuminate\\Http\\Request), Object(Illuminate\\View\\View))
+#28 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(141): Illuminate\\Routing\\Router->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#29 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Middleware\\SubstituteBindings.php(50): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#30 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(180): Illuminate\\Routing\\Middleware\\SubstituteBindings->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#31 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Auth\\Middleware\\Authenticate.php(44): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#32 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(180): Illuminate\\Auth\\Middleware\\Authenticate->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#33 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken.php(78): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#34 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(180): Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#35 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\View\\Middleware\\ShareErrorsFromSession.php(49): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#36 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(180): Illuminate\\View\\Middleware\\ShareErrorsFromSession->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#37 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Session\\Middleware\\StartSession.php(121): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#38 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Session\\Middleware\\StartSession.php(64): Illuminate\\Session\\Middleware\\StartSession->handleStatefulRequest(Object(Illuminate\\Http\\Request), Object(Illuminate\\Session\\Store), Object(Closure))
+#39 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(180): Illuminate\\Session\\Middleware\\StartSession->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#40 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse.php(37): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#41 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(180): Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#42 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Cookie\\Middleware\\EncryptCookies.php(67): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#43 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(180): Illuminate\\Cookie\\Middleware\\EncryptCookies->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#44 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(116): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#45 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(726): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#46 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(703): Illuminate\\Routing\\Router->runRouteWithinStack(Object(Illuminate\\Routing\\Route), Object(Illuminate\\Http\\Request))
+#47 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(667): Illuminate\\Routing\\Router->runRoute(Object(Illuminate\\Http\\Request), Object(Illuminate\\Routing\\Route))
+#48 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(656): Illuminate\\Routing\\Router->dispatchToRoute(Object(Illuminate\\Http\\Request))
+#49 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(167): Illuminate\\Routing\\Router->dispatch(Object(Illuminate\\Http\\Request))
+#50 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(141): Illuminate\\Foundation\\Http\\Kernel->Illuminate\\Foundation\\Http\\{closure}(Object(Illuminate\\Http\\Request))
+#51 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest.php(21): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#52 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\ConvertEmptyStringsToNull.php(31): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#53 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(180): Illuminate\\Foundation\\Http\\Middleware\\ConvertEmptyStringsToNull->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#54 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest.php(21): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#55 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TrimStrings.php(40): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#56 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(180): Illuminate\\Foundation\\Http\\Middleware\\TrimStrings->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#57 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\ValidatePostSize.php(27): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#58 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(180): Illuminate\\Foundation\\Http\\Middleware\\ValidatePostSize->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#59 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\PreventRequestsDuringMaintenance.php(86): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#60 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(180): Illuminate\\Foundation\\Http\\Middleware\\PreventRequestsDuringMaintenance->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#61 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\fruitcake\\laravel-cors\\src\\HandleCors.php(38): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#62 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(180): Fruitcake\\Cors\\HandleCors->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#63 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Middleware\\TrustProxies.php(39): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#64 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(180): Illuminate\\Http\\Middleware\\TrustProxies->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#65 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(116): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#66 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(142): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#67 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(111): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
+#68 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\public\\index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
+#69 C:\\Users\\SALAZAR-JOHN SIDNEY\\Documents\\GitHub\\eSocial\\server.php(21): require_once('C:\\\\Users\\\\SALAZA...')
+#70 {main}
+"} 

@@ -67,6 +67,8 @@ Route::post('/instructor_comment_process/', 'Instructor_controller@instructor_co
 Route::post('/instructor_add_exam/', 'Instructor_controller@instructor_add_exam')->name('instructor_add_exam');
 Route::post('/instructor_add_exam_next_page/', 'Instructor_controller@instructor_add_exam_next_page')->name('instructor_add_exam_next_page');
 Route::post('/instructor_add_exam_next_page_process/', 'Instructor_controller@instructor_add_exam_next_page_process')->name('instructor_add_exam_next_page_process');
+Route::get('/instructor_view_exam/{course_id}', 'Instructor_controller@instructor_view_exam')->name('instructor_view_exam');
+
 
 
 
