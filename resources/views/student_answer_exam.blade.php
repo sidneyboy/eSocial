@@ -16,20 +16,41 @@
 <body>
     <br />
     <div class="container">
-        <div class="card" style="width: 100%;">
-            <div class="card-header">
-                <a href="{{ url('student_enrolled_courses') }}">Back</a>
+        @foreach ($exam_details as $data)
+            <div class="card" style="width: 100%;">
+                <div class="card-header">
+                    <a href="{{ url('student_enrolled_courses') }}">Back</a>
+                </div>
+                <form enctype="multipart/form-data" action="{{ route('instructor_add_exam_next_page') }}"
+                    method="post">
+                    @csrf
+                    <div class="card-body">
+                        <div class="form-group">
+                            <p>{{ $data->question }}</p>
+                            <br />
+                            <div class="radio">
+                              <label><input type="radio" name="answer[]" value="{{ $data->choice_a }}">{{ $data->choice_a }}</label>
+                            </div>
+                            <div class="radio">
+                              <label><input type="radio" name="answer[]" value="{{ $data->choice_b }}">{{ $data->choice_b }}</label>
+                            </div>
+                            <div class="radio">
+                              <label><input type="radio" name="answer[]" value="{{ $data->choice_c }}">{{ $data->choice_c }}</label>
+                            </div>
+                            <div class="radio">
+                              <label><input type="radio" name="answer[]" value="{{ $data->choice_d }}">{{ $data->choice_d }}</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="float-right">
+                              
+                            {{ $exam_details->appends([])->links() }}
+                        </div>
+                    </div>
+                </form>
             </div>
-            <div class="card-body">
-                <ul class="list-group">
-                    @foreach ($exam_data as $data)
-                        <li class="list-group-item">
-                            <a class="btn btn-sm btn-success btn-block" href="{{ url('student_answer_exam',['exam_id' => $data->id]) }}">Title - {{ $data->title }}</a>
-                        </li>
-                    @endforeach
-                </ul>
-            </div>
-        </div>
+        @endforeach
     </div>
     <br />
     <!-- Optional JavaScript; choose one of the two! -->

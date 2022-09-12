@@ -45,10 +45,10 @@
                                             </button>
                                         </div>
                                         <div class="modal-body">
-                                            @for ($i = 1; $i < count($data->exam_details); $i++)
+                                            @for ($i = 0; $i < count($data->exam_details); $i++)
                                                 <div class="card" style="margin-bottom: 20px;">
                                                     <div class="card-header">
-                                                        {{ $i }}. Answer:
+                                                        {{ $i+1 }}. Answer:
                                                         @if ($data->exam_details[$i]->answer == 'choice_a')
                                                             Letter A
                                                         @elseif($data->exam_details[$i]->answer == 'choice_b')

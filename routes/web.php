@@ -52,6 +52,9 @@ Route::post('/student_exam_process', 'Student_controller@student_exam_process')-
 Route::post('/student_enroll_course', 'Student_controller@student_enroll_course')->name('student_enroll_course');
 Route::get('/student_enrolled_courses', 'Student_controller@student_enrolled_courses')->name('student_enrolled_courses');
 Route::get('/student_enrolled_search_course', 'Student_controller@student_enrolled_search_course')->name('student_enrolled_search_course');
+Route::get('/student_answer_exam/{exam_id}', 'Student_controller@student_answer_exam')->name('student_answer_exam');
+
+
 
 
 Route::post('/student_subscribed_course/', 'Student_subscribed_controller@student_subscribed_course')->name('student_subscribed_course');

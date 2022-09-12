@@ -230,4 +230,15 @@ class Student_controller extends Controller
             'user_data' => $user_data,
         ]);
     }
+
+    public function student_answer_exam(Request $request,$exam_id)
+    {
+        // $exam_data = Exam::where('id',$exam_id)->first();
+        return $request->input();
+        $exam_details = Exam_details::where('exam_id',$exam_id)->paginate(1);
+        return view('student_answer_exam',[
+            // 'exam_data' => $exam_data,
+            'exam_details' => $exam_details,
+        ]);
+    }
 }
