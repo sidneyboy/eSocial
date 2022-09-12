@@ -218,6 +218,13 @@
             </li>
 
             <li class="nav-item">
+                <a class="nav-link" href="{{ url('student_enrolled_courses') }}">
+                    <i class="fas fa-fw fa-hands-helping"></i>
+                    <span>{{ __('My Courses') }}</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
                 <a class="nav-link" href="#">
                     <i class="fas fa-fw fa-hands-helping"></i>
                     <span>{{ __('Certificates') }}</span>

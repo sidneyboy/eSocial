@@ -45,4 +45,9 @@ class Course extends Model
         return $this->hasMany('App\Models\Comments', 'course_id')->where('status','!=','replied');
     }
 
+    // public function enrolled()
+    // {
+    //     return $this->hasMany('App\Models\Enrolled_course', 'course_id')->where('status','!=','replied');
+    // }
+
 }

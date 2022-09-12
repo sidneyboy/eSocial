@@ -7,9 +7,11 @@ use App\Models\Course;
 use App\Models\Course_details;
 use App\Models\Tutorial;
 use App\Models\Comments;
-use App\Models\direct_message;
-use App\Models\exam;
-use App\Models\exam_details;
+use App\Models\Direct_message;
+use App\Models\Enrolled_course;
+use App\Models\Exam;
+use App\Models\Exam_details;
+use Illuminate\Http\Request;
 
 class Student_controller extends Controller
 {
@@ -30,7 +32,13 @@ class Student_controller extends Controller
 
     public function student_course()
     {
-        $course = Course::orderBy('id', 'Desc')->get();
+        $enrolled_data = Enrolled_course::where('student_id', auth()->user()->id)->get();
+        foreach ($enrolled_data as $key => $data) {
+            $id[] = $data->course_id;
+        }
+
+        //return $id;
+        $course = Course::whereNotIn('id', $id)->orderBy('id', 'Desc')->get();
         $user_data = User::find(auth()->user()->id);
         return view('student_course', [
             'user_data' => $user_data,
@@ -178,5 +186,48 @@ class Student_controller extends Controller
     public function student_exam_process(Request $request)
     {
         return $request->input();
+    }
+
+    public function student_enroll_course(Request $request)
+    {
+        $new_enrolled = new Enrolled_course([
+            'course_id' => $request->input('course_id'),
+            'student_id' => auth()->user()->id,
+            'instructor_id' => $request->input('instructor_id'),
+            'amount' => 0,
+            'course_type' => 'Free',
+        ]);
+
+        $new_enrolled->save();
+
+        return redirect('student_course')->with('success', 'Successfully enrolled');
+    }
+
+    public function student_enrolled_courses()
+    {
+        $enrolled_data = Enrolled_course::where('student_id', auth()->user()->id)->get();
+        foreach ($enrolled_data as $key => $data) {
+            $id[] = $data->course_id;
+        }
+
+        //return $id;
+        $course = Course::whereIn('id', $id)->orderBy('id', 'Desc')->get();
+        $user_data = User::find(auth()->user()->id);
+        return view('student_enrolled_courses', [
+            'user_data' => $user_data,
+            'course' => $course,
+        ]);
+    }
+
+    public function student_enrolled_search_course(Request $request)
+    {
+        $search = $request->input('search_box');
+        $course_search = Course::where('course_title', 'like', '%' . $search . '%')->orderBy('created_at', 'DESC')->get();
+
+        $user_data = User::find(auth()->user()->id);
+        return view('student_enrolled_search_course', [
+            'course_search' => $course_search,
+            'user_data' => $user_data,
+        ]);
     }
 }

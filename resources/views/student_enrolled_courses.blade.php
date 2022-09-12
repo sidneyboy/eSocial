@@ -1,9 +1,14 @@
 @extends('layouts.student')
 
 @section('main-content')
+    @if (session('success'))
+        <div class="alert alert-success border-left-success" role="alert">
+            {{ session('success') }}
+        </div>
+    @endif
     <div class="row">
         <div class="col-md-12">
-            <form action="{{ route('student_search_course') }}">
+            <form action="{{ route('student_enrolled_search_course') }}">
                 @csrf
                 <div class="input-group mb-3">
                     <input type="text" class="form-control" placeholder="Search Subject" aria-label="Search Subject"
@@ -12,14 +17,13 @@
                         <span class="input-group-text" id="basic-addon2"><i class="bi bi-search"></i></span>
                     </div>
                 </div>
-
             </form>
         </div>
     </div>
-    @foreach ($course_search as $data)
+    @foreach ($course as $data)
         <div class="row">
             <div class="col-md-12">
-                <div class="card" style="width: 100%;margin-bottom:50px;background-color:antiquewhite">
+                <div class="card" style="width: 100%;margin-bottom:50px;background-color:gainsboro">
                     <div class="card-header" style="font-weight: bold;background-color:#141E30;color:white">
                         {{ $data->course_type->course_type }} -
                         {{ $data->course_title }}</div>
@@ -153,7 +157,7 @@
                         </div>
                     </div>
                     <div class="card-footer" style="background-color:#141E30"">
-                        <p style="color:white">Instructor: {{ $data->user->name }} {{ $data->user->last_name }}</p>
+                        <p style="color:white"> Instructor: {{ $data->user->name }} {{ $data->user->last_name }}</p>
                     </div>
                 </div>
             </div>
