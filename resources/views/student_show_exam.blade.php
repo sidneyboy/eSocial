@@ -24,7 +24,11 @@
                 <ul class="list-group">
                     @foreach ($exam_data as $data)
                         <li class="list-group-item">
-                            <a class="btn btn-sm btn-success btn-block" href="{{ url('student_answer_exam',['exam_id' => $data->id]) }}">Title - {{ $data->title }}</a>
+                            <a class="btn btn-sm btn-success btn-block" href="{{ url('student_answer_exam',[
+                                'exam_id' => $data->id,
+                                'instructor_id' => $data->course->user_id,
+                                'course_id' => $data->course_id
+                            ]) }}">Title - {{ $data->title }}</a>
                         </li>
                     @endforeach
                 </ul>

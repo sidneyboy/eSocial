@@ -52,7 +52,16 @@ Route::post('/student_exam_process', 'Student_controller@student_exam_process')-
 Route::post('/student_enroll_course', 'Student_controller@student_enroll_course')->name('student_enroll_course');
 Route::get('/student_enrolled_courses', 'Student_controller@student_enrolled_courses')->name('student_enrolled_courses');
 Route::get('/student_enrolled_search_course', 'Student_controller@student_enrolled_search_course')->name('student_enrolled_search_course');
-Route::get('/student_answer_exam/{exam_id}', 'Student_controller@student_answer_exam')->name('student_answer_exam');
+Route::get('/student_answer_exam/{exam_id}/{instructor_id}/{course_id}', 'Student_controller@student_answer_exam')->name('student_answer_exam');
+Route::post('/student_answer_exam_process', 'Student_controller@student_answer_exam_process')->name('student_answer_exam_process');
+Route::get('/student_answer_exam_proceed/{student_exam_id}', 'Student_controller@student_answer_exam_proceed')->name('student_answer_exam_proceed');
+Route::get('/student_answer_exam_finalized/{student_exam_id}', 'Student_controller@student_answer_exam_finalized')->name('student_answer_exam_finalized');
+Route::get('/student_show_certificate', 'Student_controller@student_show_certificate')->name('student_show_certificate');
+
+
+
+
+
 
 
 
@@ -82,7 +91,7 @@ Route::post('/instructor_add_exam/', 'Instructor_controller@instructor_add_exam'
 Route::post('/instructor_add_exam_next_page/', 'Instructor_controller@instructor_add_exam_next_page')->name('instructor_add_exam_next_page');
 Route::post('/instructor_add_exam_next_page_process/', 'Instructor_controller@instructor_add_exam_next_page_process')->name('instructor_add_exam_next_page_process');
 Route::get('/instructor_view_exam/{course_id}', 'Instructor_controller@instructor_view_exam')->name('instructor_view_exam');
-
+Route::post('/instructor_add_exam_certificate/', 'Instructor_controller@instructor_add_exam_certificate')->name('instructor_add_exam_certificate');
 
 
 

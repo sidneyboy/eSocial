@@ -9,7 +9,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
         integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
-
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
     <title>Student</title>
 </head>
 
@@ -19,36 +19,44 @@
         @foreach ($exam_details as $data)
             <div class="card" style="width: 100%;">
                 <div class="card-header">
-                    <a href="{{ url('student_enrolled_courses') }}">Back</a>
+                    <a class="float-right btn btn-sm btn-primary" href="{{ url('student_answer_exam_finalized',['
+                    student_exam_id' => $data->student_exam_id]) }}">Submit Exam</a>
                 </div>
-                <form enctype="multipart/form-data" action="{{ route('instructor_add_exam_next_page') }}"
-                    method="post">
-                    @csrf
-                    <div class="card-body">
-                        <div class="form-group">
+                <div class="card-body">
+                    <div class="form-group">
+                        @if ($data->status != 'answered')
                             <p>{{ $data->question }}</p>
-                            <br />
                             <div class="radio">
-                              <label><input type="radio" name="answer[]" value="{{ $data->choice_a }}">{{ $data->choice_a }}</label>
+                                <label><input type="radio" name="student_answer" class="student_answer"
+                                        value="choice_a">{{ $data->choice_a }}</label>
                             </div>
                             <div class="radio">
-                              <label><input type="radio" name="answer[]" value="{{ $data->choice_b }}">{{ $data->choice_b }}</label>
+                                <label><input type="radio" name="student_answer" class="student_answer"
+                                        value="choice_b">{{ $data->choice_b }}</label>
                             </div>
                             <div class="radio">
-                              <label><input type="radio" name="answer[]" value="{{ $data->choice_c }}">{{ $data->choice_c }}</label>
+                                <label><input type="radio" name="student_answer" class="student_answer"
+                                        value="choice_c">{{ $data->choice_c }}</label>
                             </div>
                             <div class="radio">
-                              <label><input type="radio" name="answer[]" value="{{ $data->choice_d }}">{{ $data->choice_d }}</label>
+                                <label><input type="radio" name="student_answer" class="student_answer"
+                                        value="choice_d">{{ $data->choice_d }}</label>
                             </div>
-                        </div>
+
+
+                            <input type="hidden" id="student_exam_details_id" value="{{ $data->id }}">
+                            <input type="hidden" id="answer" value="{{ $data->question_answer }}">
+                            <button id="submit" class="btn btn-sm btn-success float-right">Submit Answer</button>
+                        @else
+                            <h3><span class="badge badge-success">Answer Submitted</span></h3>
+                        @endif
                     </div>
-                    <div class="card-footer">
-                        <div class="float-right">
-                              
-                            {{ $exam_details->appends([])->links() }}
-                        </div>
+                </div>
+                <div class="card-footer">
+                    <div class="float-right">
+                        {{ $exam_details->links() }}
                     </div>
-                </form>
+                </div>
             </div>
         @endforeach
     </div>
@@ -56,11 +64,43 @@
     <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"
+        integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+    {{-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
-    </script>
+    </script> --}}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous">
+    </script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $("#submit").click(function() {
+            var student_exam_details_id = $('#student_exam_details_id').val();
+            var answer = $('#answer').val();
+            var student_answer = $(".student_answer:checked").val();
+            $.ajax({
+                type: "POST",
+                url: "/student_answer_exam_process",
+                data: 'student_exam_details_id=' + student_exam_details_id + '&student_answer=' +
+                    student_answer + '&answer=' + answer,
+                success: function(data) {
+                    Swal.fire(
+                        'Good job!',
+                        'Answer Submitted',
+                        'success',
+                    )
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
+        });
     </script>
 
     {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>

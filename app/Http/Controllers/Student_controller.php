@@ -11,6 +11,9 @@ use App\Models\Direct_message;
 use App\Models\Enrolled_course;
 use App\Models\Exam;
 use App\Models\Exam_details;
+use App\Models\Student_exam;
+use App\Models\Student_exam_details;
+
 use Illuminate\Http\Request;
 
 class Student_controller extends Controller
@@ -33,17 +36,27 @@ class Student_controller extends Controller
     public function student_course()
     {
         $enrolled_data = Enrolled_course::where('student_id', auth()->user()->id)->get();
-        foreach ($enrolled_data as $key => $data) {
-            $id[] = $data->course_id;
-        }
 
-        //return $id;
-        $course = Course::whereNotIn('id', $id)->orderBy('id', 'Desc')->get();
-        $user_data = User::find(auth()->user()->id);
-        return view('student_course', [
-            'user_data' => $user_data,
-            'course' => $course,
-        ]);
+
+
+        if (count($enrolled_data) != 0) {
+            foreach ($enrolled_data as $key => $data) {
+                $id[] = $data->course_id;
+            }
+            $course = Course::whereNotIn('id', $id)->orderBy('id', 'Desc')->get();
+            $user_data = User::find(auth()->user()->id);
+            return view('student_course', [
+                'user_data' => $user_data,
+                'course' => $course,
+            ]);
+        } else {
+            $course = Course::orderBy('id', 'Desc')->get();
+            $user_data = User::find(auth()->user()->id);
+            return view('student_course', [
+                'user_data' => $user_data,
+                'course' => $course,
+            ]);
+        }
     }
 
     public function student_profile()
@@ -206,17 +219,27 @@ class Student_controller extends Controller
     public function student_enrolled_courses()
     {
         $enrolled_data = Enrolled_course::where('student_id', auth()->user()->id)->get();
-        foreach ($enrolled_data as $key => $data) {
-            $id[] = $data->course_id;
-        }
 
-        //return $id;
-        $course = Course::whereIn('id', $id)->orderBy('id', 'Desc')->get();
-        $user_data = User::find(auth()->user()->id);
-        return view('student_enrolled_courses', [
-            'user_data' => $user_data,
-            'course' => $course,
-        ]);
+
+
+        if (count($enrolled_data) != 0) {
+            foreach ($enrolled_data as $key => $data) {
+                $id[] = $data->course_id;
+            }
+            $course = Course::whereIn('id', $id)->orderBy('id', 'Desc')->get();
+            $user_data = User::find(auth()->user()->id);
+            return view('student_enrolled_courses', [
+                'user_data' => $user_data,
+                'course' => $course,
+            ]);
+        } else {
+            // $course = Course::orderBy('id', 'Desc')->get();
+            $user_data = User::find(auth()->user()->id);
+            return view('student_enrolled_courses', [
+                'user_data' => $user_data,
+                // 'course' => $course,
+            ]);
+        }
     }
 
     public function student_enrolled_search_course(Request $request)
@@ -231,14 +254,93 @@ class Student_controller extends Controller
         ]);
     }
 
-    public function student_answer_exam(Request $request,$exam_id)
+    public function student_answer_exam(Request $request, $exam_id, $instructor_id, $course_id)
     {
-        // $exam_data = Exam::where('id',$exam_id)->first();
-        return $request->input();
-        $exam_details = Exam_details::where('exam_id',$exam_id)->paginate(1);
-        return view('student_answer_exam',[
-            // 'exam_data' => $exam_data,
+        $exam_id . " - " . $instructor_id . " - " . $course_id;
+        $new_student_exam = new Student_exam([
+            'course_id' => $course_id,
+            'student_id' => auth()->user()->id,
+            'exam_id' => $exam_id,
+            'instructor_id' => $instructor_id,
+        ]);
+
+        $new_student_exam->save();
+
+        $get_exam_details = Exam_details::where('exam_id', $exam_id)->get();
+
+
+        foreach ($get_exam_details as $key => $data) {
+            $new_student_exam_details = new Student_exam_details([
+                'student_exam_id' => $new_student_exam->id,
+                'question' => $data->question,
+                'question_answer' => $data->answer,
+                'choice_a' => $data->choice_a,
+                'choice_b' => $data->choice_b,
+                'choice_c' => $data->choice_c,
+                'choice_d' => $data->choice_d,
+            ]);
+
+            $new_student_exam_details->save();
+        }
+
+        return redirect()->route('student_answer_exam_proceed', ['student_exam_id' => $new_student_exam->id]);
+    }
+
+    public function student_answer_exam_proceed($student_exam_id)
+    {
+        $exam_details = Student_exam_details::where('student_exam_id', $student_exam_id)->inRandomOrder()->simplePaginate(1);
+        return view('student_answer_exam', [
             'exam_details' => $exam_details,
         ]);
+    }
+
+    public function student_answer_exam_process(Request $request)
+    {
+        if ($request->input('student_answer') == $request->input('answer')) {
+            $remarks = 'Checked';
+        } else {
+            $remarks = 'Wrong';
+        }
+
+        Student_exam_details::where('id', $request->input('student_exam_details_id'))
+            ->update([
+                'status' => 'answered',
+                'student_answer' => $request->input('student_answer'),
+                'remarks' => $remarks,
+            ]);
+    }
+
+    public function student_answer_exam_finalized($student_exam_id)
+    {
+        //return $student_exam_id;
+
+        $student_exam_item_count = Student_exam_details::where('student_exam_id', $student_exam_id)->count();
+        $student_item_check_count = Student_exam_details::where('student_exam_id', $student_exam_id)->where('remarks', 'Checked')->count();
+        $student_item_wrong_count = Student_exam_details::where('student_exam_id', $student_exam_id)->where('remarks', 'Wrong')->count();
+
+        $student_percentage = ($student_item_check_count / $student_exam_item_count) * 100;
+
+        if ($student_percentage >= 80) {
+            student_exam::where('id', $student_exam_id)
+                ->update([
+                    'remarks' => 'passed',
+                    'student_exam_percentage' => $student_percentage,
+                ]);
+
+            return redirect('student_enrolled_courses')->with('success', 'You have successfully passed the exam. please check your certificates. Thank you');
+        } else {
+            student_exam::where('id', $student_exam_id)
+                ->update([
+                    'remarks' => 'fail',
+                    'student_exam_percentage' => $student_percentage,
+                ]);
+
+            return redirect('student_enrolled_courses')->with('error', 'Sorry, you have failed the exam. you can always retake the exam.');
+        }
+    }
+
+    public function student_show_certificate()
+    {
+        return 'asd';
     }
 }

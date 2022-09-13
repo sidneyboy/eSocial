@@ -225,18 +225,18 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="{{ url('student_show_certificate') }}">
                     <i class="fas fa-fw fa-hands-helping"></i>
                     <span>{{ __('Certificates') }}</span>
                 </a>
             </li>
 
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a class="nav-link" href="#">
                     <i class="fas fa-fw fa-hands-helping"></i>
                     <span>{{ __('Bag Pack') }}</span>
                 </a>
-            </li>
+            </li> --}}
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">

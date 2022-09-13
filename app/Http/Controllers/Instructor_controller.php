@@ -338,9 +338,23 @@ class Instructor_controller extends Controller
 
     public function instructor_view_exam($course_id)
     {
-        $exam_data = Exam::where('course_id',$course_id)->get();
-        return view('instructor_view_exam',[
+        $exam_data = Exam::where('course_id', $course_id)->get();
+        return view('instructor_view_exam', [
             'exam_data' => $exam_data,
         ]);
+    }
+
+    public function instructor_add_exam_certificate(Request $request)
+    {
+        //return dd($request->all());
+        $certificate = $request->file('certificate');
+        $certificate_name = $certificate->getClientOriginalName();
+        $certificate_type = $certificate->getClientMimeType();
+        $path_certificate = $certificate->storeAs('public', $certificate_name);
+
+        Exam::where('id', $request->input('exam_id'))
+            ->update(['certificate' => $certificate_name]);
+
+        return redirect('instructor_courses')->with('success','Successfully added exam certificate');
     }
 }

@@ -24,108 +24,172 @@
                 <ul class="list-group">
                     @foreach ($exam_data as $data)
                         <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-md-6" style="margin-bottom:10px;">
+                                    <button type="button" class="btn btn-sm btn-success btn-block" data-toggle="modal"
+                                        data-target="#exampleModal_exam">
+                                        Title - {{ $data->title }}
+                                    </button>
 
-                            <!-- Button trigger modal -->
-                            <button type="button" class="btn btn-sm btn-success btn-block" data-toggle="modal"
-                                data-target="#exampleModal_exam">
-                                Title - {{ $data->title }}
-                            </button>
-
-                            <!-- Modal -->
-                            <div class="modal fade" id="exampleModal_exam" tabindex="-1" role="dialog"
-                                aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Title - {{ $data->title }}
-                                            </h5>
-                                            <button type="button" class="close" data-dismiss="modal"
-                                                aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            @for ($i = 0; $i < count($data->exam_details); $i++)
-                                                <div class="card" style="margin-bottom: 20px;">
-                                                    <div class="card-header">
-                                                        {{ $i+1 }}. Answer:
-                                                        @if ($data->exam_details[$i]->answer == 'choice_a')
-                                                            Letter A
-                                                        @elseif($data->exam_details[$i]->answer == 'choice_b')
-                                                            Letter B
-                                                        @elseif($data->exam_details[$i]->answer == 'choice_c')
-                                                            Letter C
-                                                        @elseif($data->exam_details[$i]->answer == 'choice_d')
-                                                            Letter D
-                                                        @endif
-                                                    </div>
-                                                    <div class="card-body">
-                                                        <p> {{ $data->exam_details[$i]->question }}
-                                                        </p>
-                                                    </div>
-                                                    <div class="card-footer">
-                                                        <ul class="list-group">
-                                                            <li class="list-group-item">Choices</li>
-                                                            @if ($data->exam_details[$i]->answer == 'choice_a')
-                                                                <li class="list-group-item"
-                                                                    style="background-color:greenyellow">
-                                                                    A.
-                                                                    {{ $data->exam_details[$i]->choice_a }}
-                                                                </li>
-                                                                <li class="list-group-item">B.
-                                                                    {{ $data->exam_details[$i]->choice_b }}</li>
-                                                                <li class="list-group-item">C.
-                                                                    {{ $data->exam_details[$i]->choice_c }}</li>
-                                                                <li class="list-group-item">
-                                                                    D.
-                                                                    {{ $data->exam_details[$i]->choice_d }}
-                                                                </li>
-                                                            @elseif($data->exam_details[$i]->answer == 'choice_b')
-                                                                <li class="list-group-item">A.
-                                                                    {{ $data->exam_details[$i]->choice_a }}</li>
-                                                                <li class="list-group-item"
-                                                                    style="background-color:greenyellow">B.
-                                                                    {{ $data->exam_details[$i]->choice_b }}</li>
-                                                                <li class="list-group-item">C.
-                                                                    {{ $data->exam_details[$i]->choice_c }}</li>
-                                                                <li class="list-group-item">
-                                                                    D.
-                                                                    {{ $data->exam_details[$i]->choice_d }}
-                                                                </li>
-                                                            @elseif($data->exam_details[$i]->answer == 'choice_c')
-                                                                <li class="list-group-item">A.
-                                                                    {{ $data->exam_details[$i]->choice_a }}</li>
-                                                                <li class="list-group-item">B.
-                                                                    {{ $data->exam_details[$i]->choice_b }}</li>
-                                                                <li class="list-group-item"
-                                                                    style="background-color:greenyellow">C.
-                                                                    {{ $data->exam_details[$i]->choice_c }}</li>
-                                                                <li class="list-group-item">
-                                                                    D.
-                                                                    {{ $data->exam_details[$i]->choice_d }}
-                                                                </li>
-                                                            @elseif($data->exam_details[$i]->answer == 'choice_d')
-                                                                <li class="list-group-item">A.
-                                                                    {{ $data->exam_details[$i]->choice_a }}</li>
-                                                                <li class="list-group-item">B.
-                                                                    {{ $data->exam_details[$i]->choice_b }}</li>
-                                                                <li class="list-group-item">C.
-                                                                    {{ $data->exam_details[$i]->choice_c }}</li>
-                                                                <li class="list-group-item"
-                                                                    style="background-color:greenyellow">D.
-                                                                    {{ $data->exam_details[$i]->choice_d }}</li>
-                                                            @endif
-                                                        </ul>
-                                                    </div>
+                                    <div class="modal fade" id="exampleModal_exam" tabindex="-1" role="dialog"
+                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Title -
+                                                        {{ $data->title }}
+                                                    </h5>
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
                                                 </div>
-                                            @endfor
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-sm btn-secondary"
-                                                data-dismiss="modal">Close</button>
+                                                <div class="modal-body">
+                                                    @for ($i = 0; $i < count($data->exam_details); $i++)
+                                                        <div class="card" style="margin-bottom: 20px;">
+                                                            <div class="card-header">
+                                                                {{ $i + 1 }}. Answer:
+                                                                @if ($data->exam_details[$i]->answer == 'choice_a')
+                                                                    Letter A
+                                                                @elseif($data->exam_details[$i]->answer == 'choice_b')
+                                                                    Letter B
+                                                                @elseif($data->exam_details[$i]->answer == 'choice_c')
+                                                                    Letter C
+                                                                @elseif($data->exam_details[$i]->answer == 'choice_d')
+                                                                    Letter D
+                                                                @endif
+                                                            </div>
+                                                            <div class="card-body">
+                                                                <p> {{ $data->exam_details[$i]->question }}
+                                                                </p>
+                                                            </div>
+                                                            <div class="card-footer">
+                                                                <ul class="list-group">
+                                                                    <li class="list-group-item">Choices</li>
+                                                                    @if ($data->exam_details[$i]->answer == 'choice_a')
+                                                                        <li class="list-group-item"
+                                                                            style="background-color:greenyellow">
+                                                                            A.
+                                                                            {{ $data->exam_details[$i]->choice_a }}
+                                                                        </li>
+                                                                        <li class="list-group-item">B.
+                                                                            {{ $data->exam_details[$i]->choice_b }}</li>
+                                                                        <li class="list-group-item">C.
+                                                                            {{ $data->exam_details[$i]->choice_c }}</li>
+                                                                        <li class="list-group-item">
+                                                                            D.
+                                                                            {{ $data->exam_details[$i]->choice_d }}
+                                                                        </li>
+                                                                    @elseif($data->exam_details[$i]->answer == 'choice_b')
+                                                                        <li class="list-group-item">A.
+                                                                            {{ $data->exam_details[$i]->choice_a }}</li>
+                                                                        <li class="list-group-item"
+                                                                            style="background-color:greenyellow">B.
+                                                                            {{ $data->exam_details[$i]->choice_b }}
+                                                                        </li>
+                                                                        <li class="list-group-item">C.
+                                                                            {{ $data->exam_details[$i]->choice_c }}
+                                                                        </li>
+                                                                        <li class="list-group-item">
+                                                                            D.
+                                                                            {{ $data->exam_details[$i]->choice_d }}
+                                                                        </li>
+                                                                    @elseif($data->exam_details[$i]->answer == 'choice_c')
+                                                                        <li class="list-group-item">A.
+                                                                            {{ $data->exam_details[$i]->choice_a }}
+                                                                        </li>
+                                                                        <li class="list-group-item">B.
+                                                                            {{ $data->exam_details[$i]->choice_b }}
+                                                                        </li>
+                                                                        <li class="list-group-item"
+                                                                            style="background-color:greenyellow">C.
+                                                                            {{ $data->exam_details[$i]->choice_c }}
+                                                                        </li>
+                                                                        <li class="list-group-item">
+                                                                            D.
+                                                                            {{ $data->exam_details[$i]->choice_d }}
+                                                                        </li>
+                                                                    @elseif($data->exam_details[$i]->answer == 'choice_d')
+                                                                        <li class="list-group-item">A.
+                                                                            {{ $data->exam_details[$i]->choice_a }}
+                                                                        </li>
+                                                                        <li class="list-group-item">B.
+                                                                            {{ $data->exam_details[$i]->choice_b }}
+                                                                        </li>
+                                                                        <li class="list-group-item">C.
+                                                                            {{ $data->exam_details[$i]->choice_c }}
+                                                                        </li>
+                                                                        <li class="list-group-item"
+                                                                            style="background-color:greenyellow">D.
+                                                                            {{ $data->exam_details[$i]->choice_d }}
+                                                                        </li>
+                                                                    @endif
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    @endfor
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-sm btn-secondary"
+                                                        data-dismiss="modal">Close</button>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
+                                @if ($data->certificate != null)
+                                    <div class="col-md-6" style="margin-bottom: 10px;">
+                                        <a class="btn btn-sm btn-primary btn-block"
+                                            href="{{ asset('/storage/' . $data->certificate) }}"
+                                            download>{{ $data->certificate }}</a>
+                                    </div>
+                                @else
+                                    <div class="col-md-6" style="margin-bottom:10px;">
+                                        <!-- Button trigger modal -->
+                                        <button type="button" class="btn btn-primary btn-sm btn-block"
+                                            data-toggle="modal" data-target="#exampleModal">
+                                            Add Certificate
+                                        </button>
+
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel">Title -
+                                                            {{ $data->title }} Certificate</h5>
+                                                        <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <form action="{{ route('instructor_add_exam_certificate') }}"
+                                                        method="post" enctype="multipart/form-data">
+                                                        @csrf
+                                                        <div class="modal-body">
+                                                            <div class="form-group">
+                                                                <label>Add Certificate</label>
+                                                                <input type="file" class="form-control"
+                                                                    accept="application/pdf" required
+                                                                    name="certificate">
+
+                                                                <input type="hidden" name="exam_id"
+                                                                    value="{{ $data->id }}">
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-sm btn-secondary"
+                                                                data-dismiss="modal">Close</button>
+                                                            <button type="submit"
+                                                                class="btn btn-sm btn-primary">Submit</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endif
                             </div>
                         </li>
                     @endforeach

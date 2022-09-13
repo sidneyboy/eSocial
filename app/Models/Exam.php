@@ -19,4 +19,9 @@ class Exam extends Model
     {
         return $this->hasMany('App\Models\Exam_details', 'exam_id')->inRandomOrder();
     }
+
+    public function course()
+    {
+        return $this->belongsTo('App\Models\Course', 'course_id');
+    }
 }
