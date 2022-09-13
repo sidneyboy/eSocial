@@ -190,10 +190,26 @@ class Student_controller extends Controller
 
     public function student_show_exam($course_id)
     {
-        $exam_data = Exam::where('course_id', $course_id)->get();
-        return view('student_show_exam', [
-            'exam_data' => $exam_data,
-        ]);
+        $passed_exam = Student_exam::where('course_id', $course_id)
+            ->where('student_id', auth()->user()->id)
+            ->where('remarks', 'passed')
+            ->get();
+
+        if (count($passed_exam) != 0) {
+            foreach ($passed_exam as $key => $data) {
+                $exam_id[] = $data->id;
+            }
+
+            $exam_data = Exam::whereNotIn('id', $exam_id)->where('course_id', $course_id)->get();
+            return view('student_show_exam', [
+                'exam_data' => $exam_data,
+            ]);
+        } else {
+            $exam_data = Exam::where('course_id', $course_id)->get();
+            return view('student_show_exam', [
+                'exam_data' => $exam_data,
+            ]);
+        }
     }
 
     public function student_exam_process(Request $request)
@@ -341,6 +357,24 @@ class Student_controller extends Controller
 
     public function student_show_certificate()
     {
-        return 'asd';
+        $student_exam = Student_exam::where('remarks', '!=', 'fail')->where('student_id', auth()->user()->id)->get();
+
+        if (count($student_exam) != 0) {
+            foreach ($student_exam as $key => $data) {
+                $exam_id[] = $data->exam_id;
+            }
+            $user_data = User::find(auth()->user()->id);
+            $exam = Exam::whereIn('id', $exam_id)->get();
+
+            return view('student_show_certificate', [
+                'exam' => $exam,
+                'user_data' => $user_data,
+            ]);
+        }else{
+            $user_data = User::find(auth()->user()->id);
+            return view('student_show_no_certificate',[
+                'user_data' => $user_data,
+            ]);
+        }
     }
 }

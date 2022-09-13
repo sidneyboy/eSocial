@@ -212,6 +212,13 @@
             </li> --}}
 
             <li class="nav-item">
+                <a class="nav-link" href="{{ route('instructor_direct_message') }}">
+                    <i class="fas fa-fw fa-hands-helping"></i>
+                    <span>{{ __('Direct Message') }}</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
                 <a class="nav-link" href="{{ route('instructor_add_course') }}">
                     <i class="fas fa-fw fa-hands-helping"></i>
                     <span>{{ __('Add Course') }}</span>
@@ -226,12 +233,12 @@
             </li>
 
 
-            <li class="nav-item">
-                <a class="nav-link" href="#">
+            {{-- <li class="nav-item">
+                <a class="nav-link" href="{{ url('instructor_students') }}">
                     <i class="fas fa-fw fa-hands-helping"></i>
                     <span>{{ __('My Students') }}</span>
                 </a>
-            </li>
+            </li> --}}
 
 
             <!-- Divider -->

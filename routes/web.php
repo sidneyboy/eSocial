@@ -92,6 +92,10 @@ Route::post('/instructor_add_exam_next_page/', 'Instructor_controller@instructor
 Route::post('/instructor_add_exam_next_page_process/', 'Instructor_controller@instructor_add_exam_next_page_process')->name('instructor_add_exam_next_page_process');
 Route::get('/instructor_view_exam/{course_id}', 'Instructor_controller@instructor_view_exam')->name('instructor_view_exam');
 Route::post('/instructor_add_exam_certificate/', 'Instructor_controller@instructor_add_exam_certificate')->name('instructor_add_exam_certificate');
+Route::get('/instructor_students/', 'Instructor_controller@instructor_students')->name('instructor_students');
+Route::get('/instructor_direct_message/', 'Instructor_controller@instructor_direct_message')->name('instructor_direct_message');
+
+
 
 
 

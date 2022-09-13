@@ -16,4 +16,14 @@ class Enrolled_course extends Model
         'amount',
         'course_type',
     ];
+
+    public function student()
+    {
+        return $this->belongsTo('App\Models\User', 'student_id','id');
+    }
+
+    public function instructor()
+    {
+        return $this->belongsTo('App\Models\User', 'instructor_id','id');
+    }
 }

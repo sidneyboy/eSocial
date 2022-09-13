@@ -28,7 +28,7 @@
                                 'exam_id' => $data->id,
                                 'instructor_id' => $data->course->user_id,
                                 'course_id' => $data->course_id
-                            ]) }}">Title - {{ $data->title }}</a>
+                            ]) }}">{{ $data->title }}</a>
                         </li>
                     @endforeach
                 </ul>

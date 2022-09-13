@@ -9,8 +9,8 @@ use App\Models\Course_details;
 use App\Models\Comments;
 use App\Models\Exam;
 use App\Models\Exam_details;
-
-
+use App\Models\Direct_message;
+use App\Models\Enrolled_course;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -356,5 +356,34 @@ class Instructor_controller extends Controller
             ->update(['certificate' => $certificate_name]);
 
         return redirect('instructor_courses')->with('success','Successfully added exam certificate');
+    }
+
+    public function instructor_students(Request $request)
+    {
+        $user_data = User::find(auth()->user()->id);
+        return view('instructor_students',[
+            'user_data' => $user_data,
+        ]);
+    }
+
+    public function instructor_direct_message()
+    {
+       
+
+        $enrolled_student = Enrolled_course::where('instructor_id',auth()->user()->id)->groupBy('student_id')->get();
+
+        foreach ($enrolled_student as $key => $data) {
+            $student_id[] = $data->student_id;
+        }
+
+        $direct_message = Direct_message::whereIn('user_id',$student_id)->where('instructor_id',auth()->user()->id)->get();
+        
+        $user_data = User::find(auth()->user()->id);
+
+        return view('instructor_direct_message',[
+            'user_data' => $user_data,
+            'direct_message' => $direct_message,
+            'enrolled_student' => $enrolled_student,
+        ]);
     }
 }
