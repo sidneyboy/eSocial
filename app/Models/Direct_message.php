@@ -16,6 +16,7 @@ class Direct_message extends Model
         'status',
         'file',
         'file_type',
+        'user_typer',
     ];
 
     public function student()

@@ -19,7 +19,7 @@
                         <!-- Button trigger modal -->
                         <button type="button" class="btn btn-primary btn-sm btn-block" data-toggle="modal"
                             data-target="#exampleModal{{ $data->id }}">
-                            {{ $data->student->name }} {{ $data->student->last_name }}
+                            {{ $data->student->name }} {{ $data->student->last_name }} <span class="badge badge-light">{{ count($count[$data->student_id]) }} New Message</span>
                         </button>
 
 
@@ -33,80 +33,91 @@
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
-                                    <div class="modal-body">
-                                        <div id="table-wrapper">
-                                            <div id="table-scroll">
-                                                <table>
-                                                    <tbody>
-                                                        @foreach ($direct_message as $dm)
-                                                            <tr>
-                                                                <td>
-                                                                    @if ($dm->user_id == $data->student_id)
-                                                                        @if ($dm->user_typer == 'Student')
-                                                                            <div class="alert alert-success" role="alert">
-                                                                                <h6 class="alert-heading">
-                                                                                    {{ $dm->student->name }}
-                                                                                    {{ $dm->student->last_name }}
+                                    <form action="{{ route('instructor_message_process') }}" method="post"
+                                        enctype="multipart/form-data">
+                                        @csrf
+                                        <div class="modal-body">
+                                            <div id="table-wrapper">
+                                                <div id="table-scroll">
+                                                    <table>
+                                                        <tbody>
+                                                            @foreach ($direct_message as $dm)
+                                                                <tr>
+                                                                    <td>
+                                                                        @if ($dm->user_id == $data->student_id)
+                                                                            @if ($dm->status != 'replied')
+                                                                                <input type="hidden"
+                                                                                    value="{{ $dm->id }}"
+                                                                                    name="dm_id[]">
+                                                                            @endif
+                                                                            @if ($dm->user_typer == 'Student')
+                                                                                <div class="alert alert-success"
+                                                                                    role="alert">
+                                                                                    <h6 class="alert-heading">
+                                                                                        {{ $dm->student->name }}
+                                                                                        {{ $dm->student->last_name }}
 
-                                                                                </h6>
-                                                                                <hr>
-                                                                                <p>{{ $dm->comment }}
-                                                                                </p>
-                                                                                @if ($dm->file != null)
-                                                                                    <img src="{{ asset('/storage/' . $dm->file) }}"
-                                                                                        class="img img-thumbnail"
-                                                                                        alt="">
-                                                                                @endif
-                                                                                <hr>
-                                                                                <p class="mb-0">
-                                                                                    {{ date('F j, Y H:i a', strtotime($dm->created_at)) }}
-                                                                                </p>
-                                                                            </div>
-                                                                        @else
-                                                                            <div class="alert alert-warning" role="alert">
-                                                                                <h6 class="alert-heading">
-                                                                                    {{ $dm->instructor->name }}
-                                                                                    {{ $dm->instructor->last_name }}
+                                                                                    </h6>
+                                                                                    <hr>
+                                                                                    <p>{{ $dm->comment }}
+                                                                                    </p>
+                                                                                    @if ($dm->file != null)
+                                                                                        <img src="{{ asset('/storage/' . $dm->file) }}"
+                                                                                            class="img img-thumbnail"
+                                                                                            alt="">
+                                                                                    @endif
+                                                                                    <hr>
+                                                                                    <p class="mb-0">
+                                                                                        {{ date('F j, Y H:i a', strtotime($dm->created_at)) }}
+                                                                                    </p>
+                                                                                </div>
+                                                                            @else
+                                                                                <div class="alert alert-warning"
+                                                                                    role="alert">
+                                                                                    <h6 class="alert-heading">
+                                                                                        {{ $dm->instructor->name }}
+                                                                                        {{ $dm->instructor->last_name }}
 
-                                                                                </h6>
-                                                                                <hr>
-                                                                                <p>{{ $dm->comment }}
-                                                                                </p>
-                                                                                @if ($dm->file != null)
-                                                                                    <img src="{{ asset('/storage/' . $dm->file) }}"
-                                                                                        class="img img-thumbnail"
-                                                                                        alt="">
-                                                                                @endif
-                                                                                <hr>
-                                                                                <p class="mb-0">
-                                                                                    {{ date('F j, Y H:i a', strtotime($dm->created_at)) }}
-                                                                                </p>
-                                                                            </div>
+                                                                                    </h6>
+                                                                                    <hr>
+                                                                                    <p>{{ $dm->comment }}
+                                                                                    </p>
+                                                                                    @if ($dm->file != null)
+                                                                                        <img src="{{ asset('/storage/' . $dm->file) }}"
+                                                                                            class="img img-thumbnail"
+                                                                                            alt="">
+                                                                                    @endif
+                                                                                    <hr>
+                                                                                    <p class="mb-0">
+                                                                                        {{ date('F j, Y H:i a', strtotime($dm->created_at)) }}
+                                                                                    </p>
+                                                                                </div>
+                                                                            @endif
                                                                         @endif
-                                                                    @endif
-                                                            </tr>
-                                                        @endforeach
-                                                    </tbody>
-                                                </table>
+                                                                </tr>
+                                                            @endforeach
+                                                        </tbody>
+                                                    </table>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="modal-body">
-                                        <div class="form-group">
-                                            <label>Write Message</label>
-                                            <textarea name="comment" class="form-control"></textarea>
-                                            <input type="hidden" value="{{ $data->id }}" name="instructor_id">
+                                        <div class="modal-body">
+                                            <div class="form-group">
+                                                <label>Write Message</label>
+                                                <textarea name="comment" class="form-control"></textarea>
+                                                <input type="hidden" value="{{ $data->student_id }}" name="student_id">
 
-                                            <label>Attachment</label>
-                                            <input type="file" class="form-control" accept="image/*,video/*"
-                                                name="message_file">
+                                                <label>Attachment</label>
+                                                <input type="file" class="form-control" accept="image/*,video/*"
+                                                    name="message_file">
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary btn-sm"
-                                            data-dismiss="modal">Close</button>
-                                        <button type="submit" class="btn btn-primary btn-sm">Submit</button>
-                                    </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary btn-sm"
+                                                data-dismiss="modal">Close</button>
+                                            <button type="submit" class="btn btn-primary btn-sm">Submit</button>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>

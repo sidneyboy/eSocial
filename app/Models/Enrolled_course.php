@@ -26,4 +26,9 @@ class Enrolled_course extends Model
     {
         return $this->belongsTo('App\Models\User', 'instructor_id','id');
     }
+
+    // public function direct_message()
+    // {
+    //     return $this->hasMany('App\Models\Direct_message', 'student_id','user_id')->where('status',null)->get();
+    // }
 }

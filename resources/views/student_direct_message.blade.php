@@ -12,16 +12,12 @@
             <ul class="list-group">
                 @foreach ($instructors as $data)
                     <li class="list-group-item">
-                        {{-- <button type="button" class="btn btn-link" style="text-decoration: none;color:blue"
-                            data-toggle="modal" data-target="#exampleModal_direct_message{{ $data->id }}">
-                            <br />
-                           
-                        </button> --}}
-                        <a href="#" style="text-decoration: none;color:grey;text-transform:uppercase" data-toggle="modal"
-                            data-target="#exampleModal_direct_message{{ $data->id }}"> Direct Message -
-                            {{ $data->name }} {{ $data->last_name }}</a>
-
-                        <!-- Modal -->
+                        <button type="button" class="btn btn-primary btn-block" data-toggle="modal"
+                            data-target="#exampleModal_direct_message{{ $data->id }}">
+                            Direct Message -
+                            {{ $data->name }} {{ $data->last_name }} <span
+                                class="badge badge-light">{{ count($count[$data->id]) }} New Message</span>
+                        </button>
                         <div class="modal fade" id="exampleModal_direct_message{{ $data->id }}" tabindex="-1"
                             role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">
@@ -44,13 +40,18 @@
                                                                 <tr>
                                                                     <td>
                                                                         @if ($dm->instructor_id == $data->id)
+                                                                            @if ($dm->status != 'replied')
+                                                                                <input type="hidden"
+                                                                                    value="{{ $dm->id }}"
+                                                                                    name="dm_id[]">
+                                                                            @endif
                                                                             @if ($dm->user_typer == 'Student')
                                                                                 <div class="alert alert-success"
                                                                                     role="alert">
                                                                                     <h6 class="alert-heading">
                                                                                         {{ $dm->student->name }}
                                                                                         {{ $dm->student->last_name }}
-                                                                                
+
                                                                                     </h6>
                                                                                     <hr>
                                                                                     <p>{{ $dm->comment }}
@@ -65,14 +66,13 @@
                                                                                         {{ date('F j, Y H:i a', strtotime($dm->created_at)) }}
                                                                                     </p>
                                                                                 </div>
-                                                                                
                                                                             @else
                                                                                 <div class="alert alert-warning"
                                                                                     role="alert">
                                                                                     <h6 class="alert-heading">
                                                                                         {{ $dm->instructor->name }}
                                                                                         {{ $dm->instructor->last_name }}
-                                                                                       
+
                                                                                     </h6>
                                                                                     <hr>
                                                                                     <p>{{ $dm->comment }}
@@ -87,7 +87,6 @@
                                                                                         {{ date('F j, Y H:i a', strtotime($dm->created_at)) }}
                                                                                     </p>
                                                                                 </div>
-                                                                                
                                                                             @endif
                                                                         @endif
                                                                 </tr>

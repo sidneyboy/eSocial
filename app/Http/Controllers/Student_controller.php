@@ -141,6 +141,15 @@ class Student_controller extends Controller
     public function student_message_process(Request $request)
     {
         //dd($request->all());
+
+        $dm_id = $request->input('dm_id');
+        if (isset($dm_id)) {
+            foreach ($request->input('dm_id') as $key => $dm_id) {
+                Direct_message::where('id', $dm_id)
+                    ->update(['status' => 'replied']);
+            }
+        }
+
         if ($request->file('message_file')) {
             $message_file = $request->file('message_file');
             $message_file_name = $message_file->getClientOriginalName();
@@ -153,6 +162,7 @@ class Student_controller extends Controller
                 'instructor_id' => $request->input('instructor_id'),
                 'file' => $message_file_name,
                 'file_type' => $message_file_type,
+                'user_typer' => 'Student',
             ]);
 
             $new_message->save();
@@ -161,13 +171,13 @@ class Student_controller extends Controller
                 'comment' => $request->input('comment'),
                 'user_id' => auth()->user()->id,
                 'instructor_id' => $request->input('instructor_id'),
-                'user_type' => 'Student',
+                'user_typer' => 'Student',
             ]);
 
             $new_message->save();
         }
 
-        return redirect('student_course')->with('success', 'Message sent');
+        return redirect('student_direct_message')->with('success', 'Message sent');
     }
 
     public function student_direct_message()
@@ -176,7 +186,18 @@ class Student_controller extends Controller
         $instructors = User::where('user_type', 'Instructor')->get();
         foreach ($instructors as $key => $data) {
             $id[] = $data->id;
+
+            $count[$data->id] = Direct_message::where('instructor_id', $data->id)
+                            ->where('user_typer','Instructor')
+                            ->where('user_id',auth()->user()->id)
+                            ->where('status',null)->get();
         }
+
+    
+
+
+        
+        
         $message = Direct_message::whereIn('instructor_id', $id)->where('user_id', auth()->user()->id)->get();
 
 
@@ -185,6 +206,7 @@ class Student_controller extends Controller
             'user_data' => $user_data,
             'instructors' => $instructors,
             'message' => $message,
+            'count' => $count,
         ]);
     }
 

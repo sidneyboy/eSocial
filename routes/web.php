@@ -94,7 +94,7 @@ Route::get('/instructor_view_exam/{course_id}', 'Instructor_controller@instructo
 Route::post('/instructor_add_exam_certificate/', 'Instructor_controller@instructor_add_exam_certificate')->name('instructor_add_exam_certificate');
 Route::get('/instructor_students/', 'Instructor_controller@instructor_students')->name('instructor_students');
 Route::get('/instructor_direct_message/', 'Instructor_controller@instructor_direct_message')->name('instructor_direct_message');
-
+Route::post('/instructor_message_process/', 'Instructor_controller@instructor_message_process')->name('instructor_message_process');
 
 
 

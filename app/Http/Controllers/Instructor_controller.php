@@ -355,35 +355,80 @@ class Instructor_controller extends Controller
         Exam::where('id', $request->input('exam_id'))
             ->update(['certificate' => $certificate_name]);
 
-        return redirect('instructor_courses')->with('success','Successfully added exam certificate');
+        return redirect('instructor_courses')->with('success', 'Successfully added exam certificate');
     }
 
     public function instructor_students(Request $request)
     {
         $user_data = User::find(auth()->user()->id);
-        return view('instructor_students',[
+        return view('instructor_students', [
             'user_data' => $user_data,
         ]);
     }
 
     public function instructor_direct_message()
     {
-       
 
-        $enrolled_student = Enrolled_course::where('instructor_id',auth()->user()->id)->groupBy('student_id')->get();
+
+        $enrolled_student = Enrolled_course::where('instructor_id', auth()->user()->id)->groupBy('student_id')->get();
+        foreach ($enrolled_student as $key => $data) {
+            $count[$data->student_id] = Direct_message::where('user_id',$data->student_id)->where('user_typer','Student')->where('status',null)->get();
+        }
 
         foreach ($enrolled_student as $key => $data) {
             $student_id[] = $data->student_id;
         }
 
-        $direct_message = Direct_message::whereIn('user_id',$student_id)->where('instructor_id',auth()->user()->id)->get();
-        
+        $direct_message = Direct_message::whereIn('user_id', $student_id)->where('instructor_id', auth()->user()->id)->get();
+
         $user_data = User::find(auth()->user()->id);
 
-        return view('instructor_direct_message',[
+        return view('instructor_direct_message', [
             'user_data' => $user_data,
             'direct_message' => $direct_message,
             'enrolled_student' => $enrolled_student,
+            'count' => $count,
         ]);
+    }
+
+    public function instructor_message_process(Request $request)
+    {
+        // return dd($request->all());
+        $dm_id = $request->input('dm_id');
+        if (isset($dm_id)) {
+            foreach ($request->input('dm_id') as $key => $dm_id) {
+                Direct_message::where('id', $dm_id)
+                    ->update(['status' => 'replied']);
+            }
+        }
+
+        if ($request->file('message_file')) {
+            $message_file = $request->file('message_file');
+            $message_file_name = $message_file->getClientOriginalName();
+            $message_file_type = $message_file->getClientMimeType();
+            $path_message_file = $message_file->storeAs('public', $message_file_name);
+
+            $new_message = new Direct_message([
+                'comment' => $request->input('comment'),
+                'user_id' => $request->input('student_id'),
+                'instructor_id' => auth()->user()->id,
+                'file' => $message_file_name,
+                'file_type' => $message_file_type,
+                'user_typer' => 'Instructor',
+            ]);
+
+            $new_message->save();
+        } else {
+            $new_message = new Direct_message([
+                'comment' => $request->input('comment'),
+                'user_id' => $request->input('student_id'),
+                'instructor_id' => auth()->user()->id,
+                'user_typer' => 'Instructor',
+            ]);
+
+            $new_message->save();
+        }
+
+        return redirect('instructor_direct_message')->with('success', 'Message sent');
     }
 }
