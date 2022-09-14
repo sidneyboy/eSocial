@@ -65,14 +65,16 @@
                                                         @csrf
                                                         <div class="modal-body">
                                                             <label>Number of question</label>
-                                                            <input type="number" min="1" value="1"  class="form-control" name="number_of_exams" required>
+                                                            <input type="number" min="1" value="1"
+                                                                class="form-control" name="number_of_exams" required>
                                                             <input type="hidden" value="{{ $data->id }}"
                                                                 name="course_id">
                                                         </div>
                                                         <div class="modal-footer">
                                                             <button type="button" class="btn btn-sm btn-secondary"
                                                                 data-dismiss="modal">Close</button>
-                                                            <button type="submit" class="btn btn-sm btn-primary">Proceed</button>
+                                                            <button type="submit"
+                                                                class="btn btn-sm btn-primary">Proceed</button>
                                                         </div>
                                                     </form>
                                                 </div>
@@ -169,7 +171,11 @@
                                         </div>
                                     </li>
                                     <li class="list-group-item">
-                                        <a href="{{ url('instructor_view_exam',['course_id'=>$data->id]) }}" class="btn btn-sm btn-block btn-primary">View Exam</a>
+                                        <a href="{{ url('instructor_invite_student',['course_id' => $data->id]) }}" class="btn btn-block btn-sm btn-primary">Invite Student</a>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <a href="{{ url('instructor_view_exam', ['course_id' => $data->id]) }}"
+                                            class="btn btn-sm btn-block btn-primary">View Exam</a>
                                     </li>
                                     <li class="list-group-item">
                                         <!-- Button trigger modal -->

@@ -211,6 +211,13 @@
             </li>
 
             <li class="nav-item">
+                <a class="nav-link" href="{{ url('student_instructor_invitation') }}">
+                    <i class="fas fa-fw fa-hands-helping"></i>
+                    <span>{{ __('Invitations') }} </span><span class="badge badge-light">{{ $count }}</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
                 <a class="nav-link" href="{{ url('student_course') }}">
                     <i class="fas fa-fw fa-hands-helping"></i>
                     <span>{{ __('Courses') }}</span>

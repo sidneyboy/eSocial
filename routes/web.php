@@ -57,6 +57,9 @@ Route::post('/student_answer_exam_process', 'Student_controller@student_answer_e
 Route::get('/student_answer_exam_proceed/{student_exam_id}', 'Student_controller@student_answer_exam_proceed')->name('student_answer_exam_proceed');
 Route::get('/student_answer_exam_finalized/{student_exam_id}', 'Student_controller@student_answer_exam_finalized')->name('student_answer_exam_finalized');
 Route::get('/student_show_certificate', 'Student_controller@student_show_certificate')->name('student_show_certificate');
+Route::get('/student_instructor_invitation', 'Student_controller@student_instructor_invitation')->name('student_instructor_invitation');
+Route::post('/student_answer_exam_process', 'Student_controller@student_answer_exam_process')->name('student_answer_exam_process');
+
 
 
 
@@ -95,6 +98,11 @@ Route::post('/instructor_add_exam_certificate/', 'Instructor_controller@instruct
 Route::get('/instructor_students/', 'Instructor_controller@instructor_students')->name('instructor_students');
 Route::get('/instructor_direct_message/', 'Instructor_controller@instructor_direct_message')->name('instructor_direct_message');
 Route::post('/instructor_message_process/', 'Instructor_controller@instructor_message_process')->name('instructor_message_process');
+Route::get('/instructor_invite_student/{course_id}', 'Instructor_controller@instructor_invite_student')->name('instructor_invite_student');
+Route::get('/instructor_invite_student_process/{course_id}/{student_id}', 'Instructor_controller@instructor_invite_student_process')->name('instructor_invite_student_process');
+
+
+
 
 
 

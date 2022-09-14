@@ -18,7 +18,7 @@
     <div class="container">
         <div class="card" style="width: 100%;">
             <div class="card-header">
-                <a href="{{ url('student_course') }}">Back</a>
+                <a href="{{ url('student_enrolled_courses') }}">Back</a>
             </div>
             <div class="card-body">
                 <ul class="list-group">

@@ -11,6 +11,7 @@ use App\Models\Exam;
 use App\Models\Exam_details;
 use App\Models\Direct_message;
 use App\Models\Enrolled_course;
+use App\Models\Invite_student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -115,6 +116,8 @@ class Instructor_controller extends Controller
     {
         $course = Course::where('user_id', auth()->user()->id)->orderBy('id', 'Desc')->get();
         $user_data = User::find(auth()->user()->id);
+
+
 
         return view('instructor_courses', [
             'course' => $course,
@@ -372,7 +375,7 @@ class Instructor_controller extends Controller
 
         $enrolled_student = Enrolled_course::where('instructor_id', auth()->user()->id)->groupBy('student_id')->get();
         foreach ($enrolled_student as $key => $data) {
-            $count[$data->student_id] = Direct_message::where('user_id',$data->student_id)->where('user_typer','Student')->where('status',null)->get();
+            $count[$data->student_id] = Direct_message::where('user_id', $data->student_id)->where('user_typer', 'Student')->where('status', null)->get();
         }
 
         foreach ($enrolled_student as $key => $data) {
@@ -430,5 +433,55 @@ class Instructor_controller extends Controller
         }
 
         return redirect('instructor_direct_message')->with('success', 'Message sent');
+    }
+
+    public function instructor_invite_student($course_id)
+    {
+        $enrolled_on_this_course = Enrolled_course::select('student_id')->where('course_id', $course_id)->get();
+
+      
+        if (count($enrolled_on_this_course) != 0) {
+            foreach ($enrolled_on_this_course as $key => $data) {
+                $student_id[] = $data->student_id;
+            }
+    
+            $students = User::select('name', 'last_name', 'id')->where('user_type', 'Student')->whereNotIn('id', $student_id)->get();
+            $user_data = User::find(auth()->user()->id);
+
+            return view('instructor_invite_student', [
+                'students' => $students,
+                'user_data' => $user_data,
+            ])->with('course_id', $course_id);
+        }else{
+            $students = User::select('name', 'last_name', 'id')->where('user_type', 'Student')->get();
+            $user_data = User::find(auth()->user()->id);
+
+            return view('instructor_invite_student', [
+                'students' => $students,
+                'user_data' => $user_data,
+            ])->with('course_id', $course_id);
+        }
+    }
+
+    public function instructor_invite_student_process($course_id, $student_id)
+    {
+        $check = Invite_student::where('course_id', $course_id)
+            ->where('student_id', $student_id)
+            ->first();
+
+        if ($check) {
+            return redirect()->route('instructor_invite_student', ['course_id' => $course_id])->with('success', 'Invitation sent successfully');
+        } else {
+            $new = new Invite_student([
+                'course_id' => $course_id,
+                'student_id' => $student_id,
+                'instructor_id' => auth()->user()->id,
+                'status' => 'Pending Approval',
+            ]);
+
+            $new->save();
+
+            return redirect()->route('instructor_invite_student', ['course_id' => $course_id])->with('success', 'Invitation sent successfully');
+        }
     }
 }

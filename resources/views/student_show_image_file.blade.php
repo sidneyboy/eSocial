@@ -16,22 +16,36 @@
 <body>
     <br />
     <div class="container">
-        @foreach ($course_data as $data)
-            <div class="card" style="width: 100%;">
-                <div class="card-header">
-                    <a href="{{ url('student_course') }}">Back</a>
-                </div>
-                <div class="card-body">
-                    <img class="img img-thumbnail" style="border: 0px;" src="{{ asset('/storage/' . $data->file) }}"
+        @if (count($course_data) != 0)
+            @foreach ($course_data as $data)
+                <div class="card" style="width: 100%;">
+                    <div class="card-header">
+                        <a href="{{ url('student_course') }}">Back</a>
+                    </div>
+                    <div class="card-body">
+                        <img class="img img-thumbnail" style="border: 0px;" src="{{ asset('/storage/' . $data->file) }}"
                             alt="Card image cap">
-                </div>
-                <div class="card-footer">
-                    <div class="float-right">
-                        {{ $course_data->links() }}
+                    </div>
+                    <div class="card-footer">
+                        <div class="float-right">
+                            {{ $course_data->links() }}
+                        </div>
                     </div>
                 </div>
+            @endforeach
+        @else
+            <div class="card" style="width: 100%;">
+                <div class="card-header">
+                    <a href="{{ url('student_enrolled_courses') }}">Back</a>
+                </div>
+                <div class="card-body">
+                    <p>No Data Yet</p>
+                </div>
+                <div class="card-footer">
+                   
+                </div>
             </div>
-        @endforeach
+        @endif
     </div>
     <br />
     <!-- Optional JavaScript; choose one of the two! -->

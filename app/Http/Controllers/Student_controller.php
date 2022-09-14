@@ -13,6 +13,8 @@ use App\Models\Exam;
 use App\Models\Exam_details;
 use App\Models\Student_exam;
 use App\Models\Student_exam_details;
+use App\Models\Invite_student;
+
 
 use Illuminate\Http\Request;
 
@@ -36,7 +38,7 @@ class Student_controller extends Controller
     public function student_course()
     {
         $enrolled_data = Enrolled_course::where('student_id', auth()->user()->id)->get();
-
+        $count = Invite_student::where('student_id',auth()->user()->id)->where('status','Pending Approval')->count();
 
 
         if (count($enrolled_data) != 0) {
@@ -48,6 +50,7 @@ class Student_controller extends Controller
             return view('student_course', [
                 'user_data' => $user_data,
                 'course' => $course,
+                'count' => $count,
             ]);
         } else {
             $course = Course::orderBy('id', 'Desc')->get();
@@ -55,6 +58,7 @@ class Student_controller extends Controller
             return view('student_course', [
                 'user_data' => $user_data,
                 'course' => $course,
+                'count' => $count,
             ]);
         }
     }
@@ -62,8 +66,11 @@ class Student_controller extends Controller
     public function student_profile()
     {
         $user_data = User::find(auth()->user()->id);
+        $count = Invite_student::where('student_id',auth()->user()->id)->where('status','Pending Approval')->count();
+
         return view('student_profile', [
             'user_data' => $user_data,
+            'count' => $count,
         ]);
     }
 
@@ -87,9 +94,12 @@ class Student_controller extends Controller
         $course_search = Course::where('course_title', 'like', '%' . $search . '%')->orderBy('created_at', 'DESC')->get();
 
         $user_data = User::find(auth()->user()->id);
+        $count = Invite_student::where('student_id',auth()->user()->id)->where('status','Pending Approval')->count();
+
         return view('student_search_course', [
             'course_search' => $course_search,
             'user_data' => $user_data,
+            'count' => $count,
         ]);
     }
 
@@ -188,22 +198,23 @@ class Student_controller extends Controller
             $id[] = $data->id;
 
             $count[$data->id] = Direct_message::where('instructor_id', $data->id)
-                            ->where('user_typer','Instructor')
-                            ->where('user_id',auth()->user()->id)
-                            ->where('status',null)->get();
+                ->where('user_typer', 'Instructor')
+                ->where('user_id', auth()->user()->id)
+                ->where('status', null)->get();
         }
 
-    
 
 
-        
-        
+
+
+
         $message = Direct_message::whereIn('instructor_id', $id)->where('user_id', auth()->user()->id)->get();
-
+        $count = Invite_student::where('student_id',auth()->user()->id)->where('status','Pending Approval')->count();
 
 
         return view('student_direct_message', [
             'user_data' => $user_data,
+            'count' => $count,
             'instructors' => $instructors,
             'message' => $message,
             'count' => $count,
@@ -241,24 +252,43 @@ class Student_controller extends Controller
 
     public function student_enroll_course(Request $request)
     {
-        $new_enrolled = new Enrolled_course([
-            'course_id' => $request->input('course_id'),
-            'student_id' => auth()->user()->id,
-            'instructor_id' => $request->input('instructor_id'),
-            'amount' => 0,
-            'course_type' => 'Free',
-        ]);
+        
+        $invitation_id = $request->input('invitation_id');
+        if (isset($invitation_id)) {
+            Invite_student::where('id', $invitation_id)
+                ->update(['status' => 'Accepted']);
 
-        $new_enrolled->save();
+            $new_enrolled = new Enrolled_course([
+                'course_id' => $request->input('course_id'),
+                'student_id' => auth()->user()->id,
+                'instructor_id' => $request->input('instructor_id'),
+                'amount' => 0,
+                'course_type' => 'Free',
+            ]);
 
-        return redirect('student_course')->with('success', 'Successfully enrolled');
+            $new_enrolled->save();
+
+            return redirect('student_course')->with('success', 'Successfully enrolled');
+        } else {
+            $new_enrolled = new Enrolled_course([
+                'course_id' => $request->input('course_id'),
+                'student_id' => auth()->user()->id,
+                'instructor_id' => $request->input('instructor_id'),
+                'amount' => 0,
+                'course_type' => 'Free',
+            ]);
+
+            $new_enrolled->save();
+
+            return redirect('student_course')->with('success', 'Successfully enrolled');
+        }
     }
 
     public function student_enrolled_courses()
     {
         $enrolled_data = Enrolled_course::where('student_id', auth()->user()->id)->get();
 
-
+        $count = Invite_student::where('student_id',auth()->user()->id)->where('status','Pending Approval')->count();
 
         if (count($enrolled_data) != 0) {
             foreach ($enrolled_data as $key => $data) {
@@ -269,12 +299,14 @@ class Student_controller extends Controller
             return view('student_enrolled_courses', [
                 'user_data' => $user_data,
                 'course' => $course,
+                'count' => $count,
             ]);
         } else {
             // $course = Course::orderBy('id', 'Desc')->get();
             $user_data = User::find(auth()->user()->id);
             return view('student_enrolled_courses', [
                 'user_data' => $user_data,
+                'count' => $count,
                 // 'course' => $course,
             ]);
         }
@@ -286,9 +318,11 @@ class Student_controller extends Controller
         $course_search = Course::where('course_title', 'like', '%' . $search . '%')->orderBy('created_at', 'DESC')->get();
 
         $user_data = User::find(auth()->user()->id);
+        $count = Invite_student::where('student_id',auth()->user()->id)->where('status','Pending Approval')->count();
         return view('student_enrolled_search_course', [
             'course_search' => $course_search,
             'user_data' => $user_data,
+            'count' => $count,
         ]);
     }
 
@@ -380,6 +414,7 @@ class Student_controller extends Controller
     public function student_show_certificate()
     {
         $student_exam = Student_exam::where('remarks', '!=', 'fail')->where('student_id', auth()->user()->id)->get();
+        $count = Invite_student::where('student_id',auth()->user()->id)->where('status','Pending Approval')->count();
 
         if (count($student_exam) != 0) {
             foreach ($student_exam as $key => $data) {
@@ -391,12 +426,27 @@ class Student_controller extends Controller
             return view('student_show_certificate', [
                 'exam' => $exam,
                 'user_data' => $user_data,
+                'count' => $count,
             ]);
-        }else{
+        } else {
             $user_data = User::find(auth()->user()->id);
-            return view('student_show_no_certificate',[
+            return view('student_show_no_certificate', [
                 'user_data' => $user_data,
+                'count' => $count,
             ]);
         }
+    }
+
+    public function student_instructor_invitation()
+    {
+        $invitation = Invite_student::where('student_id', auth()->user()->id)->where('status', 'Pending Approval')->orderBy('id','desc')->get();
+
+        $user_data = User::find(auth()->user()->id);
+        $count = Invite_student::where('student_id',auth()->user()->id)->where('status','Pending Approval')->count();
+        return view('student_instructor_invitation', [
+            'user_data' => $user_data,
+            'invitation' => $invitation,
+            'count' => $count,
+        ]);
     }
 }

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Payment;
 use App\Models\Enrolled_course;
+use App\Models\Invite_student;
+
 use Illuminate\Http\Request;
 use Omnipay\Omnipay;
 
@@ -21,16 +23,31 @@ class Student_subscribed_controller extends Controller
 
     public function student_subscribed_course(Request $request)
     {
-      
-
         try {
+            $invitation_id = $request->input('invitation_id');
+
+            if (isset($invitation_id)) {
+                Invite_student::where('id', $invitation_id)
+                    ->update(['status' => 'Accepted']);
+
+                $new_enrolled = new Enrolled_course([
+                    'course_id' => $request->input('course_id'),
+                    'student_id' => auth()->user()->id,
+                    'instructor_id' => $request->input('instructor_id'),
+                    'amount' => 0,
+                    'course_type' => 'Free',
+                ]);
+
+                $new_enrolled->save();
+            }
+
             $new_payment = new Payment([
                 'course_id' => $request->input('course_id'),
                 'student_id' => auth()->user()->id,
                 'instructor_id' => $request->input('instructor_id'),
                 'amount' => $request->input('amount'),
             ]);
-    
+
             $new_payment->save();
 
             $new_enrolled = new Enrolled_course([
@@ -40,7 +57,7 @@ class Student_subscribed_controller extends Controller
                 'amount' => $request->input('amount'),
                 'course_type' => 'Subscribed',
             ]);
-    
+
             $new_enrolled->save();
 
             $response = $this->gateway->purchase(array(
@@ -50,9 +67,9 @@ class Student_subscribed_controller extends Controller
                 'cancelUrl' => url('error'),
             ))->send();
 
-            if($response->isRedirect()){
+            if ($response->isRedirect()) {
                 $response->redirect();
-            }else{
+            } else {
                 return $response->getMessage();
             }
         } catch (\Throwable $th) {
@@ -77,11 +94,10 @@ class Student_subscribed_controller extends Controller
                 // return $arr['id'];
 
                 return view('payment_success');
-
-            }else{
+            } else {
                 return $response->getMessage();
             }
-        }else{
+        } else {
             return 'Payment declined!';
         }
     }
