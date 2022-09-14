@@ -23,6 +23,7 @@
     <link href="{{ asset('css/sb-admin-2.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
 
     <!-- Favicon -->
     <link href="{{ asset('img/favicon.png') }}" rel="icon" type="image/png">
@@ -215,24 +216,38 @@
 
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('instructor_direct_message') }}">
-                    <i class="fas fa-fw fa-hands-helping"></i>
+                    <i class="bi bi-envelope-check"></i>
                     <span>{{ __('Direct Message') }}</span>
                 </a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('instructor_add_course') }}">
+                <a class="nav-link" href="{{ route('intructor_to_do') }}">
                     <i class="fas fa-fw fa-hands-helping"></i>
+                    <span>{{ __('To do list') }}</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('instructor_add_course') }}">
+                    <i class="bi bi-book"></i>
                     <span>{{ __('Add Course') }}</span>
                 </a>
             </li>
 
             <li class="nav-item">
                 <a class="nav-link" href="{{ url('instructor_courses') }}">
-                    <i class="fas fa-fw fa-hands-helping"></i>
+                    <i class="bi bi-book-half"></i>
                     <span>{{ __('My Courses') }}</span>
                 </a>
             </li>
+
+            {{-- <li class="nav-item">
+                <a class="nav-link" href="{{ url('instructor_invite_student',[]) }}">
+                    <i class="fas fa-fw fa-hands-helping"></i>
+                    <span>{{ __('Invite Student') }}</span>
+                </a>
+            </li> --}}
 
 
             {{-- <li class="nav-item">

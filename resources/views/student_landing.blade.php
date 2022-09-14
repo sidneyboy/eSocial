@@ -11,30 +11,43 @@
         integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
 
     <title>Student</title>
+    <style>
+        .bg-image {
+            /* The image used */
+            background-image: url("{{ asset('/storange/app/public/landing_background') }}");
+
+            /* Add the blur effect */
+            filter: blur(8px);
+            -webkit-filter: blur(8px);
+
+            /* Full height */
+            height: 100%;
+
+            /* Center and scale the image nicely */
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+    </style>
 </head>
 
 <body>
     <br />
+    <div class="bg-image"></div>
     <div class="container">
         @foreach ($tutorial as $data)
-            <div class="card" style="width: 100%;">
-                <div class="card-header">
-                    <div class="row">
-                        <h6>Tutorial {{ $data->id }}</h6>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <p style="text-align: justify"><img class="img img-thumbnail"
-                            src="{{ asset('/storage/' . $data->tutorial_image) }}"
-                            alt="Card image cap">{{ $data->tutorial_note }}</p>
-                    <br /> <a href="{{ url('student_course') }}" class="float-right">Skip Ttuorial</a>
-                </div>
-                <div class="card-footer">
-                    <div class="float-right">
-                        {{ $tutorial->links() }}
+            <div class="float-right">
+                {{ $tutorial->links() }}
 
-                    </div>
-                </div>
+            </div>
+            <br />
+            <img class="img img-thumbnail" style="border: 0px;" src="{{ asset('/storage/' . $data->tutorial_image) }}"
+                alt="Card image cap">
+            <br /><br />
+            <div class="container">
+                <h3>{{ $data->title }}</h3>
+                <p>{{ $data->tutorial_note }}</p>
+                <a href="{{ url('student_course') }}" class="float-right">Skip Ttuorial</a>
             </div>
         @endforeach
     </div>

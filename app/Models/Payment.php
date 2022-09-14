@@ -15,4 +15,19 @@ class Payment extends Model
         'instructor_id',
         'amount',
     ];
+
+    public function course()
+    {
+        return $this->belongsTo('App\Models\Course', 'course_id');
+    }
+    
+    public function student()
+    {
+        return $this->belongsTo('App\Models\User', 'student_id');
+    }
+
+    public function instructor()
+    {
+        return $this->belongsTo('App\Models\User', 'instructor_id');
+    }
 }

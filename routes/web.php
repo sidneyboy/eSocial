@@ -18,6 +18,7 @@ Route::get('/', function () {
 });
 
 Route::get('/home', 'HomeController@index')->name('home');
+// Route::get('/login', 'HomeController@index')->name('home');
 
 Auth::routes();
 
@@ -29,10 +30,10 @@ Route::get('/approved_instructor', 'Esocial_controller@approved_instructor')->na
 Route::get('/approved_instructor_process/{id}', 'Esocial_controller@approved_instructor_process')->name('approved_instructor_process');
 Route::post('/profile_add_image', 'Esocial_controller@profile_add_image')->name('profile_add_image');
 Route::post('/student_profile_add_image', 'Esocial_controller@student_profile_add_image')->name('student_profile_add_image');
-
-
-
-
+Route::get('/approved_instructor_suspend/{user_id}', 'Esocial_controller@approved_instructor_suspend')->name('approved_instructor_suspend');
+Route::get('/student_list', 'Esocial_controller@student_list')->name('student_list');
+Route::get('/suspend_student/{user_id}/{status}', 'Esocial_controller@suspend_student')->name('suspend_student');
+Route::get('/payment_history', 'Esocial_controller@payment_history')->name('payment_history');
 
 
 
@@ -100,6 +101,9 @@ Route::get('/instructor_direct_message/', 'Instructor_controller@instructor_dire
 Route::post('/instructor_message_process/', 'Instructor_controller@instructor_message_process')->name('instructor_message_process');
 Route::get('/instructor_invite_student/{course_id}', 'Instructor_controller@instructor_invite_student')->name('instructor_invite_student');
 Route::get('/instructor_invite_student_process/{course_id}/{student_id}', 'Instructor_controller@instructor_invite_student_process')->name('instructor_invite_student_process');
+Route::get('/intructor_to_do/', 'Instructor_controller@intructor_to_do')->name('intructor_to_do');
+Route::get('/instructor_show_image/{course_id}', 'Instructor_controller@instructor_show_image')->name('instructor_show_image');
+
 
 
 

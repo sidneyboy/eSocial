@@ -22,6 +22,8 @@
                         <div class="form-group">
                             <label>Tutorial Image</label>
                             <input type="file" class="form-control" required name="tutorial_image">
+                            <label>Title</label>
+                            <input type="text" class="form-control" required name="title">
                             <label>Tutorial Note</label>
                             <textarea name="tutorial_note" id="tutorial_note" class="form-control" cols="30" rows="10"></textarea>
                         </div>

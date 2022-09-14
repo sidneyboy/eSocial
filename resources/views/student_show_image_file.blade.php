@@ -20,7 +20,7 @@
             @foreach ($course_data as $data)
                 <div class="card" style="width: 100%;">
                     <div class="card-header">
-                        <a href="{{ url('student_course') }}">Back</a>
+                        <a href="{{ url('student_enrolled_courses') }}">Back</a>
                     </div>
                     <div class="card-body">
                         <img class="img img-thumbnail" style="border: 0px;" src="{{ asset('/storage/' . $data->file) }}"

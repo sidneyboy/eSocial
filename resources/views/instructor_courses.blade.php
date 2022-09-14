@@ -278,7 +278,7 @@
                                             class="btn btn-sm btn-primary btn-block">Open Files</a>
                                     </li>
                                     <li class="list-group-item">
-                                        <a href="{{ url('instructor_show_image_file', ['course_id' => $data->id]) }}"
+                                        <a href="{{ url('instructor_show_image', ['course_id' => $data->id]) }}"
                                             class="btn btn-sm btn-primary btn-block">Open Images</a>
                                     </li>
                                     <li class="list-group-item">

@@ -21,6 +21,10 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/sb-admin-2.min.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap4.min.css">
 
     <!-- Favicon -->
     <link href="{{ asset('img/favicon.png') }}" rel="icon" type="image/png">
@@ -134,7 +138,7 @@
             <!-- Divider -->
             <hr class="sidebar-divider my-0">
 
-            <!-- Nav Item - Dashboard -->
+            {{-- <!-- Nav Item - Dashboard -->
             <li class="nav-item {{ Nav::isRoute('home') }}">
                 <a class="nav-link" href="{{ route('home') }}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
@@ -147,7 +151,7 @@
             <!-- Heading -->
             <div class="sidebar-heading">
                 {{ __('Settings') }}
-            </div>
+            </div> --}}
 
             <!-- Nav Item - Profile -->
             {{-- <li class="nav-item {{ Nav::isRoute('profile') }}">
@@ -165,9 +169,23 @@
             </a>
         </li> --}}
             <li class="nav-item">
+                <a class="nav-link" href="{{ url('payment_history') }}">
+                    <i class="bi bi-cash"></i>
+                    <span>{{ __('Payment History') }}</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
                 <a class="nav-link" href="{{ url('approved_instructor') }}">
-                    <i class="fas fa-fw fa-hands-helping"></i>
-                    <span>{{ __('Approved User') }}</span>
+                    <i class="bi bi-check2-circle"></i>
+                    <span>{{ __('Approved Instructor') }}</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url('student_list') }}">
+                    <i class="bi bi-person-lines-fill"></i>
+                    <span>{{ __('Student List') }}</span>
                 </a>
             </li>
 
@@ -180,7 +198,7 @@
 
             <li class="nav-item">
                 <a class="nav-link" href="{{ url('course_type') }}">
-                    <i class="fas fa-fw fa-hands-helping"></i>
+                    <i class="bi bi-book-half"></i>
                     <span>{{ __('Course Type') }}</span>
                 </a>
             </li>
@@ -244,7 +262,7 @@
                                 <figure class="img-profile rounded-circle avatar font-weight-bold"
                                     data-initial="{{ Auth::user()->name[0] }}"></figure> --}}
 
-                                @if ($user_data->user_image != NULL)
+                                @if ($user_data->user_image != null)
                                     <img src="{{ asset('/storage/' . $user_data->user_image) }}"
                                         class="img-profile rounded-circle" alt="">
                                 @else
@@ -329,8 +347,26 @@
             </div>
         </div>
     </div>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> --}}
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap4.min.js"></script>
+    <!-- Scripts -->
+    {{-- <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script> --}}
+    <script src="{{ asset('vendor/bootstrap/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('vendor/jquery-easing/jquery.easing.min.js') }}"></script>
+    <script src="{{ asset('js/sb-admin-2.min.js') }}"></script>
     <script>
+        $(document).ready(function() {
+            $('#example').DataTable({
+                "paging": false,
+                "lengthChange": false,
+                "searching": true,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+            });
+        });
         $('body').append('<div style="" id="loadingDiv"><div class="loader">Loading...</div></div>');
         $(window).on('load', function() {
             setTimeout(removeLoader, 500); //wait for page load PLUS two seconds.
@@ -344,11 +380,7 @@
         }
     </script>
 
-    <!-- Scripts -->
-    <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
-    <script src="{{ asset('vendor/bootstrap/js/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('vendor/jquery-easing/jquery.easing.min.js') }}"></script>
-    <script src="{{ asset('js/sb-admin-2.min.js') }}"></script>
+
 </body>
 
 </html>

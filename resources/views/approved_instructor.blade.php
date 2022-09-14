@@ -45,7 +45,7 @@
                                         <td>
                                             @if ($data->status == '')
                                                 <a href="{{ url('approved_instructor_process', $data->id) }}"
-                                                    class="btn btn-sm btn-warning">Pending Approved</a>
+                                                    class="btn btn-sm btn-warning btn-block">Pending Approved</a>
                                             @else
                                                 Approved
                                             @endif
@@ -60,4 +60,3 @@
         </div>
     </div>
 @endsection
-

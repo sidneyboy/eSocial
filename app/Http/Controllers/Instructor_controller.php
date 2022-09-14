@@ -42,8 +42,10 @@ class Instructor_controller extends Controller
     public function instructor_profile()
     {
         $user_data = User::find(auth()->user()->id);
+        $course = Course::where('user_id',auth()->user()->id)->count();
         return view('instructor_profile', [
             'user_data' => $user_data,
+            'course' => $course,
         ]);
     }
 
@@ -190,12 +192,12 @@ class Instructor_controller extends Controller
         ]);
     }
 
-    public function instructor_show_image_file($course_id)
+    public function instructor_show_image($course_id)
     {
         $search = 'image';
         $course_data = Course_details::where('course_id', $course_id)->where('file_type', 'like', '%' . $search . '%')->paginate(1);
 
-        return view('instructor_show_image_file', [
+        return view('instructor_show_image', [
             'course_data' => $course_data
         ]);
     }
@@ -483,5 +485,13 @@ class Instructor_controller extends Controller
 
             return redirect()->route('instructor_invite_student', ['course_id' => $course_id])->with('success', 'Invitation sent successfully');
         }
+    }
+
+    public function intructor_to_do()
+    {
+        $user_data = User::find(auth()->user()->id);
+        return view('intructor_to_do',[
+            'user_data' => $user_data,
+        ]);
     }
 }

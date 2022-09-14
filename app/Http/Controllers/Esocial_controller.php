@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Tutorial;
 use App\Models\Course_type;
 use App\Models\User;
+use App\Models\Payment;
 use Illuminate\Http\Request;
 
 class Esocial_controller extends Controller
@@ -26,6 +27,7 @@ class Esocial_controller extends Controller
         $path_tutorial_image = $tutorial_image->storeAs('public', $tutorial_image_name);
 
         $new = new Tutorial([
+            'title' => $request->input('title'),
             'tutorial_image' => $tutorial_image_name,
             'tutorial_note' => $request->input('tutorial_note'),
         ]);
@@ -43,7 +45,6 @@ class Esocial_controller extends Controller
             'course_type' => $course_type,
             'user_data' => $user_data,
         ]);
-
     }
 
     public function course_process(Request $request)
@@ -90,5 +91,56 @@ class Esocial_controller extends Controller
             ]);
 
         return redirect('profile')->with('success', 'Successfully approved selected admin');
+    }
+
+    public function approved_instructor_suspend($user_id)
+    {
+        User::where('id', $user_id)
+            ->update([
+                'status' => 'Suspended',
+            ]);
+
+        return redirect('approved_instructor')->with('success', 'Successfully suspended selected instructor');
+    }
+
+    
+
+    public function student_list()
+    {
+        $user_data = User::find(auth()->user()->id);
+        $students = User::where('user_type', 'Student')->get();
+        return view('student_list', [
+            'user_data' => $user_data,
+            'students' => $students,
+        ]);
+    }
+
+    public function suspend_student($user_id, $status)
+    {
+        if ($status == 'Activated') {
+            User::where('id', $user_id)
+                ->update([
+                    'status' => 'Suspended',
+                ]);
+
+            return redirect('student_list')->with('success', 'Successfully suspended selected instructor');
+        } else {
+            User::where('id', $user_id)
+                ->update([
+                    'status' => null,
+                ]);
+
+            return redirect('student_list')->with('success', 'Successfully activated selected instructor');
+        }
+    }
+
+    public function payment_history()
+    {
+        $user_data = User::find(auth()->user()->id);
+        $payment = Payment::get();
+        return view('payment_history',[
+            'user_data' => $user_data,
+            'payment' => $payment,
+        ]);
     }
 }

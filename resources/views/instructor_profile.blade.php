@@ -24,12 +24,9 @@
     @endif
 
     <div class="row">
-
         <div class="col-lg-4 order-lg-2">
-
             <div class="card shadow mb-4">
                 <div class="card-profile-image mt-4">
-
                     <a href="#" data-toggle="modal" data-target="#exampleModal_user_image">
                         @if ($user_data->user_image != '')
                             <img src="{{ asset('/storage/' . $user_data->user_image) }}" class="img rounded-circle"
@@ -40,7 +37,6 @@
                                 data-initial="{{ Auth::user()->name[0] }}"></figure>
                         @endif
                     </a>
-
 
                     <!-- Modal -->
                     <div class="modal fade" id="exampleModal_user_image" tabindex="-1" role="dialog"
@@ -85,18 +81,18 @@
                     </div>
 
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                             <div class="card-profile-stats">
-                                <span class="heading">22</span>
+                                <span class="heading">{{ $course }}</span>
                                 <span class="description">Courses</span>
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        {{-- <div class="col-md-6">
                             <div class="card-profile-stats">
                                 <span class="heading">10</span>
                                 <span class="description">Certificates</span>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>

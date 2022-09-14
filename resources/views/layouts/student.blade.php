@@ -205,35 +205,35 @@
 
             <li class="nav-item">
                 <a class="nav-link" href="{{ url('student_direct_message') }}">
-                    <i class="fas fa-fw fa-hands-helping"></i>
+                    <i class="bi bi-messenger"></i>
                     <span>{{ __('Direct Message') }}</span>
                 </a>
             </li>
 
             <li class="nav-item">
                 <a class="nav-link" href="{{ url('student_instructor_invitation') }}">
-                    <i class="fas fa-fw fa-hands-helping"></i>
+                    <i class="bi bi-envelope-plus"></i>
                     <span>{{ __('Invitations') }} </span><span class="badge badge-light">{{ $count }}</span>
                 </a>
             </li>
 
             <li class="nav-item">
                 <a class="nav-link" href="{{ url('student_course') }}">
-                    <i class="fas fa-fw fa-hands-helping"></i>
+                    <i class="bi bi-book-half"></i>
                     <span>{{ __('Courses') }}</span>
                 </a>
             </li>
 
             <li class="nav-item">
                 <a class="nav-link" href="{{ url('student_enrolled_courses') }}">
-                    <i class="fas fa-fw fa-hands-helping"></i>
-                    <span>{{ __('My Courses') }}</span>
+                    <i class="bi bi-briefcase-fill"></i>
+                    <span>{{ __('Bag Pack') }}</span>
                 </a>
             </li>
 
             <li class="nav-item">
                 <a class="nav-link" href="{{ url('student_show_certificate') }}">
-                    <i class="fas fa-fw fa-hands-helping"></i>
+                    <i class="bi bi-card-text"></i>
                     <span>{{ __('Certificates') }}</span>
                 </a>
             </li>

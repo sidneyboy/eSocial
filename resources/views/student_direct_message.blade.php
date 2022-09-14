@@ -15,8 +15,16 @@
                         <button type="button" class="btn btn-primary btn-block" data-toggle="modal"
                             data-target="#exampleModal_direct_message{{ $data->id }}">
                             Direct Message -
-                            {{ $data->name }} {{ $data->last_name }} <span
-                                class="badge badge-light">{{ count($count[$data->id]) }} New Message</span>
+                            {{ $data->name }} {{ $data->last_name }} <span class="badge badge-light">
+                                {{-- @if (count($count[$data->id]) != 0)
+                                    New Message
+                                @endif --}}
+                                @if (empty($count_message[$data->id]))
+                                    {{ $count_message[$data->id] }}
+                                @else
+                                    0
+                                @endif
+                            </span>
                         </button>
                         <div class="modal fade" id="exampleModal_direct_message{{ $data->id }}" tabindex="-1"
                             role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -100,7 +108,7 @@
                                             <div class="form-group">
                                                 <label>Write Message</label>
                                                 <textarea name="comment" class="form-control"></textarea>
-                                                <input type="hidden" value="{{ $data->id }}" name="instructor_id">
+                                                <input type="hidden" value="{{ $data->id }}" required name="instructor_id">
 
                                                 <label>Attachment</label>
                                                 <input type="file" class="form-control" accept="image/*,video/*"
