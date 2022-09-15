@@ -62,9 +62,21 @@
                             <tfoot>
                                 <tr>
                                     <th colspan="3">Total</th>
-                                    <th style="color:blue">{{ number_format(array_sum($total_amount), 2, '.', ','); }}</th>
-                                    <th style='color:green'>{{ number_format(array_sum($total_monitization), 2, '.', ','); }}</th>
-                                    <th style="color:red">{{ number_format(array_sum($total_instructor_amount), 2, '.', ','); }}</th>
+                                    <th style="color:blue">
+                                        @if (isset($total_amount))
+                                            {{ number_format(array_sum($total_amount), 2, '.', ',') }}
+                                        @endif
+                                    </th>
+                                    <th style='color:green'>
+                                        @if (isset($total_monitization))
+                                            {{ number_format(array_sum($total_monitization), 2, '.', ',') }}
+                                        @endif
+                                    </th>
+                                    <th style="color:red">
+                                        @if (isset($total_instructor_amount))
+                                        {{ number_format(array_sum($total_instructor_amount), 2, '.', ',') }}
+                                        @endif    
+                                    </th>
                                     <th></th>
                                 </tr>
                             </tfoot>

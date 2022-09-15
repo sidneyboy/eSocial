@@ -29,7 +29,7 @@ Route::post('/course_process', 'Esocial_controller@course_process')->name('cours
 Route::get('/approved_instructor', 'Esocial_controller@approved_instructor')->name('approved_instructor');
 Route::get('/approved_instructor_process/{id}', 'Esocial_controller@approved_instructor_process')->name('approved_instructor_process');
 Route::post('/profile_add_image', 'Esocial_controller@profile_add_image')->name('profile_add_image');
-Route::post('/student_profile_add_image', 'Esocial_controller@student_profile_add_image')->name('student_profile_add_image');
+Route::post('/student_profile_add_image', 'Student_controller@student_profile_add_image')->name('student_profile_add_image');
 Route::get('/approved_instructor_suspend/{user_id}', 'Esocial_controller@approved_instructor_suspend')->name('approved_instructor_suspend');
 Route::get('/student_list', 'Esocial_controller@student_list')->name('student_list');
 Route::get('/suspend_student/{user_id}/{status}', 'Esocial_controller@suspend_student')->name('suspend_student');
@@ -115,6 +115,7 @@ Route::post('/planner_prompt/', 'Instructor_controller@planner_prompt')->name('p
 
 Route::get('/planner_approved/{planner_id}', 'Instructor_controller@planner_approved')->name('planner_approved');
 
+Route::get('/no404/', 'Instructor_controller@no404')->name('no404');
 
 
 

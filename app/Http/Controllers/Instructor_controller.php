@@ -375,27 +375,49 @@ class Instructor_controller extends Controller
     public function instructor_direct_message()
     {
 
+        $check_enrollment = Enrolled_course::get();
+        // return auth()->user()->id;
+        if (count($check_enrollment) != 0) {
 
-        $enrolled_student = Enrolled_course::where('instructor_id', auth()->user()->id)->groupBy('student_id')->get();
-        foreach ($enrolled_student as $key => $data) {
-            $count[$data->student_id] = Direct_message::where('user_id', $data->student_id)->where('user_typer', 'Student')->where('status', null)->get();
+            $enrolled_student = Enrolled_course::where('instructor_id', auth()->user()->id)->groupBy('student_id')->get();
+            if (count($enrolled_student) != 0) {
+                foreach ($enrolled_student as $key => $data) {
+                    $count[$data->student_id] = Direct_message::where('user_id', $data->student_id)->where('user_typer', 'Student')->where('status', null)->get();
+                }
+
+                foreach ($enrolled_student as $key => $data) {
+                    $student_id[] = $data->student_id;
+                }
+
+                $direct_message = Direct_message::whereIn('user_id', $student_id)->where('instructor_id', auth()->user()->id)->get();
+
+                $user_data = User::find(auth()->user()->id);
+
+                return view('instructor_direct_message', [
+                    'user_data' => $user_data,
+                    'direct_message' => $direct_message,
+                    'enrolled_student' => $enrolled_student,
+                    'count' => $count,
+                ]);
+            } else {
+                $user_data = User::find(auth()->user()->id);
+                return view('no404',[
+                    'user_data' => $user_data,
+                ]);
+            }
+        } else {
+            //return 'wala';
+            $user_data = User::find(auth()->user()->id);
+            return view('no404', [
+                'user_data' => $user_data,
+            ])->with('error', 'No Data Yet');
         }
-
-        foreach ($enrolled_student as $key => $data) {
-            $student_id[] = $data->student_id;
-        }
-
-        $direct_message = Direct_message::whereIn('user_id', $student_id)->where('instructor_id', auth()->user()->id)->get();
-
-        $user_data = User::find(auth()->user()->id);
-
-        return view('instructor_direct_message', [
-            'user_data' => $user_data,
-            'direct_message' => $direct_message,
-            'enrolled_student' => $enrolled_student,
-            'count' => $count,
-        ]);
     }
+
+    // public function no404()
+    // {
+
+    // } 
 
     public function instructor_message_process(Request $request)
     {
@@ -515,7 +537,7 @@ class Instructor_controller extends Controller
     public function instructor_to_do_list()
     {
         $user_data = User::find(auth()->user()->id);
-         $todo = Instructor_planner::where('instructor_id', auth()->user()->id)->orderBy('date')->get();
+        $todo = Instructor_planner::where('instructor_id', auth()->user()->id)->orderBy('date')->get();
         return view('instructor_to_do_list', [
             'user_data' => $user_data,
             'todo' => $todo,

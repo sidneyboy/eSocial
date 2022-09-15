@@ -24,6 +24,8 @@ class ProfileController extends Controller
 
     public function update(Request $request)
     {
+
+        $user_type = User::find(auth()->user()->id);
         $request->validate([
             'name' => 'required|string|max:255',
             'last_name' => 'nullable|string|max:255',
@@ -49,6 +51,12 @@ class ProfileController extends Controller
 
         $user->save();
 
-        return redirect()->route('profile')->withSuccess('Profile updated successfully.');
+        if ($user_type->user_type == 'Student') {
+            return redirect()->route('student_profile')->withSuccess('Profile updated successfully.');
+        }elseif($user_type->user_type == 'Instructor'){
+            return redirect()->route('instructor_profile')->withSuccess('Profile updated successfully.');
+        }else{
+            return redirect()->route('payment_history')->withSuccess('Profile updated successfully.');
+        }
     }
 }

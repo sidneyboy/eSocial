@@ -11,7 +11,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'eSocial') }}</title>
+    <title>{{ config('app.name', 'Social-E') }}</title>
 
     <!-- Fonts -->
     <link href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet">
@@ -160,7 +160,7 @@
                 {{-- <div class="sidebar-brand-icon rotate-n-15">
                 <i class="fas fa-laugh-wink"></i>
             </div> --}}
-                <div class="sidebar-brand-text mx-3">e-Social</div>
+                <div class="sidebar-brand-text mx-3">Social-E</div>
             </a>
 
             <!-- Divider -->
@@ -350,7 +350,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; e-Social {{ now()->year }}</span>
+                        <span>Copyright &copy; Social-E {{ now()->year }}</span>
                     </div>
                 </div>
             </footer>

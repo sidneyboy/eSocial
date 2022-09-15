@@ -87,13 +87,13 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="card-profile-stats">
-                                <span class="heading">22</span>
+                                <span class="heading">{{ $courses }}</span>
                                 <span class="description">Courses</span>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="card-profile-stats">
-                                <span class="heading">10</span>
+                                <span class="heading">{{ $certificate }}</span>
                                 <span class="description">Certificates</span>
                             </div>
                         </div>

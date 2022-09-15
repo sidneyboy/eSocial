@@ -7,7 +7,7 @@
         </div>
     @endif
     <div class="card">
-        <div class="card-header">Instructors</div>
+        <div class="card-header">Messages</div>
         <div class="card-body">
             <ul class="list-group">
                 @foreach ($instructors as $data)
@@ -16,14 +16,15 @@
                             data-target="#exampleModal_direct_message{{ $data->id }}">
                             Direct Message -
                             {{ $data->name }} {{ $data->last_name }} <span class="badge badge-light">
+                                {{ $count_message[$data->id] }}
                                 {{-- @if (count($count[$data->id]) != 0)
                                     New Message
                                 @endif --}}
-                                @if (empty($count_message[$data->id]))
+                                {{-- @if (empty($count_message[$data->id]))
                                     {{ $count_message[$data->id] }}
                                 @else
                                     0
-                                @endif
+                                @endif --}}
                             </span>
                         </button>
                         <div class="modal fade" id="exampleModal_direct_message{{ $data->id }}" tabindex="-1"

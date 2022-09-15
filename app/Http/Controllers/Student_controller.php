@@ -74,9 +74,12 @@ class Student_controller extends Controller
     {
         $user_data = User::find(auth()->user()->id);
         $count = Invite_student::where('student_id', auth()->user()->id)->where('status', 'Pending Approval')->count();
-
+        $certificate = Student_exam::where('remarks', '!=', 'fail')->where('student_id', auth()->user()->id)->count();
+        $courses = Enrolled_course::where('student_id', auth()->user()->id)->count();
         return view('student_profile', [
             'user_data' => $user_data,
+            'certificate' => $certificate,
+            'courses' => $courses,
             'count' => $count,
         ]);
     }
@@ -203,15 +206,14 @@ class Student_controller extends Controller
         $instructors = User::where('user_type', 'Instructor')->get();
         foreach ($instructors as $key => $data) {
             $id[] = $data->id;
-
             $count_message[$data->id] = Direct_message::where('instructor_id', $data->id)
-                ->where('user_typer', 'Instructor')
-                ->where('user_id', auth()->user()->id)
-                ->where('status', null)->get();
+                                    ->where('status',null)     
+                                    ->where('user_typer','Instructor')                               
+                                    ->count();
         }
 
 
-
+        
 
         $message = Direct_message::whereIn('instructor_id', $id)->where('user_id', auth()->user()->id)->get();
         $count = Invite_student::where('student_id', auth()->user()->id)->where('status', 'Pending Approval')->count();
