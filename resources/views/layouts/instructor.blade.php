@@ -153,7 +153,7 @@
     </style>
 </head>
 
-<body id="page-top">
+<body id="page-top" onload="myFunction()">
 
     <!-- Page Wrapper -->
     <div id="wrapper">
@@ -406,8 +406,60 @@
     <script src="{{ asset('vendor/bootstrap/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('vendor/jquery-easing/jquery.easing.min.js') }}"></script>
     <script src="{{ asset('js/sb-admin-2.min.js') }}"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        function myFunction() {
+            var date = 'asdasd';
+            $.post({
+                type: "POST",
+                url: "/planner_prompt",
+                data: 'date=' + date,
+                success: function(data) {
+                    if (data != 0) {
+                        // Swal.fire(
+                        //     'You have a scheduled plan this day',
+                        //     'Please check your planner. Thank you!',
+                        //     'success'
+                        // )
+                        let timerInterval
+                        Swal.fire({
+                            title: 'You have ' + data + ' scheduled plan this day',
+                            html: 'Please check your planner. Thank you!',
+                            timer: 3000,
+                            timerProgressBar: true,
+                            didOpen: () => {
+                                Swal.showLoading()
+                                const b = Swal.getHtmlContainer().querySelector('b')
+                                timerInterval = setInterval(() => {
+                                    b.textContent = Swal.getTimerLeft()
+                                }, 100)
+                            },
+                            willClose: () => {
+                                clearInterval(timerInterval)
+                            }
+                        }).then((result) => {
+                            /* Read more about handling dismissals below */
+                            if (result.dismiss === Swal.DismissReason.timer) {
+                                console.log('I was closed by the timer')
+                            }
+                        })
+                    }
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
+        }
+
+
+
         $(document).ready(function() {
             $('#example').DataTable({
                 "paging": false,

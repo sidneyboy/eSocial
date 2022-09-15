@@ -12,6 +12,7 @@ use App\Models\Exam_details;
 use App\Models\Direct_message;
 use App\Models\Enrolled_course;
 use App\Models\Invite_student;
+use App\Models\Instructor_planner;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -42,7 +43,7 @@ class Instructor_controller extends Controller
     public function instructor_profile()
     {
         $user_data = User::find(auth()->user()->id);
-        $course = Course::where('user_id',auth()->user()->id)->count();
+        $course = Course::where('user_id', auth()->user()->id)->count();
         return view('instructor_profile', [
             'user_data' => $user_data,
             'course' => $course,
@@ -441,12 +442,12 @@ class Instructor_controller extends Controller
     {
         $enrolled_on_this_course = Enrolled_course::select('student_id')->where('course_id', $course_id)->get();
 
-      
+
         if (count($enrolled_on_this_course) != 0) {
             foreach ($enrolled_on_this_course as $key => $data) {
                 $student_id[] = $data->student_id;
             }
-    
+
             $students = User::select('name', 'last_name', 'id')->where('user_type', 'Student')->whereNotIn('id', $student_id)->get();
             $user_data = User::find(auth()->user()->id);
 
@@ -454,7 +455,7 @@ class Instructor_controller extends Controller
                 'students' => $students,
                 'user_data' => $user_data,
             ])->with('course_id', $course_id);
-        }else{
+        } else {
             $students = User::select('name', 'last_name', 'id')->where('user_type', 'Student')->get();
             $user_data = User::find(auth()->user()->id);
 
@@ -490,8 +491,52 @@ class Instructor_controller extends Controller
     public function intructor_to_do()
     {
         $user_data = User::find(auth()->user()->id);
-        return view('intructor_to_do',[
+        return view('intructor_to_do', [
             'user_data' => $user_data,
         ]);
+    }
+
+    public function instructor_todo_process(Request $request)
+    {
+
+
+        $new = new Instructor_planner([
+            'date' => $request->input('date'),
+            'time' => $request->input('time'),
+            'instructor_id' => auth()->user()->id,
+            'todo' => $request->input('todo'),
+        ]);
+
+        $new->save();
+
+        return redirect()->route('intructor_to_do')->with('success', 'Successfully added new plan');
+    }
+
+    public function instructor_to_do_list()
+    {
+        $user_data = User::find(auth()->user()->id);
+        $todo = Instructor_planner::where('instructor_id', auth()->user()->id)->orderBy('date')->get();
+        return view('instructor_to_do_list', [
+            'user_data' => $user_data,
+            'todo' => $todo,
+        ]);
+    }
+
+    public function planner_prompt(Request $request)
+    {
+        date_default_timezone_set('Asia/Manila');
+        $date = date('Y-m-d');
+        return $planner = Instructor_planner::where('instructor_id', auth()->user()->id)
+            ->where('date', $date)
+            ->where('status', null)
+            ->count();
+    }
+
+    public function planner_approved($planner_id)
+    {
+        Instructor_planner::where('id', $planner_id)
+            ->update(['status' => 'approved']);
+
+        return redirect()->route('instructor_to_do_list')->with('success', 'Planner Acknowledge');
     }
 }

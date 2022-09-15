@@ -103,7 +103,11 @@ Route::get('/instructor_invite_student/{course_id}', 'Instructor_controller@inst
 Route::get('/instructor_invite_student_process/{course_id}/{student_id}', 'Instructor_controller@instructor_invite_student_process')->name('instructor_invite_student_process');
 Route::get('/intructor_to_do/', 'Instructor_controller@intructor_to_do')->name('intructor_to_do');
 Route::get('/instructor_show_image/{course_id}', 'Instructor_controller@instructor_show_image')->name('instructor_show_image');
+Route::post('/instructor_todo_process/', 'Instructor_controller@instructor_todo_process')->name('instructor_todo_process');
+Route::get('/instructor_to_do_list/', 'Instructor_controller@instructor_to_do_list')->name('instructor_to_do_list');
+Route::post('/planner_prompt/', 'Instructor_controller@planner_prompt')->name('planner_prompt');
 
+Route::get('/planner_approved/{planner_id}', 'Instructor_controller@planner_approved')->name('planner_approved');
 
 
 

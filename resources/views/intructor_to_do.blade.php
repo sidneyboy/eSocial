@@ -10,22 +10,26 @@
         </div>
     @endif
 
+    <br />
     <div class="card">
-        <div class="card-header">Instructor To Do List</div>
+        <div class="card-header">Instructor Add To Do List <a href="{{ url('instructor_to_do_list') }}" class="btn btn-primary btn-sm float-right">List</a></div>
         <div class="card-body">
-            <div class="form-group">
-                <label>Date</label>
-                <input type="date" name="date" class="form-control" required>
+            <form action="{{ route('instructor_todo_process') }}" method="post">
+                @csrf
+                <div class="form-group">
+                    <label>Date</label>
+                    <input type="date" name="date" class="form-control" required>
 
-                <label>Time</label>
-                <input type="time" name="time" class="form-control" required>
+                    <label>Time</label>
+                    <input type="time" name="time" class="form-control" required>
 
-                <label>To do</label>
-                <textarea name="to_do" class="form-control" required></textarea>
+                    <label>To do</label>
+                    <textarea name="todo" class="form-control" required></textarea>
 
-                <br />
-                <button class="btn btn-sm btn-success btn-block">Submit</button>
-            </div>
+                    <br />
+                    <button class="btn btn-sm btn-success btn-block">Submit</button>
+                </div>
+            </form>
         </div>
     </div>
 @endsection
