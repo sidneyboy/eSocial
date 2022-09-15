@@ -96,13 +96,13 @@ class Student_controller extends Controller
     public function student_search_course(Request $request)
     {
         $search = $request->input('search_box');
-        $course_search = Course::where('course_title', 'like', '%' . $search . '%')->orderBy('created_at', 'DESC')->get();
+        $course = Course::where('course_title', 'like', '%' . $search . '%')->orderBy('created_at', 'DESC')->get();
 
         $user_data = User::find(auth()->user()->id);
         $count = Invite_student::where('student_id', auth()->user()->id)->where('status', 'Pending Approval')->count();
 
         return view('student_search_course', [
-            'course_search' => $course_search,
+            'course' => $course,
             'user_data' => $user_data,
             'count' => $count,
         ]);

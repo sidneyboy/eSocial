@@ -13,7 +13,7 @@
         </div>
     @endif
     @if (isset($course))
-        <div class="row">
+        {{-- <div class="row">
             <div class="col-md-12">
                 <form action="{{ route('student_enrolled_search_course') }}">
                     @csrf
@@ -26,7 +26,7 @@
                     </div>
                 </form>
             </div>
-        </div>
+        </div> --}}
 
         @foreach ($course as $data)
             <div class="row">
