@@ -218,6 +218,13 @@
             </li>
 
             <li class="nav-item">
+                <a class="nav-link" href="{{ url('student_to_do') }}">
+                    <i class="bi bi-envelope-plus"></i>
+                    <span>{{ __('To do List') }} </span>
+                </a>
+            </li>
+
+            <li class="nav-item">
                 <a class="nav-link" href="{{ url('student_course') }}">
                     <i class="bi bi-book-half"></i>
                     <span>{{ __('Courses') }}</span>

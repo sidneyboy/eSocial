@@ -40,7 +40,7 @@ Route::get('/payment_history', 'Esocial_controller@payment_history')->name('paym
 
 Route::get('/student_landing', 'Student_controller@student_landing')->name('student_landing');
 Route::get('/student_course', 'Student_controller@student_course')->name('student_course');
-Route::get('/student_profile', 'Student_controller@student_profile')->name('student_profile');
+Route::get('/student_update', 'Student_controller@student_profile')->name('student_profile');
 Route::get('/student_search_course', 'Student_controller@student_search_course')->name('student_search_course');
 Route::post('/student_comment_process', 'Student_controller@student_comment_process')->name('student_comment_process');
 Route::get('/student_show_image_file/{course_id}', 'Student_controller@student_show_image_file')->name('student_show_image_file');

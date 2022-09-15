@@ -14,7 +14,8 @@
                     <input type="text" class="form-control" placeholder="Search Subject" aria-label="Search Subject"
                         name="search_box" aria-describedby="basic-addon2">
                     <div class="input-group-append">
-                        <span class="input-group-text" id="basic-addon2"><i class="bi bi-search"></i></span>
+                        {{-- <span class="input-group-text" id="basic-addon2"></span> --}}
+                        <button class="input-group-text"><i class="bi bi-search"></i></button>
                     </div>
                 </div>
             </form>
