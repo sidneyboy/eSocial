@@ -515,7 +515,7 @@ class Instructor_controller extends Controller
     public function instructor_to_do_list()
     {
         $user_data = User::find(auth()->user()->id);
-        $todo = Instructor_planner::where('instructor_id', auth()->user()->id)->orderBy('date')->get();
+         $todo = Instructor_planner::where('instructor_id', auth()->user()->id)->orderBy('date')->get();
         return view('instructor_to_do_list', [
             'user_data' => $user_data,
             'todo' => $todo,

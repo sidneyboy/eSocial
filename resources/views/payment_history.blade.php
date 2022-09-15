@@ -24,7 +24,7 @@
                                     <th>Instrutor</th>
                                     <th>Student</th>
                                     <th>Amount</th>
-                                    <th>5% Company Deducation</th>
+                                    <th>30% Company Deducation</th>
                                     <th>Total Amount to be received by instructor</th>
                                     <th>Payment Date</th>
                                 </tr>
@@ -43,7 +43,7 @@
                                         </td>
                                         <td>
                                             @php
-                                                $company_monitization = $data->amount * 0.05;
+                                                $company_monitization = $data->amount * 0.3;
                                                 $total_monitization[] = $company_monitization;
                                                 echo number_format($company_monitization, 2, '.', ',');
                                             @endphp
@@ -62,9 +62,9 @@
                             <tfoot>
                                 <tr>
                                     <th colspan="3">Total</th>
-                                    <th>{{ number_format(array_sum($total_amount), 2, '.', ','); }}</th>
-                                    <th>{{ number_format(array_sum($total_monitization), 2, '.', ','); }}</th>
-                                    <th>{{ number_format(array_sum($total_instructor_amount), 2, '.', ','); }}</th>
+                                    <th style="color:blue">{{ number_format(array_sum($total_amount), 2, '.', ','); }}</th>
+                                    <th style='color:green'>{{ number_format(array_sum($total_monitization), 2, '.', ','); }}</th>
+                                    <th style="color:red">{{ number_format(array_sum($total_instructor_amount), 2, '.', ','); }}</th>
                                     <th></th>
                                 </tr>
                             </tfoot>

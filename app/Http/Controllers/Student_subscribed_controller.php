@@ -23,11 +23,13 @@ class Student_subscribed_controller extends Controller
 
     public function student_subscribed_course(Request $request)
     {
+        //return $request->input();
         try {
-            $invitation_id = $request->input('invitation_id');
+            // $invitation_id = $request->input('invitation_id');
 
-            if (isset($invitation_id)) {
-                Invite_student::where('id', $invitation_id)
+            // if (isset($invitation_id)) {
+                
+                Invite_student::where('id', $request->input('invitation_id'))
                     ->update(['status' => 'Accepted']);
 
                 $new_enrolled = new Enrolled_course([
@@ -39,7 +41,7 @@ class Student_subscribed_controller extends Controller
                 ]);
 
                 $new_enrolled->save();
-            }
+            // }
 
             $new_payment = new Payment([
                 'course_id' => $request->input('course_id'),

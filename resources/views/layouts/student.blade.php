@@ -148,7 +148,7 @@
     </style>
 </head>
 
-<body id="page-top">
+<body id="page-top" onload="myFunction()">
 
     <!-- Page Wrapper -->
     <div id="wrapper">
@@ -202,12 +202,6 @@
                     <span>{{ __('Tutorial') }}</span>
                 </a>
             </li> --}}
-            <li class="nav-item">
-                <a class="nav-link" href="{{ url('student_to_do') }}">
-                    <i class="bi bi-messenger"></i>
-                    <span>{{ __('To Do List') }}</span>
-                </a>
-            </li>
 
             <li class="nav-item">
                 <a class="nav-link" href="{{ url('student_direct_message') }}">
@@ -416,9 +410,8 @@
     <script src="{{ asset('vendor/jquery-easing/jquery.easing.min.js') }}"></script>
     <script src="{{ asset('js/sb-admin-2.min.js') }}"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
     <script>
-        $.ajaxSetup({
+                $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
@@ -428,7 +421,7 @@
             var date = 'asdasd';
             $.post({
                 type: "POST",
-                url: "/student_planner_prompt",
+                url: "/planner_prompt",
                 data: 'date=' + date,
                 success: function(data) {
                     if (data != 0) {
@@ -466,6 +459,8 @@
                 }
             });
         }
+
+
     </script>
 </body>
 

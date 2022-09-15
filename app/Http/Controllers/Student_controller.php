@@ -481,10 +481,13 @@ class Student_controller extends Controller
 
     public function student_to_do_list()
     {
+        
         $user_data = User::find(auth()->user()->id);
+        $count = Invite_student::where('student_id', auth()->user()->id)->where('status', 'Pending Approval')->count();
         $todo = Instructor_planner::where('instructor_id', auth()->user()->id)->orderBy('date')->get();
         return view('student_to_do_list', [
             'user_data' => $user_data,
+            'count' => $count,
             'todo' => $todo,
         ]);
     }
@@ -493,6 +496,7 @@ class Student_controller extends Controller
     {
         date_default_timezone_set('Asia/Manila');
         $date = date('Y-m-d');
+        
         return $planner = Instructor_planner::where('instructor_id', auth()->user()->id)
             ->where('date', $date)
             ->where('status', null)
