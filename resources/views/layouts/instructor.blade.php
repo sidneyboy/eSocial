@@ -432,7 +432,7 @@
                         Swal.fire({
                             title: 'You have ' + data + ' scheduled plan this day',
                             html: 'Please check your planner. Thank you!',
-                            timer: 3000,
+                            timer: 5000,
                             timerProgressBar: true,
                             didOpen: () => {
                                 Swal.showLoading()

@@ -61,6 +61,12 @@ Route::get('/student_show_certificate', 'Student_controller@student_show_certifi
 Route::get('/student_instructor_invitation', 'Student_controller@student_instructor_invitation')->name('student_instructor_invitation');
 Route::post('/student_answer_exam_process', 'Student_controller@student_answer_exam_process')->name('student_answer_exam_process');
 
+Route::get('/student_to_do', 'Student_controller@student_to_do')->name('student_to_do');
+Route::post('/student_todo_process', 'Student_controller@student_todo_process')->name('student_todo_process');
+Route::get('/student_to_do_list', 'Student_controller@student_to_do_list')->name('student_to_do_list');
+Route::get('/student_planner_approved/{planner_id}', 'Student_controller@student_planner_approved')->name('student_planner_approved');
+Route::post('/student_planner_prompt', 'Student_controller@student_planner_prompt')->name('student_planner_prompt');
+
 
 
 

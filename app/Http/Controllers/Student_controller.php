@@ -14,6 +14,8 @@ use App\Models\Exam_details;
 use App\Models\Student_exam;
 use App\Models\Student_exam_details;
 use App\Models\Invite_student;
+use App\Models\Instructor_planner;
+
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -27,7 +29,7 @@ class Student_controller extends Controller
 
     public function student_landing()
     {
-         $user = User::find(auth()->user()->id);
+        $user = User::find(auth()->user()->id);
 
         if ($user->status == "Suspended") {
             Auth::logout();
@@ -208,8 +210,8 @@ class Student_controller extends Controller
                 ->where('status', null)->get();
         }
 
-        
-        
+
+
 
         $message = Direct_message::whereIn('instructor_id', $id)->where('user_id', auth()->user()->id)->get();
         $count = Invite_student::where('student_id', auth()->user()->id)->where('status', 'Pending Approval')->count();
@@ -451,5 +453,58 @@ class Student_controller extends Controller
             'invitation' => $invitation,
             'count' => $count,
         ]);
+    }
+
+    public function student_to_do()
+    {
+        $user_data = User::find(auth()->user()->id);
+        $count = Invite_student::where('student_id', auth()->user()->id)->where('status', 'Pending Approval')->count();
+        return view('student_to_do', [
+            'user_data' => $user_data,
+            'count' => $count,
+        ]);
+    }
+
+    public function student_todo_process(Request $request)
+    {
+        $new = new Instructor_planner([
+            'date' => $request->input('date'),
+            'time' => $request->input('time'),
+            'instructor_id' => auth()->user()->id,
+            'todo' => $request->input('todo'),
+        ]);
+
+        $new->save();
+
+        return redirect()->route('student_to_do')->with('success', 'Successfully added new plan');
+    }
+
+    public function student_to_do_list()
+    {
+        $user_data = User::find(auth()->user()->id);
+        $todo = Instructor_planner::where('instructor_id', auth()->user()->id)->orderBy('date')->get();
+        return view('student_to_do_list', [
+            'user_data' => $user_data,
+            'todo' => $todo,
+        ]);
+    }
+
+    public function student_planner_prompt(Request $request)
+    {
+        date_default_timezone_set('Asia/Manila');
+        $date = date('Y-m-d');
+        return $planner = Instructor_planner::where('instructor_id', auth()->user()->id)
+            ->where('date', $date)
+            ->where('status', null)
+            ->count();
+    }
+
+
+    public function student_planner_approved($planner_id)
+    {
+        Instructor_planner::where('id', $planner_id)
+            ->update(['status' => 'approved']);
+
+        return redirect()->route('student_to_do_list')->with('success', 'Planner Acknowledge');
     }
 }

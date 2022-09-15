@@ -202,6 +202,12 @@
                     <span>{{ __('Tutorial') }}</span>
                 </a>
             </li> --}}
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url('student_to_do') }}">
+                    <i class="bi bi-messenger"></i>
+                    <span>{{ __('To Do List') }}</span>
+                </a>
+            </li>
 
             <li class="nav-item">
                 <a class="nav-link" href="{{ url('student_direct_message') }}">
@@ -409,6 +415,58 @@
     <script src="{{ asset('vendor/bootstrap/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('vendor/jquery-easing/jquery.easing.min.js') }}"></script>
     <script src="{{ asset('js/sb-admin-2.min.js') }}"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        function myFunction() {
+            var date = 'asdasd';
+            $.post({
+                type: "POST",
+                url: "/student_planner_prompt",
+                data: 'date=' + date,
+                success: function(data) {
+                    if (data != 0) {
+                        // Swal.fire(
+                        //     'You have a scheduled plan this day',
+                        //     'Please check your planner. Thank you!',
+                        //     'success'
+                        // )
+                        let timerInterval
+                        Swal.fire({
+                            title: 'You have ' + data + ' scheduled plan this day',
+                            html: 'Please check your planner. Thank you!',
+                            timer: 5000,
+                            timerProgressBar: true,
+                            didOpen: () => {
+                                Swal.showLoading()
+                                const b = Swal.getHtmlContainer().querySelector('b')
+                                timerInterval = setInterval(() => {
+                                    b.textContent = Swal.getTimerLeft()
+                                }, 100)
+                            },
+                            willClose: () => {
+                                clearInterval(timerInterval)
+                            }
+                        }).then((result) => {
+                            /* Read more about handling dismissals below */
+                            if (result.dismiss === Swal.DismissReason.timer) {
+                                console.log('I was closed by the timer')
+                            }
+                        })
+                    }
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
+        }
+    </script>
 </body>
 
 </html>
