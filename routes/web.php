@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,9 +15,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('auth/login');
+    // return view('auth/login');
+    // return Redirect::action('login');
+    return redirect('socialE-login');
 });
 
+Route::get('/socialE-login', 'User_login_controller@sure')->name('socialE-login');
+// Route::get('/', 'HomeController@sure');
+// Route::any('/', 'HomeController@sure')->name('sure');
 Route::get('/home', 'HomeController@index')->name('home');
 // Route::get('/login', 'HomeController@index')->name('home');
 
@@ -34,7 +40,8 @@ Route::get('/approved_instructor_suspend/{user_id}', 'Esocial_controller@approve
 Route::get('/student_list', 'Esocial_controller@student_list')->name('student_list');
 Route::get('/suspend_student/{user_id}/{status}', 'Esocial_controller@suspend_student')->name('suspend_student');
 Route::get('/payment_history', 'Esocial_controller@payment_history')->name('payment_history');
-
+Route::get('/tutorial_remove/{tutorial_id}', 'Esocial_controller@tutorial_remove')->name('tutorial_remove');
+Route::post('/course_type_edit_process', 'Esocial_controller@course_type_edit_process')->name('course_type_edit_process');
 
 
 

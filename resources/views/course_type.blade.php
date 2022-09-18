@@ -50,7 +50,45 @@
                                         <td>
                                             {{ $data->course_type }}
                                         </td>
-                                        <td>Option</td>
+                                        <td>
+                                            <!-- Button trigger modal -->
+                                            <button type="button" class="btn btn-sm btn-primary btn-block" data-toggle="modal"
+                                                data-target="#exampleModal{{ $data->id }}">
+                                                Edit
+                                            </button>
+
+                                            <!-- Modal -->
+                                            <div class="modal fade" id="exampleModal{{ $data->id }}" tabindex="-1"
+                                                role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLabel">Edit</h5>
+                                                            <button type="button" class="close" data-dismiss="modal"
+                                                                aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <form action="{{ route('course_type_edit_process') }}"
+                                                            method="post">
+                                                            @csrf
+                                                            <div class="modal-body">
+                                                                <label>Current Course Type</label>
+                                                                <input type="text" value="{{ $data->course_type }}"
+                                                                    name="course_type" class="form-control" required>
+                                                                <input type="hidden" value="{{ $data->id }}" name="course_type_id">
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-sm btn-secondary"
+                                                                    data-dismiss="modal">Close</button>
+                                                                <button type="submit" class="btn btn-sm btn-primary">Save
+                                                                    changes</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>

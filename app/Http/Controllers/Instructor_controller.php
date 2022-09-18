@@ -382,8 +382,11 @@ class Instructor_controller extends Controller
             $enrolled_student = Enrolled_course::where('instructor_id', auth()->user()->id)->groupBy('student_id')->get();
             if (count($enrolled_student) != 0) {
                 foreach ($enrolled_student as $key => $data) {
-                    $count[$data->student_id] = Direct_message::where('user_id', $data->student_id)->where('user_typer', 'Student')->where('status', null)->get();
+                    $count[$data->student_id] = Direct_message::where('user_id', $data->student_id)->where('user_typer', 'Student')
+                        ->where('instructor_id', auth()->user()->id)
+                        ->where('status', null)->get();
                 }
+
 
                 foreach ($enrolled_student as $key => $data) {
                     $student_id[] = $data->student_id;
@@ -401,7 +404,7 @@ class Instructor_controller extends Controller
                 ]);
             } else {
                 $user_data = User::find(auth()->user()->id);
-                return view('no404',[
+                return view('no404', [
                     'user_data' => $user_data,
                 ]);
             }
@@ -537,7 +540,7 @@ class Instructor_controller extends Controller
     public function instructor_to_do_list()
     {
         $user_data = User::find(auth()->user()->id);
-        $todo = Instructor_planner::where('instructor_id', auth()->user()->id)->orderBy('date')->get();
+        $todo = Instructor_planner::where('instructor_id', auth()->user()->id)->orderBy('date')->where('status', null)->get();
         return view('instructor_to_do_list', [
             'user_data' => $user_data,
             'todo' => $todo,

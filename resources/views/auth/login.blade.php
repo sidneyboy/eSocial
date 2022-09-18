@@ -11,8 +11,8 @@
                                 <div class="p-5">
                                     <div class="text-center">
                                         {{-- <h1 class="h4 text-gray-900 mb-4">{{ __('Login') }}</h1> --}}
-                                        <img src="{{ asset('/admin_images/received_790004915490478.jpeg') }}"
-                                            style="border:0px;" class="img img-thumbnail" alt="">
+                                        <img src="{{ asset('/storage/logo.gif') }}" style="border:0px;"
+                                            class="img img-thumbnail" alt="">
                                     </div>
                                     <br />
 
@@ -69,13 +69,13 @@
 
                                     <hr>
 
-                                    {{-- @if (Route::has('password.request'))
-                                    <div class="text-center">
-                                        <a class="small" href="{{ route('password.request') }}">
-                                            {{ __('Forgot Password?') }}
-                                        </a>
-                                    </div>
-                                @endif --}}
+                                    @if (Route::has('password.request'))
+                                        <div class="text-center">
+                                            <a class="small" href="{{ route('password.request') }}">
+                                                {{ __('Forgot Password?') }}
+                                            </a>
+                                        </div>
+                                    @endif
 
                                     @if (Route::has('register'))
                                         <div class="text-center">

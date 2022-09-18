@@ -45,7 +45,9 @@
                             <thead>
                                 <tr>
                                     <th>Tutorial Image</th>
+                                    <th>Tutorial Title</th>
                                     <th>Tutorial Note</th>
+                                    <th>Option</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -86,7 +88,14 @@
                                             </div>
                                         </td>
                                         <td>
+                                            {{ $data->title }}
+                                        </td>
+                                        <td>
                                             <p>{{ $data->tutorial_note }}</p>
+                                        </td>
+                                        <td>
+                                            <a href="{{ url('tutorial_remove', ['tutorial_id' => $data->id]) }}"
+                                                class="btn btn-sm btn-warning btn-block">Remove</a>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -100,5 +109,4 @@
             </div>
         </div>
     </div>
-   
 @endsection

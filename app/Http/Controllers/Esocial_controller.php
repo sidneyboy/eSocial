@@ -20,6 +20,14 @@ class Esocial_controller extends Controller
         ]);
     }
 
+    public function tutorial_remove($tutorial_id)
+    {
+        $tutorial = Tutorial::find($tutorial_id);
+        $tutorial->delete();
+
+        return redirect('tutorial')->with('success', 'Removed Selected Tutorial');
+    }
+
     public function tutorial_process(Request $request)
     {
         $tutorial_image = $request->file('tutorial_image');
@@ -103,7 +111,7 @@ class Esocial_controller extends Controller
         return redirect('approved_instructor')->with('success', 'Successfully suspended selected instructor');
     }
 
-    
+
 
     public function student_list()
     {
@@ -138,9 +146,17 @@ class Esocial_controller extends Controller
     {
         $user_data = User::find(auth()->user()->id);
         $payment = Payment::get();
-        return view('payment_history',[
+        return view('payment_history', [
             'user_data' => $user_data,
             'payment' => $payment,
         ]);
+    }
+
+    public function course_type_edit_process(Request $request)
+    {
+        Course_type::where('id', $request->input('course_type_id'))
+            ->update(['course_type' => $request->input('course_type')]);
+
+        return redirect('course_type')->with('success','Successfully edited selected course type');
     }
 }

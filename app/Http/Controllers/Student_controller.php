@@ -236,7 +236,8 @@ class Student_controller extends Controller
             $id[] = $data->id;
             $count_message[$data->id] = Direct_message::where('instructor_id', $data->id)
                                     ->where('status',null)     
-                                    ->where('user_typer','Instructor')                               
+                                    ->where('user_typer','Instructor') 
+                                    ->where('user_id',auth()->user()->id)                              
                                     ->count();
         }
 

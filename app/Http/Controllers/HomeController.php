@@ -37,7 +37,7 @@ class HomeController extends Controller
         } elseif($user_type->user_type == 'Student') {
             return redirect('student_landing');
         }else{
-            return redirect('instructor_landing');
+            return redirect('instructor_courses');
         }
     }
 }
