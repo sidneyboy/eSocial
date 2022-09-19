@@ -47,7 +47,7 @@
             <div class="container">
                 <h3>{{ $data->title }}</h3>
                 <p>{{ $data->tutorial_note }}</p>
-                <a href="{{ url('student_course') }}" class="float-right">Skip Ttuorial</a>
+                <a href="{{ url('student_course') }}" class="float-right">Skip Tutorial</a>
             </div>
         @endforeach
     </div>

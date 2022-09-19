@@ -21,10 +21,7 @@ Route::get('/', function () {
 });
 
 Route::get('/socialE-login', 'User_login_controller@sure')->name('socialE-login');
-// Route::get('/', 'HomeController@sure');
-// Route::any('/', 'HomeController@sure')->name('sure');
 Route::get('/home', 'HomeController@index')->name('home');
-// Route::get('/login', 'HomeController@index')->name('home');
 
 Auth::routes();
 

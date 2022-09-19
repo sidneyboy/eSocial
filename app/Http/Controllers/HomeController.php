@@ -33,7 +33,7 @@ class HomeController extends Controller
                 'users' => $users,
             ];
 
-            return view('home', compact('widget'))->with('user_data', $user_data);
+            return redirect('payment_history')->with('user_data', $user_data);
         } elseif($user_type->user_type == 'Student') {
             return redirect('student_landing');
         }else{

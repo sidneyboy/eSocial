@@ -131,7 +131,7 @@ class Esocial_controller extends Controller
                     'status' => 'Suspended',
                 ]);
 
-            return redirect('student_list')->with('success', 'Successfully suspended selected instructor');
+            return redirect('student_list')->with('success', 'Successfully suspended selected student');
         } else {
             User::where('id', $user_id)
                 ->update([
