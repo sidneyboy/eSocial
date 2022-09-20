@@ -95,7 +95,7 @@ class Student_controller extends Controller
                 'user_image' => $user_image_name,
             ]);
 
-        return redirect('student_profile')->with('success', 'Successfully approved selected student');
+        return redirect('student_update')->with('success', 'Successfully approved selected student');
     }
 
     public function student_search_course(Request $request)
@@ -515,7 +515,7 @@ class Student_controller extends Controller
         
         $user_data = User::find(auth()->user()->id);
         $count = Invite_student::where('student_id', auth()->user()->id)->where('status', 'Pending Approval')->count();
-        $todo = Instructor_planner::where('instructor_id', auth()->user()->id)->orderBy('date')->get();
+        $todo = Instructor_planner::where('instructor_id', auth()->user()->id)->where('status', null)->orderBy('date')->get();
         return view('student_to_do_list', [
             'user_data' => $user_data,
             'count' => $count,

@@ -56,7 +56,7 @@ class ProfileController extends Controller
         }elseif($user_type->user_type == 'Instructor'){
             return redirect()->route('instructor_profile')->withSuccess('Profile updated successfully.');
         }else{
-            return redirect()->route('payment_history')->withSuccess('Profile updated successfully.');
+            return redirect()->route('profile')->withSuccess('Profile updated successfully.');
         }
     }
 }
