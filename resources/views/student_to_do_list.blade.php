@@ -11,7 +11,7 @@
     @endif
 
     <div class="card">
-        <div class="card-header">Instructor To Do List </div>
+        <div class="card-header">Student To Do List </div>
         <div class="card-body">
             <div class="table table-responsive">
                 <table class="table table-striped table-hover table-sm">

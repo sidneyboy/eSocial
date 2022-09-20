@@ -95,7 +95,7 @@ class Student_controller extends Controller
                 'user_image' => $user_image_name,
             ]);
 
-        return redirect('student_update')->with('success', 'Successfully approved selected student');
+        return redirect('student_update')->with('success', 'Successfully updated your profile');
     }
 
     public function student_search_course(Request $request)

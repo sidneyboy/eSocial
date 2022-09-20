@@ -28,16 +28,15 @@ class HomeController extends Controller
         $user_type = User::find(auth()->user()->id);
         $user_data = User::find(auth()->user()->id);
 
-        if ($user_type->user_type == 'Admin') {
+        if ($user_type->user_type == "Admin") {
             $widget = [
                 'users' => $users,
             ];
-
             return redirect('payment_history')->with('user_data', $user_data);
-        } elseif($user_type->user_type == 'Student') {
+        } elseif($user_type->user_type == "Student") {
             return redirect('student_landing');
         }else{
-            return redirect('instructor_courses');
+            return redirect('instructor_landing');
         }
     }
 }
