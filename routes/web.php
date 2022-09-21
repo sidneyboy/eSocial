@@ -80,6 +80,8 @@ Route::post('/student_planner_prompt', 'Student_controller@student_planner_promp
 
 
 
+
+
 Route::post('/student_subscribed_course/', 'Student_subscribed_controller@student_subscribed_course')->name('student_subscribed_course');
 Route::get('/success/', 'Student_subscribed_controller@success');
 Route::get('/error/', 'Student_subscribed_controller@error');
@@ -93,6 +95,24 @@ Route::get('/instructor_add_course', 'Instructor_controller@instructor_add_cours
 Route::post('/instructor_add_course_process', 'Instructor_controller@instructor_add_course_process')->name('instructor_add_course_process');
 Route::get('/instructor_add_course_phase_2/{course_id}', 'Instructor_controller@instructor_add_course_phase_2')->name('instructor_add_course_phase_2');
 Route::post('/instructor_add_course_phase_2_process', 'Instructor_controller@instructor_add_course_phase_2_process')->name('instructor_add_course_phase_2_process');
+Route::get('/instructor_add_course_phase_3/{course_id}/{course_chapter_id}', 'Instructor_controller@instructor_add_course_phase_3')->name('instructor_add_course_phase_3');
+Route::post('/instructor_add_course_phase_3_process', 'Instructor_controller@instructor_add_course_phase_3_process')->name('instructor_add_course_phase_3_process');
+Route::get('/instructor_add_course_phase_4/{course_id}/{course_chapter_id}', 'Instructor_controller@instructor_add_course_phase_4')->name('instructor_add_course_phase_4');
+Route::post('/instructor_add_course_phase_4_process', 'Instructor_controller@instructor_add_course_phase_4_process')->name('instructor_add_course_phase_4_process');
+Route::post('/instructor_add_course_chapter_quiz_question_type', 'Instructor_controller@instructor_add_course_chapter_quiz_question_type')->name('instructor_add_course_chapter_quiz_question_type');
+Route::post('/instructor_add_course_chapter_quiz_next_question', 'Instructor_controller@instructor_add_course_chapter_quiz_next_question')->name('instructor_add_course_chapter_quiz_next_question');
+
+
+
+
+
+
+
+
+
+
+
+
 Route::get('/instructor_courses', 'Instructor_controller@instructor_courses')->name('instructor_courses');
 Route::post('/instructor_add_subject_file', 'Instructor_controller@instructor_add_subject_file')->name('instructor_add_subject_file');
 Route::post('/instructor_profile_add_image', 'Instructor_controller@instructor_profile_add_image')->name('instructor_profile_add_image');

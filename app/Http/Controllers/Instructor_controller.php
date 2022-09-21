@@ -12,7 +12,9 @@ use App\Models\Exam_details;
 use App\Models\Direct_message;
 use App\Models\Enrolled_course;
 use App\Models\Invite_student;
+use App\Models\Course_chapter;
 use App\Models\Instructor_planner;
+use App\Models\Course_quiz;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -82,7 +84,7 @@ class Instructor_controller extends Controller
 
         $new->save();
 
-        return redirect()->route('instructor_add_course_phase_2', ['course_id' => $new->id])->with('success', 'Successfully added new course. Please add files');
+        return redirect()->route('instructor_add_course_phase_2', ['course_id' => $new->id])->with('success', 'Successfully added new course. Please add course chapter');
     }
 
     public function instructor_add_course_phase_2($course_id)
@@ -97,8 +99,34 @@ class Instructor_controller extends Controller
 
     public function instructor_add_course_phase_2_process(Request $request)
     {
-        //dd($request->all());
+        //return $request->input();
+        $new = new Course_chapter([
+            'title' => $request->input('title'),
+            'content' => $request->input('content'),
+            'course_id' => $request->input('course_id'),
+            'chapter_number' => $request->input('chapter_number'),
+        ]);
 
+        $new->save();
+
+        return redirect()->route('instructor_add_course_phase_3', [
+            'course_id' => $request->input('course_id'),
+            'course_chapter_id' => $new->id
+        ])->with('success', 'Successfully added course chapter');
+    }
+
+    public function instructor_add_course_phase_3($course_id, $course_chapter_id)
+    {
+        $user_data = User::find(auth()->user()->id);
+        return view('instructor_add_course_phase_3', [
+            'course_id' => $course_id,
+            'user_data' => $user_data,
+            'course_chapter_id' => $course_chapter_id,
+        ]);
+    }
+
+    public function instructor_add_course_phase_3_process(Request $request)
+    {
         $course_file = $request->file('course_file');
         $course_file_name = $course_file->getClientOriginalName();
         $course_file_type = $course_file->getClientMimeType();
@@ -108,19 +136,95 @@ class Instructor_controller extends Controller
             'file' => $course_file_name,
             'course_id' => $request->input('course_id'),
             'file_type' => $course_file_type,
+            'course_chapter_id' => $request->input('course_chapter_id'),
         ]);
 
         $new_course_details->save();
 
-        return redirect()->route('instructor_add_course')->with('success', 'Successfully added course_file');
+
+        return redirect()->route('instructor_add_course_phase_4', [
+            'course_id' => $request->input('course_id'),
+            'course_chapter_id' => $request->input('course_chapter_id'),
+        ])->with('success', 'Successfully added chapter file');
+
+        // return redirect()->route('instructor_add_course')->with('success', 'Successfully added chapter file');
+    }
+
+    public function instructor_add_course_phase_4($course_id, $course_chapter_id)
+    {
+        $user_data = User::find(auth()->user()->id);
+        return view('instructor_add_course_phase_4', [
+            'course_id' => $course_id,
+            'user_data' => $user_data,
+            'course_chapter_id' => $course_chapter_id,
+        ]);
+    }
+
+    public function instructor_add_course_phase_4_process(Request $request)
+    {
+        //return $request->input();
+        $new = new Course_quiz([
+            'course_id' => $request->input('course_id'),
+            'course_chapter_id' => $request->input('course_chapter_id'),
+            'quiz_title' => $request->input('quiz_title'),
+            'number_of_questions' => $request->input('number_of_questions'),
+        ]);
+
+        $new->save();
+
+        $user_data = User::find(auth()->user()->id);
+        return view('instructor_add_course_chapter_quiz', [
+            'course_id' => $request->input('course_id'),
+            'user_data' => $user_data,
+            'course_chapter_id' => $request->input('course_chapter_id'),
+            'number_of_questions' => $request->input('number_of_questions'),
+        ]);
+    }
+
+    public function instructor_add_course_chapter_quiz_question_type(Request $request)
+    {
+        return view('instructor_add_course_chapter_quiz_question_type')
+            ->with('question_type', $request->input('question_type'))
+            ->with('loop_number', $request->input('loop_number'));
+    }
+
+    public function instructor_add_course_chapter_quiz_next_question(Request $request)
+    {
+        //return $request->input();
+
+
+
+        if ($request->input('number_of_questions') == 0) {
+            return redirect('instructor_courses');
+        } else {
+            // return view('instructor_add_exam_next_page')
+            //     ->with('number_of_questions', $request->input('number_of_questions'))
+            //     ->with('exam_id', $new_exam->id);
+
+            // $new = new Course_quiz([
+            //     'course_id' => $request->input('course_id'),
+            //     'course_chapter_id' => $request->input('course_chapter_id'),
+            //     'question_type' => $request->input('question_type'),
+            //     'question' => $request->input('question'),
+            //     'answer' => $request->input('answer'),
+            // ]);
+
+            // $new->save();
+
+            $user_data = User::find(auth()->user()->id);
+            return view('instructor_add_course_chapter_quiz_next_question', [
+                'course_id' => $request->input('course_id'),
+                'user_data' => $user_data,
+                'course_chapter_id' => $request->input('course_chapter_id'),
+                'number_of_questions' => $request->input('number_of_questions'),
+            ]);
+        }
     }
 
     public function instructor_courses()
     {
         $course = Course::where('user_id', auth()->user()->id)->orderBy('id', 'Desc')->get();
         $user_data = User::find(auth()->user()->id);
-
-
 
         return view('instructor_courses', [
             'course' => $course,
