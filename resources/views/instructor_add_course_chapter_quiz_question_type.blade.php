@@ -4,7 +4,7 @@
     <input type="hidden" name="question_type" value="{{ $question_type }}">
     <br />
     @for ($i = 0; $i < $loop_number; $i++)
-        {{ $i + 1 }}.<input class="form-control" name="enumeration[]" required> <br />
+        {{ $i + 1 }}.<input class="form-control" name="answer[]" required> <br />
     @endfor
 @elseif($question_type == 'Multitple Choice')
     <label for="">Question</label>
@@ -41,4 +41,18 @@
     <label>Answer</label>
     <input type="text" name="answer" class="form-control" required>
     <input type="hidden" name="question_type" value="{{ $question_type }}">
+@elseif($question_type == 'Matching Type')
+    <div class="row">
+        <div class="col-md-6">
+            @for ($i = 0; $i < $loop_number; $i++)
+                {{ $i + 1 }}.<input class="form-control" name="question[]" required> <br />
+                Answer.<input type="text" class="form-control" name="answer[]">
+            @endfor
+        </div>
+        <div class="col-md-6">
+            @for ($i = 0; $i < $loop_number+3; $i++)
+                {{ $i + 1 }}.<input class="form-control" name="choices[]"> <br />
+            @endfor
+        </div>
+    </div>
 @endif

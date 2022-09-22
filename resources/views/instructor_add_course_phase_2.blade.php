@@ -11,6 +11,14 @@
                     </button>
                 </div>
             @endif
+            @if (session('error'))
+                <div class="alert alert-danger border-left-danger alert-dismissible fade show" role="alert">
+                    {{ session('error') }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            @endif
             <div class="card" style="width: 100%;">
                 <div class="card-header" style="font-weight: bold;">Course Chapter</div>
                 <form action="{{ route('instructor_add_course_phase_2_process') }}" method="post"
@@ -25,9 +33,10 @@
                             <input type="text" name="title" class="form-control" required>
 
                             <label>Topic</label>
-                            <textarea name="content" class="form-control" require></textarea>
-                            {{-- <label>File</label>
-                            <input type="file" class="form-control" accept="image/*,video/*,application/pdf" required name="course_file"> --}}
+                            <textarea name="content" class="form-control" required></textarea>
+
+                            <label>Thumbnail</label>
+                            <input type="file" name="thumbnail" accept="image/*" class="form-control" required>
 
                             <input type="hidden" value="{{ $course_id }}" name="course_id">
                         </div>

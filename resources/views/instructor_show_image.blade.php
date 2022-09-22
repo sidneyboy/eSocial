@@ -16,22 +16,22 @@
 <body>
     <br />
     <div class="container">
-        @foreach ($course_data as $data)
+        {{-- @foreach ($course_data as $data) --}}
             <div class="card" style="width: 100%;">
                 <div class="card-header">
-                    <a href="{{ url('instructor_courses') }}">Back</a>
+                    <a href="{{ url('instructor_show_chapter/'. $course_data->course_id) }}">Back</a>
                 </div>
                 <div class="card-body">
-                    <img class="img img-thumbnail" style="border: 0px;" src="{{ asset('/storage/' . $data->file) }}"
+                    <img class="img img-thumbnail" style="border: 0px;" src="{{ asset('/storage/' . $course_data->file) }}"
                             alt="Card image cap">
                 </div>
                 <div class="card-footer">
                     <div class="float-right">
-                        {{ $course_data->links() }}
+                        {{-- {{ $course_data->links() }} --}}
                     </div>
                 </div>
             </div>
-        @endforeach
+        {{-- @endforeach --}}
     </div>
     <br />
     <!-- Optional JavaScript; choose one of the two! -->

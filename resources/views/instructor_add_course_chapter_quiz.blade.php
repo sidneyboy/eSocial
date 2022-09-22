@@ -13,13 +13,15 @@
             @endif
             <div class="card" style="width: 100%;">
                 <div class="card-header" style="font-weight: bold;">
-                    @php
-                        $total_left = $number_of_questions - 1;
-                        $quiz_number = $number_of_questions - $total_left;
+                    {{-- @php
+                       echo $total_left = $number_of_questions - 1;
+
+                       echo "<br />";
+                       echo $quiz_number = $number_of_questions - $total_left;
                     @endphp
-                    Question # {{ $quiz_number }}
+                    Question # {{ $quiz_number }} --}}
                 </div>
-                <form action="{{ route('instructor_add_course_chapter_quiz_next_question') }}" method="post"
+                <form action="{{ route('instructor_add_course_chapter_quiz_next_question') }}" method="get"
                     enctype="multipart/form-data">
                     @csrf
                     <div class="card-body">
@@ -33,6 +35,7 @@
                             </select>
 
                             <input type="hidden" value="{{ $course_id }}" name="course_id">
+                            <input type="hidden" value="{{ $quiz_id }}" name="quiz_id">
                             <input type="hidden" value="{{ $course_chapter_id }}" name="course_chapter_id">
                             <input type="hidden" value="{{ $number_of_questions - 1 }}" name="number_of_questions">
                         </div>
@@ -100,6 +103,24 @@
                     }
                 });
                 // }
+            } else if ($(this).val() == 'Matching Type') {
+                let loop_number = prompt("Please enter number of matching type");
+                if (loop_number != null) {
+                    // document.getElementById("demo").innerHTML =
+                    //     "Hello " + person + "! How are you today?";
+                    var question_type = $(this).val();
+                    $.post({
+                        type: "POST",
+                        url: "/instructor_add_course_chapter_quiz_question_type",
+                        data: 'question_type=' + question_type + '&loop_number=' + loop_number,
+                        success: function(data) {
+                            $('#show').html(data);
+                        },
+                        error: function(error) {
+                            console.log(error);
+                        }
+                    });
+                }
             }
         });
     </script>

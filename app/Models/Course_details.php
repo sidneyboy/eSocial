@@ -13,5 +13,7 @@ class Course_details extends Model
         'file',
         'course_id',
         'file_type',
+        'course_chapter_id',
+        'status',
     ];
 }

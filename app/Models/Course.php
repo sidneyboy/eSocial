@@ -35,6 +35,11 @@ class Course extends Model
         return $this->hasMany('App\Models\Course_details', 'course_id');
     }
 
+    public function course_chapter()
+    {
+        return $this->hasMany('App\Models\Course_chapter', 'course_id');
+    }
+
     public function comments()
     {
         return $this->hasMany('App\Models\Comments', 'course_id');

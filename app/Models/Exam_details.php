@@ -11,6 +11,7 @@ class Exam_details extends Model
 
     protected $fillable = [
         'exam_id',
+        'exam_question_id',
         'question',
         'choice_a',
         'choice_b',

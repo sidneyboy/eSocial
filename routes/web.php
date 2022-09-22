@@ -21,7 +21,10 @@ Route::get('/', function () {
 });
 
 Route::get('/socialE-login', 'User_login_controller@sure')->name('socialE-login');
+Route::get('/admin_login', 'User_login_controller@admin_login')->name('admin_login');
+
 Route::get('/home', 'HomeController@index')->name('home');
+
 
 Auth::routes();
 
@@ -87,20 +90,64 @@ Route::get('/success/', 'Student_subscribed_controller@success');
 Route::get('/error/', 'Student_subscribed_controller@error');
 
 
-
+Route::get('/instructor_show_chapter/{course_id}', 'Instructor_controller@instructor_show_chapter')->name('instructor_show_chapter');
 
 Route::get('/instructor_landing', 'Instructor_controller@instructor_landing')->name('instructor_landing');
 Route::get('/instructor_profile', 'Instructor_controller@instructor_profile')->name('instructor_profile');
 Route::get('/instructor_add_course', 'Instructor_controller@instructor_add_course')->name('instructor_add_course');
 Route::post('/instructor_add_course_process', 'Instructor_controller@instructor_add_course_process')->name('instructor_add_course_process');
+
+Route::get('/instructor_courses_show_content', 'Instructor_controller@instructor_courses_show_content')->name('instructor_courses_show_content');
+
+
+Route::post('/instructor_add_file_to_chapter', 'Instructor_controller@instructor_add_file_to_chapter')->name('instructor_add_file_to_chapter');
+
+Route::get('/instructor_chapter_add_quiz_or_exam', 'Instructor_controller@instructor_chapter_add_quiz_or_exam')->name('instructor_chapter_add_quiz_or_exam');
+
+Route::get('/instructor_add_course_phase_4_process', 'Instructor_controller@instructor_add_course_phase_4_process')->name('instructor_add_course_phase_4_process');
+
+Route::get('/instructor_add_item_to_quiz/{quiz_id}', 'Instructor_controller@instructor_add_item_to_quiz')->name('instructor_add_item_to_quiz');
+
+
+Route::get('/instructor_add_course_chapter_quiz_next_question', 'Instructor_controller@instructor_add_course_chapter_quiz_next_question')->name('instructor_add_course_chapter_quiz_next_question');
+
+
+Route::get('/instructor_add_course_chapter_exam_next_question', 'Instructor_controller@instructor_add_course_chapter_exam_next_question')->name('instructor_add_course_chapter_exam_next_question');
+
+
+
 Route::get('/instructor_add_course_phase_2/{course_id}', 'Instructor_controller@instructor_add_course_phase_2')->name('instructor_add_course_phase_2');
 Route::post('/instructor_add_course_phase_2_process', 'Instructor_controller@instructor_add_course_phase_2_process')->name('instructor_add_course_phase_2_process');
 Route::get('/instructor_add_course_phase_3/{course_id}/{course_chapter_id}', 'Instructor_controller@instructor_add_course_phase_3')->name('instructor_add_course_phase_3');
 Route::post('/instructor_add_course_phase_3_process', 'Instructor_controller@instructor_add_course_phase_3_process')->name('instructor_add_course_phase_3_process');
 Route::get('/instructor_add_course_phase_4/{course_id}/{course_chapter_id}', 'Instructor_controller@instructor_add_course_phase_4')->name('instructor_add_course_phase_4');
-Route::post('/instructor_add_course_phase_4_process', 'Instructor_controller@instructor_add_course_phase_4_process')->name('instructor_add_course_phase_4_process');
+
+Route::get('/instructor_add_course_exam_process/', 'Instructor_controller@instructor_add_course_exam_process')->name('instructor_add_course_exam_process');
+
+
 Route::post('/instructor_add_course_chapter_quiz_question_type', 'Instructor_controller@instructor_add_course_chapter_quiz_question_type')->name('instructor_add_course_chapter_quiz_question_type');
-Route::post('/instructor_add_course_chapter_quiz_next_question', 'Instructor_controller@instructor_add_course_chapter_quiz_next_question')->name('instructor_add_course_chapter_quiz_next_question');
+
+
+Route::get('/course_details_status_update/{details_id}/{status}/{course_id}', 'Instructor_controller@course_details_status_update')->name('course_details_status_update');
+
+Route::get('/course_quiz_status_update/{quiz_id}/{status}/{course_id}', 'Instructor_controller@course_quiz_status_update')->name('course_quiz_status_update');
+
+
+Route::get('/instructor_edit_quiz_question/{question_id}', 'Instructor_controller@instructor_edit_quiz_question')->name('instructor_edit_quiz_question');
+
+Route::post('/instructor_edit_quiz_question_process', 'Instructor_controller@instructor_edit_quiz_question_process')->name('instructor_edit_quiz_question_process');
+
+Route::get('/instructor_edit_exam_question/{question_id}', 'Instructor_controller@instructor_edit_exam_question')->name('instructor_edit_exam_question');
+
+Route::post('/instructor_edit_exam_question_process', 'Instructor_controller@instructor_edit_exam_question_process')->name('instructor_edit_exam_question_process');
+
+
+
+Route::get('/course_exam_status_update/{exam}/{status}/{course_id}', 'Instructor_controller@course_exam_status_update')->name('course_exam_status_update');
+
+
+
+
 
 
 
@@ -117,9 +164,9 @@ Route::get('/instructor_courses', 'Instructor_controller@instructor_courses')->n
 Route::post('/instructor_add_subject_file', 'Instructor_controller@instructor_add_subject_file')->name('instructor_add_subject_file');
 Route::post('/instructor_profile_add_image', 'Instructor_controller@instructor_profile_add_image')->name('instructor_profile_add_image');
 Route::post('/instructor_update_course', 'Instructor_controller@instructor_update_course')->name('instructor_update_course');
-Route::get('/instructor_show_pdf_file/{course_id}', 'Instructor_controller@instructor_show_pdf_file')->name('instructor_show_pdf_file');
-Route::get('/instructor_show_video/{course_id}', 'Instructor_controller@instructor_show_video')->name('instructor_show_video');
-Route::get('/instructor_show_image/{course_id}', 'Instructor_controller@instructor_show_image')->name('instructor_show_image');
+Route::get('/instructor_show_pdf_file/{course_details_id}', 'Instructor_controller@instructor_show_pdf_file')->name('instructor_show_pdf_file');
+Route::get('/instructor_show_video/{course_details_id}', 'Instructor_controller@instructor_show_video')->name('instructor_show_video');
+Route::get('/instructor_show_image/{course_details_id}', 'Instructor_controller@instructor_show_image')->name('instructor_show_image');
 Route::post('/instructor_comment_process/', 'Instructor_controller@instructor_comment_process')->name('instructor_comment_process');
 Route::post('/instructor_add_exam/', 'Instructor_controller@instructor_add_exam')->name('instructor_add_exam');
 Route::post('/instructor_add_exam_next_page/', 'Instructor_controller@instructor_add_exam_next_page')->name('instructor_add_exam_next_page');

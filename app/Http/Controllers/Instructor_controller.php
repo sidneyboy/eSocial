@@ -15,6 +15,14 @@ use App\Models\Invite_student;
 use App\Models\Course_chapter;
 use App\Models\Instructor_planner;
 use App\Models\Course_quiz;
+use App\Models\Quiz_questions;
+use App\Models\Quiz_details;
+use App\Models\Exam_questions;
+use App\Models\Exam_matching;
+
+use App\Models\Quiz_matching;
+
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -83,13 +91,19 @@ class Instructor_controller extends Controller
         ]);
 
         $new->save();
+        return redirect()->route('instructor_courses')->with('success', 'Successfully added new course.');
+        // return redirect()->route('instructor_add_course_phase_2', ['course_id' => $new->id])->with('success', 'Successfully added new course. Please add course chapter');
+    }
 
-        return redirect()->route('instructor_add_course_phase_2', ['course_id' => $new->id])->with('success', 'Successfully added new course. Please add course chapter');
+    public function instructor_courses_show_content()
+    {
+        return view('instructor_courses_show_content');
     }
 
     public function instructor_add_course_phase_2($course_id)
     {
-        // $course = Course::find($course_id);
+
+        // $course = Course::find($course_id);  
         $user_data = User::find(auth()->user()->id);
         return view('instructor_add_course_phase_2', [
             'course_id' => $course_id,
@@ -100,19 +114,54 @@ class Instructor_controller extends Controller
     public function instructor_add_course_phase_2_process(Request $request)
     {
         //return $request->input();
-        $new = new Course_chapter([
-            'title' => $request->input('title'),
-            'content' => $request->input('content'),
-            'course_id' => $request->input('course_id'),
-            'chapter_number' => $request->input('chapter_number'),
+        //dd($request->all());
+        $thumbnail = $request->file('thumbnail');
+        $thumbnail_name = $thumbnail->getClientOriginalName();
+        $thumbnail_type = $thumbnail->getClientMimeType();
+        $path_thumbnail = $thumbnail->storeAs('public', $thumbnail_name);
+
+        if (str_contains($thumbnail_type, 'image')) {
+            $new = new Course_chapter([
+                'title' => $request->input('title'),
+                'content' => $request->input('content'),
+                'course_id' => $request->input('course_id'),
+                'chapter_number' => $request->input('chapter_number'),
+                'thumbnail' => $thumbnail_name,
+            ]);
+
+            $new->save();
+
+            return redirect()->route('instructor_courses')->with('success', 'Successfully added new chapter.');
+        } else {
+            return redirect()->route('instructor_add_course_phase_2', ['course_id' => $request->input('course_id')])->with('error', 'Thumbnail is not an image');
+        }
+
+
+
+        // return redirect()->route('instructor_add_course_phase_3', [
+        //     'course_id' => $request->input('course_id'),
+        //     'course_chapter_id' => $new->id
+        // ])->with('success', 'Successfully added course chapter');
+    }
+
+    public function instructor_show_chapter($course_id)
+    {
+        $course_chapter = Course_chapter::where('course_id', $course_id)->get();
+
+
+        // foreach ($course_chapter as $key => $data) {
+        //     foreach ($data->course_chapter as $key => $value) {
+        //         # code...
+        //     }
+        // }
+
+
+
+        $user_data = User::find(auth()->user()->id);
+        return view('instructor_show_chapter', [
+            'course_chapter' => $course_chapter,
+            'user_data' => $user_data,
         ]);
-
-        $new->save();
-
-        return redirect()->route('instructor_add_course_phase_3', [
-            'course_id' => $request->input('course_id'),
-            'course_chapter_id' => $new->id
-        ])->with('success', 'Successfully added course chapter');
     }
 
     public function instructor_add_course_phase_3($course_id, $course_chapter_id)
@@ -163,22 +212,40 @@ class Instructor_controller extends Controller
     public function instructor_add_course_phase_4_process(Request $request)
     {
         //return $request->input();
-        $new = new Course_quiz([
-            'course_id' => $request->input('course_id'),
-            'course_chapter_id' => $request->input('course_chapter_id'),
-            'quiz_title' => $request->input('quiz_title'),
-            'number_of_questions' => $request->input('number_of_questions'),
-        ]);
+        date_default_timezone_set('Asia/Manila');
+        $date = date('Y-m-d H:i:s');
+        $check = Course_quiz::where('quiz_title', $request->input('quiz_title'))->first();
 
-        $new->save();
+        if ($check) {
+            $user_data = User::find(auth()->user()->id);
+            return view('instructor_add_course_chapter_quiz', [
+                'course_id' => $request->input('course_id'),
+                'user_data' => $user_data,
+                'course_chapter_id' => $request->input('course_chapter_id'),
+                'quiz_id' => $check->id,
+                'number_of_questions' => $request->input('number_of_questions'),
+            ]);
+        } else {
+            $new = new Course_quiz([
+                'course_id' => $request->input('course_id'),
+                'course_chapter_id' => $request->input('course_chapter_id'),
+                'quiz_title' => $request->input('quiz_title'),
+                'number_of_questions' => $request->input('number_of_questions'),
+                'created_at' => $date,
+                'status' => 'disabled',
+            ]);
 
-        $user_data = User::find(auth()->user()->id);
-        return view('instructor_add_course_chapter_quiz', [
-            'course_id' => $request->input('course_id'),
-            'user_data' => $user_data,
-            'course_chapter_id' => $request->input('course_chapter_id'),
-            'number_of_questions' => $request->input('number_of_questions'),
-        ]);
+            $new->save();
+
+            $user_data = User::find(auth()->user()->id);
+            return view('instructor_add_course_chapter_quiz', [
+                'course_id' => $request->input('course_id'),
+                'user_data' => $user_data,
+                'course_chapter_id' => $request->input('course_chapter_id'),
+                'quiz_id' => $new->id,
+                'number_of_questions' => $request->input('number_of_questions'),
+            ]);
+        }
     }
 
     public function instructor_add_course_chapter_quiz_question_type(Request $request)
@@ -188,36 +255,303 @@ class Instructor_controller extends Controller
             ->with('loop_number', $request->input('loop_number'));
     }
 
+
+    public function instructor_edit_quiz_question_process(Request $request)
+    {
+        // return $request->input();
+        if ($request->input('question_type') == 'Enumeration') {
+            $implode = implode('|', $request->input('answer'));
+            foreach ($request->input('answer') as $key => $data) {
+                Quiz_questions::where('id', $request->input('quiz_question_id'))
+                    ->update([
+                        'question' => $request->input('question'),
+                        'answer' => strtolower($implode),
+                    ]);
+            }
+
+            return redirect()->route('instructor_edit_quiz_question', ['question_id' => $request->input('quiz_question_id')])->with('success', 'Updated');
+        } elseif ($request->input('question_type') == 'Multitple Choice') {
+            Quiz_questions::where('id', $request->input('quiz_question_id'))
+                ->update([
+                    'question' => $request->input('question'),
+                    'answer' => strtolower($request->input('answer')),
+                ]);
+
+            Quiz_details::where('id', $request->input('quiz_details_id'))
+                ->update([
+                    'choice_a' => $request->input('choice_a'),
+                    'choice_b' => $request->input('choice_b'),
+                    'choice_c' => $request->input('choice_c'),
+                    'choice_d' => $request->input('choice_d'),
+                ]);
+
+            return redirect()->route('instructor_edit_quiz_question', ['question_id' => $request->input('quiz_question_id')])->with('success', 'Updated');
+        } elseif ($request->input('question_type') == 'Identification') {
+            Quiz_questions::where('id', $request->input('quiz_question_id'))
+                ->update([
+                    'question' => $request->input('question'),
+                    'answer' => strtolower($request->input('answer')),
+                ]);
+
+            return redirect()->route('instructor_edit_quiz_question', ['question_id' => $request->input('quiz_question_id')])->with('success', 'Updated');
+        } elseif ($request->input('question_type') == 'Matching Type') {
+            //return $request->input();
+            $answer = implode('|', $request->input('answer'));
+            $question = implode('|', $request->input('question'));
+
+            Quiz_questions::where('id', $request->input('quiz_question_id'))
+                ->update([
+                    'question' => $question,
+                    'answer' => strtolower($answer),
+                ]);
+
+            foreach ($request->input('matching_id') as $key => $matching_id) {
+                Quiz_matching::where('id', $matching_id)
+                    ->update([
+                        'choices' => $request->input('choices')[$matching_id],
+                    ]);
+            }
+
+            return redirect()->route('instructor_edit_quiz_question', ['question_id' => $request->input('quiz_question_id')])->with('success', 'Updated');
+        }
+    }
+
     public function instructor_add_course_chapter_quiz_next_question(Request $request)
     {
         //return $request->input();
-
-
-
         if ($request->input('number_of_questions') == 0) {
-            return redirect('instructor_courses');
+
+            if ($request->input('question_type') == 'Enumeration') {
+                //return $request->input();
+                $implode = implode('|', $request->input('answer'));
+
+                $new_question = new Quiz_questions([
+                    'course_id' => $request->input('course_id'),
+                    'course_chapter_id' => $request->input('course_chapter_id'),
+                    'course_quiz_id' => $request->input('quiz_id'),
+                    'question' => $request->input('question'),
+                    'answer' => strtolower($implode),
+                    'question_type' => $request->input('question_type'),
+                ]);
+
+                $new_question->save();
+
+                $add_one = $request->input('add_one');
+                if (isset($add_one)) {
+                    return redirect('instructor_courses');
+                } else {
+                    return redirect('instructor_courses');
+                }
+            } elseif ($request->input('question_type') == 'Multitple Choice') {
+                $new_question = new Quiz_questions([
+                    'course_id' => $request->input('course_id'),
+                    'course_chapter_id' => $request->input('course_chapter_id'),
+                    'course_quiz_id' => $request->input('quiz_id'),
+                    'question' => $request->input('question'),
+                    'answer' => strtolower($request->input('answer')),
+                    'question_type' => $request->input('question_type'),
+                ]);
+
+                $new_question->save();
+
+                $new_question_details = new Quiz_details([
+                    'quiz_question_id' => $new_question->id,
+                    'choice_a' => $request->input('choice_a'),
+                    'choice_b' => $request->input('choice_b'),
+                    'choice_c' => $request->input('choice_c'),
+                    'choice_d' => $request->input('choice_d'),
+                ]);
+
+                $new_question_details->save();
+
+
+                $add_one = $request->input('add_one');
+                if (isset($add_one)) {
+                    return redirect('instructor_courses');
+                } else {
+                    return redirect('instructor_courses');
+                }
+            } elseif ($request->input('question_type') == 'Identification') {
+                $new_question = new Quiz_questions([
+                    'course_id' => $request->input('course_id'),
+                    'course_chapter_id' => $request->input('course_chapter_id'),
+                    'course_quiz_id' => $request->input('quiz_id'),
+                    'question' => $request->input('question'),
+                    'answer' => strtolower($request->input('answer')),
+                    'question_type' => $request->input('question_type'),
+                ]);
+
+                $new_question->save();
+
+
+                $add_one = $request->input('add_one');
+                if (isset($add_one)) {
+                    return redirect('instructor_courses');
+                } else {
+                    return redirect('instructor_courses');
+                }
+            } elseif ($request->input('question_type') == 'Matching Type') {
+                $answer = implode('|', $request->input('answer'));
+                $question = implode('|', $request->input('question'));
+
+                $new_question = new Quiz_questions([
+                    'course_id' => $request->input('course_id'),
+                    'course_chapter_id' => $request->input('course_chapter_id'),
+                    'course_quiz_id' => $request->input('quiz_id'),
+                    'question' => $question,
+                    'answer' => strtolower($answer),
+                    'question_type' => $request->input('question_type'),
+                ]);
+
+                $new_question->save();
+
+                foreach ($request->input('choices') as $key => $choices) {
+                    $new_question_details = new Quiz_matching([
+                        'quiz_question_id' => $new_question->id,
+                        'choices' => $choices,
+                    ]);
+
+                    $new_question_details->save();
+                }
+
+
+                $add_one = $request->input('add_one');
+                if (isset($add_one)) {
+                    return redirect('instructor_courses');
+                } else {
+                    return redirect('instructor_courses');
+                }
+            }
         } else {
-            // return view('instructor_add_exam_next_page')
-            //     ->with('number_of_questions', $request->input('number_of_questions'))
-            //     ->with('exam_id', $new_exam->id);
+            if ($request->input('question_type') == 'Enumeration') {
+                //return $request->input();
+                $implode = implode('|', $request->input('answer'));
 
-            // $new = new Course_quiz([
-            //     'course_id' => $request->input('course_id'),
-            //     'course_chapter_id' => $request->input('course_chapter_id'),
-            //     'question_type' => $request->input('question_type'),
-            //     'question' => $request->input('question'),
-            //     'answer' => $request->input('answer'),
-            // ]);
+                $new_question = new Quiz_questions([
+                    'course_id' => $request->input('course_id'),
+                    'course_chapter_id' => $request->input('course_chapter_id'),
+                    'course_quiz_id' => $request->input('quiz_id'),
+                    'question' => $request->input('question'),
+                    'answer' => strtolower($implode),
+                    'question_type' => $request->input('question_type'),
+                ]);
 
-            // $new->save();
+                $new_question->save();
 
-            $user_data = User::find(auth()->user()->id);
-            return view('instructor_add_course_chapter_quiz_next_question', [
-                'course_id' => $request->input('course_id'),
-                'user_data' => $user_data,
-                'course_chapter_id' => $request->input('course_chapter_id'),
-                'number_of_questions' => $request->input('number_of_questions'),
-            ]);
+                $add_one = $request->input('add_one');
+                if (isset($add_one)) {
+                    return redirect('instructor_courses');
+                } else {
+                    $user_data = User::find(auth()->user()->id);
+                    return view('instructor_add_course_chapter_quiz_next_question', [
+                        'course_id' => $request->input('course_id'),
+                        'quiz_id' => $request->input('quiz_id'),
+                        'user_data' => $user_data,
+                        'course_chapter_id' => $request->input('course_chapter_id'),
+                        'number_of_questions' => $request->input('number_of_questions'),
+                    ]);
+                }
+            } elseif ($request->input('question_type') == 'Multitple Choice') {
+                $new_question = new Quiz_questions([
+                    'course_id' => $request->input('course_id'),
+                    'course_chapter_id' => $request->input('course_chapter_id'),
+                    'course_quiz_id' => $request->input('quiz_id'),
+                    'question' => $request->input('question'),
+                    'answer' => strtolower($request->input('answer')),
+                    'question_type' => $request->input('question_type'),
+                ]);
+
+                $new_question->save();
+
+                $new_question_details = new Quiz_details([
+                    'quiz_question_id' => $new_question->id,
+                    'choice_a' => $request->input('choice_a'),
+                    'choice_b' => $request->input('choice_b'),
+                    'choice_c' => $request->input('choice_c'),
+                    'choice_d' => $request->input('choice_d'),
+                ]);
+
+                $new_question_details->save();
+
+
+                $add_one = $request->input('add_one');
+                if (isset($add_one)) {
+                    return redirect('instructor_courses');
+                } else {
+                    $user_data = User::find(auth()->user()->id);
+                    return view('instructor_add_course_chapter_quiz_next_question', [
+                        'course_id' => $request->input('course_id'),
+                        'quiz_id' => $request->input('quiz_id'),
+                        'user_data' => $user_data,
+                        'course_chapter_id' => $request->input('course_chapter_id'),
+                        'number_of_questions' => $request->input('number_of_questions'),
+                    ]);
+                }
+            } elseif ($request->input('question_type') == 'Identification') {
+                $new_question = new Quiz_questions([
+                    'course_id' => $request->input('course_id'),
+                    'course_chapter_id' => $request->input('course_chapter_id'),
+                    'course_quiz_id' => $request->input('quiz_id'),
+                    'question' => $request->input('question'),
+                    'answer' => strtolower($request->input('answer')),
+                    'question_type' => $request->input('question_type'),
+                ]);
+
+                $new_question->save();
+
+
+                $add_one = $request->input('add_one');
+                if (isset($add_one)) {
+                    return redirect('instructor_courses');
+                } else {
+                    $user_data = User::find(auth()->user()->id);
+                    return view('instructor_add_course_chapter_quiz_next_question', [
+                        'course_id' => $request->input('course_id'),
+                        'quiz_id' => $request->input('quiz_id'),
+                        'user_data' => $user_data,
+                        'course_chapter_id' => $request->input('course_chapter_id'),
+                        'number_of_questions' => $request->input('number_of_questions'),
+                    ]);
+                }
+            } elseif ($request->input('question_type') == 'Matching Type') {
+                $answer = implode('|', $request->input('answer'));
+                $question = implode('|', $request->input('question'));
+
+                $new_question = new Quiz_questions([
+                    'course_id' => $request->input('course_id'),
+                    'course_chapter_id' => $request->input('course_chapter_id'),
+                    'course_quiz_id' => $request->input('quiz_id'),
+                    'question' => $question,
+                    'answer' => strtolower($answer),
+                    'question_type' => $request->input('question_type'),
+                ]);
+
+                $new_question->save();
+
+                foreach ($request->input('choices') as $key => $choices) {
+                    $new_question_details = new Quiz_matching([
+                        'quiz_question_id' => $new_question->id,
+                        'choices' => $choices,
+                    ]);
+
+                    $new_question_details->save();
+                }
+
+
+                $add_one = $request->input('add_one');
+                if (isset($add_one)) {
+                    return redirect('instructor_courses');
+                } else {
+                    $user_data = User::find(auth()->user()->id);
+                    return view('instructor_add_course_chapter_quiz_next_question', [
+                        'course_id' => $request->input('course_id'),
+                        'quiz_id' => $request->input('quiz_id'),
+                        'user_data' => $user_data,
+                        'course_chapter_id' => $request->input('course_chapter_id'),
+                        'number_of_questions' => $request->input('number_of_questions'),
+                    ]);
+                }
+            }
         }
     }
 
@@ -266,6 +600,364 @@ class Instructor_controller extends Controller
         return redirect('instructor_profile')->with('success', 'Successfully approved selected instructor');
     }
 
+    public function instructor_add_file_to_chapter(Request $request)
+    {
+        // dd($request->all());
+
+        date_default_timezone_set('Asia/Manila');
+        $date = date('Y-m-d H:i:s');
+
+        $file = $request->file('file');
+        $file_name = 'file-' . time() . '.' . $file->getClientOriginalExtension();
+        $mime_type = $file->getClientMimeType();
+        $path_file = $file->storeAs('public', $file_name);
+
+        //$explode = explode('/', $mime_type);
+
+        if (str_contains($mime_type, 'image')) {
+            $new = new Course_details([
+                'file' => $file_name,
+                'course_id' => $request->input('course_id'),
+                'file_type' => 'image',
+                'course_chapter_id' => $request->input('chapter_id'),
+                'created_at' => $date,
+                'status' => 'disabled',
+            ]);
+            $new->save();
+        } else if (str_contains($mime_type, 'video')) {
+            $new = new Course_details([
+                'file' => $file_name,
+                'course_id' => $request->input('course_id'),
+                'file_type' => 'video',
+                'course_chapter_id' => $request->input('chapter_id'),
+                'created_at' => $date,
+                'status' => 'disabled',
+            ]);
+            $new->save();
+        } else if (str_contains($mime_type, 'application')) {
+            $new = new Course_details([
+                'file' => $file_name,
+                'course_id' => $request->input('course_id'),
+                'file_type' => 'application',
+                'course_chapter_id' => $request->input('chapter_id'),
+                'created_at' => $date,
+                'status' => 'disabled',
+            ]);
+            $new->save();
+        }
+
+        //return $request->input();
+
+        // $new_course_details = new Course_details([
+        //     'file' => $file_name,
+        //     'course_id' => $request->input('course_id'),
+        //     'file_type' => $subject_file_type,
+        // ]);
+
+        // $new_course_details->save();
+
+        return redirect()->route('instructor_show_chapter', ['course_id' => $request->input('course_id')])->with('success', 'Successfully added new chapter file');
+    }
+
+    public function instructor_chapter_add_quiz_or_exam(Request $request)
+    {
+        //return $request->input();
+
+
+        if ($request->input('type') == 'Chapter Quiz') {
+            $user_data = User::find(auth()->user()->id);
+            return view('instructor_add_course_phase_4', [
+                'course_id' => $request->input('course_id'),
+                'user_data' => $user_data,
+                'course_chapter_id' => $request->input('chapter_id'),
+            ]);
+        } else {
+            $user_data = User::find(auth()->user()->id);
+            return view('instructor_add_course_exam', [
+                'course_id' => $request->input('course_id'),
+                'user_data' => $user_data,
+                'course_chapter_id' => $request->input('chapter_id'),
+            ]);
+        }
+    }
+
+    public function instructor_add_course_exam_process(Request $request)
+    {
+        date_default_timezone_set('Asia/Manila');
+        $date = date('Y-m-d H:i:s');
+        $check = Exam::where('title', $request->input('title'))->first();
+
+        if ($check) {
+            $user_data = User::find(auth()->user()->id);
+            return view('instructor_add_course_chapter_exam_proceed', [
+                'course_id' => $request->input('course_id'),
+                'user_data' => $user_data,
+                'course_chapter_id' => $request->input('course_chapter_id'),
+                'exam_id' => $check->id,
+                'number_of_questions' => $request->input('number_of_questions'),
+            ]);
+        } else {
+            // return 'asdasd';
+            $new = new Exam([
+                'course_id' => $request->input('course_id'),
+                'course_chapter_id' => $request->input('course_chapter_id'),
+                'title' => $request->input('title'),
+                'number_of_questions' => $request->input('number_of_questions'),
+                'created_at' => $date,
+                'status' => 'disabled',
+            ]);
+
+            $new->save();
+
+            $user_data = User::find(auth()->user()->id);
+            return view('instructor_add_course_chapter_exam_proceed', [
+                'course_id' => $request->input('course_id'),
+                'user_data' => $user_data,
+                'course_chapter_id' => $request->input('course_chapter_id'),
+                'exam_id' => $new->id,
+                'number_of_questions' => $request->input('number_of_questions'),
+            ]);
+        }
+    }
+
+    public function instructor_add_course_chapter_exam_next_question(Request $request)
+    {
+        if ($request->input('number_of_questions') == 0) {
+
+            if ($request->input('question_type') == 'Enumeration') {
+                //return $request->input();
+                $implode = implode('|', $request->input('answer'));
+
+                $new_question = new Exam_questions([
+                    'course_id' => $request->input('course_id'),
+                    'course_chapter_id' => $request->input('course_chapter_id'),
+                    'course_exam_id' => $request->input('exam_id'),
+                    'question' => $request->input('question'),
+                    'answer' => strtolower($implode),
+                    'question_type' => $request->input('question_type'),
+                ]);
+
+                $new_question->save();
+
+                $add_one = $request->input('add_one');
+                if (isset($add_one)) {
+                    return redirect('instructor_courses');
+                } else {
+                    return redirect('instructor_courses');
+                }
+            } elseif ($request->input('question_type') == 'Multitple Choice') {
+                $new_question = new Exam_questions([
+                    'course_id' => $request->input('course_id'),
+                    'course_chapter_id' => $request->input('course_chapter_id'),
+                    'course_exam_id' => $request->input('exam_id'),
+                    'question' => $request->input('question'),
+                    'answer' => strtolower($request->input('answer')),
+                    'question_type' => $request->input('question_type'),
+                ]);
+
+                $new_question->save();
+
+                $new_question_details = new Exam_details([
+                    'exam_question_id' => $new_question->id,
+                    'choice_a' => $request->input('choice_a'),
+                    'choice_b' => $request->input('choice_b'),
+                    'choice_c' => $request->input('choice_c'),
+                    'choice_d' => $request->input('choice_d'),
+                ]);
+
+                $new_question_details->save();
+
+
+                $add_one = $request->input('add_one');
+                if (isset($add_one)) {
+                    return redirect('instructor_courses');
+                } else {
+                    return redirect('instructor_courses');
+                }
+            } elseif ($request->input('question_type') == 'Identification') {
+                $new_question = new Exam_questions([
+                    'course_id' => $request->input('course_id'),
+                    'course_chapter_id' => $request->input('course_chapter_id'),
+                    'course_exam_id' => $request->input('exam_id'),
+                    'question' => $request->input('question'),
+                    'answer' => strtolower($request->input('answer')),
+                    'question_type' => $request->input('question_type'),
+                ]);
+
+                $new_question->save();
+
+
+                $add_one = $request->input('add_one');
+                if (isset($add_one)) {
+                    return redirect('instructor_courses');
+                } else {
+                    return redirect('instructor_courses');
+                }
+            } elseif ($request->input('question_type') == 'Matching Type') {
+                $answer = implode('|', $request->input('answer'));
+                $question = implode('|', $request->input('question'));
+
+                $new_question = new Exam_questions([
+                    'course_id' => $request->input('course_id'),
+                    'course_chapter_id' => $request->input('course_chapter_id'),
+                    'course_exam_id' => $request->input('exam_id'),
+                    'question' => $question,
+                    'answer' => strtolower($answer),
+                    'question_type' => $request->input('question_type'),
+                ]);
+
+                $new_question->save();
+
+                foreach ($request->input('choices') as $key => $choices) {
+                    $new_question_details = new Exam_matching([
+                        'exam_question_id' => $new_question->id,
+                        'choices' => $choices,
+                    ]);
+
+                    $new_question_details->save();
+                }
+
+
+                $add_one = $request->input('add_one');
+                if (isset($add_one)) {
+                    return redirect('instructor_courses');
+                } else {
+                    return redirect('instructor_courses');
+                }
+            }
+        } else {
+            if ($request->input('question_type') == 'Enumeration') {
+                //return $request->input();
+                $implode = implode('|', $request->input('answer'));
+
+                $new_question = new Exam_questions([
+                    'course_id' => $request->input('course_id'),
+                    'course_chapter_id' => $request->input('course_chapter_id'),
+                    'course_exam_id' => $request->input('exam_id'),
+                    'question' => $request->input('question'),
+                    'answer' => strtolower($implode),
+                    'question_type' => $request->input('question_type'),
+                ]);
+
+                $new_question->save();
+
+                $add_one = $request->input('add_one');
+                if (isset($add_one)) {
+                    return redirect('instructor_courses');
+                } else {
+                    $user_data = User::find(auth()->user()->id);
+                    return view('instructor_add_course_chapter_exam_next_question', [
+                        'course_id' => $request->input('course_id'),
+                        'exam_id' => $request->input('exam_id'),
+                        'user_data' => $user_data,
+                        'course_chapter_id' => $request->input('course_chapter_id'),
+                        'number_of_questions' => $request->input('number_of_questions'),
+                    ]);
+                }
+            } elseif ($request->input('question_type') == 'Multitple Choice') {
+                $new_question = new Exam_questions([
+                    'course_id' => $request->input('course_id'),
+                    'course_chapter_id' => $request->input('course_chapter_id'),
+                    'course_exam_id' => $request->input('exam_id'),
+                    'question' => $request->input('question'),
+                    'answer' => strtolower($request->input('answer')),
+                    'question_type' => $request->input('question_type'),
+                ]);
+
+                $new_question->save();
+
+                $new_question_details = new Exam_details([
+                    'exam_question_id' => $new_question->id,
+                    'choice_a' => $request->input('choice_a'),
+                    'choice_b' => $request->input('choice_b'),
+                    'choice_c' => $request->input('choice_c'),
+                    'choice_d' => $request->input('choice_d'),
+                ]);
+
+                $new_question_details->save();
+
+
+                $add_one = $request->input('add_one');
+                if (isset($add_one)) {
+                    return redirect('instructor_courses');
+                } else {
+                    $user_data = User::find(auth()->user()->id);
+                    return view('instructor_add_course_chapter_exam_next_question', [
+                        'course_id' => $request->input('course_id'),
+                        'exam_id' => $request->input('exam_id'),
+                        'user_data' => $user_data,
+                        'course_chapter_id' => $request->input('course_chapter_id'),
+                        'number_of_questions' => $request->input('number_of_questions'),
+                    ]);
+                }
+            } elseif ($request->input('question_type') == 'Identification') {
+                $new_question = new Exam_questions([
+                    'course_id' => $request->input('course_id'),
+                    'course_chapter_id' => $request->input('course_chapter_id'),
+                    'course_exam_id' => $request->input('exam_id'),
+                    'question' => $request->input('question'),
+                    'answer' => strtolower($request->input('answer')),
+                    'question_type' => $request->input('question_type'),
+                ]);
+
+                $new_question->save();
+
+
+                $add_one = $request->input('add_one');
+                if (isset($add_one)) {
+                    return redirect('instructor_courses');
+                } else {
+                    $user_data = User::find(auth()->user()->id);
+                    return view('instructor_add_course_chapter_exam_next_question', [
+                        'course_id' => $request->input('course_id'),
+                        'exam_id' => $request->input('exam_id'),
+                        'user_data' => $user_data,
+                        'course_chapter_id' => $request->input('course_chapter_id'),
+                        'number_of_questions' => $request->input('number_of_questions'),
+                    ]);
+                }
+            } elseif ($request->input('question_type') == 'Matching Type') {
+                $answer = implode('|', $request->input('answer'));
+                $question = implode('|', $request->input('question'));
+
+                $new_question = new Exam_questions([
+                    'course_id' => $request->input('course_id'),
+                    'course_chapter_id' => $request->input('course_chapter_id'),
+                    'course_exam_id' => $request->input('exam_id'),
+                    'question' => $question,
+                    'answer' => strtolower($answer),
+                    'question_type' => $request->input('question_type'),
+                ]);
+
+                $new_question->save();
+
+                foreach ($request->input('choices') as $key => $choices) {
+                    $new_question_details = new Exam_matching([
+                        'exam_question_id' => $new_question->id,
+                        'choices' => $choices,
+                    ]);
+
+                    $new_question_details->save();
+                }
+
+
+                $add_one = $request->input('add_one');
+                if (isset($add_one)) {
+                    return redirect('instructor_courses');
+                } else {
+                    $user_data = User::find(auth()->user()->id);
+                    return view('instructor_add_course_chapter_exam_next_question', [
+                        'course_id' => $request->input('course_id'),
+                        'exam_id' => $request->input('exam_id'),
+                        'user_data' => $user_data,
+                        'course_chapter_id' => $request->input('course_chapter_id'),
+                        'number_of_questions' => $request->input('number_of_questions'),
+                    ]);
+                }
+            }
+        }
+    }
+
     public function instructor_update_course(Request $request)
     {
         Course::where('id', $request->input('course_id'))
@@ -287,21 +979,21 @@ class Instructor_controller extends Controller
         ]);
     }
 
-    public function instructor_show_video($course_id)
+    public function instructor_show_video($course_details_id)
     {
-        $search = 'video';
-        $course_data = Course_details::where('course_id', $course_id)->where('file_type', 'like', '%' . $search . '%')->paginate(1);
-
+        //$search = 'video';
+        //$course_data = Course_details::where('course_id', $course_id)->where('file_type', 'like', '%' . $search . '%')->paginate(1);
+        $course_data = Course_details::find($course_details_id);
         return view('instructor_show_video', [
             'course_data' => $course_data,
         ]);
     }
 
-    public function instructor_show_image($course_id)
+    public function instructor_show_image($course_details_id)
     {
-        $search = 'image';
-        $course_data = Course_details::where('course_id', $course_id)->where('file_type', 'like', '%' . $search . '%')->paginate(1);
-
+        // $search = 'image';
+        //$course_data = Course_details::where('course_id', $course_id)->where('file_type', 'like', '%' . $search . '%')->paginate(1);
+        $course_data = Course_details::find($course_details_id);
         return view('instructor_show_image', [
             'course_data' => $course_data
         ]);
@@ -667,5 +1359,137 @@ class Instructor_controller extends Controller
             ->update(['status' => 'approved']);
 
         return redirect()->route('instructor_to_do_list')->with('success', 'Planner Acknowledge');
+    }
+
+    public function course_details_status_update($details_id, $status, $course_id)
+    {
+        if ($status == 'disabled') {
+            Course_details::where('id', $details_id)
+                ->update(['status' => 'enabled']);
+        } else {
+            Course_details::where('id', $details_id)
+                ->update(['status' => 'disabled']);
+        }
+
+        return redirect()->route('instructor_show_chapter', ['course_id' => $course_id])->with('success', 'Updated');
+    }
+
+    public function course_quiz_status_update($quiz_id, $status, $course_id)
+    {
+        //return 'asdasd';
+        if ($status == 'disabled') {
+            Course_quiz::where('id', $quiz_id)
+                ->update(['status' => 'enabled']);
+        } else {
+            Course_quiz::where('id', $quiz_id)
+                ->update(['status' => 'disabled']);
+        }
+
+        return redirect()->route('instructor_show_chapter', ['course_id' => $course_id])->with('success', 'Updated');
+    }
+
+    public function instructor_edit_quiz_question($question_id)
+    {
+        $question = Quiz_questions::find($question_id);
+        $user_data = User::find(auth()->user()->id);
+        return view('instructor_edit_quiz_question', [
+            'question' => $question,
+            'user_data' => $user_data,
+        ]);
+    }
+
+    public function instructor_add_item_to_quiz($quiz_id)
+    {
+        $quiz = Course_quiz::find($quiz_id);
+        $user_data = User::find(auth()->user()->id);
+        return view('instructor_add_item_to_quiz', [
+            'quiz' => $quiz,
+            'user_data' => $user_data,
+        ]);
+    }
+
+
+    public function course_exam_status_update($quiz_id, $status, $course_id)
+    {
+        //return 'asdasd';
+        if ($status == 'disabled') {
+            Exam::where('id', $quiz_id)
+                ->update(['status' => 'enabled']);
+        } else {
+            Exam::where('id', $quiz_id)
+                ->update(['status' => 'disabled']);
+        }
+
+        return redirect()->route('instructor_show_chapter', ['course_id' => $course_id])->with('success', 'Updated');
+    }
+
+    public function instructor_edit_exam_question($question_id)
+    {
+        $question = Exam_questions::find($question_id);
+        $user_data = User::find(auth()->user()->id);
+        return view('instructor_edit_exam_question', [
+            'question' => $question,
+            'user_data' => $user_data,
+        ]);
+    }
+
+    public function instructor_edit_exam_question_process(Request $request)
+    {
+        // return $request->input();
+        if ($request->input('question_type') == 'Enumeration') {
+            $implode = implode('|', $request->input('answer'));
+            foreach ($request->input('answer') as $key => $data) {
+                Exam_questions::where('id', $request->input('quiz_question_id'))
+                    ->update([
+                        'question' => $request->input('question'),
+                        'answer' => strtolower($implode),
+                    ]);
+            }
+
+            return redirect()->route('instructor_edit_exam_question', ['question_id' => $request->input('quiz_question_id')])->with('success', 'Updated');
+        } elseif ($request->input('question_type') == 'Multitple Choice') {
+            Exam_questions::where('id', $request->input('quiz_question_id'))
+                ->update([
+                    'question' => $request->input('question'),
+                    'answer' => strtolower($request->input('answer')),
+                ]);
+
+            Exam_details::where('id', $request->input('quiz_details_id'))
+                ->update([
+                    'choice_a' => $request->input('choice_a'),
+                    'choice_b' => $request->input('choice_b'),
+                    'choice_c' => $request->input('choice_c'),
+                    'choice_d' => $request->input('choice_d'),
+                ]);
+
+            return redirect()->route('instructor_edit_exam_question', ['question_id' => $request->input('quiz_question_id')])->with('success', 'Updated');
+        } elseif ($request->input('question_type') == 'Identification') {
+            Exam_questions::where('id', $request->input('quiz_question_id'))
+                ->update([
+                    'question' => $request->input('question'),
+                    'answer' => strtolower($request->input('answer')),
+                ]);
+
+            return redirect()->route('instructor_edit_exam_question', ['question_id' => $request->input('quiz_question_id')])->with('success', 'Updated');
+        } elseif ($request->input('question_type') == 'Matching Type') {
+            //return $request->input();
+            $answer = implode('|', $request->input('answer'));
+            $question = implode('|', $request->input('question'));
+
+            Exam_questions::where('id', $request->input('quiz_question_id'))
+                ->update([
+                    'question' => $question,
+                    'answer' => strtolower($answer),
+                ]);
+
+            foreach ($request->input('matching_id') as $key => $matching_id) {
+                Quiz_matching::where('id', $matching_id)
+                    ->update([
+                        'choices' => $request->input('choices')[$matching_id],
+                    ]);
+            }
+
+            return redirect()->route('instructor_edit_exam_question', ['question_id' => $request->input('quiz_question_id')])->with('success', 'Updated');
+        }
     }
 }

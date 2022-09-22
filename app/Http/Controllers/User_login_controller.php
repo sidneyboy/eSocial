@@ -16,4 +16,15 @@ class User_login_controller extends Controller
         $request->session()->regenerateToken();
         return view('auth/login');
     }
+
+    public function admin_login(Request $request)
+    {
+        Auth::logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        return view('admin_login');
+    }
 }

@@ -14,5 +14,13 @@ class Course_quiz extends Model
         'course_chapter_id',
         'quiz_title',
         'number_of_questions',
+        'status',
     ];
+
+    public function quiz_question()
+    {
+        return $this->hasMany('App\Models\Quiz_questions', 'course_quiz_id');
+    }
+
+   
 }

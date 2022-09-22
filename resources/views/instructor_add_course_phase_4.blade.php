@@ -13,7 +13,7 @@
             @endif
             <div class="card" style="width: 100%;">
                 <div class="card-header" style="font-weight: bold;">Chapter Quiz</div>
-                <form action="{{ route('instructor_add_course_phase_4_process') }}" method="post" enctype="multipart/form-data">
+                <form action="{{ route('instructor_add_course_phase_4_process') }}" method="get" enctype="multipart/form-data">
                     @csrf
                     <div class="card-body">
                         <div class="form-group">
