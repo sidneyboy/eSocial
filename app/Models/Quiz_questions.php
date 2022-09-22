@@ -16,6 +16,7 @@ class Quiz_questions extends Model
         'question',
         'answer',
         'question_type',
+        'score',
     ];
 
     public function quiz_details()

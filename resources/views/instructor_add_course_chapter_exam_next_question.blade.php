@@ -34,7 +34,8 @@
                                 <option value="Matching Type">Matching Type</option>
                             </select>
 
-                          
+                            <label>Score</label>
+                            <input type="number" class="form-control" name="score" required>
 
                             <input type="hidden" value="{{ $course_id }}" name="course_id">
                             <input type="hidden" value="{{ $exam_id }}" name="exam_id">

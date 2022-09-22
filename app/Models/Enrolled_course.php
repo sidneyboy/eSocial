@@ -22,6 +22,11 @@ class Enrolled_course extends Model
         return $this->belongsTo('App\Models\User', 'student_id','id');
     }
 
+    public function course()
+    {
+        return $this->belongsTo('App\Models\Course', 'course_id','id');
+    }
+
     public function instructor()
     {
         return $this->belongsTo('App\Models\User', 'instructor_id','id');

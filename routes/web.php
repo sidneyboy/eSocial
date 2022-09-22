@@ -100,19 +100,25 @@ Route::post('/instructor_add_course_process', 'Instructor_controller@instructor_
 Route::get('/instructor_courses_show_content', 'Instructor_controller@instructor_courses_show_content')->name('instructor_courses_show_content');
 
 
-Route::post('/instructor_add_file_to_chapter', 'Instructor_controller@instructor_add_file_to_chapter')->name('instructor_add_file_to_chapter');
+Route::post('/instructor_add_file_to_chapter', 'Instrinstructor_edit_exam_questionuctor_controller@instructor_add_file_to_chapter')->name('instructor_add_file_to_chapter');
 
 Route::get('/instructor_chapter_add_quiz_or_exam', 'Instructor_controller@instructor_chapter_add_quiz_or_exam')->name('instructor_chapter_add_quiz_or_exam');
 
 Route::get('/instructor_add_course_phase_4_process', 'Instructor_controller@instructor_add_course_phase_4_process')->name('instructor_add_course_phase_4_process');
 
 Route::get('/instructor_add_item_to_quiz/{quiz_id}', 'Instructor_controller@instructor_add_item_to_quiz')->name('instructor_add_item_to_quiz');
+Route::get('/instructor_add_item_to_exam/{exam_id}', 'Instructor_controller@instructor_add_item_to_exam')->name('instructor_add_item_to_exam');
+Route::get('/instructor_add_item_to_assignment/{assignment_id}', 'Instructor_controller@instructor_add_item_to_assignment')->name('instructor_add_item_to_assignment');
+
 
 
 Route::get('/instructor_add_course_chapter_quiz_next_question', 'Instructor_controller@instructor_add_course_chapter_quiz_next_question')->name('instructor_add_course_chapter_quiz_next_question');
 
 
 Route::get('/instructor_add_course_chapter_exam_next_question', 'Instructor_controller@instructor_add_course_chapter_exam_next_question')->name('instructor_add_course_chapter_exam_next_question');
+
+Route::get('/instructor_add_course_chapter_assignment_next_question', 'Instructor_controller@instructor_add_course_chapter_assignment_next_question')->name('instructor_add_course_chapter_assignment_next_question');
+
 
 
 
@@ -141,15 +147,22 @@ Route::get('/instructor_edit_exam_question/{question_id}', 'Instructor_controlle
 
 Route::post('/instructor_edit_exam_question_process', 'Instructor_controller@instructor_edit_exam_question_process')->name('instructor_edit_exam_question_process');
 
+Route::get('/instructor_edit_assignment_question/{question_id}', 'Instructor_controller@instructor_edit_assignment_question')->name('instructor_edit_assignment_question');
+
+Route::post('/instructor_edit_assignment_question_process', 'Instructor_controller@instructor_edit_assignment_question_process')->name('instructor_edit_assignment_question_process');
+
 
 
 Route::get('/course_exam_status_update/{exam}/{status}/{course_id}', 'Instructor_controller@course_exam_status_update')->name('course_exam_status_update');
 
 
+Route::get('/instructor_add_course_assignment_process/', 'Instructor_controller@instructor_add_course_assignment_process')->name('instructor_add_course_assignment_process');
 
 
+// Route::get('/instructor_add_course_chapter_assignment_next_question', 'Instructor_controller@instructor_add_course_chapter_assignment_next_question')->name('instructor_add_course_chapter_assignment_next_question');
 
 
+// Route::get('/instructor_add_course_chapter_assignment_next_question', 'Instructor_controller@instructor_add_course_chapter_assignment_next_question')->name('instructor_add_course_chapter_assignment_next_question');
 
 
 
@@ -183,13 +196,14 @@ Route::get('/instructor_show_image/{course_id}', 'Instructor_controller@instruct
 Route::post('/instructor_todo_process/', 'Instructor_controller@instructor_todo_process')->name('instructor_todo_process');
 Route::get('/instructor_to_do_list/', 'Instructor_controller@instructor_to_do_list')->name('instructor_to_do_list');
 Route::post('/planner_prompt/', 'Instructor_controller@planner_prompt')->name('planner_prompt');
-
 Route::get('/planner_approved/{planner_id}', 'Instructor_controller@planner_approved')->name('planner_approved');
-
 Route::get('/no404/', 'Instructor_controller@no404')->name('no404');
 
 
+Route::post('/instructor_edit_chapter/', 'Instructor_controller@instructor_edit_chapter')->name('instructor_edit_chapter');
 
+
+Route::get('/instructor_list_of_students/', 'Instructor_controller@instructor_list_of_students')->name('instructor_list_of_students');
 
 
 

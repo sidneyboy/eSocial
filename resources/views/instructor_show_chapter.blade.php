@@ -48,7 +48,7 @@
                                         <div class="collapse" id="collapseExampleattachments{{ $data->id }}">
                                             <div class="card card-body">
                                                 <div class="table table-responsive">
-                                                    <table class="table table-striped">
+                                                    <table class="table table-striped table-hover table-sm" id="example">
                                                         <thead>
                                                             <tr>
                                                                 <th>File Type</th>
@@ -56,6 +56,8 @@
                                                                 <th>Created At</th>
                                                                 <th>Status</th>
                                                             </tr>
+                                                        </thead>
+                                                        <tbody>
                                                             @foreach ($data->course_details as $details)
                                                                 <tr>
                                                                     @if ($details->file_type == 'image')
@@ -145,20 +147,22 @@
                                                                     @endif
                                                                 </tr>
                                                             @endforeach
-                                                        </thead>
+                                                        </tbody>
                                                     </table>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="collapse" id="collapseExampleexam{{ $data->id }}">
                                             <div class="card card-body">
-                                                <table class="table table-striped">
+                                                <table class="table table-striped table-hover table-sm" id="example2">
                                                     <thead>
                                                         <tr>
                                                             <th>Title</th>
                                                             <th>Created At</th>
                                                             <th>Status</th>
                                                         </tr>
+                                                    </thead>
+                                                    <tbody>
                                                         @foreach ($data->course_quiz as $quiz)
                                                             <tr>
                                                                 <td>
@@ -362,7 +366,8 @@
                                                                                         data-dismiss="modal">Close</button>
                                                                                     <a href="{{ url('instructor_add_item_to_quiz', ['quiz_id' => $quiz->id]) }}"
                                                                                         class="btn btn-sm btn-primary">Quiz
-                                                                                        (+)</a>
+                                                                                        (+)
+                                                                                    </a>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -593,8 +598,8 @@
                                                                                     <button type="button"
                                                                                         class="btn btn-sm btn-secondary"
                                                                                         data-dismiss="modal">Close</button>
-                                                                                    <a href="{{ url('instructor_add_item_to_quiz', ['quiz_id' => $exam->id]) }}"
-                                                                                        class="btn btn-sm btn-primary">Quiz
+                                                                                    <a href="{{ url('instructor_add_item_to_exam', ['exam_id' => $exam->id]) }}"
+                                                                                        class="btn btn-sm btn-primary">Exam
                                                                                         (+)
                                                                                     </a>
                                                                                 </div>
@@ -623,7 +628,241 @@
                                                                 </td>
                                                             </tr>
                                                         @endforeach
-                                                    </thead>
+                                                        @foreach ($data->assignment as $assignment)
+                                                            <tr>
+                                                                <td>
+                                                                    <!-- Button trigger modal -->
+                                                                    <button type="button"
+                                                                        class="btn btn-link btn-sm btn-block"
+                                                                        data-toggle="modal"
+                                                                        data-target="#exampleModalexam{{ $assignment->id }}">
+                                                                        {{ $assignment->title }}
+                                                                    </button>
+
+                                                                    <!-- Modal -->
+                                                                    <div class="modal fade"
+                                                                        id="exampleModalexam{{ $assignment->id }}"
+                                                                        tabindex="-1" role="dialog"
+                                                                        aria-labelledby="exampleModalLabel"
+                                                                        aria-hidden="true">
+                                                                        <div class="modal-dialog" role="document">
+                                                                            <div class="modal-content">
+                                                                                <div class="modal-header">
+                                                                                    <h5 class="modal-title"
+                                                                                        id="exampleModalLabel">
+                                                                                        {{ $assignment->title }}
+                                                                                    </h5>
+                                                                                    <button type="button" class="close"
+                                                                                        data-dismiss="modal"
+                                                                                        aria-label="Close">
+                                                                                        <span
+                                                                                            aria-hidden="true">&times;</span>
+                                                                                    </button>
+                                                                                </div>
+                                                                                <div class="modal-body">
+                                                                                    @foreach ($assignment->assignment_question as $question)
+                                                                                        <div class="card"
+                                                                                            style="margin-bottom: 20px;">
+                                                                                            <div class="card-header">
+                                                                                                @if ($question->question_type != 'Matching Type')
+                                                                                                    Question:
+                                                                                                    {{ $question->question }}
+                                                                                                @else
+                                                                                                    Matching Type
+                                                                                                @endif
+                                                                                            </div>
+                                                                                            <div class="card-body">
+                                                                                                @if ($question->question_type == 'Enumeration')
+                                                                                                    @php
+                                                                                                        $explode = explode('|', $question->answer);
+                                                                                                    @endphp
+                                                                                                    <ul class="list-group">
+                                                                                                        <li
+                                                                                                            class="list-group-item">
+                                                                                                            Answers
+                                                                                                        </li>
+                                                                                                        @foreach ($explode as $key => $value)
+                                                                                                            <li
+                                                                                                                class="list-group-item">
+                                                                                                                {{ $value }}
+                                                                                                            </li>
+                                                                                                        @endforeach
+                                                                                                    </ul>
+                                                                                                @elseif($question->question_type == 'Multitple Choice')
+                                                                                                    <ul class="list-group">
+                                                                                                        <li
+                                                                                                            class="list-group-item">
+                                                                                                            Choices</li>
+
+                                                                                                        @if ($question->answer == 'choice_a')
+                                                                                                            <li class="list-group-item"
+                                                                                                                style="background-color:greenyellow">
+                                                                                                                A.
+                                                                                                                {{-- {{ $question->exam_details->choice_a }} --}}
+                                                                                                                {{ $question->assignment_details->choice_a }}
+                                                                                                            </li>
+                                                                                                            <li
+                                                                                                                class="list-group-item">
+                                                                                                                B.
+                                                                                                                {{ $question->assignment_details->choice_a }}
+                                                                                                            </li>
+                                                                                                            <li
+                                                                                                                class="list-group-item">
+                                                                                                                C.
+                                                                                                                {{ $question->assignment_details->choice_a }}
+                                                                                                            </li>
+                                                                                                            <li
+                                                                                                                class="list-group-item">
+                                                                                                                D.
+                                                                                                                {{ $question->assignment_details->choice_a }}
+                                                                                                            </li>
+                                                                                                        @elseif($question->answer == 'choice_b')
+                                                                                                            <li
+                                                                                                                class="list-group-item">
+                                                                                                                A.
+                                                                                                                {{ $question->assignment_details->choice_a }}
+                                                                                                            </li>
+                                                                                                            <li class="list-group-item"
+                                                                                                                style="background-color:greenyellow">
+                                                                                                                B.
+                                                                                                                {{ $question->assignment_details->choice_b }}
+                                                                                                            </li>
+                                                                                                            <li
+                                                                                                                class="list-group-item">
+                                                                                                                C.
+                                                                                                                {{ $question->assignment_details->choice_c }}
+                                                                                                            </li>
+                                                                                                            <li
+                                                                                                                class="list-group-item">
+                                                                                                                D.
+                                                                                                                {{ $question->assignment_details->choice_d }}
+                                                                                                            </li>
+                                                                                                        @elseif($question->answer == 'choice_c')
+                                                                                                            <li
+                                                                                                                class="list-group-item">
+                                                                                                                A.
+                                                                                                                {{ $question->assignment_details->choice_a }}
+                                                                                                            </li>
+                                                                                                            <li
+                                                                                                                class="list-group-item">
+                                                                                                                B.
+                                                                                                                {{ $question->assignment_details->choice_b }}
+                                                                                                            </li>
+                                                                                                            <li class="list-group-item"
+                                                                                                                style="background-color:greenyellow">
+                                                                                                                C.
+                                                                                                                {{ $question->assignment_details->choice_c }}
+                                                                                                            </li>
+                                                                                                            <li
+                                                                                                                class="list-group-item">
+                                                                                                                D.
+                                                                                                                {{ $question->assignment_details->choice_d }}
+                                                                                                            </li>
+                                                                                                        @elseif($question->answer == 'choice_d')
+                                                                                                            <li
+                                                                                                                class="list-group-item">
+                                                                                                                A.
+                                                                                                                {{ $question->assignment_details->choice_a }}
+                                                                                                            </li>
+                                                                                                            <li
+                                                                                                                class="list-group-item">
+                                                                                                                B.
+                                                                                                                {{ $question->assignment_details->choice_b }}
+                                                                                                            </li>
+                                                                                                            <li
+                                                                                                                class="list-group-item">
+                                                                                                                C.
+                                                                                                                {{ $question->assignment_details->choice_c }}
+                                                                                                            </li>
+                                                                                                            <li class="list-group-item"
+                                                                                                                style="background-color:greenyellow">
+                                                                                                                D.
+                                                                                                                {{ $question->assignment_details->choice_d }}
+                                                                                                            </li>
+                                                                                                        @endif
+                                                                                                    </ul>
+                                                                                                @elseif($question->question_type == 'Identification')
+                                                                                                    <ul class="list-group">
+                                                                                                        <li
+                                                                                                            class="list-group-item">
+                                                                                                            {{ $question->answer }}
+                                                                                                        </li>
+                                                                                                    </ul>
+                                                                                                @elseif($question->question_type == 'Matching Type')
+                                                                                                    @php
+                                                                                                        $match_answer = explode('|', $question->answer);
+                                                                                                        $match_question = explode('|', $question->question);
+                                                                                                    @endphp
+                                                                                                    <ul class="list-group">
+                                                                                                        <li
+                                                                                                            class="list-group-item">
+                                                                                                            Answer</li>
+
+                                                                                                        @for ($i = 0; $i < count($match_answer); $i++)
+                                                                                                            <li
+                                                                                                                class="list-group-item">
+                                                                                                                {{ $match_question[$i] }}
+                                                                                                                -
+                                                                                                                {{ $match_answer[$i] }}
+                                                                                                            </li>
+                                                                                                        @endfor
+                                                                                                    </ul>
+                                                                                                    <br />
+                                                                                                    <ul class="list-group">
+                                                                                                        <li
+                                                                                                            class="list-group-item">
+                                                                                                            Choices</li>
+                                                                                                        @foreach ($question->exam_matching as $match_choices)
+                                                                                                            <li
+                                                                                                                class="list-group-item">
+                                                                                                                {{ $match_choices->choices }}
+                                                                                                            </li>
+                                                                                                        @endforeach
+                                                                                                    </ul>
+                                                                                                @endif
+                                                                                            </div>
+                                                                                            <div class="card-footer">
+                                                                                                <a href="{{ url('instructor_edit_assignment_question', ['question_id' => $question->id]) }}"
+                                                                                                    class="btn btn-primary btn-sm float-right">Edit</a>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    @endforeach
+                                                                                </div>
+                                                                                <div class="modal-footer">
+                                                                                    <button type="button"
+                                                                                        class="btn btn-sm btn-secondary"
+                                                                                        data-dismiss="modal">Close</button>
+                                                                                    <a href="{{ url('instructor_add_item_to_assignment', ['assignment_id' => $assignment->id]) }}"
+                                                                                        class="btn btn-sm btn-primary">Assignment
+                                                                                        (+)
+                                                                                    </a>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </td>
+                                                                <td>{{ date('F j, Y h:i a', strtotime($assignment->created_at)) }}
+                                                                </td>
+                                                                <td>
+                                                                    @if ($assignment->status == 'disabled')
+                                                                        <a href="{{ url('course_exam_status_update', [
+                                                                            'exam_id' => $assignment->id,
+                                                                            'status' => $assignment->status,
+                                                                            'course_id' => $data->course_id,
+                                                                        ]) }}"
+                                                                            class="btn btn-sm btn-danger btn-block">{{ $assignment->status }}</a>
+                                                                    @else
+                                                                        <a href="{{ url('course_exam_status_update', [
+                                                                            'exam_id' => $assignment->id,
+                                                                            'status' => $assignment->status,
+                                                                            'course_id' => $data->course_id,
+                                                                        ]) }}"
+                                                                            class="btn btn-sm btn-success btn-block">{{ $assignment->status }}</a>
+                                                                    @endif
+                                                                </td>
+                                                            </tr>
+                                                        @endforeach
+                                                    </tbody>
                                                 </table>
                                             </div>
                                         </div>
@@ -634,16 +873,16 @@
                     </div>
                     <div class="card-header">
                         <div class="row">
-                            <div class="col-md-12">
+                            <div class="col-md-6">
                                 <!-- Button trigger modal -->
                                 <button type="button" class="btn btn-primary btn-sm btn-block" data-toggle="modal"
-                                    data-target="#exampleModal">
+                                    data-target="#exampleModalcontent{{ $data->id }}">
                                     ADD CHAPTER CONTENT
                                 </button>
 
                                 <!-- Modal -->
-                                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
-                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal fade" id="exampleModalcontent{{ $data->id }}" tabindex="-1"
+                                    role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
@@ -662,12 +901,63 @@
 
                                                     <input type="hidden" name="course_id"
                                                         value="{{ $data->course_id }}">
-                                                    <input type="hidden" name="chapter_id" value="{{ $data->id }}">
+                                                    <input type="hidden" name="chapter_id"
+                                                        value="{{ $data->id }}">
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-sm btn-secondary"
                                                         data-dismiss="modal">Close</button>
                                                     <button type="submit" class="btn btn-primary">Save changes</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <!-- Button trigger modal -->
+                                <button type="button" class="btn btn-primary btn-sm btn-block" data-toggle="modal"
+                                    data-target="#exampleModaledit{{ $data->id }}">
+                                    EDIT
+                                </button>
+
+                                <!-- Modal -->
+                                <div class="modal fade" id="exampleModaledit{{ $data->id }}" tabindex="-1"
+                                    role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Edit</h5>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                    aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <form action="{{ route('instructor_edit_chapter') }}"
+                                                enctype="multipart/form-data" method="post">
+                                                @csrf
+                                                <div class="modal-body">
+                                                    <label>Chapter</label>
+                                                    <input type="text" name="chapter" class="form-control" required
+                                                        value="{{ $data->chapter_number }}">
+
+                                                    <label>Title</label>
+                                                    <input type="text" name="title" class="form-control" required
+                                                        value="{{ $data->title }}">
+
+                                                    <label>Description</label>
+                                                    <textarea name="content" class="form-control" col="30">{{ $data->content }}</textarea>
+
+                                                    <input type="hidden" name="course_id"
+                                                        value="{{ $data->course_id }}">
+                                                    <input type="hidden" name="chapter_id"
+                                                        value="{{ $data->id }}">
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-sm btn-secondary"
+                                                        data-dismiss="modal">Close</button>
+                                                    <button type="submit" class="btn btn-sm btn-primary">Save
+                                                        changes</button>
                                                 </div>
                                             </form>
                                         </div>

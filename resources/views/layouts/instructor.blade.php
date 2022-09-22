@@ -242,6 +242,13 @@
                 </a>
             </li>
 
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url('instructor_list_of_students') }}">
+                    <i class="bi bi-book-half"></i>
+                    <span>{{ __('List of students') }}</span>
+                </a>
+            </li>
+
             {{-- <li class="nav-item">
                 <a class="nav-link" href="{{ url('instructor_invite_student',[]) }}">
                     <i class="fas fa-fw fa-hands-helping"></i>
@@ -462,6 +469,15 @@
 
         $(document).ready(function() {
             $('#example').DataTable({
+                "paging": false,
+                "lengthChange": false,
+                "searching": true,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+            });
+
+            $('#example2').DataTable({
                 "paging": false,
                 "lengthChange": false,
                 "searching": true,

@@ -11,11 +11,13 @@ class Exam_questions extends Model
     
     protected $fillable = [
         'course_id',
+        'course_chapter_id',
+        'course_assignment_id',
         'course_exam_id',
         'question',
         'answer',
-        'course_chapter_id',
         'question_type',
+        'score',
     ];
 
     public function exam_details()
