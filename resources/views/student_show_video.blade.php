@@ -22,24 +22,22 @@
 <body>
     <br />
     <div class="container">
-        @foreach ($course_data as $data)
-            <div class="card" style="width: 100%;">
-                <div class="card-header">
-                    <a href="{{ url('student_enrolled_courses') }}">Back</a>
-                </div>
-                <div class="card-body">
-                    <video controls>
-                        <source src="{{ asset('/storage/' . $data->file) }}"
-                            type="{{ $data->file_type }}">
-                    </video>
-                </div>
-                <div class="card-footer">
-                    <div class="float-right">
-                        {{ $course_data->links() }}
-                    </div>
-                </div>
+        <div class="card" style="width: 100%;">
+            <div class="card-header">
+                <a href="{{ url('student_show_course_chapter',['course_id' => $course_data->course_id]) }}">Back</a>
             </div>
-        @endforeach
+            <div class="card-body">
+                <video controls>
+                    <source src="{{ asset('/storage/' . $course_data->file) }}"
+                        type="{{ $course_data->file_type }}/mp4">
+                </video>
+            </div>
+            {{-- <div class="card-footer">
+                <div class="float-right">
+                    {{ $course_data->links() }}
+                </div>
+            </div> --}}
+        </div>
     </div>
     <br />
     <!-- Optional JavaScript; choose one of the two! -->

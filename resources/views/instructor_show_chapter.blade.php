@@ -812,7 +812,7 @@
                                                                                                         <li
                                                                                                             class="list-group-item">
                                                                                                             Choices</li>
-                                                                                                        @foreach ($question->exam_matching as $match_choices)
+                                                                                                        @foreach ($question->assignment_matching as $match_choices)
                                                                                                             <li
                                                                                                                 class="list-group-item">
                                                                                                                 {{ $match_choices->choices }}

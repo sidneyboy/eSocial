@@ -35,8 +35,8 @@
                             <label>Topic</label>
                             <textarea name="content" class="form-control" required></textarea>
 
-                            {{-- <label>Thumbnail</label>
-                            <input type="file" name="thumbnail" accept="image/*" class="form-control" required> --}}
+                            <label>Thumbnail</label>
+                            <input type="file" name="thumbnail" accept="image/*" class="form-control" required>
 
                             <input type="hidden" value="{{ $course_id }}" name="course_id">
                         </div>

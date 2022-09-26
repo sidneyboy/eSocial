@@ -24,6 +24,12 @@ class Assignment_questions extends Model
         return $this->hasOne('App\Models\Assignment_details', 'assignment_question_id');
     }
 
+    public function assignment()
+    {
+        return $this->belongsTo('App\Models\Assignment', 'course_assignment_id');
+    }
+
+
     public function assignment_matching()
     {
         return $this->hasMany('App\Models\Assignment_matching', 'assignment_question_id');

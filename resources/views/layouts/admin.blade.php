@@ -197,6 +197,13 @@
             </li>
 
             <li class="nav-item">
+                <a class="nav-link" href="{{ url('courses') }}">
+                    <i class="bi bi-book-half"></i>
+                    <span>{{ __('Course Approval') }}</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
                 <a class="nav-link" href="{{ url('course_type') }}">
                     <i class="bi bi-book-half"></i>
                     <span>{{ __('Course Type') }}</span>

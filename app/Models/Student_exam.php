@@ -16,5 +16,6 @@ class Student_exam extends Model
         'instructor_id',
         'student_exam_percentage',
         'remarks',
+        'course_chapter_id',
     ];
 }

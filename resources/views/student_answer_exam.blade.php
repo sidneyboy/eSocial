@@ -42,8 +42,6 @@
                                 <label><input type="radio" name="student_answer" class="student_answer"
                                         value="choice_d">{{ $data->choice_d }}</label>
                             </div>
-
-
                             <input type="hidden" id="student_exam_details_id" value="{{ $data->id }}">
                             <input type="hidden" id="answer" value="{{ $data->question_answer }}">
                             <button id="submit" class="btn btn-sm btn-success float-right">Submit Answer</button>

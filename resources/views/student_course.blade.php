@@ -30,6 +30,7 @@
                         {{ $data->course_title }}</div>
                     <img class="card-img-top" style="border-radius: 0px;"
                         src="{{ asset('/storage/' . $data->image_template) }}" alt="Card image cap">
+
                     <div class="card-body">
                         <p style="text-align: justify">{{ $data->course_description }}</p>
                     </div>

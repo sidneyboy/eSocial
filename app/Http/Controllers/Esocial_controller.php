@@ -6,6 +6,7 @@ use App\Models\Tutorial;
 use App\Models\Course_type;
 use App\Models\User;
 use App\Models\Payment;
+use App\Models\Course;
 use Illuminate\Http\Request;
 
 class Esocial_controller extends Controller
@@ -111,6 +112,35 @@ class Esocial_controller extends Controller
         return redirect('approved_instructor')->with('success', 'Successfully suspended selected instructor');
     }
 
+    public function courses()
+    {
+        $courses = Course::orderBy('id', 'desc')->get();
+        $user_data = User::find(auth()->user()->id);
+        return view('courses', [
+            'courses' => $courses,
+            'user_data' => $user_data,
+        ]);
+    }
+
+    public function course_update($course_id, $status)
+    {
+        if ($status == 'Pending Approval') {
+            Course::where('id', $course_id)
+                ->update([
+                    'status' => 'Approved',
+                ]);
+
+            return redirect('courses')->with('success', 'Successfully Change Status To Approved');
+        } else {
+            Course::where('id', $course_id)
+                ->update([
+                    'status' => 'Pending Approval',
+                ]);
+
+            return redirect('courses')->with('success', 'Successfully Change Status To Pending Approval');
+        }
+    }
+
 
 
     public function student_list()
@@ -157,6 +187,6 @@ class Esocial_controller extends Controller
         Course_type::where('id', $request->input('course_type_id'))
             ->update(['course_type' => $request->input('course_type')]);
 
-        return redirect('course_type')->with('success','Successfully edited selected course type');
+        return redirect('course_type')->with('success', 'Successfully edited selected course type');
     }
 }

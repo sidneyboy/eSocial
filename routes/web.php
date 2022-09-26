@@ -29,6 +29,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Auth::routes();
 
 Route::get('/tutorial', 'Esocial_controller@tutorial')->name('tutorial');
+Route::get('/courses', 'Esocial_controller@courses')->name('courses');
 Route::post('/tutorial_process', 'Esocial_controller@tutorial_process')->name('tutorial_process');
 Route::get('/course_type', 'Esocial_controller@course_type')->name('course_type');
 Route::post('/course_process', 'Esocial_controller@course_process')->name('course_process');
@@ -42,6 +43,7 @@ Route::get('/suspend_student/{user_id}/{status}', 'Esocial_controller@suspend_st
 Route::get('/payment_history', 'Esocial_controller@payment_history')->name('payment_history');
 Route::get('/tutorial_remove/{tutorial_id}', 'Esocial_controller@tutorial_remove')->name('tutorial_remove');
 Route::post('/course_type_edit_process', 'Esocial_controller@course_type_edit_process')->name('course_type_edit_process');
+Route::get('/course_update/{course_id}/{status}', 'Esocial_controller@course_update')->name('course_update');
 
 
 
@@ -50,12 +52,21 @@ Route::get('/student_course', 'Student_controller@student_course')->name('studen
 Route::get('/student_update', 'Student_controller@student_profile')->name('student_profile');
 Route::get('/student_search_course', 'Student_controller@student_search_course')->name('student_search_course');
 Route::post('/student_comment_process', 'Student_controller@student_comment_process')->name('student_comment_process');
-Route::get('/student_show_image_file/{course_id}', 'Student_controller@student_show_image_file')->name('student_show_image_file');
-Route::get('/student_show_pdf_file/{course_id}', 'Student_controller@student_show_pdf_file')->name('student_show_pdf_file');
-Route::get('/student_show_video/{course_id}', 'Student_controller@student_show_video')->name('student_show_video');
+Route::get('/student_show_image_file/{course_details_id}/{course_id}/{course_chapter_id}', 'Student_controller@student_show_image_file')->name('student_show_image_file');
+Route::get('/student_show_pdf_file/{course_details_id}/{course_id}/', 'Student_controller@student_show_pdf_file')->name('student_show_pdf_file');
+Route::get('/student_show_video/{course_details_id}/{course_id}/{course_chapter_id}', 'Student_controller@student_show_video')->name('student_show_video');
 Route::post('/student_message_process', 'Student_controller@student_message_process')->name('student_message_process');
 Route::get('/student_direct_message', 'Student_controller@student_direct_message')->name('student_direct_message');
 Route::get('/student_show_exam/{course_id}', 'Student_controller@student_show_exam')->name('student_show_exam');
+
+
+
+Route::get('/student_show_taken/{id}/{type}', 'Student_controller@student_show_taken')->name('student_show_taken');
+Route::post('/student_taken_process/', 'Student_controller@student_taken_process')->name('student_taken_process');
+
+
+
+
 Route::post('/student_exam_process', 'Student_controller@student_exam_process')->name('student_exam_process');
 Route::post('/student_enroll_course', 'Student_controller@student_enroll_course')->name('student_enroll_course');
 Route::get('/student_enrolled_courses', 'Student_controller@student_enrolled_courses')->name('student_enrolled_courses');
@@ -74,6 +85,8 @@ Route::get('/student_to_do_list', 'Student_controller@student_to_do_list')->name
 Route::get('/student_planner_approved/{planner_id}', 'Student_controller@student_planner_approved')->name('student_planner_approved');
 Route::post('/student_planner_prompt', 'Student_controller@student_planner_prompt')->name('student_planner_prompt');
 
+
+Route::get('/student_show_course_chapter/{course_id}', 'Student_controller@student_show_course_chapter')->name('student_show_course_chapter');
 
 
 

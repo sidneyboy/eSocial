@@ -13,21 +13,6 @@
         </div>
     @endif
     @if (isset($course))
-        {{-- <div class="row">
-            <div class="col-md-12">
-                <form action="{{ route('student_enrolled_search_course') }}">
-                    @csrf
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="Search Subject" aria-label="Search Subject"
-                            name="search_box" aria-describedby="basic-addon2">
-                        <div class="input-group-append">
-                            <span class="input-group-text" id="basic-addon2"><i class="bi bi-search"></i></span>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div> --}}
-
         @foreach ($course as $data)
             <div class="row">
                 <div class="col-md-12">
@@ -35,12 +20,14 @@
                         <div class="card-header" style="font-weight: bold;background-color:#141E30;color:white">
                             {{ $data->course_type->course_type }} -
                             {{ $data->course_title }}</div>
-                        <img class="card-img-top" style="border-radius: 0px;"
+                        <a href="{{ url('student_show_course_chapter', ['course_id' => $data->id]) }}">
+                            <img class="card-img-top" style="border-radius: 0px;"
                             src="{{ asset('/storage/' . $data->image_template) }}" alt="Card image cap">
+                        </a>
                         <div class="card-body">
                             <p style="text-align: justify">{{ $data->course_description }}</p>
                         </div>
-                        <div class="card-body">
+                        {{-- <div class="card-body">
                             <button class="btn btn-primary btn-sm btn-block" style="border-radius: 0px;border:0px;"
                                 type="button" data-toggle="collapse" data-target="#collapseExample{{ $data->id }}"
                                 aria-expanded="false" aria-controls="collapseExample{{ $data->id }}">
@@ -166,7 +153,7 @@
                                     </ul>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                         <div class="card-footer" style="background-color:#141E30"">
                             <p style="color:white"> Instructor: {{ $data->user->name }} {{ $data->user->last_name }}</p>
                         </div>

@@ -30,11 +30,11 @@
                             <label>Score</label>
                             <input type="number" name="score" required min="0" class="form-control">
 
-                            <input type="text" value="{{ $question->course_id }}" name="course_id">
-                            <input type="text" value="{{ $question->id }}" name="exam_id">
-                            <input type="text" value="{{ $question->course_chapter_id }}" name="course_chapter_id">
-                            <input type="text" value="{{ 1 }}" name="number_of_questions">
-                            <input type="text" value="add_one" name="add_one">
+                            <input type="hidden" value="{{ $exam->course_id }}" name="course_id">
+                            <input type="hidden" value="{{ $exam->id }}" name="exam_id">
+                            <input type="hidden" value="{{ $exam->course_chapter_id }}" name="course_chapter_id">
+                            <input type="hidden" value="{{ 1 }}" name="number_of_questions">
+                            <input type="hidden" value="add_one" name="add_one">
                         </div>
                         <div id="show"></div>
                     </div>
