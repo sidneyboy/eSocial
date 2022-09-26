@@ -845,15 +845,15 @@
                                                                 </td>
                                                                 <td>
                                                                     @if ($assignment->status == 'disabled')
-                                                                        <a href="{{ url('course_exam_status_update', [
-                                                                            'exam_id' => $assignment->id,
+                                                                        <a href="{{ url('instructor_course_assignment_status_update', [
+                                                                            'assignment_id' => $assignment->id,
                                                                             'status' => $assignment->status,
                                                                             'course_id' => $data->course_id,
                                                                         ]) }}"
                                                                             class="btn btn-sm btn-danger btn-block">{{ $assignment->status }}</a>
                                                                     @else
-                                                                        <a href="{{ url('course_exam_status_update', [
-                                                                            'exam_id' => $assignment->id,
+                                                                        <a href="{{ url('instructor_course_assignment_status_update', [
+                                                                            'assignment_id' => $assignment->id,
                                                                             'status' => $assignment->status,
                                                                             'course_id' => $data->course_id,
                                                                         ]) }}"

@@ -19,6 +19,11 @@
         @foreach ($assignment_question as $question)
             <div class="card">
                 <div class="card-header">
+                    <span style="text-transform: uppercase;font-weight:bold;">{{ $type }}</span>
+                    <a href="{{ url('student_taken_submit', ['taken_id' => $taken_id]) }}"
+                        class="float-right btn-sm btn btn-warning">Finish Assignment</a>
+                </div>
+                <div class="card-header">
                     @if ($question->question_type != 'Matching Type')
                         Question: <span class="float-right">{{ $question->score }} Points</span> <br />
                         {{ $question->question }}
@@ -45,23 +50,61 @@
                             @elseif($question->question_type == 'Multitple Choice')
                                 <input type="text" id="question_answer" value="{{ $question->answer }}">
 
-                                <div class="radio">
-                                    <label><input type="radio" name="student_answer" class="student_answer"
-                                            value="choice_a">{{ $question->assignment_details->choice_a }}</label>
-                                </div>
-                                <div class="radio">
-                                    <label><input type="radio" name="student_answer" class="student_answer"
-                                            value="choice_b">{{ $question->assignment_details->choice_b }}</label>
-                                </div>
-                                <div class="radio">
-                                    <label><input type="radio" name="student_answer" class="student_answer"
-                                            value="choice_c">{{ $question->assignment_details->choice_c }}</label>
-                                </div>
-                                <div class="radio">
-                                    <label><input type="radio" name="student_answer" class="student_answer"
-                                            value="choice_d">{{ $question->assignment_details->choice_d }}</label>
-                                </div>
-                                <input type="hidden" id="question_type" value="{{ $question->question_type }}">
+                                @if ($type == 'assignment')
+                                    <div class="radio">
+                                        <label><input type="radio" name="student_answer" class="student_answer"
+                                                value="choice_a">{{ $question->assignment_details->choice_a }}</label>
+                                    </div>
+                                    <div class="radio">
+                                        <label><input type="radio" name="student_answer" class="student_answer"
+                                                value="choice_b">{{ $question->assignment_details->choice_b }}</label>
+                                    </div>
+                                    <div class="radio">
+                                        <label><input type="radio" name="student_answer" class="student_answer"
+                                                value="choice_c">{{ $question->assignment_details->choice_c }}</label>
+                                    </div>
+                                    <div class="radio">
+                                        <label><input type="radio" name="student_answer" class="student_answer"
+                                                value="choice_d">{{ $question->assignment_details->choice_d }}</label>
+                                    </div>
+                                    <input type="hidden" id="question_type" value="{{ $question->question_type }}">
+                                @elseif($type == 'quiz')
+                                    <div class="radio">
+                                        <label><input type="radio" name="student_answer" class="student_answer"
+                                                value="choice_a">{{ $question->quiz_details->choice_a }}</label>
+                                    </div>
+                                    <div class="radio">
+                                        <label><input type="radio" name="student_answer" class="student_answer"
+                                                value="choice_b">{{ $question->quiz_details->choice_b }}</label>
+                                    </div>
+                                    <div class="radio">
+                                        <label><input type="radio" name="student_answer" class="student_answer"
+                                                value="choice_c">{{ $question->quiz_details->choice_c }}</label>
+                                    </div>
+                                    <div class="radio">
+                                        <label><input type="radio" name="student_answer" class="student_answer"
+                                                value="choice_d">{{ $question->quiz_details->choice_d }}</label>
+                                    </div>
+                                    <input type="hidden" id="question_type" value="{{ $question->question_type }}">
+                                @elseif($type == 'exam')
+                                    <div class="radio">
+                                        <label><input type="radio" name="student_answer" class="student_answer"
+                                                value="choice_a">{{ $question->exam_details->choice_a }}</label>
+                                    </div>
+                                    <div class="radio">
+                                        <label><input type="radio" name="student_answer" class="student_answer"
+                                                value="choice_b">{{ $question->exam_details->choice_b }}</label>
+                                    </div>
+                                    <div class="radio">
+                                        <label><input type="radio" name="student_answer" class="student_answer"
+                                                value="choice_c">{{ $question->exam_details->choice_c }}</label>
+                                    </div>
+                                    <div class="radio">
+                                        <label><input type="radio" name="student_answer" class="student_answer"
+                                                value="choice_d">{{ $question->exam_details->choice_d }}</label>
+                                    </div>
+                                    <input type="hidden" id="question_type" value="{{ $question->question_type }}">
+                                @endif
                             @elseif($question->question_type == 'Identification')
                                 <ul class="list-group">
                                     <li class="list-group-item">
@@ -83,7 +126,8 @@
                                                     {{ $match_question[$i] }}
                                                 </div>
                                                 <div class="col-md-6">
-                                                    <input type="text" class="form-control" name="answer[]" required>
+                                                    <input type="text" class="form-control" name="answer[]"
+                                                        required>
                                                 </div>
                                             </div>
                                         </li>
@@ -95,11 +139,25 @@
                                 <ul class="list-group">
                                     <li class="list-group-item">
                                         Choices</li>
-                                    @foreach ($question->assignment_matching as $match_choices)
-                                        <li class="list-group-item">
-                                            {{ $match_choices->choices }}
-                                        </li>
-                                    @endforeach
+                                    @if ($type == 'assignment')
+                                        @foreach ($question->assignment_matching as $match_choices)
+                                            <li class="list-group-item">
+                                                {{ $match_choices->choices }}
+                                            </li>
+                                        @endforeach
+                                    @elseif($type == 'quiz')
+                                        @foreach ($question->quiz_matching as $match_choices)
+                                            <li class="list-group-item">
+                                                {{ $match_choices->choices }}
+                                            </li>
+                                        @endforeach
+                                    @elseif($type == 'exam')
+                                        @foreach ($question->exam_matching as $match_choices)
+                                            <li class="list-group-item">
+                                                {{ $match_choices->choices }}
+                                            </li>
+                                        @endforeach
+                                    @endif
                                 </ul>
                             @endif
                         @else
@@ -143,7 +201,7 @@
             }
         });
         $("#submit").click(function() {
-
+            $('#submit').hide();
             if ($('#question_type').val() == 'Enumeration') {
                 var student_answer = $("input[name='answer[]']").map(function() {
                     return $(this).val();
@@ -228,7 +286,34 @@
                     }
                 });
             } else if ($('#question_type').val() == 'Matching Type') {
-
+                var student_answer = $("input[name='answer[]']").map(function() {
+                    return $(this).val();
+                }).get();
+                var taken_id = $('#taken_id').val();
+                var question_type = $('#question_type').val();
+                var type = $('#type').val();
+                var question_answer = $('#question_answer').val();
+                var question_id = $('#question_id').val();
+                $.ajax({
+                    type: "POST",
+                    url: "/student_taken_process",
+                    data: 'taken_id=' + taken_id + '&student_answer=' +
+                        student_answer + '&question_type=' +
+                        question_type + '&type=' +
+                        type + '&question_answer=' +
+                        question_answer + '&question_id=' +
+                        question_id,
+                    success: function(data) {
+                        Swal.fire(
+                            'Good job!',
+                            'Answer Submitted',
+                            'success',
+                        )
+                    },
+                    error: function(error) {
+                        console.log(error);
+                    }
+                });
             }
         });
     </script>

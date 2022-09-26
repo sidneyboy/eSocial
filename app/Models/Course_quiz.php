@@ -22,5 +22,10 @@ class Course_quiz extends Model
         return $this->hasMany('App\Models\Quiz_questions', 'course_quiz_id');
     }
 
+    public function course()
+    {
+        return $this->belongsTo('App\Models\Course', 'course_id');
+    }
+
    
 }

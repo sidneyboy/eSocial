@@ -28,4 +28,9 @@ class Quiz_questions extends Model
     {
         return $this->hasMany('App\Models\Quiz_matching', 'quiz_question_id');
     }
+
+    public function quiz()
+    {
+        return $this->belongsTo('App\Models\Course_quiz', 'course_quiz_id');
+    }
 }

@@ -58,11 +58,11 @@
                                                 </button>
                                             </div>
                                             <form action="{{ route('instructor_chapter_add_quiz_or_exam') }}"
-                                                method="get">
+                                                method="get" enctype="multipart/form-data">
                                                 @csrf
                                                 <div class="modal-body">
                                                     <label>Add</label>
-                                                    <select name="type" class="form-control" required>
+                                                    <select name="type" id="type" class="form-control" required>
                                                         <option value="" default>Select</option>
                                                         <option value="Chapter Exam">Chapter Exam</option>
                                                         <option value="Chapter Quiz">Chapter Quiz</option>
@@ -78,7 +78,6 @@
                                                             </option>
                                                         @endforeach
                                                     </select>
-
                                                     <input type="hidden" name="course_id" value="{{ $data->id }}">
                                                 </div>
                                                 <div class="modal-footer">

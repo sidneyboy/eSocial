@@ -25,6 +25,9 @@ use App\Models\Assignment_details;
 use App\Models\Assignment_matching;
 use App\Models\Quiz_matching;
 
+use App\Models\Student_logs;
+
+
 
 
 use Illuminate\Http\Request;
@@ -672,8 +675,8 @@ class Instructor_controller extends Controller
 
     public function instructor_chapter_add_quiz_or_exam(Request $request)
     {
-       // return $request->input();
-
+        //dd($request->all());
+        // return $request->input();
 
         if ($request->input('type') == 'Chapter Quiz') {
             $user_data = User::find(auth()->user()->id);
@@ -690,7 +693,6 @@ class Instructor_controller extends Controller
                 'course_chapter_id' => $request->input('chapter_id'),
             ]);
         } elseif ($request->input('type') == 'Chapter Assignment') {
-            
             $user_data = User::find(auth()->user()->id);
             return view('instructor_add_course_assignment', [
                 'course_id' => $request->input('course_id'),
@@ -1002,7 +1004,11 @@ class Instructor_controller extends Controller
                 'number_of_questions' => $request->input('number_of_questions'),
             ]);
         } else {
-            // return 'asdasd';
+            $certificate = $request->file('certificate');
+            $certificate_name = $certificate->getClientOriginalName();
+            $certificate_type = $certificate->getClientMimeType();
+            $path_certificate = $certificate->storeAs('public', $certificate_name);
+
             $new = new Exam([
                 'course_id' => $request->input('course_id'),
                 'course_chapter_id' => $request->input('course_chapter_id'),
@@ -1010,6 +1016,7 @@ class Instructor_controller extends Controller
                 'number_of_questions' => $request->input('number_of_questions'),
                 'created_at' => $date,
                 'status' => 'disabled',
+                'certificate' => $certificate_name,
             ]);
 
             $new->save();
@@ -1917,6 +1924,31 @@ class Instructor_controller extends Controller
         return view('instructor_add_item_to_assignment', [
             'assignment' => $assignment,
             'user_data' => $user_data,
+        ]);
+    }
+
+    public function instructor_course_assignment_status_update($assignment_id, $status, $course_id)
+    {
+
+        if ($status == 'disabled') {
+            Assignment::where('id', $assignment_id)
+                ->update(['status' => 'enabled']);
+        } else {
+            Assignment::where('id', $assignment_id)
+                ->update(['status' => 'disabled']);
+        }
+
+        return redirect()->route('instructor_show_chapter', ['course_id' => $course_id])->with('success', 'Updated');
+    }
+
+    public function instructor_student_logs($student_id,$course_id)
+    {
+        $student_logs = Student_logs::where('course_id',$course_id)
+                                    ->where('student_id',$student_id)
+                                    ->get();
+
+        return view('instructor_student_logs',[
+            'student_logs' => $student_logs,
         ]);
     }
 }

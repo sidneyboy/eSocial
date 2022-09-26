@@ -71,43 +71,43 @@
                                                                 @if ($details->file_type == 'image')
                                                                     <td>{{ $details->file_type }}</td>
                                                                     <td>
-                                                                        @if ($details->file_type == 'image')
-                                                                            <a href="{{ url('student_show_image_file', [
-                                                                                'course_details_id' => $details->id,
-                                                                                'course_id' => $details->course_id,
-                                                                                'course_chapter_id' => $details->course_chapter_id,
-                                                                            ]) }}"
-                                                                                class="btn btn-sm btn-sm btn-primary btn-block">show</a>
+                                                                        @if ($details->status != 'disabled')
+                                                                            @if ($details->file_type == 'image')
+                                                                                <a href="{{ url('student_show_image_file', [
+                                                                                    'course_details_id' => $details->id,
+                                                                                    'course_id' => $details->course_id,
+                                                                                    'course_chapter_id' => $details->course_chapter_id,
+                                                                                ]) }}"
+                                                                                    class="btn btn-sm btn-sm btn-primary btn-block">show</a>
+                                                                            @endif
                                                                         @endif
                                                                     </td>
                                                                 @elseif($details->file_type == 'video')
                                                                     <td>{{ $details->file_type }}</td>
                                                                     <td>
-                                                                        @if ($details->file_type == 'video')
-                                                                            <a href="{{ url('student_show_video', [
-                                                                                'course_details_id' => $details->id,
-                                                                                'course_id' => $details->course_id,
-                                                                                'course_chapter_id' => $details->course_chapter_id,
-                                                                            ]) }}"
-                                                                                class="btn btn-sm btn-primary btn-block">show</a>
+                                                                        @if ($details->status != 'disabled')
+                                                                            @if ($details->file_type == 'video')
+                                                                                <a href="{{ url('student_show_video', [
+                                                                                    'course_details_id' => $details->id,
+                                                                                    'course_id' => $details->course_id,
+                                                                                    'course_chapter_id' => $details->course_chapter_id,
+                                                                                ]) }}"
+                                                                                    class="btn btn-sm btn-primary btn-block">show</a>
+                                                                            @endif
                                                                         @endif
                                                                     </td>
                                                                 @elseif($details->file_type == 'application')
                                                                     <td>{{ $details->file_type }}</td>
                                                                     <td>
-                                                                        @if ($details->file_type == 'application')
-                                                                            <a href="{{ url('student_show_pdf_file', [
-                                                                                'course_details_id' => $details->id,
-                                                                                'course_id' => $details->course_id,
-                                                                                // 'course_chapter_id' => $details->course_chapter_id,
-                                                                            ]) }}"
-                                                                                class="btn btn-sm btn-primary btn-block">show</a>
-
-                                                                            {{-- <a href="{{ url('student_show_pdf_file', [
-                                                                                'course_details_id' => $details->id,
-                                                                                'course_id' => $details->course_id,
-                                                                                'course_chapter_id' => $details->course_chapter_id,
-                                                                            ]) }}" class="btn btn-sm btn-primary btn-block">show</a> --}}
+                                                                        @if ($details->status != 'disabled')
+                                                                            @if ($details->file_type == 'application')
+                                                                                <a href="{{ url('student_show_pdf_file', [
+                                                                                    'course_details_id' => $details->id,
+                                                                                    'course_id' => $details->course_id,
+                                                                                    // 'course_chapter_id' => $details->course_chapter_id,
+                                                                                ]) }}"
+                                                                                    class="btn btn-sm btn-primary btn-block">show</a>
+                                                                            @endif
                                                                         @endif
                                                                     </td>
                                                                 @endif
@@ -140,17 +140,19 @@
                                                     </thead>
                                                     <tbody>
                                                         @foreach ($data->assignment as $assignment)
-                                                            <tr>
-                                                                <td>
-                                                                    <a
-                                                                        href="{{ url('student_show_taken', [
-                                                                            'id' => $assignment->id,
-                                                                            'type' => 'assignment',
+                                                            @if ($assignment->status != 'disabled')
+                                                                <tr>
+                                                                    <td>
+                                                                        <a
+                                                                            href="{{ url('student_show_taken', [
+                                                                                'id' => $assignment->id,
+                                                                                'type' => 'assignment',
                                                                             ]) }}">{{ $assignment->title }}</a>
-                                                                </td>
-                                                                <td>{{ date('F j, Y', strtotime($assignment->deadline)) }}
-                                                                </td>
-                                                            </tr>
+                                                                    </td>
+                                                                    <td>{{ date('F j, Y', strtotime($assignment->deadline)) }}
+                                                                    </td>
+                                                                </tr>
+                                                            @endif
                                                         @endforeach
                                                     </tbody>
                                                 </table>
@@ -179,13 +181,19 @@
                                                     </thead>
                                                     <tbody>
                                                         @foreach ($data->course_quiz as $quiz)
-                                                            <tr>
-                                                                <td>
-                                                                    <a href="#">{{ $quiz->quiz_title }}</a>
-                                                                </td>
-                                                                <td>{{ date('F j, Y', strtotime($quiz->created_at)) }}
-                                                                </td>
-                                                            </tr>
+                                                            @if ($quiz->status != 'disabled')
+                                                                <tr>
+                                                                    <td>
+                                                                        <a
+                                                                            href="{{ url('student_show_taken', [
+                                                                                'id' => $quiz->id,
+                                                                                'type' => 'quiz',
+                                                                            ]) }}">{{ $quiz->quiz_title }}</a>
+                                                                    </td>
+                                                                    <td>{{ date('F j, Y', strtotime($quiz->created_at)) }}
+                                                                    </td>
+                                                                </tr>
+                                                            @endif
                                                         @endforeach
                                                     </tbody>
                                                 </table>
@@ -214,11 +222,18 @@
                                                     </thead>
                                                     <tbody>
                                                         @foreach ($data->exam as $exam)
-                                                            <tr>
-                                                                <td><a href="#">{{ $exam->title }}</a></td>
-                                                                <td>{{ date('F j, Y', strtotime($exam->created_at)) }}
-                                                                </td>
-                                                            </tr>
+                                                            @if ($exam->status != 'disabled')
+                                                                <tr>
+                                                                    <td>
+                                                                        <a href="{{ url('student_show_taken', [
+                                                                                'id' => $exam->id,
+                                                                                'type' => 'exam',
+                                                                            ]) }}">{{ $exam->title }}</a>
+                                                                    </td>
+                                                                    <td>{{ date('F j, Y', strtotime($exam->created_at)) }}
+                                                                    </td>
+                                                                </tr>
+                                                            @endif
                                                         @endforeach
                                                     </tbody>
                                                 </table>

@@ -24,6 +24,7 @@ class Student_logs extends Model
         'exam_id',
         'course_details_id',
         'student_id',
+        'content',
         'date',
     ];
 }

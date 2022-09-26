@@ -88,6 +88,9 @@ Route::post('/student_planner_prompt', 'Student_controller@student_planner_promp
 
 Route::get('/student_show_course_chapter/{course_id}', 'Student_controller@student_show_course_chapter')->name('student_show_course_chapter');
 
+Route::get('/student_taken_submit/{taken_id}', 'Student_controller@student_taken_submit')->name('student_taken_submit');
+
+
 
 
 
@@ -141,7 +144,8 @@ Route::get('/instructor_add_course_phase_3/{course_id}/{course_chapter_id}', 'In
 Route::post('/instructor_add_course_phase_3_process', 'Instructor_controller@instructor_add_course_phase_3_process')->name('instructor_add_course_phase_3_process');
 Route::get('/instructor_add_course_phase_4/{course_id}/{course_chapter_id}', 'Instructor_controller@instructor_add_course_phase_4')->name('instructor_add_course_phase_4');
 
-Route::get('/instructor_add_course_exam_process/', 'Instructor_controller@instructor_add_course_exam_process')->name('instructor_add_course_exam_process');
+Route::post('/instructor_add_course_exam_process/', 'Instructor_controller@instructor_add_course_exam_process')->name('instructor_add_course_exam_process');
+
 
 
 Route::post('/instructor_add_course_chapter_quiz_question_type', 'Instructor_controller@instructor_add_course_chapter_quiz_question_type')->name('instructor_add_course_chapter_quiz_question_type');
@@ -166,7 +170,7 @@ Route::post('/instructor_edit_assignment_question_process', 'Instructor_controll
 
 
 
-Route::get('/course_exam_status_update/{exam}/{status}/{course_id}', 'Instructor_controller@course_exam_status_update')->name('course_exam_status_update');
+Route::get('/course_exam_status_update/{exam_id}/{status}/{course_id}', 'Instructor_controller@course_exam_status_update')->name('course_exam_status_update');
 
 
 Route::get('/instructor_add_course_assignment_process/', 'Instructor_controller@instructor_add_course_assignment_process')->name('instructor_add_course_assignment_process');
@@ -218,7 +222,14 @@ Route::post('/instructor_edit_chapter/', 'Instructor_controller@instructor_edit_
 
 Route::get('/instructor_list_of_students/', 'Instructor_controller@instructor_list_of_students')->name('instructor_list_of_students');
 
+Route::get('/instructor_student_logs/{student_id}/{course_id}', 'Instructor_controller@instructor_student_logs')->name('instructor_student_logs');
 
+
+
+
+
+
+Route::get('/instructor_course_assignment_status_update/{assignment_id}/{status}/{course_id}', 'Instructor_controller@instructor_course_assignment_status_update')->name('instructor_course_assignment_status_update');
 
 
 

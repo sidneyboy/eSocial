@@ -27,7 +27,10 @@
                     <tbody>
                         @foreach ($enrolled as $data)
                             <tr>
-                                <td>{{ $data->student->last_name }} {{ $data->student->name }}</td>
+                                <td><a href="{{ url('instructor_student_logs',[
+                                    'student_id' => $data->student_id,
+                                    'course_id' => $data->course_id,
+                                    ]) }}" target="_blank">{{ $data->student->last_name }} {{ $data->student->name }}</a></td>
                                 <td>{{ $data->student->email }}</td>
                                 <td>{{ $data->course->course_title }}</td>
                                 <td>{{ $data->course->course_type->course_type }}</td>

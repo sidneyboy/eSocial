@@ -13,7 +13,8 @@
             @endif
             <div class="card" style="width: 100%;">
                 <div class="card-header" style="font-weight: bold;">Chapter Exam</div>
-                <form action="{{ route('instructor_add_course_exam_process') }}" method="get" enctype="multipart/form-data">
+                <form action="{{ route('instructor_add_course_exam_process') }}" method="post"
+                    enctype="multipart/form-data">
                     @csrf
                     <div class="card-body">
                         <div class="form-group">
@@ -22,6 +23,10 @@
 
                             <label>Number of questions</label>
                             <input type="number" min="0" name="number_of_questions" class="form-control" required>
+
+                            <label>Certificate</label>
+                            <input type="file" name="certificate" class="form-control" required
+                                accept="application/*">
 
                             <input type="hidden" value="{{ $course_id }}" name="course_id">
                             <input type="hidden" value="{{ $course_chapter_id }}" name="course_chapter_id">

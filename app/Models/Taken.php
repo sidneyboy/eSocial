@@ -23,4 +23,9 @@ class Taken extends Model
         'remarks',
         'date',
     ];
+
+    public function taken_details()
+    {
+        return $this->hasMany('App\Models\Taken_details', 'taken_id');
+    }
 }
