@@ -43,33 +43,32 @@
                                 </ul>
                                 <input type="hidden" id="question_type" value="{{ $question->question_type }}">
                             @elseif($question->question_type == 'Multitple Choice')
-                                @if ($question->status != 'answered')
-                                    <div class="radio">
-                                        <label><input type="radio" name="student_answer" class="student_answer"
-                                                value="choice_a">{{ $question->assignment_details->choice_a }}</label>
-                                    </div>
-                                    <div class="radio">
-                                        <label><input type="radio" name="student_answer" class="student_answer"
-                                                value="choice_b">{{ $question->assignment_details->choice_b }}</label>
-                                    </div>
-                                    <div class="radio">
-                                        <label><input type="radio" name="student_answer" class="student_answer"
-                                                value="choice_c">{{ $question->assignment_details->choice_c }}</label>
-                                    </div>
-                                    <div class="radio">
-                                        <label><input type="radio" name="student_answer" class="student_answer"
-                                                value="choice_d">{{ $question->assignment_details->choice_d }}</label>
-                                    </div>
-                                    <input type="hidden" id="question_type" value="{{ $question->question_type }}">
-                                @else
-                                    <h3><span class="badge badge-success">Answer Submitted</span></h3>
-                                @endif
+                                <input type="text" id="question_answer" value="{{ $question->answer }}">
+
+                                <div class="radio">
+                                    <label><input type="radio" name="student_answer" class="student_answer"
+                                            value="choice_a">{{ $question->assignment_details->choice_a }}</label>
+                                </div>
+                                <div class="radio">
+                                    <label><input type="radio" name="student_answer" class="student_answer"
+                                            value="choice_b">{{ $question->assignment_details->choice_b }}</label>
+                                </div>
+                                <div class="radio">
+                                    <label><input type="radio" name="student_answer" class="student_answer"
+                                            value="choice_c">{{ $question->assignment_details->choice_c }}</label>
+                                </div>
+                                <div class="radio">
+                                    <label><input type="radio" name="student_answer" class="student_answer"
+                                            value="choice_d">{{ $question->assignment_details->choice_d }}</label>
+                                </div>
+                                <input type="hidden" id="question_type" value="{{ $question->question_type }}">
                             @elseif($question->question_type == 'Identification')
                                 <ul class="list-group">
                                     <li class="list-group-item">
-                                        <input type="text" class="form-control" name="answer" required>
+                                        <input type="text" class="form-control" id="answer" required>
                                     </li>
                                 </ul>
+                                <input type="hidden" id="question_answer" value="{{ $question->answer }}">
                                 <input type="hidden" id="question_type" value="{{ $question->question_type }}">
                             @elseif($question->question_type == 'Matching Type')
                                 @php
@@ -91,6 +90,7 @@
                                     @endfor
                                 </ul>
                                 <br />
+                                <input type="text" id="question_answer" value="{{ $question->answer }}">
                                 <input type="hidden" id="question_type" value="{{ $question->question_type }}">
                                 <ul class="list-group">
                                     <li class="list-group-item">
@@ -108,7 +108,8 @@
                         <br />
 
                         <input type="hidden" id="type" value="{{ $type }}">
-                        <input type="hidden" id="taken_id" value="{{ $question->id }}">
+                        <input type="hidden" id="question_id" value="{{ $question->id }}">
+                        <input type="hidden" id="taken_id" value="{{ $taken_id }}">
                         {{-- <input type="hidden" id="answer" value="{{ $question->question_answer }}"> --}}
                         <button id="submit" class="btn btn-sm btn-success btn-block">Submit Answer</button>
                     </div>
@@ -142,13 +143,16 @@
             }
         });
         $("#submit").click(function() {
-           
+
             if ($('#question_type').val() == 'Enumeration') {
-                var student_answer = $("input[name='answer[]']").map(function(){return $(this).val();}).get();
+                var student_answer = $("input[name='answer[]']").map(function() {
+                    return $(this).val();
+                }).get();
                 var taken_id = $('#taken_id').val();
                 var question_type = $('#question_type').val();
                 var type = $('#type').val();
                 var question_answer = $('#question_answer').val();
+                var question_id = $('#question_id').val();
                 $.ajax({
                     type: "POST",
                     url: "/student_taken_process",
@@ -156,7 +160,8 @@
                         student_answer + '&question_type=' +
                         question_type + '&type=' +
                         type + '&question_answer=' +
-                        question_answer,
+                        question_answer + '&question_id=' +
+                        question_id,
                     success: function(data) {
                         Swal.fire(
                             'Good job!',
@@ -168,17 +173,22 @@
                         console.log(error);
                     }
                 });
-            } else if ($('#question_type').val() == 'Multiple Choice') {
+            } else if ($('#question_type').val() == 'Multitple Choice') {
                 var taken_id = $('#taken_id').val();
                 var student_answer = $(".student_answer:checked").val();
                 var question_type = $('#question_type').val();
+                var type = $('#type').val();
+                var question_answer = $('#question_answer').val();
+                var question_id = $('#question_id').val();
                 $.ajax({
                     type: "POST",
                     url: "/student_taken_process",
                     data: 'taken_id=' + taken_id + '&student_answer=' +
                         student_answer + '&question_type=' +
                         question_type + '&type=' +
-                        type,
+                        type + '&question_answer=' +
+                        question_answer + '&question_id=' +
+                        question_id,
                     success: function(data) {
                         Swal.fire(
                             'Good job!',
@@ -191,7 +201,32 @@
                     }
                 });
             } else if ($('#question_type').val() == 'Identification') {
-
+                var student_answer = $('#answer').val();
+                var taken_id = $('#taken_id').val();
+                var question_type = $('#question_type').val();
+                var type = $('#type').val();
+                var question_answer = $('#question_answer').val();
+                var question_id = $('#question_id').val();
+                $.ajax({
+                    type: "POST",
+                    url: "/student_taken_process",
+                    data: 'taken_id=' + taken_id + '&student_answer=' +
+                        student_answer + '&question_type=' +
+                        question_type + '&type=' +
+                        type + '&question_answer=' +
+                        question_answer + '&question_id=' +
+                        question_id,
+                    success: function(data) {
+                        Swal.fire(
+                            'Good job!',
+                            'Answer Submitted',
+                            'success',
+                        )
+                    },
+                    error: function(error) {
+                        console.log(error);
+                    }
+                });
             } else if ($('#question_type').val() == 'Matching Type') {
 
             }

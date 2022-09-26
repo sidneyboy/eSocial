@@ -855,37 +855,33 @@ class Student_controller extends Controller
 
     public function student_taken_process(Request $request)
     {
-        // return $request->input();
+        //return $request->input();
         date_default_timezone_set('Asia/Manila');
         $date = date('Y-m-d');
 
-
-
-
-
         if ($request->input('type') == 'assignment') {
-            $assignment_question = Assignment_questions::find($request->input('taken_id'));
-            $check = Taken::where('date', $date)->where('assignment_id', $assignment_question->assignment->id)->where('student_id', auth()->user()->id)->first();
-            if ($check) {
+            $assignment_question = Assignment_questions::find($request->input('question_id'));
+            $check = Taken::find($request->input('taken_id'));
+            if ($request->input('question_type') == 'Enumeration') {
                 $question_answer = explode('|', $request->input('question_answer'));
                 $student_answer = explode(',', strtolower($request->input('student_answer')));
-
                 // Sort the array elements
                 sort($question_answer);
                 sort($student_answer);
-
                 // Check for equality
                 if ($question_answer == $student_answer) {
                     //echo "Both arrays are same\n";
                     $taken_details = new Taken_details([
-                        'taken_id' => $request->input('taken_id'),
-                        'question_id' => $request->input('taken_id'),
+                        'taken_id' => $check->id,
+                        'question_id' => $request->input('question_id'),
                         'question_answer' => $request->input('question_answer'),
                         'student_answer' => strtolower($request->input('student_answer')),
                         'remarks' => 'checked',
                         'score' => $assignment_question->score,
                         'status' => 'answered',
                         'type' => $request->input('type'),
+                        'student_id' => auth()->user()->id,
+                        'question_type' => $request->input('question_type'),
                     ]);
 
                     $taken_details->save();
@@ -895,17 +891,35 @@ class Student_controller extends Controller
                             'score' => $check->score + $assignment_question->score,
                             'remarks' => 'unfinished',
                         ]);
-
                 } else {
                     $taken_details = new Taken_details([
-                        'taken_id' => $request->input('taken_id'),
-                        'question_id' => $request->input('taken_id'),
+                        'taken_id' => $check->id,
+                        'question_id' => $request->input('question_id'),
                         'question_answer' => $question_answer,
                         'student_answer' => $student_answer,
                         'remarks' => 'wrong',
                         'score' => $assignment_question->score,
                         'status' => 'answered',
                         'type' => $request->input('type'),
+                        'student_id' => auth()->user()->id,
+                        'question_type' => $request->input('question_type'),
+                    ]);
+
+                    $taken_details->save();
+                }
+            } else if ($request->input('question_type') == 'Multitple Choice') {
+                if ($request->input('question_answer') == strtolower($request->input('student_answer'))) {
+                    $taken_details = new Taken_details([
+                        'taken_id' => $check->id,
+                        'question_id' => $request->input('question_id'),
+                        'question_answer' => $request->input('question_answer'),
+                        'student_answer' => strtolower($request->input('student_answer')),
+                        'remarks' => 'checked',
+                        'score' => $assignment_question->score,
+                        'status' => 'answered',
+                        'type' => $request->input('type'),
+                        'student_id' => auth()->user()->id,
+                        'question_type' => $request->input('question_type'),
                     ]);
 
                     $taken_details->save();
@@ -915,19 +929,105 @@ class Student_controller extends Controller
                             'score' => $check->score + $assignment_question->score,
                             'remarks' => 'unfinished',
                         ]);
-                }
-            } else {
-                $new = new Taken([
-                    'assignment_id' => $assignment_question->assignment->id,
-                    'instructor_id' => $assignment_question->assignment->course->user_id,
-                    'student_id' => auth()->user()->id,
-                    'course_chapter_id' => $assignment_question->course_chapter_id,
-                    'course_id' => $assignment_question->course_id,
-                    'type' => $request->input('type'),
-                    'date' => $date,
-                ]);
+                } else {
+                    $taken_details = new Taken_details([
+                        'taken_id' => $check->id,
+                        'question_id' => $request->input('question_id'),
+                        'question_answer' => $request->input('question_answer'),
+                        'student_answer' => strtolower($request->input('student_answer')),
+                        'remarks' => 'wrong',
+                        'score' => $assignment_question->score,
+                        'status' => 'answered',
+                        'type' => $request->input('type'),
+                        'student_id' => auth()->user()->id,
+                        'question_type' => $request->input('question_type'),
+                    ]);
 
-                $new->save();
+                    $taken_details->save();
+                }
+            } else if ($request->input('question_type') == 'Identification') {
+                if ($request->input('question_answer') == strtolower($request->input('student_answer'))) {
+                    $taken_details = new Taken_details([
+                        'taken_id' => $check->id,
+                        'question_id' => $request->input('question_id'),
+                        'question_answer' => $request->input('question_answer'),
+                        'student_answer' => strtolower($request->input('student_answer')),
+                        'remarks' => 'checked',
+                        'score' => $assignment_question->score,
+                        'status' => 'answered',
+                        'type' => $request->input('type'),
+                        'student_id' => auth()->user()->id,
+                        'question_type' => $request->input('question_type'),
+                    ]);
+
+                    $taken_details->save();
+
+                    Taken::where('id', $check->id)
+                        ->update([
+                            'score' => $check->score + $assignment_question->score,
+                            'remarks' => 'unfinished',
+                        ]);
+                } else {
+                    $taken_details = new Taken_details([
+                        'taken_id' => $check->id,
+                        'question_id' => $request->input('question_id'),
+                        'question_answer' => $request->input('question_answer'),
+                        'student_answer' => strtolower($request->input('student_answer')),
+                        'remarks' => 'wrong',
+                        'score' => $assignment_question->score,
+                        'status' => 'answered',
+                        'type' => $request->input('type'),
+                        'student_id' => auth()->user()->id,
+                        'question_type' => $request->input('question_type'),
+                    ]);
+
+                    $taken_details->save();
+                }
+            } else if($request->input('question_type') == 'Matching Type'){
+                $question_answer = explode('|', $request->input('question_answer'));
+                $student_answer = explode(',', strtolower($request->input('student_answer')));
+                // Sort the array elements
+                sort($question_answer);
+                sort($student_answer);
+                // Check for equality
+                if ($question_answer == $student_answer) {
+                    //echo "Both arrays are same\n";
+                    $taken_details = new Taken_details([
+                        'taken_id' => $check->id,
+                        'question_id' => $request->input('question_id'),
+                        'question_answer' => $request->input('question_answer'),
+                        'student_answer' => strtolower($request->input('student_answer')),
+                        'remarks' => 'checked',
+                        'score' => $assignment_question->score,
+                        'status' => 'answered',
+                        'type' => $request->input('type'),
+                        'student_id' => auth()->user()->id,
+                        'question_type' => $request->input('question_type'),
+                    ]);
+
+                    $taken_details->save();
+
+                    Taken::where('id', $check->id)
+                        ->update([
+                            'score' => $check->score + $assignment_question->score,
+                            'remarks' => 'unfinished',
+                        ]);
+                } else {
+                    $taken_details = new Taken_details([
+                        'taken_id' => $check->id,
+                        'question_id' => $request->input('question_id'),
+                        'question_answer' => $question_answer,
+                        'student_answer' => $student_answer,
+                        'remarks' => 'wrong',
+                        'score' => $assignment_question->score,
+                        'status' => 'answered',
+                        'type' => $request->input('type'),
+                        'student_id' => auth()->user()->id,
+                        'question_type' => $request->input('question_type'),
+                    ]);
+
+                    $taken_details->save();
+                }
             }
         }
 
@@ -1211,6 +1311,7 @@ class Student_controller extends Controller
 
     public function student_show_taken($id, $type)
     {
+
         date_default_timezone_set('Asia/Manila');
         $date = date('Y-m-d');
 
@@ -1220,25 +1321,118 @@ class Student_controller extends Controller
             $count = Invite_student::where('student_id', auth()->user()->id)->where('status', 'Pending Approval')->count();
             $assignment_question = Assignment_questions::where('course_assignment_id', $id)->paginate(1);
             foreach ($assignment_question as $key => $data) {
-                $taken_details = Taken_details::where('type',$type)->where('taken_id',$data->id)->first();
+                $taken_details = Taken_details::where('question_id', $data->id)
+                    ->where('student_id', auth()->user()->id)
+                    ->first();
                 if ($taken_details) {
                     $status = $taken_details->status;
-                }else{
+                } else {
                     $status = 'wala';
                 }
             }
 
-            if ($assignment->deadline >= $date) {
-                return view('student_show_taken_page', [
-                    'assignment_question' => $assignment_question,
-                    'count' => $count,
-                    'user_data' => $user_data,
-                    'type' => $type,
-                    'status' => $status,
-                ]);
+            $check_taken_table = Taken::where('assignment_id', $id)->where('student_id', auth()->user()->id)->first();
+
+            if ($check_taken_table) {
+                if ($assignment->deadline >= $date) {
+                    return view('student_show_taken_page', [
+                        'assignment_question' => $assignment_question,
+                        'count' => $count,
+                        'user_data' => $user_data,
+                        'type' => $type,
+                        'status' => $status,
+                        'taken_id' => $check_taken_table->id,
+                    ]);
+                } else {
+                    return redirect()->route('student_show_course_chapter', ['course_id' => $assignment->course_id])->with('error', 'Assignment due date lapse, Cannot Take.');
+                }
             } else {
-                return redirect()->route('student_show_course_chapter', ['course_id' => $assignment->course_id])->with('error', 'Assignment due date lapse, Cannot Take.');
+                $new = new Taken([
+                    'assignment_id' => $assignment->id,
+                    'instructor_id' => $assignment->course->user_id,
+                    'student_id' => auth()->user()->id,
+                    'course_chapter_id' => $assignment->course_chapter_id,
+                    'course_id' => $assignment->course_id,
+                    'type' => $type,
+                    'date' => $date,
+                ]);
+
+                $new->save();
+
+                if ($assignment->deadline >= $date) {
+                    return view('student_show_taken_page', [
+                        'assignment_question' => $assignment_question,
+                        'count' => $count,
+                        'user_data' => $user_data,
+                        'type' => $type,
+                        'status' => $status,
+                        'taken_id' => $check_taken_table->id,
+                    ]);
+                } else {
+                    return redirect()->route('student_show_course_chapter', ['course_id' => $assignment->course_id])->with('error', 'Assignment due date lapse, Cannot Take.');
+                }
             }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            // if ($check) {
+            //     if ($assignment->deadline >= $date) {
+            //         return view('student_show_taken_page', [
+            //             'assignment_question' => $assignment_question,
+            //             'count' => $count,
+            //             'user_data' => $user_data,
+            //             'type' => $type,
+            //             'status' => $status,
+            //         ]);
+            //     } else {
+            //         return redirect()->route('student_show_course_chapter', ['course_id' => $assignment->course_id])->with('error', 'Assignment due date lapse, Cannot Take.');
+            //     }
+            // } else {
+            //     $new = new Taken([
+            //         'assignment_id' => $assignment_question->assignment->id,
+            //         'instructor_id' => $assignment_question->assignment->course->user_id,
+            //         'student_id' => auth()->user()->id,
+            //         'course_chapter_id' => $assignment_question->course_chapter_id,
+            //         'course_id' => $assignment_question->course_id,
+            //         'type' => $type,
+            //         'date' => $date,
+            //     ]);
+
+            //     $new->save();
+
+            //     if ($assignment->deadline >= $date) {
+            //         return view('student_show_taken_page', [
+            //             'assignment_question' => $assignment_question,
+            //             'count' => $count,
+            //             'user_data' => $user_data,
+            //             'type' => $type,
+            //             'status' => $status,
+            //         ]);
+            //     } else {
+            //         return redirect()->route('student_show_course_chapter', ['course_id' => $assignment->course_id])->with('error', 'Assignment due date lapse, Cannot Take.');
+            //     }
+            // }
         }
     }
 }

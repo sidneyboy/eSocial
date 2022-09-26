@@ -17,5 +17,8 @@ class Taken_details extends Model
         'remarks',
         'score',
         'status',
+        'type',
+        'student_id',
+        'question_type',
     ];
 }
