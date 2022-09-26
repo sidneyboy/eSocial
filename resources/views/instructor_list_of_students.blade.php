@@ -27,10 +27,14 @@
                     <tbody>
                         @foreach ($enrolled as $data)
                             <tr>
-                                <td><a href="{{ url('instructor_student_logs',[
-                                    'student_id' => $data->student_id,
-                                    'course_id' => $data->course_id,
-                                    ]) }}" target="_blank">{{ $data->student->last_name }} {{ $data->student->name }}</a></td>
+                                <td>
+                                    <a href="{{ url('instructor_student_logs', [
+                                        'student_id' => $data->student_id,
+                                        'course_id' => $data->course_id,
+                                    ]) }}"
+                                        target="_blank">{{ $data->student->last_name }} {{ $data->student->name }}
+                                    </a>
+                                </td>
                                 <td>{{ $data->student->email }}</td>
                                 <td>{{ $data->course->course_title }}</td>
                                 <td>{{ $data->course->course_type->course_type }}</td>
@@ -39,6 +43,19 @@
                         @endforeach
                     </tbody>
                 </table>
+            </div>
+        </div>
+        <div class="card-footer">
+            <div class="row">
+                <div class="col-md-4">
+                    <a href="{{ url('instructor_view_assignment_score',['type' => 'assignment']) }}" class="btn btn-block btn-primary btn-sm">View All Student Assignment Score</a>
+                </div>
+                <div class="col-md-4">
+                    <a href="{{ url('instructor_view_assignment_score',['type' => 'quiz']) }}" class="btn btn-block btn-primary btn-sm">View All Student Quiz Score</a>
+                </div>
+                <div class="col-md-4">
+                    <a href="{{ url('instructor_view_assignment_score',['type' => 'exam']) }}" class="btn btn-block btn-primary btn-sm">View All Student Exam Score</a>
+                </div>
             </div>
         </div>
     </div>

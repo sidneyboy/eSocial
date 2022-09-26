@@ -168,6 +168,13 @@
                 <span>{{ __('About') }}</span>
             </a>
         </li> --}}
+            {{-- <li class="nav-item">
+                <a class="nav-link" href="{{ url('statistics') }}">
+                    <i class="bi bi-cash"></i>
+                    <span>{{ __('Statistics') }}</span>
+                </a>
+            </li> --}}
+
             <li class="nav-item">
                 <a class="nav-link" href="{{ url('payment_history') }}">
                     <i class="bi bi-cash"></i>
@@ -385,8 +392,6 @@
                 $("#loadingDiv").remove(); //makes page more lightweight 
             });
         }
-
-
     </script>
 
 

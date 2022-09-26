@@ -52,15 +52,15 @@ class Student_subscribed_controller extends Controller
 
             $new_payment->save();
 
-            $new_enrolled = new Enrolled_course([
-                'course_id' => $request->input('course_id'),
-                'student_id' => auth()->user()->id,
-                'instructor_id' => $request->input('instructor_id'),
-                'amount' => $request->input('amount'),
-                'course_type' => 'Subscribed',
-            ]);
+            // $new_enrolled = new Enrolled_course([
+            //     'course_id' => $request->input('course_id'),
+            //     'student_id' => auth()->user()->id,
+            //     'instructor_id' => $request->input('instructor_id'),
+            //     'amount' => $request->input('amount'),
+            //     'course_type' => 'Subscribed',
+            // ]);
 
-            $new_enrolled->save();
+            // $new_enrolled->save();
 
             $response = $this->gateway->purchase(array(
                 'amount' => $request->input('amount'),

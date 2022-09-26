@@ -24,6 +24,32 @@ class Taken extends Model
         'date',
     ];
 
+    public function exam()
+    {
+        return $this->belongsTo('App\Models\Exam', 'exam_id');
+    }
+
+    public function assignment()
+    {
+        return $this->belongsTo('App\Models\Assignment', 'assignment_id');
+    }
+
+    public function student()
+    {
+        return $this->belongsTo('App\Models\User', 'student_id');
+    }
+
+    public function course()
+    {
+        return $this->belongsTo('App\Models\Course', 'course_id');
+    }
+
+    public function course_chapter()
+    {
+        return $this->belongsTo('App\Models\Course_chapter', 'course_chapter_id');
+    }
+
+
     public function taken_details()
     {
         return $this->hasMany('App\Models\Taken_details', 'taken_id');

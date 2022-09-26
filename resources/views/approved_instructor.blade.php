@@ -16,45 +16,39 @@
                     <h6 style="font-weight: bold;">Approved Instructor</h6>
                 </div>
                 <div class="card-body">
-                    @foreach ($instructor as $data)
-                        <div class="table table-responsive">
-                            <table class="table table-bordered table-hover table-sm">
-                                <thead>
-                                    <tr>
-                                        <th>First Name</th>
-                                        <td>{{ $data->name }}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Last Name</th>
-                                        <td>{{ $data->last_name }}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Email</th>
-                                        <td>{{ $data->email }}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>User</th>
-                                        <td>{{ $data->user_type }}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Created At</th>
-                                        <td>{{ date('F j, Y', strtotime($data->created_at)) }}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Status</th>
-                                        <td>
-                                            @if ($data->status == '')
-                                                <a href="{{ url('approved_instructor_process', $data->id) }}"
-                                                    class="btn btn-sm btn-warning btn-block">Pending Approved</a>
-                                            @else
-                                                Approved
-                                            @endif
-                                        </td>
-                                    </tr>
-                                </thead>
-                            </table>
-                        </div>
-                    @endforeach
+
+                    <div class="table table-responsive">
+                        <table class="table table-striped table-hover table-sm" id="example">
+                            <thead>
+                                <tr>
+                                    <th>First Name</th>
+                                    <th>Last Name</th>
+                                    <th>Email</th>
+                                    <th>User</th>
+                                    <th>Created At</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($instructor as $data)
+                                    <td>{{ $data->last_name }}</td>
+                                    <td>{{ $data->name }}</td>
+                                    <td>{{ $data->email }}</td>
+                                    <td>{{ $data->user_type }}</td>
+                                    <td>{{ date('F j, Y', strtotime($data->created_at)) }}</td>
+                                    <td>
+                                        @if ($data->status == '')
+                                            <a href="{{ url('approved_instructor_process', $data->id) }}"
+                                                class="btn btn-sm btn-warning btn-block">Pending Approved</a>
+                                        @else
+                                            Approved
+                                        @endif
+                                    </td>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+
                 </div>
             </div>
         </div>

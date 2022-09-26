@@ -188,23 +188,16 @@ class Student_controller extends Controller
 
         $course_data = Course_details::find($course_details_id);
         $check_student_log = Student_logs::where('student_id', auth()->user()->id)->where('date', $date)->first();
-        if ($check_student_log) {
-            Student_logs::where('id', $check_student_log->id)
-                ->update([
-                    'content' => $check_student_log->content . "<br />" . 'view image file ' . $course_data->file,
-                ]);
-        } else {
-            $new_student_log = new Student_logs([
-                'content' => 'view image file ' . $course_data->file,
-                'course_id' => $course_id,
-                'course_chapter_id' => $course_chapter_id,
-                'course_details_id' => $course_details_id,
-                'created_at' => $date_time,
-                'student_id' => auth()->user()->id,
-                'date' => $date,
-            ]);
-            $new_student_log->save();
-        }
+        $new_student_log = new Student_logs([
+            'content' => 'view image file ',
+            'course_id' => $course_id,
+            'course_chapter_id' => $course_chapter_id,
+            'course_details_id' => $course_details_id,
+            'created_at' => $date_time,
+            'student_id' => auth()->user()->id,
+            'date' => $date,
+        ]);
+        $new_student_log->save();
 
         // if ($day == 'Monday') {
         //     $check_student_log = Student_logs::where('student_id', auth()->user()->id)->where('date', $date)->first();
@@ -360,25 +353,18 @@ class Student_controller extends Controller
 
         $course_data = Course_details::find($course_details_id);
 
-        $check_student_log = Student_logs::where('student_id', auth()->user()->id)->where('date', $date)->first();
+        //$check_student_log = Student_logs::where('student_id', auth()->user()->id)->where('date', $date)->first();
 
-        if ($check_student_log) {
-            Student_logs::where('id', $check_student_log->id)
-                ->update([
-                    'monday' => $check_student_log->monday . "<br />" . 'view document file ' . $course_data->file,
-                ]);
-        } else {
-            $new_student_log = new Student_logs([
-                'monday' => 'view document file ' . $course_data->file,
-                'course_id' => $course_id,
-                'course_chapter_id' => $course_data->course_chapter_id,
-                'course_details_id' => $course_details_id,
-                'created_at' => $date_time,
-                'student_id' => auth()->user()->id,
-                'date' => $date,
-            ]);
-            $new_student_log->save();
-        }
+        $new_student_log = new Student_logs([
+            'monday' => 'view document file ' . $course_data->file,
+            'course_id' => $course_id,
+            'course_chapter_id' => $course_data->course_chapter_id,
+            'course_details_id' => $course_details_id,
+            'created_at' => $date_time,
+            'student_id' => auth()->user()->id,
+            'date' => $date,
+        ]);
+        $new_student_log->save();
 
         // if ($day == 'Monday') {
         //     $check_student_log = Student_logs::where('student_id', auth()->user()->id)->where('date', $date)->first();
@@ -535,160 +521,16 @@ class Student_controller extends Controller
 
         $course_data = Course_details::find($course_details_id);
 
-        $check_student_log = Student_logs::where('student_id', auth()->user()->id)->where('date', $date)->first();
-
-        if ($check_student_log) {
-            Student_logs::where('id', $check_student_log->id)
-                ->update([
-                    'content' => $check_student_log->content . "<br />" . 'view video file ' . $course_data->file,
-                ]);
-        } else {
-            $new_student_log = new Student_logs([
-                'content' => 'view video file ' . $course_data->file,
-                'course_id' => $course_id,
-                'course_chapter_id' => $course_chapter_id,
-                'course_details_id' => $course_details_id,
-                'created_at' => $date_time,
-                'student_id' => auth()->user()->id,
-                'date' => $date,
-            ]);
-            $new_student_log->save();
-        }
-
-        // if ($day == 'Monday') {
-        //     $check_student_log = Student_logs::where('student_id', auth()->user()->id)->where('date', $date)->first();
-
-        //     if ($check_student_log) {
-        //         Student_logs::where('id', $check_student_log->id)
-        //             ->update([
-        //                 'monday' => $check_student_log->monday . "<br />" . 'view video file ' . $course_data->file,
-        //             ]);
-        //     } else {
-        //         $new_student_log = new Student_logs([
-        //             'monday' => 'view video file ' . $course_data->file,
-        //             'course_id' => $course_id,
-        //             'course_chapter_id' => $course_chapter_id,
-        //             'course_details_id' => $course_details_id,
-        //             'created_at' => $date_time,
-        //             'student_id' => auth()->user()->id,
-        //         ]);
-        //         $new_student_log->save();
-        //     }
-        // } else if ($day == 'Tuesday') {
-        //     $check_student_log = Student_logs::where('student_id', auth()->user()->id)->where('date', $date)->first();
-
-        //     if ($check_student_log) {
-        //         Student_logs::where('id', $check_student_log->id)
-        //             ->update([
-        //                 'tuesday' => $check_student_log->tuesday . "<br />" . 'view video file ' . $course_data->file,
-        //             ]);
-        //     } else {
-        //         $new_student_log = new Student_logs([
-        //             'tuesday' => 'view video file ' . $course_data->file,
-        //             'course_id' => $course_id,
-        //             'course_chapter_id' => $course_chapter_id,
-        //             'course_details_id' => $course_details_id,
-        //             'created_at' => $date_time,
-        //             'student_id' => auth()->user()->id,
-        //         ]);
-        //         $new_student_log->save();
-        //     }
-        // } else if ($day == 'Wednesday') {
-        //     $check_student_log = Student_logs::where('student_id', auth()->user()->id)->where('date', $date)->first();
-
-        //     if ($check_student_log) {
-        //         Student_logs::where('id', $check_student_log->id)
-        //             ->update([
-        //                 'wednesday' => $check_student_log->wednesday . "<br />" . 'view video file ' . $course_data->file,
-        //             ]);
-        //     } else {
-        //         $new_student_log = new Student_logs([
-        //             'wednesday' => 'view video file ' . $course_data->file,
-        //             'course_id' => $course_id,
-        //             'course_chapter_id' => $course_chapter_id,
-        //             'course_details_id' => $course_details_id,
-        //             'created_at' => $date_time,
-        //             'student_id' => auth()->user()->id,
-        //         ]);
-        //         $new_student_log->save();
-        //     }
-        // } else if ($day == 'Thursday') {
-        //     $check_student_log = Student_logs::where('student_id', auth()->user()->id)->where('date', $date)->first();
-
-        //     if ($check_student_log) {
-        //         Student_logs::where('id', $check_student_log->id)
-        //             ->update([
-        //                 'thursday' => $check_student_log->thursday . "<br />" . 'view video file ' . $course_data->file,
-        //             ]);
-        //     } else {
-        //         $new_student_log = new Student_logs([
-        //             'thursday' => 'view video file ' . $course_data->file,
-        //             'course_id' => $course_id,
-        //             'course_chapter_id' => $course_chapter_id,
-        //             'course_details_id' => $course_details_id,
-        //             'created_at' => $date_time,
-        //             'student_id' => auth()->user()->id,
-        //         ]);
-        //         $new_student_log->save();
-        //     }
-        // } else if ($day == 'Friday') {
-        //     $check_student_log = Student_logs::where('student_id', auth()->user()->id)->where('date', $date)->first();
-
-        //     if ($check_student_log) {
-        //         Student_logs::where('id', $check_student_log->id)
-        //             ->update([
-        //                 'friday' => $check_student_log->friday . "<br />" . 'view video file ' . $course_data->file,
-        //             ]);
-        //     } else {
-        //         $new_student_log = new Student_logs([
-        //             'friday' => 'view video file ' . $course_data->file,
-        //             'course_id' => $course_id,
-        //             'course_chapter_id' => $course_chapter_id,
-        //             'course_details_id' => $course_details_id,
-        //             'created_at' => $date_time,
-        //             'student_id' => auth()->user()->id,
-        //         ]);
-        //         $new_student_log->save();
-        //     }
-        // } else if ($day == 'Saturday') {
-        //     $check_student_log = Student_logs::where('student_id', auth()->user()->id)->where('date', $date)->first();
-
-        //     if ($check_student_log) {
-        //         Student_logs::where('id', $check_student_log->id)
-        //             ->update([
-        //                 'saturday' => $check_student_log->saturday . "<br />" . 'view video file ' . $course_data->file,
-        //             ]);
-        //     } else {
-        //         $new_student_log = new Student_logs([
-        //             'saturday' => 'view video file ' . $course_data->file,
-        //             'course_id' => $course_id,
-        //             'course_chapter_id' => $course_chapter_id,
-        //             'course_details_id' => $course_details_id,
-        //             'created_at' => $date_time,
-        //             'student_id' => auth()->user()->id,
-        //         ]);
-        //         $new_student_log->save();
-        //     }
-        // } else if ($day == 'Sunday') {
-        //     $check_student_log = Student_logs::where('student_id', auth()->user()->id)->where('date', $date)->first();
-
-        //     if ($check_student_log) {
-        //         Student_logs::where('id', $check_student_log->id)
-        //             ->update([
-        //                 'sunday' => $check_student_log->sunday . "<br />" . 'view video file ' . $course_data->file,
-        //             ]);
-        //     } else {
-        //         $new_student_log = new Student_logs([
-        //             'sunday' => 'view video file ' . $course_data->file,
-        //             'course_id' => $course_id,
-        //             'course_chapter_id' => $course_chapter_id,
-        //             'course_details_id' => $course_details_id,
-        //             'created_at' => $date_time,
-        //             'student_id' => auth()->user()->id,
-        //         ]);
-        //         $new_student_log->save();
-        //     }
-        // }
+        $new_student_log = new Student_logs([
+            'content' => 'view video file ' . $course_data->file,
+            'course_id' => $course_id,
+            'course_chapter_id' => $course_chapter_id,
+            'course_details_id' => $course_details_id,
+            'created_at' => $date_time,
+            'student_id' => auth()->user()->id,
+            'date' => $date,
+        ]);
+        $new_student_log->save();
 
         return view('student_show_video', [
             'course_data' => $course_data,
@@ -1682,17 +1524,21 @@ class Student_controller extends Controller
 
         $user_data = User::find(auth()->user()->id);
         $count = Invite_student::where('student_id', auth()->user()->id)->where('status', 'Pending Approval')->count();
+        $taken = Taken::where('student_id',auth()->user()->id)->where('type','exam')->orderBy('id','desc')->where('remarks','pass')->first();
+        $taken_all = Taken::where('student_id',auth()->user()->id)->where('type','exam')->orderBy('id','desc')->where('remarks','pass')->get();
 
-        $student_exam = Student_exam::where('course_id', $course_id)
-            ->where('student_id', auth()->user()->id)
-            ->where('remarks', '!=', 'fail')
-            ->first();
 
-        if ($student_exam) {
-            $course_chapter = Course_chapter::where('id', '>', $student_exam->course_chapter_id)
+        if ($taken) {
+            foreach ($taken_all as $key => $data) {
+                $id[] = $data->course_chapter_id;
+            }
+            $course_chapter = Course_chapter::whereIn('id', $id)->take(1)->get();
+            $course_chapter_next_chapter = Course_chapter::where('id', '>', $taken->course_chapter_id)
                 ->orderBy('id')
+                ->limit(1)
                 ->get();
             return view('student_show_course_chapter', [
+                'course_chapter_next_chapter' => $course_chapter_next_chapter,
                 'user_data' => $user_data,
                 'count' => $count,
                 'course_chapter' => $course_chapter,
@@ -1932,23 +1778,36 @@ class Student_controller extends Controller
             $check_student_log = Student_logs::where('student_id', auth()->user()->id)->where('date', $date)->first();
 
 
-            if ($check_student_log) {
-                Student_logs::where('id', $check_student_log->id)
-                    ->update([
-                        'content' => $check_student_log->content . "<br />" . 'Turned in assignment with a score of ' . $count_student_answer . ' over ' . $count_assignment_question_total_score . ' and a percentage of ' . round($percentage, 2) . '. remarks ' . $remarks,
-                    ]);
-            } else {
-                $new_logs = new Student_logs([
-                    'content' => 'Turned in assignment with a score of ' . $count_student_answer . ' over ' . $count_assignment_question_total_score . ' and a percentage of ' . round($percentage, 2) . '. remarks ' . $remarks,
-                    'course_id' => $taken->course_id,
-                    'course_chapter_id' => $taken->course_chapter_id,
-                    'assignment_id' => $taken->assignment_id,
-                    'student_id' => auth()->user()->id,
-                    'date' => $date,
-                ]);
+            // if ($check_student_log) {
+            //     Student_logs::where('id', $check_student_log->id)
+            //         ->update([
+            //             'content' => $check_student_log->content . "<br />" . 'Turned in assignment with a score of ' . $count_student_answer . ' over ' . $count_assignment_question_total_score . ' and a percentage of ' . round($percentage, 2) . '. remarks ' . $remarks,
+            //             'content' =>
+            //             'content' => ''
+            //         ]);
+            // } else {
+            //     $new_logs = new Student_logs([
+            //         'content' => 'Turned in assignment with a score of ' . $count_student_answer . ' over ' . $count_assignment_question_total_score . ' and a percentage of ' . round($percentage, 2) . '. remarks ' . $remarks,
+            //         'course_id' => $taken->course_id,
+            //         'course_chapter_id' => $taken->course_chapter_id,
+            //         'assignment_id' => $taken->assignment_id,
+            //         'student_id' => auth()->user()->id,
+            //         'date' => $date,
+            //     ]);
 
-                $new_logs->save();
-            }
+            //     $new_logs->save();
+            // }
+
+            $new_logs = new Student_logs([
+                'content' => 'Assignment score ' . $count_student_answer . "/" . $count_assignment_question_total_score,
+                'course_id' => $taken->course_id,
+                'course_chapter_id' => $taken->course_chapter_id,
+                'assignment_id' => $taken->assignment_id,
+                'student_id' => auth()->user()->id,
+                'date' => $date,
+            ]);
+
+            $new_logs->save();
 
 
             return redirect()->route('student_show_course_chapter', ['course_id' => $taken->course_id])->with('success', 'assignment successfully turned in');
@@ -1982,25 +1841,36 @@ class Student_controller extends Controller
                 $remarks = 'failed';
             }
 
-            $check_student_log = Student_logs::where('student_id', auth()->user()->id)->where('date', $date)->first();
+            //$check_student_log = Student_logs::where('student_id', auth()->user()->id)->where('date', $date)->first();
 
-            if ($check_student_log) {
-                Student_logs::where('id', $check_student_log->id)
-                    ->update([
-                        'content' => $check_student_log->monday . '<br />Turned in quiz with a score of ' . $count_student_answer . ' over ' . $count_assignment_question_total_score . ' and a percentage of ' . round($percentage, 2) . '. remarks ' . $remarks,
-                    ]);
-            } else {
-                $new_logs = new Student_logs([
-                    'content' => 'Turned in quiz with a score of ' . $count_student_answer . ' over ' . $count_assignment_question_total_score . ' and a percentage of ' . round($percentage, 2) . '. remarks ' . $remarks,
-                    'course_id' => $taken->course_id,
-                    'course_chapter_id' => $taken->course_chapter_id,
-                    'assignment_id' => $taken->assignment_id,
-                    'student_id' => auth()->user()->id,
-                    'date' => $date,
-                ]);
+            // if ($check_student_log) {
+            //     Student_logs::where('id', $check_student_log->id)
+            //         ->update([
+            //             'content' => $check_student_log->monday . '<br />Turned in quiz with a score of ' . $count_student_answer . ' over ' . $count_assignment_question_total_score . ' and a percentage of ' . round($percentage, 2) . '. remarks ' . $remarks,
+            //         ]);
+            // } else {
+            //     $new_logs = new Student_logs([
+            //         'content' => 'Turned in quiz with a score of ' . $count_student_answer . ' over ' . $count_assignment_question_total_score . ' and a percentage of ' . round($percentage, 2) . '. remarks ' . $remarks,
+            //         'course_id' => $taken->course_id,
+            //         'course_chapter_id' => $taken->course_chapter_id,
+            //         'assignment_id' => $taken->assignment_id,
+            //         'student_id' => auth()->user()->id,
+            //         'date' => $date,
+            //     ]);
 
-                $new_logs->save();
-            }
+            //     $new_logs->save();
+            // }
+
+            $new_logs = new Student_logs([
+                'content' => 'Quiz score ' . $count_student_answer . "/" . $count_assignment_question_total_score,
+                'course_id' => $taken->course_id,
+                'course_chapter_id' => $taken->course_chapter_id,
+                'assignment_id' => $taken->assignment_id,
+                'student_id' => auth()->user()->id,
+                'date' => $date,
+            ]);
+
+            $new_logs->save();
 
             return redirect()->route('student_show_course_chapter', ['course_id' => $taken->course_id])->with('success', 'quiz successfully turned in');
         } elseif ($taken->type == 'exam') {
@@ -2033,27 +1903,42 @@ class Student_controller extends Controller
                 $remarks = 'failed';
             }
 
-            $check_student_log = Student_logs::where('student_id', auth()->user()->id)->where('date', $date)->first();
+            // $check_student_log = Student_logs::where('student_id', auth()->user()->id)->where('date', $date)->first();
 
-            if ($check_student_log) {
-                Student_logs::where('id', $check_student_log->id)
-                    ->update([
-                        'content' => $check_student_log->content . '<br />Turned in exam with a score of ' . $count_student_answer . ' over ' . $count_assignment_question_total_score . ' and a percentage of ' . round($percentage, 2) . '. remarks ' . $remarks,
-                    ]);
-            } else {
-                $new_logs = new Student_logs([
-                    'content' => 'Turned in exam with a score of ' . $count_student_answer . ' over ' . $count_assignment_question_total_score . ' and a percentage of ' . round($percentage, 2) . '. remarks ' . $remarks,
-                    'course_id' => $taken->course_id,
-                    'course_chapter_id' => $taken->course_chapter_id,
-                    'exam_id' => $taken->exam_id,
-                    'student_id' => auth()->user()->id,
-                    'date' => $date,
-                ]);
+            // if ($check_student_log) {
+            //     Student_logs::where('id', $check_student_log->id)
+            //         ->update([
+            //             'content' => $check_student_log->content . '<br />Turned in exam with a score of ' . $count_student_answer . ' over ' . $count_assignment_question_total_score . ' and a percentage of ' . round($percentage, 2) . '. remarks ' . $remarks,
+            //         ]);
+            // } else {
+            //     $new_logs = new Student_logs([
+            //         'content' => 'Turned in exam with a score of ' . $count_student_answer . ' over ' . $count_assignment_question_total_score . ' and a percentage of ' . round($percentage, 2) . '. remarks ' . $remarks,
+            //         'course_id' => $taken->course_id,
+            //         'course_chapter_id' => $taken->course_chapter_id,
+            //         'exam_id' => $taken->exam_id,
+            //         'student_id' => auth()->user()->id,
+            //         'date' => $date,
+            //     ]);
 
-                $new_logs->save();
-            }
+            //     $new_logs->save();
+            // }
+
+            $new_logs = new Student_logs([
+                'content' => 'Exam score ' . $count_student_answer . "/" . $count_assignment_question_total_score,
+                'course_id' => $taken->course_id,
+                'course_chapter_id' => $taken->course_chapter_id,
+                'assignment_id' => $taken->assignment_id,
+                'student_id' => auth()->user()->id,
+                'date' => $date,
+            ]);
+
+            $new_logs->save();
+
+
 
             return redirect()->route('student_show_course_chapter', ['course_id' => $taken->course_id])->with('success', 'exam successfully turned in');
         }
     }
+
+
 }

@@ -21,7 +21,7 @@
                 <div class="card-header">
                     <span style="text-transform: uppercase;font-weight:bold;">{{ $type }}</span>
                     <a href="{{ url('student_taken_submit', ['taken_id' => $taken_id]) }}"
-                        class="float-right btn-sm btn btn-warning">Finish Assignment</a>
+                        class="float-right btn-sm btn btn-warning">Finish</a>
                 </div>
                 <div class="card-header">
                     @if ($question->question_type != 'Matching Type')
@@ -39,7 +39,7 @@
                                     $explode = explode('|', $question->answer);
                                 @endphp
                                 <ul class="list-group">
-                                    <input type="text" id="question_answer" value="{{ $question->answer }}">
+                                    <input type="hidden" id="question_answer" value="{{ $question->answer }}">
                                     @foreach ($explode as $key => $value)
                                         <li class="list-group-item">
                                             <input type="text" name="answer[]" class="form-control">
@@ -48,7 +48,7 @@
                                 </ul>
                                 <input type="hidden" id="question_type" value="{{ $question->question_type }}">
                             @elseif($question->question_type == 'Multitple Choice')
-                                <input type="text" id="question_answer" value="{{ $question->answer }}">
+                                <input type="hidden" id="question_answer" value="{{ $question->answer }}">
 
                                 @if ($type == 'assignment')
                                     <div class="radio">
@@ -134,7 +134,7 @@
                                     @endfor
                                 </ul>
                                 <br />
-                                <input type="text" id="question_answer" value="{{ $question->answer }}">
+                                <input type="hidden" id="question_answer" value="{{ $question->answer }}">
                                 <input type="hidden" id="question_type" value="{{ $question->question_type }}">
                                 <ul class="list-group">
                                     <li class="list-group-item">

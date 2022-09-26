@@ -116,7 +116,7 @@ Route::post('/instructor_add_course_process', 'Instructor_controller@instructor_
 Route::get('/instructor_courses_show_content', 'Instructor_controller@instructor_courses_show_content')->name('instructor_courses_show_content');
 
 
-Route::post('/instructor_add_file_to_chapter', 'Instrinstructor_edit_exam_questionuctor_controller@instructor_add_file_to_chapter')->name('instructor_add_file_to_chapter');
+Route::post('/instructor_add_file_to_chapter', 'Instructor_controller@instructor_add_file_to_chapter')->name('instructor_add_file_to_chapter');
 
 Route::get('/instructor_chapter_add_quiz_or_exam', 'Instructor_controller@instructor_chapter_add_quiz_or_exam')->name('instructor_chapter_add_quiz_or_exam');
 
@@ -223,6 +223,10 @@ Route::post('/instructor_edit_chapter/', 'Instructor_controller@instructor_edit_
 Route::get('/instructor_list_of_students/', 'Instructor_controller@instructor_list_of_students')->name('instructor_list_of_students');
 
 Route::get('/instructor_student_logs/{student_id}/{course_id}', 'Instructor_controller@instructor_student_logs')->name('instructor_student_logs');
+
+
+
+Route::get('/instructor_view_assignment_score/{type}', 'Instructor_controller@instructor_view_assignment_score')->name('instructor_view_assignment_score');
 
 
 

@@ -34,7 +34,7 @@
                     </div>
                     <div class="card-footer">
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-6" style="margin-bottom: 10px;">
                                 <a href="{{ url('instructor_add_course_phase_2', [$data->id]) }}"
                                     class="btn btn-sm btn-block btn-info">ADD CHAPTER</a>
                             </div>

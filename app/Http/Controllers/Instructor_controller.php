@@ -27,6 +27,9 @@ use App\Models\Quiz_matching;
 
 use App\Models\Student_logs;
 
+use App\Models\Taken;
+use App\Models\Taken_details;
+
 
 
 
@@ -1949,6 +1952,16 @@ class Instructor_controller extends Controller
 
         return view('instructor_student_logs',[
             'student_logs' => $student_logs,
+        ]);
+    }
+
+    public function instructor_view_assignment_score($type)
+    {
+        $taken = Taken::where('instructor_id',auth()->user()->id)->where('type',$type)->get();
+        $user_data = User::find(auth()->user()->id);
+        return view('instructor_view_assignment_score',[
+            'taken' => $taken,
+            'user_data' => $user_data,
         ]);
     }
 }

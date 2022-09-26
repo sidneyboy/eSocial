@@ -873,7 +873,7 @@
                     </div>
                     <div class="card-header">
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-6" style="margin-bottom: 10px;">
                                 <!-- Button trigger modal -->
                                 <button type="button" class="btn btn-primary btn-sm btn-block" data-toggle="modal"
                                     data-target="#exampleModalcontent{{ $data->id }}">
