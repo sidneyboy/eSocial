@@ -497,6 +497,30 @@
             </div>
         @endforeach
     @endif
+
+
+
+    <div class="card">
+        <div class="card-header">Comments</div>
+        <div class="card-body">
+            @foreach ($course->comments as $comments)
+                <div class="card" style="margin-bottom: 10px;">
+                    <div class="card-header">{{ $comments->user->last_name }} {{ $comments->user->name }}</div>
+                    <div class="card-body">{{ $comments->comment }}</div>
+                </div>
+            @endforeach
+        </div>
+        <div class="card-footer">
+            <form action="{{ route('student_comment_process') }}" method="post">
+                @csrf
+                <label>Add Comment</label>
+                <textarea name="comment" class="form-control" required></textarea>
+                <input type="hidden" name="course_id" value="{{ $course_id }}">
+                <br />
+                <button class="btn btn-primary btn-sm float-right">Submit</button>
+            </form>
+        </div>
+    </div>
 @endsection
 
 

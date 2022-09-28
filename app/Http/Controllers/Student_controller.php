@@ -169,11 +169,13 @@ class Student_controller extends Controller
             'course_id' => $request->input('course_id'),
             'comment' => $request->input('comment'),
             'user_id' => auth()->user()->id,
+            'status' => 'none',
         ]);
 
         $new_comment->save();
 
-        return redirect('student_enrolled_courses')->with('success', 'Successfully add new comment');
+
+        return redirect()->route('student_show_course_chapter',['course_id' => $request->input('course_id')])->with('success', 'Successfully add new comment');
     }
 
     public function student_show_image_file($course_details_id, $course_id, $course_chapter_id)
@@ -1526,7 +1528,7 @@ class Student_controller extends Controller
         $count = Invite_student::where('student_id', auth()->user()->id)->where('status', 'Pending Approval')->count();
         $taken = Taken::where('student_id',auth()->user()->id)->where('type','exam')->orderBy('id','desc')->where('remarks','pass')->first();
         $taken_all = Taken::where('student_id',auth()->user()->id)->where('type','exam')->orderBy('id','desc')->where('remarks','pass')->get();
-
+        $course = Course::find($course_id);
 
         if ($taken) {
             foreach ($taken_all as $key => $data) {
@@ -1543,6 +1545,8 @@ class Student_controller extends Controller
                 'count' => $count,
                 'course_chapter' => $course_chapter,
                 'date' => $date,
+                'course_id' => $course_id,
+                'course' => $course,
             ]);
         } else {
             $course_chapter = Course_chapter::where('course_id', $course_id)->take(1)->get();
@@ -1551,6 +1555,8 @@ class Student_controller extends Controller
                 'count' => $count,
                 'course_chapter' => $course_chapter,
                 'date' => $date,
+                'course_id' => $course_id,
+                'course' => $course,
             ]);
         }
     }

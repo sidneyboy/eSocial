@@ -13,6 +13,7 @@ class Exam extends Model
         'course_id',
         'number_of_exams',
         'course_chapter_id',
+        // 'question_type',
         'title',
         'status',
     ];

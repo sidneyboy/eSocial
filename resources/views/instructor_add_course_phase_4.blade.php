@@ -23,6 +23,16 @@
                             <label>Number of questions</label>
                             <input type="number" min="0" name="number_of_questions" class="form-control" required>
 
+                            <label>Question Type</label>
+                            <select class="form-control" id="question_type" name="question_type" required >
+                                <option value="" default>Select</option>
+                                <option value="Enumeration">Enumeration</option>
+                                <option value="Multitple Choice">Multitple Choice</option>
+                                <option value="Identification">Identification</option>
+                                <option value="Matching Type">Matching Type</option>
+                            </select>
+
+
                             <input type="hidden" value="{{ $course_id }}" name="course_id">
                             <input type="hidden" value="{{ $course_chapter_id }}" name="course_chapter_id">
                         </div>

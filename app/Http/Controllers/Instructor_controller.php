@@ -156,21 +156,15 @@ class Instructor_controller extends Controller
 
     public function instructor_show_chapter($course_id)
     {
+        //return $course_id;
         $course_chapter = Course_chapter::where('course_id', $course_id)->get();
-
-
-        // foreach ($course_chapter as $key => $data) {
-        //     foreach ($data->course_chapter as $key => $value) {
-        //         # code...
-        //     }
-        // }
-
-
-
+        $course = course::find($course_id);
         $user_data = User::find(auth()->user()->id);
         return view('instructor_show_chapter', [
             'course_chapter' => $course_chapter,
             'user_data' => $user_data,
+            'course' => $course,
+            'course_id' => $course_id,
         ]);
     }
 
@@ -229,11 +223,20 @@ class Instructor_controller extends Controller
         if ($check) {
             $user_data = User::find(auth()->user()->id);
             return view('instructor_add_course_chapter_quiz', [
+                // 'course_id' => $request->input('course_id'),
+                // 'user_data' => $user_data,
+                // 'course_chapter_id' => $request->input('course_chapter_id'),
+                // 'quiz_id' => $check->id,
+                // 'number_of_questions' => $request->input('number_of_questions'),
+
                 'course_id' => $request->input('course_id'),
                 'user_data' => $user_data,
                 'course_chapter_id' => $request->input('course_chapter_id'),
-                'quiz_id' => $check->id,
+                'question_type' => $request->input('question_type'),
+                'exam_id' => $check->id,
                 'number_of_questions' => $request->input('number_of_questions'),
+                'original_number_of_questions' => $request->input('number_of_questions'),
+                'question_type' => $request->input('question_type'),
             ]);
         } else {
             $new = new Course_quiz([
@@ -254,6 +257,8 @@ class Instructor_controller extends Controller
                 'course_chapter_id' => $request->input('course_chapter_id'),
                 'quiz_id' => $new->id,
                 'number_of_questions' => $request->input('number_of_questions'),
+                'original_number_of_questions' => $request->input('number_of_questions'),
+                'question_type' => $request->input('question_type'),
             ]);
         }
     }
@@ -436,6 +441,13 @@ class Instructor_controller extends Controller
                 }
             }
         } else {
+            $counter = $request->input('next_count_variable');
+
+            if (isset($counter)) {
+                $count_variable = $request->input('next_count_variable');
+            } else {
+                $count_variable = 2;
+            }
             if ($request->input('question_type') == 'Enumeration') {
                 //return $request->input();
                 $implode = implode('|', $request->input('answer'));
@@ -463,6 +475,9 @@ class Instructor_controller extends Controller
                         'user_data' => $user_data,
                         'course_chapter_id' => $request->input('course_chapter_id'),
                         'number_of_questions' => $request->input('number_of_questions'),
+                        'question_type' => $request->input('question_type'),
+                        'count_variable' => $count_variable,
+                        'original_number_of_questions' => $request->input('original_number_of_questions'),
                     ]);
                 }
             } elseif ($request->input('question_type') == 'Multitple Choice') {
@@ -500,6 +515,9 @@ class Instructor_controller extends Controller
                         'user_data' => $user_data,
                         'course_chapter_id' => $request->input('course_chapter_id'),
                         'number_of_questions' => $request->input('number_of_questions'),
+                        'question_type' => $request->input('question_type'),
+                        'count_variable' => $count_variable,
+                        'original_number_of_questions' => $request->input('original_number_of_questions'),
                     ]);
                 }
             } elseif ($request->input('question_type') == 'Identification') {
@@ -527,6 +545,9 @@ class Instructor_controller extends Controller
                         'user_data' => $user_data,
                         'course_chapter_id' => $request->input('course_chapter_id'),
                         'number_of_questions' => $request->input('number_of_questions'),
+                        'question_type' => $request->input('question_type'),
+                        'count_variable' => $count_variable,
+                        'original_number_of_questions' => $request->input('original_number_of_questions'),
                     ]);
                 }
             } elseif ($request->input('question_type') == 'Matching Type') {
@@ -566,6 +587,9 @@ class Instructor_controller extends Controller
                         'user_data' => $user_data,
                         'course_chapter_id' => $request->input('course_chapter_id'),
                         'number_of_questions' => $request->input('number_of_questions'),
+                        'question_type' => $request->input('question_type'),
+                        'count_variable' => $count_variable,
+                        'original_number_of_questions' => $request->input('original_number_of_questions'),
                     ]);
                 }
             }
@@ -718,7 +742,9 @@ class Instructor_controller extends Controller
                 'user_data' => $user_data,
                 'course_chapter_id' => $request->input('course_chapter_id'),
                 'exam_id' => $check->id,
-                'number_of_questions' => $request->input('number_of_``questions'),
+                'number_of_questions' => $request->input('number_of_questions'),
+                'original_number_of_questions' => $request->input('number_of_questions'),
+                'question_type' => $request->input('question_type'),
             ]);
         } else {
             // return 'asdasd';
@@ -741,6 +767,8 @@ class Instructor_controller extends Controller
                 'course_chapter_id' => $request->input('course_chapter_id'),
                 'exam_id' => $new->id,
                 'number_of_questions' => $request->input('number_of_questions'),
+                'original_number_of_questions' => $request->input('number_of_questions'),
+                'question_type' => $request->input('question_type'),
             ]);
         }
     }
@@ -855,6 +883,14 @@ class Instructor_controller extends Controller
                 }
             }
         } else {
+            $counter = $request->input('next_count_variable');
+
+            if (isset($counter)) {
+                $count_variable = $request->input('next_count_variable');
+            } else {
+                $count_variable = 2;
+            }
+
             if ($request->input('question_type') == 'Enumeration') {
                 //return $request->input();
                 $implode = implode('|', $request->input('answer'));
@@ -882,6 +918,9 @@ class Instructor_controller extends Controller
                         'user_data' => $user_data,
                         'course_chapter_id' => $request->input('course_chapter_id'),
                         'number_of_questions' => $request->input('number_of_questions'),
+                        'count_variable' => $count_variable,
+                        'original_number_of_questions' => $request->input('original_number_of_questions'),
+                        'question_type' => $request->input('question_type'),
                     ]);
                 }
             } elseif ($request->input('question_type') == 'Multitple Choice') {
@@ -919,6 +958,9 @@ class Instructor_controller extends Controller
                         'user_data' => $user_data,
                         'course_chapter_id' => $request->input('course_chapter_id'),
                         'number_of_questions' => $request->input('number_of_questions'),
+                        'count_variable' => $count_variable,
+                        'original_number_of_questions' => $request->input('original_number_of_questions'),
+                        'question_type' => $request->input('question_type'),
                     ]);
                 }
             } elseif ($request->input('question_type') == 'Identification') {
@@ -946,6 +988,9 @@ class Instructor_controller extends Controller
                         'user_data' => $user_data,
                         'course_chapter_id' => $request->input('course_chapter_id'),
                         'number_of_questions' => $request->input('number_of_questions'),
+                        'count_variable' => $count_variable,
+                        'original_number_of_questions' => $request->input('original_number_of_questions'),
+                        'question_type' => $request->input('question_type'),
                     ]);
                 }
             } elseif ($request->input('question_type') == 'Matching Type') {
@@ -985,6 +1030,9 @@ class Instructor_controller extends Controller
                         'user_data' => $user_data,
                         'course_chapter_id' => $request->input('course_chapter_id'),
                         'number_of_questions' => $request->input('number_of_questions'),
+                        'count_variable' => $count_variable,
+                        'original_number_of_questions' => $request->input('original_number_of_questions'),
+                        'question_type' => $request->input('question_type'),
                     ]);
                 }
             }
@@ -993,6 +1041,7 @@ class Instructor_controller extends Controller
 
     public function instructor_add_course_exam_process(Request $request)
     {
+        // return $request->input();
         date_default_timezone_set('Asia/Manila');
         $date = date('Y-m-d H:i:s');
         $check = Exam::where('title', $request->input('title'))->first();
@@ -1003,8 +1052,10 @@ class Instructor_controller extends Controller
                 'course_id' => $request->input('course_id'),
                 'user_data' => $user_data,
                 'course_chapter_id' => $request->input('course_chapter_id'),
+                'question_type' => $request->input('question_type'),
                 'exam_id' => $check->id,
                 'number_of_questions' => $request->input('number_of_questions'),
+                'original_number_of_questions' => $request->input('number_of_questions'),
             ]);
         } else {
             $certificate = $request->file('certificate');
@@ -1017,6 +1068,7 @@ class Instructor_controller extends Controller
                 'course_chapter_id' => $request->input('course_chapter_id'),
                 'title' => $request->input('title'),
                 'number_of_questions' => $request->input('number_of_questions'),
+                // 'question_type' => $request->input('question_type'),
                 'created_at' => $date,
                 'status' => 'disabled',
                 'certificate' => $certificate_name,
@@ -1029,8 +1081,10 @@ class Instructor_controller extends Controller
                 'course_id' => $request->input('course_id'),
                 'user_data' => $user_data,
                 'course_chapter_id' => $request->input('course_chapter_id'),
+                'question_type' => $request->input('question_type'),
                 'exam_id' => $new->id,
                 'number_of_questions' => $request->input('number_of_questions'),
+                'original_number_of_questions' => $request->input('number_of_questions'),
             ]);
         }
     }
@@ -1146,8 +1200,19 @@ class Instructor_controller extends Controller
                 }
             }
         } else {
+            $counter = $request->input('next_count_variable');
+
+            if (isset($counter)) {
+                $count_variable = $request->input('next_count_variable');
+            } else {
+                $count_variable = 2;
+            }
+
+
+
+
             if ($request->input('question_type') == 'Enumeration') {
-                //eturn $request->input();
+                //return $request->input();
                 $implode = implode('|', $request->input('answer'));
 
                 $new_question = new Exam_questions([
@@ -1155,8 +1220,8 @@ class Instructor_controller extends Controller
                     'course_chapter_id' => $request->input('course_chapter_id'),
                     'course_exam_id' => $request->input('exam_id'),
                     'question' => $request->input('question'),
-                    'answer' => strtolower($implode),
                     'question_type' => $request->input('question_type'),
+                    'answer' => strtolower($implode),
                     'score' => $request->input('score'),
                 ]);
 
@@ -1173,6 +1238,9 @@ class Instructor_controller extends Controller
                         'user_data' => $user_data,
                         'course_chapter_id' => $request->input('course_chapter_id'),
                         'number_of_questions' => $request->input('number_of_questions'),
+                        'question_type' => $request->input('question_type'),
+                        'count_variable' => $count_variable,
+                        'original_number_of_questions' => $request->input('original_number_of_questions'),
                     ]);
                 }
             } elseif ($request->input('question_type') == 'Multitple Choice') {
@@ -1181,8 +1249,8 @@ class Instructor_controller extends Controller
                     'course_chapter_id' => $request->input('course_chapter_id'),
                     'course_exam_id' => $request->input('exam_id'),
                     'question' => $request->input('question'),
-                    'answer' => strtolower($request->input('answer')),
                     'question_type' => $request->input('question_type'),
+                    'answer' => strtolower($request->input('answer')),
                     'score' => $request->input('score'),
                 ]);
 
@@ -1210,6 +1278,9 @@ class Instructor_controller extends Controller
                         'user_data' => $user_data,
                         'course_chapter_id' => $request->input('course_chapter_id'),
                         'number_of_questions' => $request->input('number_of_questions'),
+                        'question_type' => $request->input('question_type'),
+                        'count_variable' => $count_variable,
+                        'original_number_of_questions' => $request->input('original_number_of_questions'),
                     ]);
                 }
             } elseif ($request->input('question_type') == 'Identification') {
@@ -1219,8 +1290,8 @@ class Instructor_controller extends Controller
                     'course_chapter_id' => $request->input('course_chapter_id'),
                     'course_exam_id' => $request->input('exam_id'),
                     'question' => $request->input('question'),
-                    'answer' => strtolower($request->input('answer')),
                     'question_type' => $request->input('question_type'),
+                    'answer' => strtolower($request->input('answer')),
                     'score' => $request->input('score'),
                 ]);
 
@@ -1238,6 +1309,9 @@ class Instructor_controller extends Controller
                         'user_data' => $user_data,
                         'course_chapter_id' => $request->input('course_chapter_id'),
                         'number_of_questions' => $request->input('number_of_questions'),
+                        'question_type' => $request->input('question_type'),
+                        'count_variable' => $count_variable,
+                        'original_number_of_questions' => $request->input('original_number_of_questions'),
                     ]);
                 }
             } elseif ($request->input('question_type') == 'Matching Type') {
@@ -1249,8 +1323,8 @@ class Instructor_controller extends Controller
                     'course_chapter_id' => $request->input('course_chapter_id'),
                     'course_exam_id' => $request->input('exam_id'),
                     'question' => $question,
-                    'answer' => strtolower($answer),
                     'question_type' => $request->input('question_type'),
+                    'answer' => strtolower($answer),
                     'score' => $request->input('score'),
                 ]);
 
@@ -1277,6 +1351,9 @@ class Instructor_controller extends Controller
                         'user_data' => $user_data,
                         'course_chapter_id' => $request->input('course_chapter_id'),
                         'number_of_questions' => $request->input('number_of_questions'),
+                        'question_type' => $request->input('question_type'),
+                        'count_variable' => $count_variable,
+                        'original_number_of_questions' => $request->input('original_number_of_questions'),
                     ]);
                 }
             }
@@ -1327,10 +1404,10 @@ class Instructor_controller extends Controller
     public function instructor_comment_process(Request $request)
     {
 
-        foreach ($request->input('comment_details') as $key => $id) {
-            Comments::where('id', $id)
-                ->update(['status' => 'replied']);
-        }
+        // foreach ($request->input('comment_details') as $key => $id) {
+        //     Comments::where('id', $id)
+        //         ->update(['status' => 'replied']);
+        // }
 
         $new_comment = new Comments([
             'course_id' => $request->input('course_id'),
@@ -1341,7 +1418,7 @@ class Instructor_controller extends Controller
 
         $new_comment->save();
 
-        return redirect('instructor_courses')->with('success', 'Successfully add new comment');
+        return redirect()->route('instructor_courses',['course_id' => $request->input('course_id')])->with('success', 'Successfully add new comment');
     }
 
     public function instructor_add_exam(Request $request)
@@ -1944,22 +2021,22 @@ class Instructor_controller extends Controller
         return redirect()->route('instructor_show_chapter', ['course_id' => $course_id])->with('success', 'Updated');
     }
 
-    public function instructor_student_logs($student_id,$course_id)
+    public function instructor_student_logs($student_id, $course_id)
     {
-        $student_logs = Student_logs::where('course_id',$course_id)
-                                    ->where('student_id',$student_id)
-                                    ->get();
+        $student_logs = Student_logs::where('course_id', $course_id)
+            ->where('student_id', $student_id)
+            ->get();
 
-        return view('instructor_student_logs',[
+        return view('instructor_student_logs', [
             'student_logs' => $student_logs,
         ]);
     }
 
     public function instructor_view_assignment_score($type)
     {
-        $taken = Taken::where('instructor_id',auth()->user()->id)->where('type',$type)->get();
+        $taken = Taken::where('instructor_id', auth()->user()->id)->where('type', $type)->get();
         $user_data = User::find(auth()->user()->id);
-        return view('instructor_view_assignment_score',[
+        return view('instructor_view_assignment_score', [
             'taken' => $taken,
             'user_data' => $user_data,
         ]);

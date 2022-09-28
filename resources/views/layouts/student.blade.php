@@ -239,12 +239,12 @@
                 </a>
             </li>
 
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a class="nav-link" href="{{ url('student_show_certificate') }}">
                     <i class="bi bi-card-text"></i>
                     <span>{{ __('Certificates') }}</span>
                 </a>
-            </li>
+            </li> --}}
 
             {{-- <li class="nav-item">
                 <a class="nav-link" href="#">
