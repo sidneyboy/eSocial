@@ -17,6 +17,7 @@
                     @csrf
                     <div class="card-body">
                         <div class="form-group">
+                            
                             <label>Quiz Title</label>
                             <input type="text" name="quiz_title" required class="form-control">
 

@@ -9,10 +9,9 @@
             </button>
         </div>
     @endif
-
-    @foreach ($course as $data)
-        <div class="row">
-            <div class="col-md-12">
+    <div class="row">
+        @foreach ($course as $data)
+            <div class="col-md-4">
                 <div class="card" style="width: 100%;margin-bottom:50px;background-color:gainsboro">
                     <div class="card-header" style="font-weight: bold;background-color:#141E30;color:white">
                         <div class="row">
@@ -34,19 +33,19 @@
                     </div>
                     <div class="card-footer">
                         <div class="row">
-                            <div class="col-md-6" style="margin-bottom: 10px;">
+                            <div class="col-md-12" style="margin-bottom: 10px;">
                                 <a href="{{ url('instructor_add_course_phase_2', [$data->id]) }}"
                                     class="btn btn-sm btn-block btn-info">ADD CHAPTER</a>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                                 <!-- Button trigger modal -->
                                 <button type="button" class="btn btn-primary btn-sm btn-block" data-toggle="modal"
-                                    data-target="#exampleModal">
+                                    data-target="#exampleModal{{ $data->id }}">
                                     ADD EXAM/QUIZ/ASSIGNMENT
                                 </button>
 
                                 <!-- Modal -->
-                                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                                <div class="modal fade" id="exampleModal{{ $data->id }}" tabindex="-1" role="dialog"
                                     aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
@@ -57,8 +56,8 @@
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
                                             </div>
-                                            <form action="{{ route('instructor_chapter_add_quiz_or_exam') }}"
-                                                method="get" enctype="multipart/form-data">
+                                            <form action="{{ route('instructor_chapter_add_quiz_or_exam') }}" method="get"
+                                                enctype="multipart/form-data">
                                                 @csrf
                                                 <div class="modal-body">
                                                     <label>Add</label>
@@ -94,6 +93,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-    @endforeach
+        @endforeach
+    </div>
 @endsection

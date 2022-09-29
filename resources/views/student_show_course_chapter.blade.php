@@ -37,7 +37,7 @@
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Chapter Conten</h5>
+                                <h5 class="modal-title" id="exampleModalLabel">Chapter Content</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -172,31 +172,51 @@
                                         <div id="collapseThree" class="collapse" aria-labelledby="headingThree"
                                             data-parent="#accordionExample">
                                             <div class="card-body">
-                                                <table class="table">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>Quiz</th>
-                                                            <th>Posted</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        @foreach ($data->course_quiz as $quiz)
-                                                            @if ($quiz->status != 'disabled')
-                                                                <tr>
-                                                                    <td>
-                                                                        <a
-                                                                            href="{{ url('student_show_taken', [
-                                                                                'id' => $quiz->id,
-                                                                                'type' => 'quiz',
-                                                                            ]) }}">{{ $quiz->quiz_title }}</a>
-                                                                    </td>
-                                                                    <td>{{ date('F j, Y', strtotime($quiz->created_at)) }}
-                                                                    </td>
-                                                                </tr>
-                                                            @endif
-                                                        @endforeach
-                                                    </tbody>
-                                                </table>
+                                                <div class="table table-responsive">
+                                                    <table class="table table-sm">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Quiz</th>
+                                                                <th>Grade</th>
+                                                                <th>Percentage</th>
+                                                                <th>Posted</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @foreach ($data->course_quiz as $quiz)
+                                                                @if ($quiz->status != 'disabled')
+                                                                    <tr>
+                                                                        <td>
+                                                                            <a
+                                                                                href="{{ url('student_show_taken', [
+                                                                                    'id' => $quiz->id,
+                                                                                    'type' => 'quiz',
+                                                                                ]) }}">{{ $quiz->quiz_title }}</a>
+                                                                        </td>
+                                                                        <td>
+                                                                            @if ($quiz->student_quiz_score)
+                                                                                {{ $quiz->student_quiz_score->score }}/{{ $quiz->student_quiz_score->total_points }}
+                                                                                @php
+                                                                                    $percentage = ($quiz->student_quiz_score->score / $quiz->student_quiz_score->total_points) * 100
+                                                                                @endphp
+                                                                            @else
+                                                                                @php
+                                                                                    $percentage = 0;
+                                                                                @endphp
+                                                                                Not Taken
+                                                                            @endif
+                                                                        </td>
+                                                                        <td>
+                                                                            {{ round($percentage,2) }}%
+                                                                        </td>
+                                                                        <td>{{ date('F j, Y', strtotime($quiz->created_at)) }}
+                                                                        </td>
+                                                                    </tr>
+                                                                @endif
+                                                            @endforeach
+                                                        </tbody>
+                                                    </table>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

@@ -175,7 +175,7 @@ class Esocial_controller extends Controller
     public function payment_history()
     {
         $user_data = User::find(auth()->user()->id);
-        $payment = Payment::get();
+        $payment = Payment::orderBy('id','desc')->where('status','paid')->get();
         return view('payment_history', [
             'user_data' => $user_data,
             'payment' => $payment,

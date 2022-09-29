@@ -27,5 +27,10 @@ class Course_quiz extends Model
         return $this->belongsTo('App\Models\Course', 'course_id');
     }
 
+    public function student_quiz_score()
+    {
+        return $this->hasOne('App\Models\Taken', 'quiz_id')->where('student_id',auth()->user()->id);
+    }
+
    
 }

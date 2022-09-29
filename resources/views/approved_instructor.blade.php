@@ -31,19 +31,21 @@
                             </thead>
                             <tbody>
                                 @foreach ($instructor as $data)
-                                    <td>{{ $data->last_name }}</td>
-                                    <td>{{ $data->name }}</td>
-                                    <td>{{ $data->email }}</td>
-                                    <td>{{ $data->user_type }}</td>
-                                    <td>{{ date('F j, Y', strtotime($data->created_at)) }}</td>
-                                    <td>
-                                        @if ($data->status == '')
-                                            <a href="{{ url('approved_instructor_process', $data->id) }}"
-                                                class="btn btn-sm btn-warning btn-block">Pending Approved</a>
-                                        @else
-                                            Approved
-                                        @endif
-                                    </td>
+                                    <tr>
+                                        <td>{{ $data->last_name }}</td>
+                                        <td>{{ $data->name }}</td>
+                                        <td>{{ $data->email }}</td>
+                                        <td>{{ $data->user_type }}</td>
+                                        <td>{{ date('F j, Y', strtotime($data->created_at)) }}</td>
+                                        <td>
+                                            @if ($data->status == '')
+                                                <a href="{{ url('approved_instructor_process', $data->id) }}"
+                                                    class="btn btn-sm btn-warning btn-block">Pending Approved</a>
+                                            @else
+                                                Approved
+                                            @endif
+                                        </td>
+                                    </tr>
                                 @endforeach
                             </tbody>
                         </table>

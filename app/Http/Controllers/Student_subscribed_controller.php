@@ -11,7 +11,7 @@ use Omnipay\Omnipay;
 
 class Student_subscribed_controller extends Controller
 {
-    private $gateway;
+    private $gateway, $course_id;
 
     public function __construct()
     {
@@ -28,36 +28,29 @@ class Student_subscribed_controller extends Controller
             // $invitation_id = $request->input('invitation_id');
 
             // if (isset($invitation_id)) {
-                
-                Invite_student::where('id', $request->input('invitation_id'))
-                    ->update(['status' => 'Accepted']);
 
-                // $new_enrolled = new Enrolled_course([
-                //     'course_id' => $request->input('course_id'),
-                //     'student_id' => auth()->user()->id,
-                //     'instructor_id' => $request->input('instructor_id'),
-                //     'amount' => 0,
-                //     'course_type' => 'Free',
-                // ]);
+            $this->course_id = $request->input('course_id');
 
-                // $new_enrolled->save();
-            // }
+            // Invite_student::where('id', $request->input('invitation_id'))
+            //     ->update(['status' => 'Accepted']);
 
             $new_payment = new Payment([
-                'course_id' => $request->input('course_id'),
+                'course_id' => $this->course_id,
                 'student_id' => auth()->user()->id,
                 'instructor_id' => $request->input('instructor_id'),
                 'amount' => $request->input('amount'),
+                'status' => 'unpaid',
             ]);
 
             $new_payment->save();
 
             $new_enrolled = new Enrolled_course([
-                'course_id' => $request->input('course_id'),
+                'course_id' => $this->course_id,
                 'student_id' => auth()->user()->id,
                 'instructor_id' => $request->input('instructor_id'),
                 'amount' => $request->input('amount'),
                 'course_type' => 'Subscribed',
+                'status' => 'unpaid',
             ]);
 
             $new_enrolled->save();
@@ -81,6 +74,7 @@ class Student_subscribed_controller extends Controller
 
     public function success(Request $request)
     {
+        //return  auth()->user()->id;
         if ($request->input('paymentId') && $request->input('PayerID')) {
             $transaction = $this->gateway->completePurchase(array(
                 'payer_id' => $request->input('PayerID'),
@@ -90,6 +84,16 @@ class Student_subscribed_controller extends Controller
             $response = $transaction->send();
 
             if ($response->isSuccessful()) {
+
+                $check_latest_payment = Payment::where('student_id', auth()->user()->id)->latest()->first();
+
+                $check_latest_enrolled = Enrolled_course::where('student_id', auth()->user()->id)->latest()->first();
+
+                Payment::where('id', $check_latest_payment->id)
+                    ->update(['status' => 'paid']);
+
+                Enrolled_course::where('id', $check_latest_enrolled->id)
+                    ->update(['status' => 'paid']);
 
                 // $arr = $response->getData();
 

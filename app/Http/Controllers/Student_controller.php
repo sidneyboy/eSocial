@@ -66,7 +66,7 @@ class Student_controller extends Controller
 
     public function student_course()
     {
-        $enrolled_data = Enrolled_course::where('student_id', auth()->user()->id)->get();
+        $enrolled_data = Enrolled_course::where('student_id', auth()->user()->id)->where('status','!=','unpaid')->get();
         $count = Invite_student::where('student_id', auth()->user()->id)->where('status', 'Pending Approval')->count();
 
 
@@ -675,7 +675,7 @@ class Student_controller extends Controller
 
     public function student_enrolled_courses()
     {
-        $enrolled_data = Enrolled_course::where('student_id', auth()->user()->id)->get();
+        $enrolled_data = Enrolled_course::where('student_id', auth()->user()->id)->where('status','!=','unpaid')->get();
 
         $count = Invite_student::where('student_id', auth()->user()->id)->where('status', 'Pending Approval')->count();
 
@@ -1569,9 +1569,9 @@ class Student_controller extends Controller
 
         if ($type == 'assignment') {
             $assignment = Assignment::find($id);
-            $check_if_taken = Taken::where('assignment_id', $id)->where('student_id', auth()->user()->id)->where('remarks', 'pass')->orWhere('remarks', 'failed')->where('type', 'assignment')->first();
+            $check_if_taken = Taken::where('assignment_id', $id)->where('student_id', auth()->user()->id)->where('type', 'assignment')->where('remarks','!=','unfinished')->orWhere('remarks',null)->first();
             if ($check_if_taken) {
-                return redirect()->route('student_show_course_chapter', ['course_id' => $check_if_taken->course_id])->with('error', 'Cannot take assignment anymore');
+                return redirect()->route('student_enrolled_courses')->with('error', 'Cannot take assignment anymore');
             } else {
                 $user_data = User::find(auth()->user()->id);
                 $count = Invite_student::where('student_id', auth()->user()->id)->where('status', 'Pending Approval')->count();
@@ -1599,7 +1599,7 @@ class Student_controller extends Controller
                             'taken_id' => $check_taken_table->id,
                         ]);
                     } else {
-                        return redirect()->route('student_show_course_chapter', ['course_id' => $assignment->course_id])->with('error', 'Assignment due date lapse, Cannot Take.');
+                        return redirect()->route('student_enrolled_courses')->with('error', 'Assignment due date lapse, Cannot Take.');
                     }
                 } else {
                     $new = new Taken([
@@ -1610,6 +1610,7 @@ class Student_controller extends Controller
                         'course_id' => $assignment->course_id,
                         'type' => $type,
                         'date' => $date,
+                        'remarks' => 'unfinished',
                     ]);
 
                     $new->save();
@@ -1624,17 +1625,18 @@ class Student_controller extends Controller
                             'taken_id' => $new->id,
                         ]);
                     } else {
-                        return redirect()->route('student_show_course_chapter', ['course_id' => $assignment->course_id])->with('error', 'Assignment due date lapse, Cannot Take.');
+                        return redirect()->route('student_enrolled_courses')->with('error', 'Assignment due date lapse, Cannot Take.');
                     }
                 }
             }
         } else if ($type == 'quiz') {
+           
             $quiz = Course_quiz::find($id);
 
-            $check_if_taken = Taken::where('quiz_id', $id)->where('student_id', auth()->user()->id)->where('remarks', 'pass')->orWhere('remarks', 'failed')->where('type', 'quiz')->first();
+            $check_if_taken = Taken::where('quiz_id', $id)->where('student_id', auth()->user()->id)->where('type', 'quiz')->where('remarks','!=','unfinished')->orWhere('remarks',null)->first();
 
             if ($check_if_taken) {
-                return redirect()->route('student_show_course_chapter', ['course_id' => $check_if_taken->course_id])->with('error', 'Cannot take quiz anymore');
+               return redirect()->route('student_enrolled_courses')->with('error', 'Cannot take quiz anymore');
             } else {
                 $user_data = User::find(auth()->user()->id);
                 $count = Invite_student::where('student_id', auth()->user()->id)->where('status', 'Pending Approval')->count();
@@ -1669,6 +1671,7 @@ class Student_controller extends Controller
                         'course_id' => $quiz->course_id,
                         'type' => $type,
                         'date' => $date,
+                        'remarks' => 'unfinished',
                     ]);
 
                     $new->save();
@@ -1687,10 +1690,10 @@ class Student_controller extends Controller
         } else if ($type == 'exam') {
             $quiz = Exam::find($id);
 
-            $check_if_taken = Taken::where('exam_id', $id)->where('student_id', auth()->user()->id)->where('remarks', 'pass')->orWhere('remarks', 'failed')->where('type', 'exam')->first();
+            $check_if_taken = Taken::where('exam_id', $id)->where('student_id', auth()->user()->id)->where('type', 'exam')->where('remarks','!=','unfinished')->orWhere('remarks',null)->first();
 
             if ($check_if_taken) {
-                return redirect()->route('student_show_course_chapter', ['course_id' => $check_if_taken->course_id])->with('error', 'Cannot take exam anymore');
+                return redirect()->route('student_enrolled_courses')->with('error', 'Cannot take exam anymore');
             } else {
                 $user_data = User::find(auth()->user()->id);
                 $count = Invite_student::where('student_id', auth()->user()->id)->where('status', 'Pending Approval')->count();
@@ -1725,6 +1728,7 @@ class Student_controller extends Controller
                         'course_id' => $quiz->course_id,
                         'type' => $type,
                         'date' => $date,
+                        'remarks' => 'unfinished',
                     ]);
 
                     $new->save();
@@ -1783,27 +1787,6 @@ class Student_controller extends Controller
 
             $check_student_log = Student_logs::where('student_id', auth()->user()->id)->where('date', $date)->first();
 
-
-            // if ($check_student_log) {
-            //     Student_logs::where('id', $check_student_log->id)
-            //         ->update([
-            //             'content' => $check_student_log->content . "<br />" . 'Turned in assignment with a score of ' . $count_student_answer . ' over ' . $count_assignment_question_total_score . ' and a percentage of ' . round($percentage, 2) . '. remarks ' . $remarks,
-            //             'content' =>
-            //             'content' => ''
-            //         ]);
-            // } else {
-            //     $new_logs = new Student_logs([
-            //         'content' => 'Turned in assignment with a score of ' . $count_student_answer . ' over ' . $count_assignment_question_total_score . ' and a percentage of ' . round($percentage, 2) . '. remarks ' . $remarks,
-            //         'course_id' => $taken->course_id,
-            //         'course_chapter_id' => $taken->course_chapter_id,
-            //         'assignment_id' => $taken->assignment_id,
-            //         'student_id' => auth()->user()->id,
-            //         'date' => $date,
-            //     ]);
-
-            //     $new_logs->save();
-            // }
-
             $new_logs = new Student_logs([
                 'content' => 'Assignment score ' . $count_student_answer . "/" . $count_assignment_question_total_score,
                 'course_id' => $taken->course_id,
@@ -1816,7 +1799,7 @@ class Student_controller extends Controller
             $new_logs->save();
 
 
-            return redirect()->route('student_show_course_chapter', ['course_id' => $taken->course_id])->with('success', 'assignment successfully turned in');
+            return redirect()->route('student_enrolled_courses')->with('success', 'assignment successfully turned in');
         } elseif ($taken->type == 'quiz') {
             $assignment = Course_quiz::find($taken->quiz_id);
             $count_assignment_question = Quiz_questions::where('course_quiz_id', $taken->quiz_id)->count();
@@ -1878,7 +1861,7 @@ class Student_controller extends Controller
 
             $new_logs->save();
 
-            return redirect()->route('student_show_course_chapter', ['course_id' => $taken->course_id])->with('success', 'quiz successfully turned in');
+            return redirect()->route('student_enrolled_courses')->with('success', 'quiz successfully turned in');
         } elseif ($taken->type == 'exam') {
             $assignment = Exam::find($taken->exam_id);
             $count_assignment_question = Exam_questions::where('course_exam_id', $taken->exam_id)->count();
@@ -1942,7 +1925,7 @@ class Student_controller extends Controller
 
 
 
-            return redirect()->route('student_show_course_chapter', ['course_id' => $taken->course_id])->with('success', 'exam successfully turned in');
+            return redirect()->route('student_enrolled_courses')->with('success', 'exam successfully turned in');
         }
     }
 

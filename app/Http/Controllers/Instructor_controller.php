@@ -598,7 +598,7 @@ class Instructor_controller extends Controller
 
     public function instructor_courses()
     {
-        $course = Course::where('user_id', auth()->user()->id)->orderBy('id', 'Desc')->get();
+        $course = Course::where('user_id', auth()->user()->id)->get();
         $user_data = User::find(auth()->user()->id);
 
         return view('instructor_courses', [

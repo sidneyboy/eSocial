@@ -385,7 +385,7 @@
                                             <input type="hidden" value="{{ $number_of_questions - 1 }}"
                                                 name="number_of_questions">
 
-                                            <input type="text" value="{{ $original_number_of_questions }}"
+                                            <input type="hidden" value="{{ $original_number_of_questions }}"
                                                 name="original_number_of_questions">
 
                                             <input type="hidden" value="{{ $question_type }}" name="question_type"

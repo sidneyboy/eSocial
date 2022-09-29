@@ -14,6 +14,7 @@ class Payment extends Model
         'student_id',
         'instructor_id',
         'amount',
+        'status',
     ];
 
     public function course()

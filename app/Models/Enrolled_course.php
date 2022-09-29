@@ -15,7 +15,9 @@ class Enrolled_course extends Model
         'instructor_id',
         'amount',
         'course_type',
+        'status',
     ];
+
 
     public function student()
     {
