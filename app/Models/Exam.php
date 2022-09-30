@@ -32,4 +32,9 @@ class Exam extends Model
     {
         return $this->hasMany('App\Models\Exam_questions', 'course_exam_id');
     }
+
+    public function student_exam_score()
+    {
+        return $this->hasOne('App\Models\Taken', 'exam_id')->where('student_id', auth()->user()->id);
+    }
 }

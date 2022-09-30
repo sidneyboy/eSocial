@@ -1569,7 +1569,7 @@ class Student_controller extends Controller
 
         if ($type == 'assignment') {
             $assignment = Assignment::find($id);
-            $check_if_taken = Taken::where('assignment_id', $id)->where('student_id', auth()->user()->id)->where('type', 'assignment')->where('remarks','!=','unfinished')->orWhere('remarks',null)->first();
+           $check_if_taken = Taken::where('assignment_id', $id)->where('student_id', auth()->user()->id)->where('type', 'assignment')->where('remarks','!=','unfinished')->orWhere('remarks',null)->first();
             if ($check_if_taken) {
                 return redirect()->route('student_enrolled_courses')->with('error', 'Cannot take assignment anymore');
             } else {
@@ -1579,6 +1579,7 @@ class Student_controller extends Controller
                 foreach ($assignment_question as $key => $data) {
                     $taken_details = Taken_details::where('question_id', $data->id)
                         ->where('student_id', auth()->user()->id)
+                        ->where('type','assignment')
                         ->first();
                     if ($taken_details) {
                         $status = $taken_details->status;
@@ -1644,6 +1645,7 @@ class Student_controller extends Controller
                 foreach ($quiz_questions as $key => $data) {
                     $taken_details = Taken_details::where('question_id', $data->id)
                         ->where('student_id', auth()->user()->id)
+                        ->where('type','quiz')
                         ->first();
                     if ($taken_details) {
                         $status = $taken_details->status;
@@ -1701,6 +1703,7 @@ class Student_controller extends Controller
                 foreach ($quiz_questions as $key => $data) {
                     $taken_details = Taken_details::where('question_id', $data->id)
                         ->where('student_id', auth()->user()->id)
+                        ->where('type','exam')
                         ->first();
                     if ($taken_details) {
                         $status = $taken_details->status;

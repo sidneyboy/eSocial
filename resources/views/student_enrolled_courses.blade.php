@@ -12,6 +12,7 @@
             {{ session('error') }}
         </div>
     @endif
+    <h6 style="font-weight: bold;">ENROLLED COURSES</h6>
     @if (isset($course))
         @foreach ($course as $data)
             <div class="row">

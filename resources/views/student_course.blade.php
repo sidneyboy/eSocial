@@ -21,6 +21,7 @@
             </form>
         </div>
     </div>
+    <h6 style="font-weight:bold;">LIST OF COURSES</h6>
     @foreach ($course as $data)
         <div class="row">
             <div class="col-md-12">

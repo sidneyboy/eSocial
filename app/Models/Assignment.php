@@ -32,4 +32,9 @@ class Assignment extends Model
     {
         return $this->hasMany('App\Models\Assignment_questions', 'course_assignment_id');
     }
+
+    public function student_assignment_score()
+    {
+        return $this->hasOne('App\Models\Taken', 'assignment_id')->where('student_id',auth()->user()->id);
+    }
 }
