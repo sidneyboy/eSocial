@@ -1896,7 +1896,7 @@ class Instructor_controller extends Controller
 
     public function instructor_list_of_students()
     {
-        $enrolled = Enrolled_course::where('instructor_id', auth()->user()->id)->get();
+        $enrolled = Enrolled_course::where('instructor_id', auth()->user()->id)->where('status','!=','unpaid')->get();
         $user_data = User::find(auth()->user()->id);
         return view('instructor_list_of_students', [
             'enrolled' => $enrolled,

@@ -174,6 +174,12 @@
                     <span>{{ __('Statistics') }}</span>
                 </a>
             </li> --}}
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url('statistics') }}">
+                    <i class="bi bi-cash"></i>
+                    <span>{{ __('Statistics') }}</span>
+                </a>
+            </li>
 
             <li class="nav-item">
                 <a class="nav-link" href="{{ url('payment_history') }}">
@@ -281,7 +287,7 @@
                                         class="img-profile rounded-circle" alt="">
                                 @else
                                     <span
-                                        class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->name }}</span>
+                                        class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->name }} </span>
                                     <figure class="img-profile rounded-circle avatar font-weight-bold"
                                         data-initial="{{ Auth::user()->name[0] }}"></figure>
                                 @endif

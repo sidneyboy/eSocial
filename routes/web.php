@@ -45,6 +45,10 @@ Route::get('/tutorial_remove/{tutorial_id}', 'Esocial_controller@tutorial_remove
 Route::post('/course_type_edit_process', 'Esocial_controller@course_type_edit_process')->name('course_type_edit_process');
 Route::get('/course_update/{course_id}/{status}', 'Esocial_controller@course_update')->name('course_update');
 
+Route::get('/statistics/', 'Esocial_controller@statistics')->name('statistics');
+
+
+
 
 
 Route::get('/student_landing', 'Student_controller@student_landing')->name('student_landing');

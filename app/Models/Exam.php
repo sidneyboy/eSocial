@@ -14,6 +14,7 @@ class Exam extends Model
         'number_of_exams',
         'course_chapter_id',
         // 'question_type',
+        'certificate',
         'title',
         'status',
     ];

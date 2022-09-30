@@ -24,16 +24,16 @@ class Course_chapter extends Model
 
     public function exam()
     {
-        return $this->hasMany('App\Models\Exam', 'course_chapter_id');
+        return $this->hasMany('App\Models\Exam', 'course_chapter_id')->orderBy('id','desc');
     }
 
     public function assignment()
     {
-        return $this->hasMany('App\Models\Assignment', 'course_chapter_id');
+        return $this->hasMany('App\Models\Assignment', 'course_chapter_id')->orderBy('id','desc');
     }
 
     public function course_quiz()
     {
-        return $this->hasMany('App\Models\Course_quiz', 'course_chapter_id');
+        return $this->hasMany('App\Models\Course_quiz', 'course_chapter_id')->orderBy('id','desc');
     }
 }

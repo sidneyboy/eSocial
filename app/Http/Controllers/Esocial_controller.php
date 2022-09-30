@@ -189,4 +189,12 @@ class Esocial_controller extends Controller
 
         return redirect('course_type')->with('success', 'Successfully edited selected course type');
     }
+
+    public function statistics()
+    {
+        $user_data = User::find(auth()->user()->id);
+        return view('statistics',[
+            'user_data' => $user_data,
+        ]);
+    }
 }

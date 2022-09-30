@@ -254,6 +254,7 @@
                                                                 <th>Exam</th>
                                                                 <th>Score</th>
                                                                 <th>Percentage</th>
+                                                                <th>Certificate</th>
                                                                 <th>Posted</th>
                                                             </tr>
                                                         </thead>
@@ -283,6 +284,13 @@
                                                                         </td>
                                                                         <td>
                                                                             {{ round($percentage, 2) }}%
+                                                                        </td>
+                                                                        <td>
+                                                                            @if ($percentage >= 80)
+                                                                                <a href="{{ asset('/storage/'.$exam->certificate) }}" download>{{ $exam->certificate }}</a>
+                                                                            @else
+                                                                                None
+                                                                            @endif
                                                                         </td>
                                                                         <td>{{ date('F j, Y', strtotime($exam->created_at)) }}
                                                                         </td>
@@ -519,6 +527,7 @@
                                                                                 Not Taken
                                                                             @endif
                                                                         </td>
+                                                                      
                                                                         <td>
                                                                             {{ round($percentage, 2) }}%
                                                                         </td>
@@ -546,12 +555,13 @@
                                         <div id="collapseFour" class="collapse" aria-labelledby="headingFour"
                                             data-parent="#accordionExample">
                                             <div class="card-body">
-                                                <table class="table">
+                                                <table class="table table-responsive">
                                                     <thead>
                                                         <tr>
                                                             <th>Exam</th>
                                                             <th>Score</th>
                                                             <th>Percentage</th>
+                                                            <th>Certificate</th>
                                                             <th>Posted</th>
                                                         </tr>
                                                     </thead>
@@ -579,8 +589,16 @@
                                                                             Not Taken
                                                                         @endif
                                                                     </td>
+                                                                   
                                                                     <td>
                                                                         {{ round($percentage, 2) }}%
+                                                                    </td>
+                                                                    <td>
+                                                                        @if ($percentage >= 80)
+                                                                            <a href="{{ asset('/storage/'.$exam->certificate) }}" download>{{ $exam->certificate }}</a>
+                                                                        @else
+                                                                            
+                                                                        @endif
                                                                     </td>
                                                                     <td>{{ date('F j, Y', strtotime($exam->created_at)) }}
                                                                     </td>

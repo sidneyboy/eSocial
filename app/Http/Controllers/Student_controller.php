@@ -1534,8 +1534,10 @@ class Student_controller extends Controller
             foreach ($taken_all as $key => $data) {
                 $id[] = $data->course_chapter_id;
             }
-            $course_chapter = Course_chapter::whereIn('id', $id)->take(1)->get();
-            $course_chapter_next_chapter = Course_chapter::where('id', '>', $taken->course_chapter_id)
+
+            
+            $course_chapter = Course_chapter::whereIn('id', $id)->orderBy('id','desc')->get();
+            $course_chapter_next_chapter = Course_chapter::whereNotIn('id',$id)->where('id', '>', $taken->course_chapter_id)
                 ->orderBy('id')
                 ->limit(1)
                 ->get();
