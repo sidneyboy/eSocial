@@ -211,12 +211,12 @@
                 </a>
             </li>
 
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a class="nav-link" href="{{ url('student_instructor_invitation') }}">
                     <i class="bi bi-envelope-plus"></i>
                     <span>{{ __('Invitations') }} </span><span class="badge badge-light">{{ $count }}</span>
                 </a>
-            </li>
+            </li> --}}
 
             <li class="nav-item">
                 <a class="nav-link" href="{{ url('student_to_do') }}">

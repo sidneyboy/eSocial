@@ -14,7 +14,7 @@
             <div class="row">
                 @foreach ($course_chapter as $data)
                     <div class="col-md-6">
-                        <div class="card" style="margin-bottom:20px;">
+                        <div class="card" style="margin-bottom:20px;height:100%;">
                             <div class="card-header">Chapter {{ $data->chapter_number }} - {{ $data->title }}</div>
                             <div class="card-body">
                                 <div class="row">

@@ -16,10 +16,10 @@
             </form>
         </div>
     </div>
-    @foreach ($course as $data)
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card" style="width: 100%;margin-bottom:50px;background-color:gainsboro">
+    <div class="row">
+        @foreach ($course as $data)
+            <div class="col-md-4">
+                <div class="card" style="width: 100%;height:100%;margin-bottom:50px;background-color:gainsboro">
                     <div class="card-header" style="font-weight: bold;background-color:#141E30;color:white">
                         {{ $data->course_type->course_type }} -
                         {{ $data->course_title }}</div>
@@ -56,8 +56,8 @@
                     </div>
                 </div>
             </div>
-        </div>
-    @endforeach
+        @endforeach
+    </div>
     {{-- @foreach ($course_search as $data)
         <div class="row">
             <div class="col-md-12">

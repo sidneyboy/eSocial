@@ -122,15 +122,16 @@ class Student_controller extends Controller
 
     public function student_search_course(Request $request)
     {
-        $enrolled_data = Enrolled_course::where('student_id', auth()->user()->id)->get();
+        $enrolled_data = Enrolled_course::where('student_id', auth()->user()->id)->where('status','!=','paid')->get();
 
         if (count($enrolled_data) != 0) {
             foreach ($enrolled_data as $key => $data) {
                 $id[] = $data->course_id;
             }
 
+           
             $search = $request->input('search_box');
-            $course = Course::whereNotIn('id', $id)->where('course_title', 'like', '%' . $search . '%')->orderBy('created_at', 'DESC')->get();
+            $course = Course::where('course_title', 'like', '%' . $search . '%')->whereNotIn('id', $id)->orderBy('created_at', 'DESC')->get();
 
             $user_data = User::find(auth()->user()->id);
             $count = Invite_student::where('student_id', auth()->user()->id)->where('status', 'Pending Approval')->count();
@@ -150,8 +151,8 @@ class Student_controller extends Controller
             // ]);
         } else {
             $count = Invite_student::where('student_id', auth()->user()->id)->where('status', 'Pending Approval')->count();
-
-            $course = Course::orderBy('id', 'Desc')->get();
+            $search = $request->input('search_box');
+            $course = Course::where('course_title', 'like', '%' . $search . '%')->orderBy('id', 'Desc')->get();
             $user_data = User::find(auth()->user()->id);
             return view('student_search_course', [
                 'user_data' => $user_data,
