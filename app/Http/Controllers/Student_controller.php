@@ -654,18 +654,21 @@ class Student_controller extends Controller
                 'instructor_id' => $request->input('instructor_id'),
                 'amount' => 0,
                 'course_type' => 'Free',
+                'status' => 'paid',
             ]);
 
             $new_enrolled->save();
 
             return redirect('student_course')->with('success', 'Successfully enrolled');
         } else {
+           // return 'asdasd';
             $new_enrolled = new Enrolled_course([
                 'course_id' => $request->input('course_id'),
                 'student_id' => auth()->user()->id,
                 'instructor_id' => $request->input('instructor_id'),
                 'amount' => 0,
                 'course_type' => 'Free',
+                'status' => 'paid',
             ]);
 
             $new_enrolled->save();

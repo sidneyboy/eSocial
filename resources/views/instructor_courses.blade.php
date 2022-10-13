@@ -15,13 +15,13 @@
                 <div class="card" style="width: 100%;height:100%;margin-bottom:50px;background-color:gainsboro">
                     <div class="card-header" style="font-weight: bold;background-color:#141E30;color:white">
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                                 {{ $data->course_type->course_type }} -
                                 {{ $data->course_title }}
                             </div>
-                            <div class="col-md-6">
+                            {{-- <div class="col-md-6">
                                 Comments <span class="badge badge-primary">New {{ count($data->comments_count) }}</span>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                     <a href="{{ url('instructor_show_chapter', ['course_id' => $data->id]) }}">

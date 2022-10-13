@@ -174,12 +174,12 @@
                     <span>{{ __('Statistics') }}</span>
                 </a>
             </li> --}}
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a class="nav-link" href="{{ url('statistics') }}">
                     <i class="bi bi-cash"></i>
                     <span>{{ __('Statistics') }}</span>
                 </a>
-            </li>
+            </li> --}}
 
             <li class="nav-item">
                 <a class="nav-link" href="{{ url('payment_history') }}">
