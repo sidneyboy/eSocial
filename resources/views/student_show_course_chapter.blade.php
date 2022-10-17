@@ -274,19 +274,22 @@
                                                                                         ]) }}">{{ $exam->title }}</a>
                                                                                 </td>
                                                                                 <td>
+                                                                                    {{ $exam->student_exam_score }}
                                                                                     @if ($exam->student_exam_score)
-                                                                                        {{ $exam->student_exam_score->score }}/{{ $exam->student_exam_score->total_points }}
-                                                                                        @php
+
+                                                                                        {{-- @php
                                                                                             $percentage = ($exam->student_exam_score->score / $exam->student_exam_score->total_points) * 100;
-                                                                                        @endphp
+                                                                                       
+                                                                                        //    echo $exam->student_exam_score->score / $exam->student_exam_score->total_points;
+                                                                                        @endphp --}}
                                                                                     @else
-                                                                                        @php
+                                                                                        {{-- @php
                                                                                             $percentage = 0;
                                                                                         @endphp
-                                                                                        Not Taken
+                                                                                        Not Taken --}}
                                                                                     @endif
                                                                                 </td>
-                                                                                <td>
+                                                                                {{-- <td>
                                                                                     {{ round($percentage, 2) }}%
                                                                                 </td>
                                                                                 <td>
@@ -298,7 +301,7 @@
                                                                                     @endif
                                                                                 </td>
                                                                                 <td>{{ date('F j, Y', strtotime($exam->created_at)) }}
-                                                                                </td>
+                                                                                </td> --}}
                                                                             </tr>
                                                                         @endif
                                                                     @endforeach
