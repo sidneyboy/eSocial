@@ -31,13 +31,13 @@
                                             {{ session('error') }}
                                         </div>
                                     @endif
+                                        
 
-
-                                    <form method="POST" action="{{ route('login') }}" class="user">
+                                    <form action="{{ route('student_login_process') }}"  method="POST" class="user">
                                         @csrf
                                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
-
+                                        <input type="hidden" name="login_by" value="'student_login">
 
                                         <div class="form-group">
                                             <input type="email" class="form-control" name="email"

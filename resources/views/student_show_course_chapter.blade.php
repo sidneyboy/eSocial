@@ -72,9 +72,9 @@
                                                                     @foreach ($data->course_details as $details)
                                                                         <tr>
                                                                             @if ($details->file_type == 'image')
-                                                                                <td>{{ $details->file_type }}</td>
-                                                                                <td>
-                                                                                    @if ($details->status != 'disabled')
+                                                                                @if ($details->status != 'disabled')
+                                                                                    <td>{{ $details->file_type }}</td>
+                                                                                    <td>
                                                                                         @if ($details->file_type == 'image')
                                                                                             <a href="{{ url('student_show_image_file', [
                                                                                                 'course_details_id' => $details->id,
@@ -83,12 +83,12 @@
                                                                                             ]) }}"
                                                                                                 class="btn btn-sm btn-sm btn-primary btn-block">show</a>
                                                                                         @endif
-                                                                                    @endif
-                                                                                </td>
+                                                                                    </td>
+                                                                                @endif
                                                                             @elseif($details->file_type == 'video')
-                                                                                <td>{{ $details->file_type }}</td>
-                                                                                <td>
-                                                                                    @if ($details->status != 'disabled')
+                                                                                @if ($details->status != 'disabled')
+                                                                                    <td>{{ $details->file_type }}</td>
+                                                                                    <td>
                                                                                         @if ($details->file_type == 'video')
                                                                                             <a href="{{ url('student_show_video', [
                                                                                                 'course_details_id' => $details->id,
@@ -97,22 +97,24 @@
                                                                                             ]) }}"
                                                                                                 class="btn btn-sm btn-primary btn-block">show</a>
                                                                                         @endif
-                                                                                    @endif
-                                                                                </td>
+                                                                                    </td>
+                                                                                @endif
                                                                             @elseif($details->file_type == 'application')
-                                                                                <td>{{ $details->file_type }}</td>
-                                                                                <td>
-                                                                                    @if ($details->status != 'disabled')
+                                                                                @if ($details->status != 'disabled')
+                                                                                    <td>{{ $details->file_type }}</td>
+                                                                                    <td>
                                                                                         @if ($details->file_type == 'application')
-                                                                                            <a href="{{ url('student_show_pdf_file', [
+                                                                                            {{-- <a href="{{ url('student_show_pdf_file', [
                                                                                                 'course_details_id' => $details->id,
                                                                                                 'course_id' => $details->course_id,
-                                                                                                // 'course_chapter_id' => $details->course_chapter_id,
                                                                                             ]) }}"
+                                                                                                class="btn btn-sm btn-primary btn-block" >show</a> --}}
+
+                                                                                            <a href="{{ asset('/storage/'. $details->id) }}"
                                                                                                 class="btn btn-sm btn-primary btn-block">show</a>
                                                                                         @endif
-                                                                                    @endif
-                                                                                </td>
+                                                                                    </td>
+                                                                                @endif
                                                                             @endif
                                                                         </tr>
                                                                     @endforeach
@@ -274,22 +276,19 @@
                                                                                         ]) }}">{{ $exam->title }}</a>
                                                                                 </td>
                                                                                 <td>
-                                                                                    {{ $exam->student_exam_score }}
                                                                                     @if ($exam->student_exam_score)
-
-                                                                                        {{-- @php
+                                                                                        {{ $exam->student_exam_score->score }}/{{ $exam->student_exam_score->total_points }}
+                                                                                        @php
                                                                                             $percentage = ($exam->student_exam_score->score / $exam->student_exam_score->total_points) * 100;
-                                                                                       
-                                                                                        //    echo $exam->student_exam_score->score / $exam->student_exam_score->total_points;
-                                                                                        @endphp --}}
+                                                                                        @endphp
                                                                                     @else
-                                                                                        {{-- @php
+                                                                                        @php
                                                                                             $percentage = 0;
                                                                                         @endphp
-                                                                                        Not Taken --}}
+                                                                                        Not Taken
                                                                                     @endif
                                                                                 </td>
-                                                                                {{-- <td>
+                                                                                <td>
                                                                                     {{ round($percentage, 2) }}%
                                                                                 </td>
                                                                                 <td>
@@ -301,7 +300,7 @@
                                                                                     @endif
                                                                                 </td>
                                                                                 <td>{{ date('F j, Y', strtotime($exam->created_at)) }}
-                                                                                </td> --}}
+                                                                                </td>
                                                                             </tr>
                                                                         @endif
                                                                     @endforeach

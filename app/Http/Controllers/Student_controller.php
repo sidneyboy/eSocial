@@ -44,10 +44,10 @@ use Illuminate\Http\Request;
 
 class Student_controller extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+    // public function __construct()
+    // {
+    //     $this->middleware('auth');
+    // }
 
     public function student_landing()
     {
@@ -64,9 +64,26 @@ class Student_controller extends Controller
         }
     }
 
+    public function student_login_process(Request $request)
+    {
+        if (Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password')])) {
+            //return auth()->user()->id;
+            $user = User::find(auth()->user()->id);
+            if ($user->user_type == 'Student') {
+                return redirect('student_landing');
+            }elseif($user->user_type == 'Instructor'){
+                return redirect('instructor_landing');
+            } else {
+                return redirect('socialE-login');
+            }
+        } else {
+            return redirect('socialE-login')->with('error','Wrong Credentials');
+        }
+    }
+
     public function student_course()
     {
-        $enrolled_data = Enrolled_course::where('student_id', auth()->user()->id)->where('status','!=','unpaid')->get();
+        $enrolled_data = Enrolled_course::where('student_id', auth()->user()->id)->where('status', '!=', 'unpaid')->get();
         $count = Invite_student::where('student_id', auth()->user()->id)->where('status', 'Pending Approval')->count();
 
 
@@ -122,14 +139,14 @@ class Student_controller extends Controller
 
     public function student_search_course(Request $request)
     {
-        $enrolled_data = Enrolled_course::where('student_id', auth()->user()->id)->where('status','!=','paid')->get();
+        $enrolled_data = Enrolled_course::where('student_id', auth()->user()->id)->where('status', '!=', 'paid')->get();
 
         if (count($enrolled_data) != 0) {
             foreach ($enrolled_data as $key => $data) {
                 $id[] = $data->course_id;
             }
 
-           
+
             $search = $request->input('search_box');
             $course = Course::where('course_title', 'like', '%' . $search . '%')->whereNotIn('id', $id)->orderBy('created_at', 'DESC')->get();
 
@@ -176,7 +193,7 @@ class Student_controller extends Controller
         $new_comment->save();
 
 
-        return redirect()->route('student_show_course_chapter',['course_id' => $request->input('course_id')])->with('success', 'Successfully add new comment');
+        return redirect()->route('student_show_course_chapter', ['course_id' => $request->input('course_id')])->with('success', 'Successfully add new comment');
     }
 
     public function student_show_image_file($course_details_id, $course_id, $course_chapter_id)
@@ -345,7 +362,7 @@ class Student_controller extends Controller
 
     public function student_show_pdf_file($course_details_id, $course_id)
     {
-        // return 'asdasdasd';
+        //return $course_details_id;
         date_default_timezone_set('Asia/Manila');
         $date = date('Y-m-d');
         $time = date('h:i a');
@@ -369,148 +386,15 @@ class Student_controller extends Controller
         ]);
         $new_student_log->save();
 
-        // if ($day == 'Monday') {
-        //     $check_student_log = Student_logs::where('student_id', auth()->user()->id)->where('date', $date)->first();
 
-        //     if ($check_student_log) {
-        //         Student_logs::where('id', $check_student_log->id)
-        //             ->update([
-        //                 'monday' => $check_student_log->monday . "<br />" . 'view document file ' . $course_data->file,
-        //             ]);
-        //     } else {
-        //         $new_student_log = new Student_logs([
-        //             'monday' => 'view document file ' . $course_data->file,
-        //             'course_id' => $course_id,
-        //             'course_chapter_id' => $course_data->course_chapter_id,
-        //             'course_details_id' => $course_details_id,
-        //             'created_at' => $date_time,
-        //             'student_id' => auth()->user()->id,
-        //         ]);
-        //         $new_student_log->save();
-        //     }
-        // } else if ($day == 'Tuesday') {
-        //     $check_student_log = Student_logs::where('student_id', auth()->user()->id)->where('date', $date)->first();
-
-        //     if ($check_student_log) {
-        //         Student_logs::where('id', $check_student_log->id)
-        //             ->update([
-        //                 'tuesday' => $check_student_log->tuesday . "<br />" . 'view document file ' . $course_data->file,
-        //             ]);
-        //     } else {
-        //         $new_student_log = new Student_logs([
-        //             'tuesday' => 'view document file ' . $course_data->file,
-        //             'course_id' => $course_id,
-        //             'course_chapter_id' => $course_data->course_chapter_id,
-        //             'course_details_id' => $course_details_id,
-        //             'created_at' => $date_time,
-        //             'student_id' => auth()->user()->id,
-        //         ]);
-        //         $new_student_log->save();
-        //     }
-        // } else if ($day == 'Wednesday') {
-        //     $check_student_log = Student_logs::where('student_id', auth()->user()->id)->where('date', $date)->first();
-
-        //     if ($check_student_log) {
-        //         Student_logs::where('id', $check_student_log->id)
-        //             ->update([
-        //                 'wednesday' => $check_student_log->wednesday . "<br />" . 'view document file ' . $course_data->file,
-        //             ]);
-        //     } else {
-        //         $new_student_log = new Student_logs([
-        //             'wednesday' => 'view document file ' . $course_data->file,
-        //             'course_id' => $course_id,
-        //             'course_chapter_id' => $course_data->course_chapter_id,
-        //             'course_details_id' => $course_details_id,
-        //             'created_at' => $date_time,
-        //             'student_id' => auth()->user()->id,
-        //         ]);
-        //         $new_student_log->save();
-        //     }
-        // } else if ($day == 'Thursday') {
-        //     $check_student_log = Student_logs::where('student_id', auth()->user()->id)->where('date', $date)->first();
-
-        //     if ($check_student_log) {
-        //         Student_logs::where('id', $check_student_log->id)
-        //             ->update([
-        //                 'thursday' => $check_student_log->thursday . "<br />" . 'view document file ' . $course_data->file,
-        //             ]);
-        //     } else {
-        //         $new_student_log = new Student_logs([
-        //             'thursday' => 'view document file ' . $course_data->file,
-        //             'course_id' => $course_id,
-        //             'course_chapter_id' => $course_data->course_chapter_id,
-        //             'course_details_id' => $course_details_id,
-        //             'created_at' => $date_time,
-        //             'student_id' => auth()->user()->id,
-        //         ]);
-        //         $new_student_log->save();
-        //     }
-        // } else if ($day == 'Friday') {
-        //     $check_student_log = Student_logs::where('student_id', auth()->user()->id)->where('date', $date)->first();
-
-        //     if ($check_student_log) {
-        //         Student_logs::where('id', $check_student_log->id)
-        //             ->update([
-        //                 'friday' => $check_student_log->friday . "<br />" . 'view document file ' . $course_data->file,
-        //             ]);
-        //     } else {
-        //         $new_student_log = new Student_logs([
-        //             'friday' => 'view document file ' . $course_data->file,
-        //             'course_id' => $course_id,
-        //             'course_chapter_id' => $course_data->course_chapter_id,
-        //             'course_details_id' => $course_details_id,
-        //             'created_at' => $date_time,
-        //             'student_id' => auth()->user()->id,
-        //         ]);
-        //         $new_student_log->save();
-        //     }
-        // } else if ($day == 'Saturday') {
-        //     $check_student_log = Student_logs::where('student_id', auth()->user()->id)->where('date', $date)->first();
-
-        //     if ($check_student_log) {
-        //         Student_logs::where('id', $check_student_log->id)
-        //             ->update([
-        //                 'saturday' => $check_student_log->saturday . "<br />" . 'view document file ' . $course_data->file,
-        //             ]);
-        //     } else {
-        //         $new_student_log = new Student_logs([
-        //             'saturday' => 'view document file ' . $course_data->file,
-        //             'course_id' => $course_id,
-        //             'course_chapter_id' => $course_data->course_chapter_id,
-        //             'course_details_id' => $course_details_id,
-        //             'created_at' => $date_time,
-        //             'student_id' => auth()->user()->id,
-        //         ]);
-        //         $new_student_log->save();
-        //     }
-        // } else if ($day == 'Sunday') {
-        //     $check_student_log = Student_logs::where('student_id', auth()->user()->id)->where('date', $date)->first();
-
-        //     if ($check_student_log) {
-        //         Student_logs::where('id', $check_student_log->id)
-        //             ->update([
-        //                 'sunday' => $check_student_log->sunday . "<br />" . 'view document file ' . $course_data->file,
-        //             ]);
-        //     } else {
-        //         $new_student_log = new Student_logs([
-        //             'sunday' => 'view document file ' . $course_data->file,
-        //             'course_id' => $course_id,
-        //             'course_chapter_id' => $course_data->course_chapter_id,
-        //             'course_details_id' => $course_details_id,
-        //             'created_at' => $date_time,
-        //             'student_id' => auth()->user()->id,
-        //         ]);
-        //         $new_student_log->save();
-        //     }
-        // }
 
         $file = public_path() . "/storage/" . $course_data->file;
 
-        $headers = array(
-            'Content-Type: application/pdf',
-        );
+        // $headers = array(
+        //     'Content-Type: application/pdf',
+        // );
 
-        return Response::download($file, $course_data->file, $headers);
+        return Response::download($file, $course_data->file);
     }
 
     public function student_show_video($course_details_id, $course_id, $course_chapter_id)
@@ -661,7 +545,7 @@ class Student_controller extends Controller
 
             return redirect('student_course')->with('success', 'Successfully enrolled');
         } else {
-           // return 'asdasd';
+            // return 'asdasd';
             $new_enrolled = new Enrolled_course([
                 'course_id' => $request->input('course_id'),
                 'student_id' => auth()->user()->id,
@@ -679,7 +563,7 @@ class Student_controller extends Controller
 
     public function student_enrolled_courses()
     {
-        $enrolled_data = Enrolled_course::where('student_id', auth()->user()->id)->where('status','!=','unpaid')->get();
+        $enrolled_data = Enrolled_course::where('student_id', auth()->user()->id)->where('status', '!=', 'unpaid')->get();
 
         $count = Invite_student::where('student_id', auth()->user()->id)->where('status', 'Pending Approval')->count();
 
@@ -1528,20 +1412,24 @@ class Student_controller extends Controller
         $date = date('Y-m-d');
         $time = date('h:i a');
 
+        //return $course_id;
+
         $user_data = User::find(auth()->user()->id);
         $count = Invite_student::where('student_id', auth()->user()->id)->where('status', 'Pending Approval')->count();
-        $taken = Taken::where('student_id',auth()->user()->id)->where('type','exam')->orderBy('id','desc')->where('remarks','pass')->first();
-        $taken_all = Taken::where('student_id',auth()->user()->id)->where('type','exam')->orderBy('id','desc')->where('remarks','pass')->get();
+        $taken = Taken::where('student_id', auth()->user()->id)->where('course_id', $course_id)->where('type', 'exam')->orderBy('id', 'desc')->where('remarks', 'pass')->first();
+        
         $course = Course::find($course_id);
 
         if ($taken) {
+            $taken_all = Taken::where('student_id', auth()->user()->id)->where('type', 'exam')->where('course_id',$course_id)->orderBy('id', 'desc')->where('remarks', 'pass')->get();
+
             foreach ($taken_all as $key => $data) {
                 $id[] = $data->course_chapter_id;
             }
 
-            
-            $course_chapter = Course_chapter::whereIn('id', $id)->orderBy('id','desc')->get();
-            $course_chapter_next_chapter = Course_chapter::whereNotIn('id',$id)->where('id', '>', $taken->course_chapter_id)
+            $course_chapter = Course_chapter::whereIn('id', $id)->orderBy('id', 'desc')->get();
+            $course_chapter_next_chapter = Course_chapter::whereNotIn('id', $id)->where('id', '>', $taken->course_chapter_id)
+                ->where('course_id',$course_id)
                 ->orderBy('id')
                 ->limit(1)
                 ->get();
@@ -1575,7 +1463,7 @@ class Student_controller extends Controller
 
         if ($type == 'assignment') {
             $assignment = Assignment::find($id);
-           $check_if_taken = Taken::where('assignment_id', $id)->where('student_id', auth()->user()->id)->where('type', 'assignment')->where('remarks','!=','unfinished')->orWhere('remarks',null)->first();
+            $check_if_taken = Taken::where('assignment_id', $id)->where('student_id', auth()->user()->id)->where('type', 'assignment')->where('remarks', '!=', 'unfinished')->orWhere('remarks', null)->first();
             if ($check_if_taken) {
                 return redirect()->route('student_enrolled_courses')->with('error', 'Cannot take assignment anymore');
             } else {
@@ -1585,7 +1473,7 @@ class Student_controller extends Controller
                 foreach ($assignment_question as $key => $data) {
                     $taken_details = Taken_details::where('question_id', $data->id)
                         ->where('student_id', auth()->user()->id)
-                        ->where('type','assignment')
+                        ->where('type', 'assignment')
                         ->first();
                     if ($taken_details) {
                         $status = $taken_details->status;
@@ -1637,13 +1525,13 @@ class Student_controller extends Controller
                 }
             }
         } else if ($type == 'quiz') {
-           
+
             $quiz = Course_quiz::find($id);
 
-            $check_if_taken = Taken::where('quiz_id', $id)->where('student_id', auth()->user()->id)->where('type', 'quiz')->where('remarks','!=','unfinished')->orWhere('remarks',null)->first();
+            $check_if_taken = Taken::where('quiz_id', $id)->where('student_id', auth()->user()->id)->where('type', 'quiz')->where('remarks', '!=', 'unfinished')->orWhere('remarks', null)->first();
 
             if ($check_if_taken) {
-               return redirect()->route('student_enrolled_courses')->with('error', 'Cannot take quiz anymore');
+                return redirect()->route('student_enrolled_courses')->with('error', 'Cannot take quiz anymore');
             } else {
                 $user_data = User::find(auth()->user()->id);
                 $count = Invite_student::where('student_id', auth()->user()->id)->where('status', 'Pending Approval')->count();
@@ -1651,7 +1539,7 @@ class Student_controller extends Controller
                 foreach ($quiz_questions as $key => $data) {
                     $taken_details = Taken_details::where('question_id', $data->id)
                         ->where('student_id', auth()->user()->id)
-                        ->where('type','quiz')
+                        ->where('type', 'quiz')
                         ->first();
                     if ($taken_details) {
                         $status = $taken_details->status;
@@ -1698,7 +1586,7 @@ class Student_controller extends Controller
         } else if ($type == 'exam') {
             $quiz = Exam::find($id);
 
-            $check_if_taken = Taken::where('exam_id', $id)->where('student_id', auth()->user()->id)->where('type', 'exam')->where('remarks','!=','unfinished')->orWhere('remarks',null)->first();
+            $check_if_taken = Taken::where('exam_id', $id)->where('student_id', auth()->user()->id)->where('type', 'exam')->where('remarks', '!=', 'unfinished')->orWhere('remarks', null)->first();
 
             if ($check_if_taken) {
                 return redirect()->route('student_enrolled_courses')->with('error', 'Cannot take exam anymore');
@@ -1709,7 +1597,7 @@ class Student_controller extends Controller
                 foreach ($quiz_questions as $key => $data) {
                     $taken_details = Taken_details::where('question_id', $data->id)
                         ->where('student_id', auth()->user()->id)
-                        ->where('type','exam')
+                        ->where('type', 'exam')
                         ->first();
                     if ($taken_details) {
                         $status = $taken_details->status;
@@ -1937,6 +1825,4 @@ class Student_controller extends Controller
             return redirect()->route('student_enrolled_courses')->with('success', 'exam successfully turned in');
         }
     }
-
-
 }

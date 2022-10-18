@@ -58,26 +58,26 @@
                     
                         <li class="list-group-item">
                             A.
-                            <input type="text" name="choice_a" value="{{ $question->quiz_details->choice_a }}" required
+                            <input type="text" name="choice_a" value="{{ $question->exam_details->choice_a }}" required
                                 class="form-control">
                         </li>
                         <li class="list-group-item">
                             B.
-                            <input type="text" name="choice_b" value="{{ $question->quiz_details->choice_b }}" required
+                            <input type="text" name="choice_b" value="{{ $question->exam_details->choice_b }}" required
                                 class="form-control">
                         </li>
                         <li class="list-group-item">
                             C.
-                            <input type="text" name="choice_c" value="{{ $question->quiz_details->choice_c }}" required
+                            <input type="text" name="choice_c" value="{{ $question->exam_details->choice_c }}" required
                                 class="form-control">
                         </li>
                         <li class="list-group-item">
                             D.
-                            <input type="text" name="choice_d" value="{{ $question->quiz_details->choice_d }}" required
+                            <input type="text" name="choice_d" value="{{ $question->exam_details->choice_d }}" required
                                 class="form-control">
                         </li>
                     </ul>
-                    <input type="hidden" name="quiz_details_id" value="{{ $question->quiz_details->id }}">
+                    <input type="hidden" name="quiz_details_id" value="{{ $question->exam_details->id }}">
                 @elseif($question->question_type == 'Identification')
                     <ul class="list-group">
                         <li class="list-group-item">

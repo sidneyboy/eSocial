@@ -33,7 +33,7 @@
                                     @endif
 
 
-                                    <form method="POST" action="{{ route('login') }}" class="user">
+                                    <form method="POST" action="{{ route('admin_login') }}" class="user">
                                         @csrf
                                         <center><h3>ADMIN CREDENTIAL</h3></center>
                                         <br />

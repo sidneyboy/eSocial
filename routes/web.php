@@ -49,9 +49,27 @@ Route::get('/statistics/', 'Esocial_controller@statistics')->name('statistics');
 
 
 
+Route::post('/admin_login/', 'Esocial_controller@admin_login')->name('admin_login');
+
+
 
 
 Route::get('/student_landing', 'Student_controller@student_landing')->name('student_landing');
+
+Route::post('/student_login_process', 'Student_controller@student_login_process')->name('student_login_process');
+
+
+
+
+
+
+
+
+
+
+
+
+
 Route::get('/student_course', 'Student_controller@student_course')->name('student_course');
 Route::get('/student_update', 'Student_controller@student_profile')->name('student_profile');
 Route::get('/student_search_course', 'Student_controller@student_search_course')->name('student_search_course');

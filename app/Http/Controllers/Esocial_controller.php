@@ -7,10 +7,27 @@ use App\Models\Course_type;
 use App\Models\User;
 use App\Models\Payment;
 use App\Models\Course;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class Esocial_controller extends Controller
 {
+
+    public function admin_login(Request $request)
+    {
+        if (Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password')])) {
+            //return auth()->user()->id;
+            $user = User::find(auth()->user()->id);
+            if ($user->user_type == 'Admin') {
+                return redirect('payment_history');
+            } else {
+                return redirect('admin_login');
+            }
+        } else {
+            return redirect('admin_login')->with('error', 'Wrong Credentials');
+        }
+    }
+
     public function tutorial()
     {
         $tutorial = Tutorial::get();
@@ -175,7 +192,7 @@ class Esocial_controller extends Controller
     public function payment_history()
     {
         $user_data = User::find(auth()->user()->id);
-        $payment = Payment::orderBy('id','desc')->where('status','paid')->get();
+        $payment = Payment::orderBy('id', 'desc')->where('status', 'paid')->get();
         return view('payment_history', [
             'user_data' => $user_data,
             'payment' => $payment,
@@ -193,7 +210,7 @@ class Esocial_controller extends Controller
     public function statistics()
     {
         $user_data = User::find(auth()->user()->id);
-        return view('statistics',[
+        return view('statistics', [
             'user_data' => $user_data,
         ]);
     }
