@@ -47,6 +47,7 @@ Route::get('/course_update/{course_id}/{status}', 'Esocial_controller@course_upd
 
 Route::get('/statistics/', 'Esocial_controller@statistics')->name('statistics');
 
+Route::get('/admin_logs/', 'Esocial_controller@admin_logs')->name('admin_logs');
 
 
 Route::post('/admin_login/', 'Esocial_controller@admin_login')->name('admin_login');

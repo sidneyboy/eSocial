@@ -25,7 +25,8 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap4.min.css">
-
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
     <!-- Favicon -->
     <link href="{{ asset('img/favicon.png') }}" rel="icon" type="image/png">
 
@@ -138,97 +139,64 @@
             <!-- Divider -->
             <hr class="sidebar-divider my-0">
 
-            {{-- <!-- Nav Item - Dashboard -->
-            <li class="nav-item {{ Nav::isRoute('home') }}">
-                <a class="nav-link" href="{{ route('home') }}">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>{{ __('Dashboard') }}</span></a>
-            </li>
+            @if ($user_data->user_type == 'Admin')
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url('statistics') }}">
+                        <i class="bi bi-book-half"></i>
+                        <span>{{ __('Statistics') }}</span>
+                    </a>
+                </li>
 
-            <!-- Divider -->
-            <hr class="sidebar-divider">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url('payment_history') }}">
+                        <i class="bi bi-cash"></i>
+                        <span>{{ __('Payment History') }}</span>
+                    </a>
+                </li>
 
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                {{ __('Settings') }}
-            </div> --}}
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url('approved_instructor') }}">
+                        <i class="bi bi-check2-circle"></i>
+                        <span>{{ __('Approved Instructor') }}</span>
+                    </a>
+                </li>
 
-            <!-- Nav Item - Profile -->
-            {{-- <li class="nav-item {{ Nav::isRoute('profile') }}">
-            <a class="nav-link" href="{{ route('profile') }}">
-                <i class="fas fa-fw fa-user"></i>
-                <span>{{ __('Profile') }}</span>
-            </a>
-        </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url('student_list') }}">
+                        <i class="bi bi-person-lines-fill"></i>
+                        <span>{{ __('Student List') }}</span>
+                    </a>
+                </li>
 
-        <!-- Nav Item - About -->
-        <li class="nav-item {{ Nav::isRoute('about') }}">
-            <a class="nav-link" href="{{ route('about') }}">
-                <i class="fas fa-fw fa-hands-helping"></i>
-                <span>{{ __('About') }}</span>
-            </a>
-        </li> --}}
-            {{-- <li class="nav-item">
-                <a class="nav-link" href="{{ url('statistics') }}">
-                    <i class="bi bi-cash"></i>
-                    <span>{{ __('Statistics') }}</span>
-                </a>
-            </li> --}}
-            {{-- <li class="nav-item">
-                <a class="nav-link" href="{{ url('statistics') }}">
-                    <i class="bi bi-cash"></i>
-                    <span>{{ __('Statistics') }}</span>
-                </a>
-            </li> --}}
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url('tutorial') }}">
+                        <i class="fas fa-fw fa-hands-helping"></i>
+                        <span>{{ __('Intro') }}</span>
+                    </a>
+                </li>
 
-            <li class="nav-item">
-                <a class="nav-link" href="{{ url('payment_history') }}">
-                    <i class="bi bi-cash"></i>
-                    <span>{{ __('Payment History') }}</span>
-                </a>
-            </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url('courses') }}">
+                        <i class="bi bi-book-half"></i>
+                        <span>{{ __('Course Approval') }}</span>
+                    </a>
+                </li>
 
-            <li class="nav-item">
-                <a class="nav-link" href="{{ url('approved_instructor') }}">
-                    <i class="bi bi-check2-circle"></i>
-                    <span>{{ __('Approved Instructor') }}</span>
-                </a>
-            </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url('course_type') }}">
+                        <i class="bi bi-book-half"></i>
+                        <span>{{ __('Course Type') }}</span>
+                    </a>
+                </li>
+            @else
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url('admin_logs') }}">
+                        <i class="bi bi-book-half"></i>
+                        <span>{{ __('Logs') }}</span>
+                    </a>
+                </li>
+            @endif
 
-            <li class="nav-item">
-                <a class="nav-link" href="{{ url('student_list') }}">
-                    <i class="bi bi-person-lines-fill"></i>
-                    <span>{{ __('Student List') }}</span>
-                </a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="{{ url('tutorial') }}">
-                    <i class="fas fa-fw fa-hands-helping"></i>
-                    <span>{{ __('Intro') }}</span>
-                </a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="{{ url('courses') }}">
-                    <i class="bi bi-book-half"></i>
-                    <span>{{ __('Course Approval') }}</span>
-                </a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="{{ url('course_type') }}">
-                    <i class="bi bi-book-half"></i>
-                    <span>{{ __('Course Type') }}</span>
-                </a>
-            </li>
-
-            {{-- <li class="nav-item">
-                <a class="nav-link" href="#">
-                    <i class="fas fa-fw fa-hands-helping"></i>
-                    <span>{{ __('Bag Pack') }}</span>
-                </a>
-            </li> --}}
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
@@ -286,8 +254,8 @@
                                     <img src="{{ asset('/storage/' . $user_data->user_image) }}"
                                         class="img-profile rounded-circle" alt="">
                                 @else
-                                    <span
-                                        class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->name }} </span>
+                                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->name }}
+                                    </span>
                                     <figure class="img-profile rounded-circle avatar font-weight-bold"
                                         data-initial="{{ Auth::user()->name[0] }}"></figure>
                                 @endif
@@ -301,7 +269,8 @@
                                 </a>
 
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                <a class="dropdown-item" href="#" data-toggle="modal"
+                                    data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     {{ __('Logout') }}
                                 </a>
@@ -376,6 +345,8 @@
     <script src="{{ asset('vendor/bootstrap/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('vendor/jquery-easing/jquery.easing.min.js') }}"></script>
     <script src="{{ asset('js/sb-admin-2.min.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+   
     <script>
         $(document).ready(function() {
             $('#example').DataTable({
@@ -398,7 +369,12 @@
                 $("#loadingDiv").remove(); //makes page more lightweight 
             });
         }
+
+        $('.input-daterange input').each(function() {
+            $(this).datepicker('clearDates');
+        });
     </script>
+
 
 
 </body>
