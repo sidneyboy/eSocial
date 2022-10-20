@@ -30,6 +30,8 @@ use App\Models\Assignment_details;
 use App\Models\Assignment_matching;
 use App\Models\Quiz_matching;
 
+use App\Models\Student_course_ratings;
+
 
 use App\Models\Taken;
 use App\Models\Taken_details;

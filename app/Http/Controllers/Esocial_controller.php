@@ -19,6 +19,40 @@ use Illuminate\Http\Request;
 
 class Esocial_controller extends Controller
 {
+    public function super_admin_login_process(Request $request)
+    {
+        date_default_timezone_set('Asia/Manila');
+        $date = date('Y-m-d H:i:s');
+        if (Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password')])) {
+            //return auth()->user()->id;
+
+            $user = User::find(auth()->user()->id);
+            if ($user->user_type == 'Super admin') {
+                return redirect('admin_logs');
+            } else {
+                return redirect('super_admin_login')->with('error', 'Wrong Credentials');
+            }
+        } else {
+            return redirect('super_admin_login')->with('error', 'Wrong Credentials');
+        }
+    }
+
+    public function generate_statistics(Request $request)
+    {
+        //return $request->input();
+   
+        $startDate = date('Y-m-d',  strtotime($request->input('date_from')));
+        $endDate = date('Y-m-d', strtotime($request->input('date_to')));
+       
+       // $posts = Post::whereBetween('created_at', [$startDate, $endDate])->get()
+       $enrolled_students = Enrolled_course::whereBetween('created_at',[$startDate,$endDate])
+                            ->where('status','paid')
+                            ->get();
+
+        return view('generate_statistics',[
+            'enrolled_students' => $enrolled_students,
+        ]);
+    }
 
     public function admin_login(Request $request)
     {
@@ -29,8 +63,6 @@ class Esocial_controller extends Controller
             $user = User::find(auth()->user()->id);
             if ($user->user_type == 'Admin') {
                 return redirect('payment_history');
-            } elseif ($user->user_type == 'Super_admin') {
-                return redirect('admin_logs');
             } else {
                 return redirect('admin_login');
             }

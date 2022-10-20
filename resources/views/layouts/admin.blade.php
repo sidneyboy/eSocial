@@ -9,7 +9,7 @@
     <meta name="author" content="Alejandro RH">
 
     <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
 
     <title>{{ config('app.name', 'Social-E') }}</title>
 
@@ -26,7 +26,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
     <!-- Favicon -->
     <link href="{{ asset('img/favicon.png') }}" rel="icon" type="image/png">
 
@@ -141,13 +141,6 @@
 
             @if ($user_data->user_type == 'Admin')
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url('statistics') }}">
-                        <i class="bi bi-book-half"></i>
-                        <span>{{ __('Statistics') }}</span>
-                    </a>
-                </li>
-
-                <li class="nav-item">
                     <a class="nav-link" href="{{ url('payment_history') }}">
                         <i class="bi bi-cash"></i>
                         <span>{{ __('Payment History') }}</span>
@@ -189,6 +182,12 @@
                     </a>
                 </li>
             @else
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url('statistics') }}">
+                        <i class="bi bi-book-half"></i>
+                        <span>{{ __('Statistics') }}</span>
+                    </a>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url('admin_logs') }}">
                         <i class="bi bi-book-half"></i>
@@ -346,7 +345,7 @@
     <script src="{{ asset('vendor/jquery-easing/jquery.easing.min.js') }}"></script>
     <script src="{{ asset('js/sb-admin-2.min.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
-   
+
     <script>
         $(document).ready(function() {
             $('#example').DataTable({

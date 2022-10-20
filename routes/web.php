@@ -22,6 +22,16 @@ Route::get('/', function () {
 
 Route::get('/socialE-login', 'User_login_controller@sure')->name('socialE-login');
 Route::get('/admin_login', 'User_login_controller@admin_login')->name('admin_login');
+Route::get('/super_admin_login', 'User_login_controller@super_admin_login')->name('super_admin_login');
+
+Route::post('/super_admin_login_process', 'Esocial_controller@super_admin_login_process')->name('super_admin_login_process');
+Route::post('/generate_statistics', 'Esocial_controller@generate_statistics')->name('generate_statistics');
+
+
+
+
+
+
 
 Route::get('/home', 'HomeController@index')->name('home');
 
