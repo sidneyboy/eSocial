@@ -14,6 +14,57 @@
     @endif
 
     <div class="row">
+        <div class="col-md-12">
+            <input type="hidden" value="{{ $course_id }}" id="course_id">
+            @if ($enrolled_data->rating == '5')
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+            @elseif ($enrolled_data->rating == '4')
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star"></span>
+            @elseif ($enrolled_data->rating == '3')
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star"></span>
+                <span class="fa fa-star"></span>
+            @elseif ($enrolled_data->rating == '2')
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star"></span>
+                <span class="fa fa-star"></span>
+                <span class="fa fa-star"></span>
+            @elseif ($enrolled_data->rating == '1')
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star"></span>
+                <span class="fa fa-star"></span>
+                <span class="fa fa-star"></span>
+                <span class="fa fa-star"></span>
+            @else
+                <div class="rate">
+                    <input type="radio" id="star5" name="rate" value="5" />
+                    <label for="star5" title="text">5 stars</label>
+                    <input type="radio" id="star4" name="rate" value="4" />
+                    <label for="star4" title="text">4 stars</label>
+                    <input type="radio" id="star3" name="rate" value="3" />
+                    <label for="star3" title="text">3 stars</label>
+                    <input type="radio" id="star2" name="rate" value="2" />
+                    <label for="star2" title="text">2 stars</label>
+                    <input type="radio" id="star1" name="rate" value="1" />
+                    <label for="star1" title="text">1 star</label>
+                </div>
+            @endif
+
+        </div>
+    </div>
+
+    <div class="row">
         @if (isset($course_chapter_next_chapter))
             @foreach ($course_chapter_next_chapter as $data)
                 <div class="col-md-4">
@@ -50,9 +101,10 @@
                                                 <div class="card">
                                                     <div class="card-header" id="headingOne">
                                                         <h2 class="mb-0">
-                                                            <button class="btn btn-link btn-block text-left" type="button"
-                                                                data-toggle="collapse" data-target="#collapseOne"
-                                                                aria-expanded="true" aria-controls="collapseOne">
+                                                            <button class="btn btn-link btn-block text-left"
+                                                                type="button" data-toggle="collapse"
+                                                                data-target="#collapseOne" aria-expanded="true"
+                                                                aria-controls="collapseOne">
                                                                 Materials
                                                             </button>
                                                         </h2>
@@ -110,7 +162,7 @@
                                                                                             ]) }}"
                                                                                                 class="btn btn-sm btn-primary btn-block" >show</a> --}}
 
-                                                                                            <a href="{{ asset('/storage/'. $details->id) }}"
+                                                                                            <a href="{{ asset('/storage/' . $details->id) }}"
                                                                                                 class="btn btn-sm btn-primary btn-block">show</a>
                                                                                         @endif
                                                                                     </td>
@@ -194,8 +246,8 @@
                                                             </button>
                                                         </h2>
                                                     </div>
-                                                    <div id="collapseThree" class="collapse" aria-labelledby="headingThree"
-                                                        data-parent="#accordionExample">
+                                                    <div id="collapseThree" class="collapse"
+                                                        aria-labelledby="headingThree" data-parent="#accordionExample">
                                                         <div class="card-body">
                                                             <table class="table">
                                                                 <thead>
@@ -634,15 +686,8 @@
                 </div>
             </div>
         @endforeach
-
-
-
     </div>
-
-
     <br /><br /><br />
-
-
     <div class="card">
         <div class="card-header">Comments</div>
         <div class="card-body">
@@ -664,12 +709,95 @@
             </form>
         </div>
     </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"
+        integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+    <script>
+        $('#myTab button').on('click', function(event) {
+            event.preventDefault()
+            $(this).tab('show')
+        })
+
+        $("#star5").click(function() {
+            var rating = $('#star5').val();
+            var course_id = $('#course_id').val();
+            $.post({
+                type: "POST",
+                url: "/enrolled_course_rating",
+                data: 'rating=' + rating + '&course_id=' + course_id,
+                success: function(data) {
+                    location.reload();
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
+        });
+
+        $("#star4").click(function() {
+            var rating = $('#star4').val();
+            var course_id = $('#course_id').val();
+            $.post({
+                type: "POST",
+                url: "/enrolled_course_rating",
+                data: 'rating=' + rating + '&course_id=' + course_id,
+                success: function(data) {
+                    console.log(data);
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
+        });
+
+        $("#star3").click(function() {
+            var rating = $('#star3').val();
+            var course_id = $('#course_id').val();
+            $.post({
+                type: "POST",
+                url: "/enrolled_course_rating",
+                data: 'rating=' + rating + '&course_id=' + course_id,
+                success: function(data) {
+                    console.log(data);
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
+        });
+
+        $("#star2").click(function() {
+            var rating = $('#star2').val();
+            var course_id = $('#course_id').val();
+            $.post({
+                type: "POST",
+                url: "/enrolled_course_rating",
+                data: 'rating=' + rating + '&course_id=' + course_id,
+                success: function(data) {
+                    console.log(data);
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
+        });
+
+        $("#star1").click(function() {
+            var rating = $('#star1').val();
+            var course_id = $('#course_id').val();
+            $.post({
+                type: "POST",
+                url: "/enrolled_course_rating",
+                data: 'rating=' + rating + '&course_id=' + course_id,
+                success: function(data) {
+                    console.log(data);
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
+        });
+    </script>
+
 @endsection
-
-
-<script>
-    $('#myTab button').on('click', function(event) {
-        event.preventDefault()
-        $(this).tab('show')
-    })
-</script>

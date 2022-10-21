@@ -31,8 +31,6 @@ Route::post('/generate_statistics', 'Esocial_controller@generate_statistics')->n
 
 
 
-
-
 Route::get('/home', 'HomeController@index')->name('home');
 
 
@@ -123,6 +121,8 @@ Route::get('/student_show_course_chapter/{course_id}', 'Student_controller@stude
 
 Route::get('/student_taken_submit/{taken_id}', 'Student_controller@student_taken_submit')->name('student_taken_submit');
 
+
+Route::post('/enrolled_course_rating/', 'Student_controller@enrolled_course_rating')->name('enrolled_course_rating');
 
 
 

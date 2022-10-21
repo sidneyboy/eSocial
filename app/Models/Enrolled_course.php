@@ -16,6 +16,7 @@ class Enrolled_course extends Model
         'amount',
         'course_type',
         'status',
+        'rating',
     ];
 
 

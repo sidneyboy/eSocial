@@ -21,11 +21,11 @@ class Esocial_controller extends Controller
 {
     public function super_admin_login_process(Request $request)
     {
+      
         date_default_timezone_set('Asia/Manila');
         $date = date('Y-m-d H:i:s');
         if (Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password')])) {
             //return auth()->user()->id;
-
             $user = User::find(auth()->user()->id);
             if ($user->user_type == 'Super admin') {
                 return redirect('admin_logs');

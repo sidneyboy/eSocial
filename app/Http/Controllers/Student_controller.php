@@ -73,13 +73,13 @@ class Student_controller extends Controller
             $user = User::find(auth()->user()->id);
             if ($user->user_type == 'Student') {
                 return redirect('student_landing');
-            }elseif($user->user_type == 'Instructor'){
+            } elseif ($user->user_type == 'Instructor') {
                 return redirect('instructor_landing');
             } else {
                 return redirect('socialE-login');
             }
         } else {
-            return redirect('socialE-login')->with('error','Wrong Credentials');
+            return redirect('socialE-login')->with('error', 'Wrong Credentials');
         }
     }
 
@@ -1414,16 +1414,18 @@ class Student_controller extends Controller
         $date = date('Y-m-d');
         $time = date('h:i a');
 
-        //return $course_id;
-
         $user_data = User::find(auth()->user()->id);
         $count = Invite_student::where('student_id', auth()->user()->id)->where('status', 'Pending Approval')->count();
         $taken = Taken::where('student_id', auth()->user()->id)->where('course_id', $course_id)->where('type', 'exam')->orderBy('id', 'desc')->where('remarks', 'pass')->first();
-        
+
         $course = Course::find($course_id);
+        $enrolled_data = Enrolled_course::where('student_id',auth()->user()->id)
+                                        ->where('course_id',$course_id)
+                                        ->where('status','paid')
+                                        ->first();
 
         if ($taken) {
-            $taken_all = Taken::where('student_id', auth()->user()->id)->where('type', 'exam')->where('course_id',$course_id)->orderBy('id', 'desc')->where('remarks', 'pass')->get();
+            $taken_all = Taken::where('student_id', auth()->user()->id)->where('type', 'exam')->where('course_id', $course_id)->orderBy('id', 'desc')->where('remarks', 'pass')->get();
 
             foreach ($taken_all as $key => $data) {
                 $id[] = $data->course_chapter_id;
@@ -1431,7 +1433,7 @@ class Student_controller extends Controller
 
             $course_chapter = Course_chapter::whereIn('id', $id)->orderBy('id', 'desc')->get();
             $course_chapter_next_chapter = Course_chapter::whereNotIn('id', $id)->where('id', '>', $taken->course_chapter_id)
-                ->where('course_id',$course_id)
+                ->where('course_id', $course_id)
                 ->orderBy('id')
                 ->limit(1)
                 ->get();
@@ -1443,6 +1445,7 @@ class Student_controller extends Controller
                 'date' => $date,
                 'course_id' => $course_id,
                 'course' => $course,
+                'enrolled_data' => $enrolled_data,
             ]);
         } else {
             $course_chapter = Course_chapter::where('course_id', $course_id)->take(1)->get();
@@ -1453,6 +1456,7 @@ class Student_controller extends Controller
                 'date' => $date,
                 'course_id' => $course_id,
                 'course' => $course,
+                'enrolled_data' => $enrolled_data,
             ]);
         }
     }
@@ -1826,5 +1830,15 @@ class Student_controller extends Controller
 
             return redirect()->route('student_enrolled_courses')->with('success', 'exam successfully turned in');
         }
+    }
+
+    public function enrolled_course_rating(Request $request)
+    {
+        Enrolled_course::where('course_id', $request->input('course_id'))
+            ->where('student_id',auth()->user()->id)
+            ->where('status','paid')
+            ->update(['rating' => $request->input('rating')]);
+
+        return 'saved';
     }
 }
