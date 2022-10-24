@@ -6,7 +6,6 @@
                 <th>Instructor</th>
                 <th>Course</th>
                 <th>Type</th>
-                <th>Amount</th>
             </tr>
         </thead>
         <tbody>
@@ -16,7 +15,6 @@
                     <td>{{ $data->instructor->last_name }} {{ $data->instructor->name }} </td>
                     <td>{{ $data->course->course_title }}</td>
                     <td>{{ $data->course_type }}</td>
-                    <td>{{ $data->amount }}</td>
                 </tr>
             @endforeach
         </tbody>

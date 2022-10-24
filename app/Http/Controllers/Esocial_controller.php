@@ -21,7 +21,7 @@ class Esocial_controller extends Controller
 {
     public function super_admin_login_process(Request $request)
     {
-      
+
         date_default_timezone_set('Asia/Manila');
         $date = date('Y-m-d H:i:s');
         if (Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password')])) {
@@ -40,28 +40,93 @@ class Esocial_controller extends Controller
     public function generate_statistics(Request $request)
     {
         //return $request->input();
-   
+
         $startDate = date('Y-m-d',  strtotime($request->input('date_from')));
         $endDate = date('Y-m-d', strtotime($request->input('date_to')));
-       
-       // $posts = Post::whereBetween('created_at', [$startDate, $endDate])->get()
-       $enrolled_students = Enrolled_course::whereBetween('created_at',[$startDate,$endDate])
-                            ->where('status','paid')
-                            ->get();
 
-        return view('generate_statistics',[
+        // $posts = Post::whereBetween('created_at', [$startDate, $endDate])->get()
+        $enrolled_students = Enrolled_course::whereBetween('created_at', [$startDate, $endDate])
+            ->where('status', 'paid')
+            ->get();
+
+        return view('generate_statistics', [
             'enrolled_students' => $enrolled_students,
+        ]);
+    }
+
+
+    public function generate_course_rating(Request $request)
+    {
+        // return $request->input();
+
+
+        $startDate = date('Y-m-d',  strtotime($request->input('date_from')));
+        $endDate = date('Y-m-d', strtotime($request->input('date_to')));
+
+        // $posts = Post::whereBetween('created_at', [$startDate, $endDate])->get()
+        $enrolled_students = Enrolled_course::whereBetween('created_at', [$startDate, $endDate])
+            ->where('status', 'paid')
+            ->where('rating', '!=', null)
+            ->get();
+
+        return view('generate_course_rating', [
+            'enrolled_students' => $enrolled_students,
+        ]);
+    }
+
+    public function generate_payment_history(Request $request)
+    {
+        $startDate = date('Y-m-d',  strtotime($request->input('date_from')));
+        $endDate = date('Y-m-d', strtotime($request->input('date_to')));
+        $user_data = User::find(auth()->user()->id);
+        $payment = Payment::orderBy('id', 'desc')
+            ->whereBetween('created_at', [$startDate, $endDate])
+            ->where('status', 'paid')->get();
+
+        return view('generate_payment_history', [
+            'payment' => $payment,
+        ]);
+    }
+
+    public function generate_approved_instructor(Request $request)
+    {
+        $startDate = date('Y-m-d',  strtotime($request->input('date_from')));
+        $endDate = date('Y-m-d', strtotime($request->input('date_to')));
+
+        $user = User::where('user_type', 'Instructor')
+            ->whereBetween('created_at', [$startDate, $endDate])
+            ->get();
+
+        return view('generate_approved_instructor', [
+            'user' => $user
+        ]);
+    }
+
+    public function generate_approved_students(Request $request)
+    {
+        $startDate = date('Y-m-d',  strtotime($request->input('date_from')));
+        $endDate = date('Y-m-d', strtotime($request->input('date_to')));
+
+        $user = User::where('user_type', 'Student')
+            ->whereBetween('created_at', [$startDate, $endDate])
+            ->get();
+
+        return view('generate_approved_students', [
+            'user' => $user
         ]);
     }
 
     public function admin_login(Request $request)
     {
+        
         date_default_timezone_set('Asia/Manila');
         $date = date('Y-m-d H:i:s');
         if (Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password')])) {
             //return auth()->user()->id;
             $user = User::find(auth()->user()->id);
-            if ($user->user_type == 'Admin') {
+            if ($user->user_type == 'Admin Approved Course') {
+                return redirect('payment_history');
+            }elseif($user->user_type == 'Admin Approved Student'){
                 return redirect('payment_history');
             } else {
                 return redirect('admin_login');

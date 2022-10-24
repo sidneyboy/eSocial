@@ -139,7 +139,7 @@
             <!-- Divider -->
             <hr class="sidebar-divider my-0">
 
-            @if ($user_data->user_type == 'Admin')
+            @if ($user_data->user_type == 'Admin Approved Student')
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url('payment_history') }}">
                         <i class="bi bi-cash"></i>
@@ -167,7 +167,13 @@
                         <span>{{ __('Intro') }}</span>
                     </a>
                 </li>
-
+            @elseif($user_data->user_type == 'Admin Approved Course')
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url('payment_history') }}">
+                        <i class="bi bi-cash"></i>
+                        <span>{{ __('Payment History') }}</span>
+                    </a>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url('courses') }}">
                         <i class="bi bi-book-half"></i>

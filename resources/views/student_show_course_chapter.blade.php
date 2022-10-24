@@ -163,7 +163,7 @@
                                                                                                 class="btn btn-sm btn-primary btn-block" >show</a> --}}
 
                                                                                             <a href="{{ asset('/storage/' . $details->id) }}"
-                                                                                                class="btn btn-sm btn-primary btn-block">show</a>
+                                                                                                class="btn btn-sm btn-primary btn-block" download>show</a>
                                                                                         @endif
                                                                                     </td>
                                                                                 @endif
@@ -465,11 +465,13 @@
                                                                             <td>
                                                                                 @if ($details->status != 'disabled')
                                                                                     @if ($details->file_type == 'application')
-                                                                                        <a href="{{ url('student_show_pdf_file', [
+                                                                                        {{-- <a href="{{ url('student_show_pdf_file', [
                                                                                             'course_details_id' => $details->id,
                                                                                             'course_id' => $details->course_id,
                                                                                         ]) }}"
-                                                                                            class="btn btn-sm btn-primary btn-block">show</a>
+                                                                                            class="btn btn-sm btn-primary btn-block">show</a> --}}
+                                                                                            <a href="{{ asset('/storage/' . $details->file) }}"
+                                                                                                download>View</a>
                                                                                     @endif
                                                                                 @endif
                                                                             </td>

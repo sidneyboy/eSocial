@@ -59,6 +59,11 @@ Route::get('/admin_logs/', 'Esocial_controller@admin_logs')->name('admin_logs');
 
 
 Route::post('/admin_login/', 'Esocial_controller@admin_login')->name('admin_login');
+Route::post('/generate_course_rating/', 'Esocial_controller@generate_course_rating')->name('generate_course_rating');
+
+Route::post('/generate_payment_history/', 'Esocial_controller@generate_payment_history')->name('generate_payment_history');
+Route::post('/generate_approved_instructor/', 'Esocial_controller@generate_approved_instructor')->name('generate_approved_instructor');
+Route::post('/generate_approved_students/', 'Esocial_controller@generate_approved_students')->name('generate_approved_students');
 
 
 
